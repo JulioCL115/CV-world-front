@@ -1,3 +1,49 @@
-#root {
-    background-color: #3E3E70;
+@font-face {
+    font-family: 'Roboto-Light';
+    src: local('Roboto-Light'), url() format('truetype');
   }
+
+.footer{
+    background-color: #3E3E70;
+    width: 100%;
+    height: 400px;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-right: 45px;
+  }
+
+.txt {
+    color: white;
+    text-decoration: none;
+}
+
+.logo {
+    width: 70px;
+    height: 39.38px;
+}
+
+.input {
+    width: 350px;
+    height: 40px;
+    padding-left: 15px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn {
+    height: 40px;
+    background-color: transparent;
+    border-color: white;
+}
+
+.horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}  
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+}
