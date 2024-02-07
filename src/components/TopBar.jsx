@@ -11,7 +11,7 @@ function TopBar() {
             </div>
             <div>
                 <title>CV World</title>
-                <img src="" id="illustration-login"></img>
+                <img src="" alt="illustration-login"></img>
             </div>
             <div>
                 <Link to="/signin">Iniciar sesión</Link>
