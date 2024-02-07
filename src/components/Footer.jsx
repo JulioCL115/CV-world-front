@@ -11,7 +11,7 @@ function Footer() {
                 <p>Mantenete al tanto de nuestras novedades y lanzamientos
                     suscribiéndote a nuestro newsletter.</p>
                 <div>
-                    <input>Ingresá tu email...</input>
+                    <input value=""/>
                     <button>Aceptar</button>
                 </div>
                 <p>Al suscribirte estás aceptando nuestras Políticas de Privacidad y accediendo a

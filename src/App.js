@@ -7,6 +7,7 @@ import SignUp from "./scenes/SignUp";
 import Cart from "./scenes/Cart";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
+import './App.css';
 
 
 function App() {
