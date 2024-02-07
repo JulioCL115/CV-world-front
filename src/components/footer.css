@@ -1,6 +1,9 @@
+
 @font-face {
-    font-family: 'Roboto-Light';
-    src: local('Roboto-Light'), url() format('truetype');
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    src:local()
   }
 
 .footer{
@@ -15,6 +18,8 @@
 .txt {
     color: white;
     text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
 }
 
 .logo {
@@ -32,9 +37,12 @@
 }
 
 .btn {
+    width: 100px;
     height: 40px;
     background-color: transparent;
     border-color: white;
+    border-radius: 10px;
+    margin-left: 20px;
 }
 
 .horizontal {
@@ -46,4 +54,27 @@
 .vertical {
     display: flex;
     flex-direction: column;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+p {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+#container-top {
+    width:100%;
+}
+
+#container-left {
+    width: 50%;
+    padding-right: 20%;
+}
+
+#container-right {
+    width: 50%;
 }
