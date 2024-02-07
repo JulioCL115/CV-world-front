@@ -2,6 +2,7 @@ function SignUp() {
     return (
         <div>
             SIGN UP
+            //si
         </div>
     )
 };
