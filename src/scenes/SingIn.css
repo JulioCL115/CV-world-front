@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    height: 70vh; /* Ocupa el 100% de la altura de la ventana */
+}
+
+.content {
+    display: flex ; /* Utiliza flexbox para los elementos internos */
+    align-items: center; /* Centra verticalmente los elementos */
+    width: 100%; /* Ocupa el 50% del ancho de la ventana */
+}
+
+.singin_and_singup_image {
+    width: 50%; /* Ocupa el 50% del ancho de su contenedor */
+    height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
+
+.Formulario {
+    display: flex ; /* Utiliza flexbox para los elementos internos */
+    align-items: center
+}
