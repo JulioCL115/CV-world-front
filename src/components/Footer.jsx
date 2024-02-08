@@ -19,8 +19,8 @@ function Footer() {
     return (
         <div className='footer'>
             <div className="vertical">
-                <div className="horizontal" id="container top">
-                    <div className='vertical' id="container-left">
+                <div className="horizontal" id="container-top">
+                    <div className='vertical' id="container-top-left">
                         <div className='horizontal'>
                             <h1 className='txt'>CV World</h1>
                             <img className="logo" src={Logo} alt="logo-white" />
@@ -33,10 +33,10 @@ function Footer() {
                                 <p className='txt'>Aceptar</p>
                             </button>
                         </div>
-                        <p className='txt'>Al suscribirte estás aceptando nuestras Políticas de Privacidad y accediendo a
+                        <p className='txt' id="small">Al suscribirte estás aceptando nuestras Políticas de Privacidad y accediendo a
                             recibir novedades de nuestra compañía.</p>
                     </div>
-                    <div className='horizontal' id="container-right">
+                    <div className='horizontal' id="container-top-right">
                         <div className='vertical'>
                             <h2 className='txt'>Páginas</h2>
                             <p>
@@ -95,10 +95,10 @@ function Footer() {
                         </div>
                     </div>
                 </div>
-                    ///DIVIDER
+                <hr class="solid"/>
                 <div className="horizontal" id="container-bottom">
                     <p className="txt">© 2024. Created by Henry students. All rights reserved.</p>
-                    <div className="horizontal">
+                    <div className="horizontal" id="container-bottom-right">
                         <p className="txt">Políticas de Provacidad</p>
                         <p className="txt">Términos y condiciones</p>
                         <p className="txt">Configuración de Cookies</p>
