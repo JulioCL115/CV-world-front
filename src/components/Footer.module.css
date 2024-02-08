@@ -8,11 +8,59 @@
     padding-top: 60px;
   }
 
-.txt {
-    color: white;
-    text-decoration: none;
+.txtRegular16 {
     font-family: "Poppins", sans-serif;
     font-style: normal;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtLogo {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtRegular16Underlined {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: underline;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtRegular12 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
 }
 
 .logo {
@@ -47,6 +95,7 @@
 }
 
 .horizontal {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -61,33 +110,21 @@
 h1 {
     margin: 0px;
     padding: 0px;
+    font-weight: 700;
+    font-size: 32px;
 }
 
-h2 {
-    font-weight: 600;
-    font-size: 16px;
-    margin: 0px;
-    padding: 0px;
+.icn {
+    margin-right: 20px;
+    width: 20px;
 }
 
-p {
-    font-weight: 400;
-    font-size: 16px;
-    margin: 0px;
-    padding: 0px;
-}
-
-svg {
-    margin-right: 10px;
-}
-
-#container-top {
+#containerTop {
     width:100%;
     align-items: flex-start;
-
 }
 
-#container-top-left {
+#containerTopLeft {
     width: 40%;
     padding-right: 10%;
     display: flex;
@@ -95,13 +132,14 @@ svg {
     row-gap: 20px;
 }
 
-#container-top-right {
+#containerTopRight {
     width: 60%;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
-#container-bottom {
+#containerBottom {
     width:100%;
     margin: 0px;
     padding: 0px;
@@ -109,7 +147,7 @@ svg {
     justify-content: space-between;
 }
 
-#container-bottom-right {
+#containerBottomRight {
     width:50%;
     display: flex;
     justify-content: space-between;
@@ -117,11 +155,11 @@ svg {
     color: white;
 }
 
-#container-bottom-left {
+#containerBottomLeft {
     width:50%;
 }
 
-hr {
+.divider {
     width: 100%;
     margin-top: 20px;
     border-color: white;
