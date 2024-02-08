@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from "../assets/Logo-black.png";
+import logo from "../assets/Logo-Black.png";
 import styles from './TopBar.module.css';
 
 function TopBar() {
