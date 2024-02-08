@@ -1,69 +1,115 @@
-/* Contenedor principal de la topbar */
-.Container {
+.topbar {
+    max-width: 100%;
+    padding-left: 45px;
+    padding-right: 45px;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width:  100%;
-    height:  100px;
-    background-color: #ffffff; /* Color de fondo blanco */
-    box-shadow:  0px  2px  8px rgba(0,  0,  0,  0.5); /* Sombra en la parte inferior */
-    padding:  0  20px;
+    height: 100px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* Contenedor de los enlaces */
-.linkContainer {
-    display: flex;
-    gap:  35px; /* Espacio entre los enlaces */
-}
+/*FONT SYLES*/
 
-/* Estilos para los enlaces */
-.linkContainer a {
+.txtLogo {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
     text-decoration: none;
-    color: #000000; /* Color del texto de los enlaces */
-    font-size:  16px; /* Tamaño de fuente de los enlaces */
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px;
 }
 
-/* Estilos para el título y el logo */
-.titulo{
-    width:  141px; /* Ancho del título y del logo */
-    height:  39px; /* Altura del título y del logo */
-}
-.logo {
-    width:  70px; /* Ancho del título y del logo */
-    height:  39px; /* Altura del título y del logo */
+.txtRegular16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
 }
 
-.tituloLogoContainer {
+.txtRegular16Underlined {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: underline;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtRegular16:active {
+    font-weight: 600;
+}
+
+/*CONTAINERS*/
+
+.containerLeft {
+    width: 33%;
+    height: 39px;
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.containerCenter {
+    width: 33%;
+    height: 39px;
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    width:  211px; /* Ancho del título y del logo */
-    height:  39px; /* Altura del título y del logo */
-
 }
 
-.dereContainer {
+.containerRight {
+    width: 33%;
+    height: 39px;
     display: flex;
-    gap:  10px; /* Espacio entre los enlaces */
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 10px;
+    ;
+}
+
+.containerLogin {
+    height: 39px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
     align-items: center;
 }
 
-.dereContainer a {
-    text-decoration: none;
-    color: #000000; /* Color del texto de los enlaces */
-    font-size:  18px; /* Tamaño de fuente de los enlaces */
+  /*UI ELEMENTS*/
+
+.logo {
+    width: 70px;
+    height: 39.38px;
 }
 
-
-/* Estilos para el SVG dentro del botón */
-.button svg {
-    width:  30px; /* Ancho del SVG */
-    height:  30px; /* Altura del SVG */
-    margin-right: 15px;
-
+.icn {
+    color: #000000;
 }
 
-.perfil svg {
-    width:  40px; /* Ancho del SVG */
-    height:  40px; /* Altura del SVG */
+#icnUser {
+    height: 35px;
+    margin-left: 10px;
+}
+
+#icnBell {
+    height: 30px;
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
 }
