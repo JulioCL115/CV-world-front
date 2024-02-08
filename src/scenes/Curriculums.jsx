@@ -23,4 +23,4 @@ function Curriculums() {
     )
 };
 
-export default Curriculums; 
+export default Curriculums;
