@@ -1,13 +1,13 @@
-.container {
+.containerSingIn {
     display: flex;
     justify-content: center; /* Centra horizontalmente el contenido */
     align-items: center; /* Centra verticalmente el contenido */
-    height: 70vh; /* Ocupa el 100% de la altura de la ventana */
+    height: 80vh; /* Ocupa el 100% de la altura de la ventana */
 }
 
-.content {
+.contentSingIn {
     display: flex ; /* Utiliza flexbox para los elementos internos */
-    align-items: center; /* Centra verticalmente los elementos */
+     /* Centra verticalmente los elementos */
     width: 100%; /* Ocupa el 50% del ancho de la ventana */
 }
 
@@ -18,6 +18,8 @@
 }
 
 .Formulario {
-    display: flex ; /* Utiliza flexbox para los elementos internos */
-    align-items: center
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra horizontalmente los elementos */
 }
+
