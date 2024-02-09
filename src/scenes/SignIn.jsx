@@ -57,20 +57,14 @@ function SignIn() {
     let newErrors = {};
   
     // Validaciones para los nuevos campos
-    if (!/^[a-zA-Z\s]+$/.test(input.EMAIL)) {
-      newErrors = { ...newErrors, EMAIL: "Error: El EMAIL solo debe contener letras y espacios." };
-    }
-  
-    // Apellido: Solo letras y espacios permitidos
-    if (!/^[a-zA-Z\s]+$/.test(input.CONTRASEÑA)) {
-      newErrors = { ...newErrors, CONTRASEÑA: "Error: La CONTRASEÑA solo debe contener letras y espacios." };
-    }
-  
-    // Descripción: Puede contener cualquier caracter (opcional)
-    
-  
-    // Nacionalidad: Puedes realizar validaciones específicas según tus requisitos
-    
+if (!/^\S+@\S+\.\S+$/.test(input.EMAIL)) {
+  newErrors = { ...newErrors, EMAIL: "Error: No es un correo electrónico válido." };
+}
+
+// Contraseña: Solo letras y números permitidos
+if (!/^[a-zA-Z0-9]+$/.test(input.CONTRASEÑA)) {
+  newErrors = { ...newErrors, CONTRASEÑA: "Error: La contraseña solo debe contener letras y números." };
+}
   
     setError(newErrors);
   
@@ -102,36 +96,49 @@ function SignIn() {
       }, [input]); // Run this effect whenever input changes
       
     return (
-        <div class="container">
+      <div class="containerSingIn">
 
-        <div class="content">
-            <img class="singin_and_singup_image" src={image} alt="Imagen empleado"></img>
-            <div class="Formulario">
-               
-                <form className='formulario' onSubmit={(e)=> handleSubmit(e)}>
-                     <p>Iniciar Sesión</p>
-                     <div>
-                        <label>EMAIL:</label>
-                        <br></br>
-                        <input name="EMAIL" value={input.EMAIL} onChange={handleChange} />
-                        <br></br>
-                        <span className='span2'>{error.EMAIL}</span>
-                    </div>
-                    <div>
-                        <label>CONTRASEÑA:</label>
-                        <br></br>
-                        <input name="CONTRASEÑA" value={input.CONTRASEÑA} onChange={handleChange} />
-                        <br></br>
-                        <span className='span2'>{error.CONTRASEÑA}</span>
-                    </div>
-                    <p>¿Has olvidado tu contraseña?</p>
-                    {Object.values(error).every((e) => !e) && <button type="submit" class="button">
-        <span className="button-content">INICIAR SESIÓN</span>
-          </button>}
-                </form>
-            </div>
-        </div>
-    </div>
+      <div class="contentSingIn">
+          <img class="singin_and_singup_image" src={image} alt="Imagen empleado"></img>
+          <div class="Formulario">
+  
+              <form className='formulario' onSubmit={(e)=> handleSubmit(e)}>
+                  <p>Iniciar Sesión</p>
+                  <div>
+                      <label>EMAIL:</label>
+                      <br></br>
+                      <input name="EMAIL" value={input.EMAIL} onChange={handleChange} />
+                      <br></br>
+                      <span className='span2'>{error.EMAIL}</span>
+                  </div>
+                  <div>
+                      <label>CONTRASEÑA:</label>
+                      <br></br>
+                      <input name="CONTRASEÑA" value={input.CONTRASEÑA} onChange={handleChange} />
+                      <br></br>
+                      <span className='span2'>{error.CONTRASEÑA}</span>
+                  </div>
+                  <p>¿Has olvidado tu contraseña?</p>
+                  {Object.values(error).every((e) => !e) && <button type="submit" class="button">
+                      <span className="button-content">INICIAR SESIÓN</span>
+                  </button>}
+              </form>
+              <p>O INICIA SESION CON</p>
+              <div className="contentSingIn">
+                  <div>
+                      <button type="submit" class="button">
+                          Google
+                      </button>
+                  </div>
+                  <div>
+                      <button type="submit" class="button">
+                          Facebook
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
     )
 };
 
