@@ -1,0 +1,83 @@
+.card {
+    width: 400px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 2px;;
+    border-color: #098D85;
+    border-radius: 80px;
+    text-align: center;
+}
+
+  /*FONT SYLES*/
+
+  .txtRegular16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold16Green {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #098D85;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0px;
+    padding-bottom: 7px;
+}
+
+  .txtSemiBold32Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold32Green {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #098D85;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+ /*CONTAINERS*/
+
+ .containerPrice {
+    display: flex;
+    flex-direction: row;
+    row-gap: 0px;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0px;
+    margin: 0px;
+ }
+
+.btn {
+    height: 50px;
+    width: 300px;
+    background-color: #098D85;
+    border-color: transparent;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+}
