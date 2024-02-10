@@ -11,45 +11,6 @@
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-/*FONT SYLES*/
-
-.txtLogo {
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    color: black;
-    text-decoration: none;
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0px;
-    padding: 0px;
-}
-
-.txtRegular16 {
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    color: black;
-    font-size: 16px;
-    font-weight: 400;
-    text-decoration: none;
-    margin: 0px;
-    padding: 0px;
-}
-
-.txtRegular16Underlined {
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    color: black;
-    font-size: 16px;
-    font-weight: 400;
-    text-decoration: underline;
-    margin: 0px;
-    padding: 0px;
-}
-
-.txtRegular16:active {
-    font-weight: 600;
-}
-
 /*CONTAINERS*/
 
 .containerLeft {
@@ -87,6 +48,45 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+/*FONT SYLES*/
+
+.txtLogo {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtRegular16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtRegular16Underlined {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: underline;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtRegular16:active {
+    font-weight: 600;
 }
 
   /*UI ELEMENTS*/
