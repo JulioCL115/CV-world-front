@@ -7,6 +7,9 @@ import Logo from "../assets/Logo-Black.png";
 
 
 function TopBar() {
+
+
+    
     return (
         <div className={styles.topbar}>
             <div className={styles.containerLeft}>
