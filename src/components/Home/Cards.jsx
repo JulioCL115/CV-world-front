@@ -1,7 +1,9 @@
+import Card from './Card'
+
 function Cards () {
     return (
         <div>
-            CARDS
+            <Card/>
         </div>
     )
 };
