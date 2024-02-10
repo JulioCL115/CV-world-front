@@ -12,7 +12,7 @@ function TopBar() {
             <div className={styles.containerLeft}>
                 <Link className={styles.txtRegular16} to="/">Home</Link>
                 <Link className={styles.txtRegular16} to="/curriculums">Currículums</Link>
-                <Link className={styles.txtRegular16} to="/suscripciones">Suscripciones</Link>
+                <Link className={styles.txtRegular16} to="/subscriptions">Suscripciones</Link>
             </div>
             <div className={styles.containerCenter}>
                 <h1 className={styles.txt} id={styles.h1}>CV World</h1>
