@@ -14,6 +14,7 @@ import Subscriptions from "./scenes/Subscriptions";
 import SignIn from "./scenes/SignIn";
 import SignUp from "./scenes/SignUp";
 import Cart from "./scenes/Cart";
+import FormCreateCv from "./scenes/FormCreateCv";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/createcv" element={<FormCreateCv />} />
       </Routes>
       <Footer/>
     </div>
