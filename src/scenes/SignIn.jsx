@@ -14,7 +14,6 @@ function SignIn() {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
-    showPassword: false
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -47,14 +46,14 @@ function SignIn() {
         <h1 className={styles.txtSemiBold32Black}>Iniciar Sesión</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.vertical}>
-            <label className={styles.txtSemiBold16Purple}>CONTRASEÑA</label>
+            <label className={styles.txtSemiBold16Purple}>EMAIL</label>
             <input
               className={styles.input}
-              name="password"
-              type={showPassword ? "text" : "password"}
+              name="email"
+              type="text"
               placeholder="Ingresá tu contraseña..."
               onChange={handleChange}
-              value={login.password}
+              value={loginInfo.email}
             />
           </div>
           <div className={styles.vertical}>
@@ -66,7 +65,7 @@ function SignIn() {
                 type={showPassword ? "text" : "password"}
                 placeholder="Ingresá tu contraseña..."
                 onChange={handleChange}
-                value={login.password}
+                value={loginInfo.password}
               />
               <button
                 className={styles.btnEye}
