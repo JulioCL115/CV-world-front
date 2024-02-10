@@ -1,145 +1,78 @@
-import { useState, useEffect } from 'react';
-import image from "../assets/Working-Man-Illustration.jpg"
-import "./SingIn.css"
+import styles from "./SingIn.module.css"
+
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios'
-function handleSubmit(e) {
-    e.preventDefault(); // Evita el comportamiento predeterminado de recargar la página al enviar el formulario
-    // Aquí puedes realizar las acciones que desees al enviar el formulario
-  }
+import { Link } from "react-router-dom";
+
+import image from "../assets/Working-Man-Illustration.jpg"
+
+
 function SignIn() {
-    const dispatch = useDispatch();
-  const [teams, setteams] = useState([]);
-  
-  useEffect(() => {
-    
-  }, [dispatch]);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const dispatch = useDispatch();
 
-    validate(input);
-
-    if (Object.values(error).some((e) => e)) {
-      console.log('Error en el formulario. No se enviarán datos.');
-      return;
-    }
-
-    try {
-      const url = `http://localhost:3001/drivers?nombre=${input.nombre}&apellido=${input.apellido}&descripcion=${input.descripcion}&imagen=${input.imagen}&nacionalidad=${input.nacionalidad}&fechaNacimiento=${input.fechaNacimiento}&team=${input.team}&color=${input.color}`;//http://localhost:3001/drivers
-      //http://localhost:3001/drivers?nombre=${input.nombre}&apellido=${input.apellido}&descripcion=${input.descripcion}&imagen=${input.imagen}&nacionalidad=${input.nacionalidad}&fechaNacimiento=${input.fechaNacimiento}&team=${input.team}
-      const response = await axios.post(url/*, {
-        EMAIL: '',
-        CONTRASEÑA: ''
-      }*/);
-
-      console.log('Respuesta del servidor:', response.data);
-
-      setInput({
-        EMAIL: '',
-        CONTRASEÑA: ''
-      });
-    } catch (error) {
-      console.error('Error al enviar los datos:', error);
-    }
-  };
-  const [input, setInput] = useState({
-    EMAIL: '',
-    CONTRASEÑA: ''
+  const [login, setLogin] = useState({
+    email: "",
+    password: ""
   });
-  console.log("input:",input)
-  const [error, setError] = useState({
-    EMAIL: '',
-    CONTRASEÑA: ''
-  });
-  console.log("error:",error)
-    
-  const validate = (input) => {
-    let newErrors = {};
-  
-    // Validaciones para los nuevos campos
-if (!/^\S+@\S+\.\S+$/.test(input.EMAIL)) {
-  newErrors = { ...newErrors, EMAIL: "Error: No es un correo electrónico válido." };
-}
 
-// Contraseña: Solo letras y números permitidos
-if (!/^[a-zA-Z0-9]+$/.test(input.CONTRASEÑA)) {
-  newErrors = { ...newErrors, CONTRASEÑA: "Error: La contraseña solo debe contener letras y números." };
-}
-  
-    setError(newErrors);
-  
-    // Clear console log messages
-    if (Object.values(newErrors).every((e) => !e)) {
-      console.clear();
-    } else {
-      console.log("Errors:", newErrors);
-    }
+  const handleChange = (event) => {
+    setLogin({
+      ...login,
+      [event.target.name]: event.target.value
+    });
   };
 
-    function handleChange(e) {
-        if (e.target.name === "team") {
-          const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-          setInput((prevInput) => ({
-            ...prevInput,
-            [e.target.name]: selectedOptions,
-          }));
-        } else {
-          setInput((prevInput) => ({
-            ...prevInput,
-            [e.target.name]: e.target.value,
-          }));
-        }
-      }
+  const handleSubmit = () => {
 
-    useEffect(() => {
-        validate(input);
-      }, [input]); // Run this effect whenever input changes
-      
-    return (
-      <div class="containerSingIn">
+  };
 
-      <div class="contentSingIn">
-          <img class="singin_and_singup_image" src={image} alt="Imagen empleado"></img>
-          <div class="Formulario">
-  
-              <form className='formulario' onSubmit={(e)=> handleSubmit(e)}>
-                  <p>Iniciar Sesión</p>
-                  <div>
-                      <label>EMAIL:</label>
-                      <br></br>
-                      <input name="EMAIL" value={input.EMAIL} onChange={handleChange} />
-                      <br></br>
-                      <span className='span2'>{error.EMAIL}</span>
-                  </div>
-                  <div>
-                      <label>CONTRASEÑA:</label>
-                      <br></br>
-                      <input name="CONTRASEÑA" value={input.CONTRASEÑA} onChange={handleChange} />
-                      <br></br>
-                      <span className='span2'>{error.CONTRASEÑA}</span>
-                  </div>
-                  <p>¿Has olvidado tu contraseña?</p>
-                  {Object.values(error).every((e) => !e) && <button type="submit" class="button">
-                      <span className="button-content">INICIAR SESIÓN</span>
-                  </button>}
-              </form>
-              <p>O INICIA SESION CON</p>
-              <div className="contentSingIn">
-                  <div>
-                      <button type="submit" class="button">
-                          Google
-                      </button>
-                  </div>
-                  <div>
-                      <button type="submit" class="button">
-                          Facebook
-                      </button>
-                  </div>
-              </div>
-          </div>
+  return (
+    <div className={styles.signIn}>
+      <div className={styles.containerLeft}>
+        <img className={styles.illustration} src={image} alt="ilustración"></img>
       </div>
-  </div>
-    )
+      <div className={styles.containerRight}>
+        <h1 className={styles.txtSemiBold32Black}>Iniciar Sesión</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.vertical}>
+            <label className={styles.txtSemiBold16Purple}>EMAIL</label>
+            <input
+              className={styles.input}
+              name='email'
+              type='text'
+              placeholder='Ingresá tu mail...'
+              onChange={handleChange}
+              value={login.email}
+            />
+          </div>
+          <div className={styles.vertical}>
+            <label className={styles.txtSemiBold16Purple}>CONTRASEÑA</label>
+            <input
+              className={styles.input}
+              name='password'
+              type='text'
+              placeholder='Ingresá tu contraseña...'
+              onChange={handleChange}
+              value={login.password}
+            />
+          </div>
+          <Link className={styles.txtSemiBold12Purple} to="/resetpassword">¿Olvidaste tu contraseña?</Link>
+          <button className={styles.btnLogin}>INICIAR SESION</button>
+        </form>
+        <p className={styles.txtSemiBold12Purple}>O INICIA SESION CON</p>
+        <button className={styles.btnGoogle}>
+          <svg className={styles.icn} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">
+            <g fill="#3e3e70" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" ><g transform="scale(8.53333,8.53333)"><path d="M15.00391,3c-6.629,0 -12.00391,5.373 -12.00391,12c0,6.627 5.37491,12 12.00391,12c10.01,0 12.26517,-9.293 11.32617,-14h-1.33008h-2.26758h-7.73242v4h7.73828c-0.88958,3.44825 -4.01233,6 -7.73828,6c-4.418,0 -8,-3.582 -8,-8c0,-4.418 3.582,-8 8,-8c2.009,0 3.83914,0.74575 5.24414,1.96875l2.8418,-2.83984c-2.134,-1.944 -4.96903,-3.12891 -8.08203,-3.12891z"></path></g></g>
+          </svg>
+          Google
+        </button>
+        <div className={styles.containerSignUp}>
+          <p className={styles.txtSemiBold16Green}>¿No tenés cuenta</p>
+          <Link className={styles.txtSemiBold16Green} to="/signup">Registrate</Link>
+        </div>
+      </div>
+    </div>
+  )
 };
 
 export default SignIn; 
