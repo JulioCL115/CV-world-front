@@ -1,12 +1,12 @@
 import axios from "axios";
 import { setCurrentUser } from "../../slices/usersSlice"
 
-const login = (loginInfo) => {
-    const endpoint = "http://localhost:3001/user/login"
+const register = (registerInfo) => {
+    const endpoint = "http://localhost:3001/user/register"
 
     return async (dispatch) => {
         try {
-            const response = await axios.post(endpoint, loginInfo);
+            const response = await axios.post(endpoint, registerInfo);
             let data = response.data;
 
             console.log(data)
@@ -18,4 +18,4 @@ const login = (loginInfo) => {
     };
 };
 
-export default login;
+export default register;

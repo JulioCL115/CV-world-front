@@ -85,6 +85,8 @@
 .containerPassword {
     width: 400px;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 /*UI ELEMENTS*/
@@ -107,8 +109,9 @@
     border-color: #3E3E70;
     border-width: 1px;
     border-radius: 10px;
-    padding-right: 40px; /* Adjust the padding to leave space for the button */
     margin: 0px;
+    padding-left: 5px;
+
 }
 
 .input::placeholder {
@@ -158,15 +161,15 @@
 .icn {
     height: 20px;
     width: 20px;
-    fill: #3E3E70;
+    color: #3E3E70;
 }
 
-.eyeButton {
+.btnEye {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 10px; /* Adjust the right spacing for the eye icon */
     transform: translateY(-50%);
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
   }

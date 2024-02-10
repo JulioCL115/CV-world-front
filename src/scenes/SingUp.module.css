@@ -78,8 +78,15 @@
     text-align: left;
 }
 
-.containerSignUp {
+.containerSignIn {
     margin-top: 30px;
+}
+
+.containerPassword {
+    width: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 /*UI ELEMENTS*/
@@ -96,12 +103,15 @@
 }
 
 .input {
+    width: 400px;
     height: 40px;
     background-color: transparent;
     border-color: #3E3E70;
     border-width: 1px;
     border-radius: 10px;
     margin: 0px;
+    padding-left: 5px;
+
 }
 
 .input::placeholder {
@@ -115,7 +125,7 @@
     padding-left: 5px;
 }
 
-.btnLogin {
+.btnRegister {
     width: 400px;
     height: 50px;
     background-color: #098D85;
@@ -151,4 +161,15 @@
 .icn {
     height: 20px;
     width: 20px;
+    color: #3E3E70;
 }
+
+.btnEye {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust the right spacing for the eye icon */
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
