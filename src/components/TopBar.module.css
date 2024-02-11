@@ -160,3 +160,8 @@
 
   .dropdown:hover .dropdownContent {display: block;}
 
+.profilePicture {
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+}

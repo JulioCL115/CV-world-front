@@ -20,7 +20,6 @@ function SignUp() {
     repeatPassword: "",
   });
 
- 
 
   const [showFirstPassword, setShowFirstPassword] = useState(false);
   const [showSecondPassword, setShowSecondPassword] = useState(false);
@@ -43,6 +42,7 @@ function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch(register(registerInfo));
+
     const credential = await createUserWithEmailAndPassword(auth,registerInfo.email, registerInfo.password)
     console.log("sign up")
   };
