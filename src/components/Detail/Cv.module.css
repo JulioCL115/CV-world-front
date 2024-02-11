@@ -1,6 +1,9 @@
 .cv {
-    margin: 100px;
     background-color: white;
+    border-style: solid;
+    border-color: #CCCCCC;
+    border-radius: 20px;
+    border-width: 2px;
     padding: 45px;
     display: flex;
     flex-direction: row;

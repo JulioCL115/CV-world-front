@@ -7,6 +7,13 @@ function Detail() {
 
     return (
         <div className={styles.detail}>
+            <div className={styles.containerHeader}>
+                <img src="" alt="foto de perfil del usuario" />
+                <div>
+                    <p>Título del CV</p>
+                    <p>Nombre del usuario</p>
+                </div>
+            </div>
             <Cv />
             <div className={styles.containerBottom}>
                 <Comments />

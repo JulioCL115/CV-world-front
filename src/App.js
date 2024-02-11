@@ -28,9 +28,10 @@ function App() {
     dispatch(getAllSubscriptions());
   });
 
+
   return (
 
-    <div>
+    <div >
       <TopBar/>
       <Routes>
         <Route path="/" element={<Home />} />

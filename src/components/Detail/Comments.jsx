@@ -3,7 +3,7 @@ import styles from "./Contact.module.css";
 function Comments() {
 
     return (
-        <div>
+        <div className={styles.comments}>
             COMMENTS
         </div>
     )
