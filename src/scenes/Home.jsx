@@ -1,7 +1,10 @@
+import Error404 from "./Error404";
+
+
 function Home() {
     return (
         <div>
-            HOME
+            <Error404/>
         </div>
     )
 };

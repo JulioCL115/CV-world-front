@@ -1,9 +1,11 @@
-function Card () {
+import styles from "./Card.module.css"
+
+function Card() {
     return (
-        <div>
-            CARD
+        <div className={styles.card}>
+
         </div>
     )
 };
 
-export default Card; 
+export default Card;
