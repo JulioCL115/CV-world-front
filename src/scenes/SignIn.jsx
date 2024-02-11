@@ -73,6 +73,7 @@ function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch(login(loginInfo));
+    
     const credential = await signInWithEmailAndPassword(auth,loginInfo.email, loginInfo.password)
     console.log(credential)
   };
