@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import image from "../assets/Working-Man-Illustration.jpg"
 import register from "../redux/actions/users/register";
 
+import { app, auth } from "../config/firebase-config";
+import { createUserWithEmailAndPassword} from 'firebase/auth';
+
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -16,6 +19,8 @@ function SignUp() {
     password: "",
     repeatPassword: "",
   });
+
+ 
 
   const [showFirstPassword, setShowFirstPassword] = useState(false);
   const [showSecondPassword, setShowSecondPassword] = useState(false);
@@ -35,9 +40,11 @@ function SignUp() {
     setShowSecondPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     dispatch(register(registerInfo));
+    const credential = await createUserWithEmailAndPassword(auth,registerInfo.email, registerInfo.password)
+    console.log("sign up")
   };
 
   return (

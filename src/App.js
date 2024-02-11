@@ -18,6 +18,8 @@ import FormCreateCv from "./scenes/FormCreateCv";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 
+import { AuthProvider } from "./AuthProvider/authProvider";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -30,6 +32,7 @@ function App() {
   return (
 
     <div>
+      <AuthProvider>
       <TopBar/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -41,6 +44,7 @@ function App() {
         <Route path="/createcv" element={<FormCreateCv />} />
       </Routes>
       <Footer/>
+      </AuthProvider>
     </div>
   );
 }
