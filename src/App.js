@@ -19,6 +19,8 @@ import Detail from "./scenes/Detail";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 
+import { AuthProvider } from "./AuthProvider/authProvider";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -30,8 +32,8 @@ function App() {
 
 
   return (
-
-    <div >
+    <div>
+      <AuthProvider>
       <TopBar/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -44,6 +46,7 @@ function App() {
         <Route path="/detail" element={<Detail/>}></Route>
       </Routes>
       <Footer/>
+      </AuthProvider>
     </div>
   );
 }
