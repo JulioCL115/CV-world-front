@@ -14,10 +14,16 @@ function Detail() {
                     <p>Nombre del usuario</p>
                 </div>
             </div>
-            <Cv />
+            <div className={styles.containerTop}>
+                <Cv />
+            </div>
             <div className={styles.containerBottom}>
-                <Comments />
-                <Contact />
+                <div className={styles.containerBottomLeft}>
+                    <Comments />
+                </div>
+                <div className={styles.containerBottomRight}>
+                    <Contact />
+                </div>
             </div>
         </div>
     )
