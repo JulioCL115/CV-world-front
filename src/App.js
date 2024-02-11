@@ -18,6 +18,8 @@ import FormCreateCv from "./scenes/FormCreateCv";
 import Detail from "./scenes/Detail";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
+import MyProfile from "./scenes/MyProfile";
+import MyCvs from "./scenes/MyCvs";
 
 import { AuthProvider } from "./AuthProvider/authProvider";
 
@@ -44,6 +46,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/createcv" element={<FormCreateCv />} />
         <Route path="/detail" element={<Detail/>}></Route>
+        <Route path="/mycvs" element={<MyCvs/>}></Route>
+        <Route path="/profile" element={<MyProfile/>}></Route>
       </Routes>
       <Footer/>
       </AuthProvider>
