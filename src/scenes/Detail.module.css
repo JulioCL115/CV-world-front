@@ -6,10 +6,33 @@
     padding-right: 20%;
 }
 
+/*CONTAINERS*/
+
 .containerHeader {
     display: flex;
     flex-direction: row;
     margin-left: 45px;
     margin-right: 45px;
 }
+
+.containerTop {
+    width: 100%;
+}
+
+.containerBottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.containerBottomLeft {
+    width: 50%;
+}
+
+.containerBottomRight {
+    width: 50%;
+}
+
+/*FONT STYLES*/
+
 

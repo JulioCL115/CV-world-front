@@ -2,4 +2,11 @@
     background-color: white;
     border-color: #CCCCCC;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
 }
