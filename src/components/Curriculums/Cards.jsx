@@ -24,4 +24,5 @@ function Cards(cvs) {
     )
 };
 
-export default Cards; 
+export default Cards;
+
