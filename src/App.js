@@ -15,6 +15,7 @@ import SignIn from "./scenes/SignIn";
 import SignUp from "./scenes/SignUp";
 import Cart from "./scenes/Cart";
 import FormCreateCv from "./scenes/FormCreateCv";
+import Detail from "./scenes/Detail";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 
@@ -27,9 +28,10 @@ function App() {
     dispatch(getAllSubscriptions());
   });
 
+
   return (
 
-    <div>
+    <div >
       <TopBar/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -39,6 +41,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/createcv" element={<FormCreateCv />} />
+        <Route path="/detail" element={<Detail/>}></Route>
       </Routes>
       <Footer/>
     </div>
