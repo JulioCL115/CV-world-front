@@ -67,15 +67,18 @@ function SignIn() {
   
       if (userCredential) {
         console.log("User Credential: ", userCredential);
+        console.log(userCredential._tokenResponse)
+        console.log(userCredential._tokenResponse.isNewUser)
         // setAuthentication(true);
         // setToken({ token: userCredential.user });
-        dispatch(login(userCredential.user.accessToken));
+        login(userCredential.user.accessToken);
         navigate("/home");
+
   
         // Check if it's a new user
         if (
-          userCredential.additionalUserInfo &&
-          userCredential.additionalUserInfo.isNewUser
+          userCredential._tokenResponse &&
+          userCredential._tokenResponse.isNewUser
         ) {
           // Register the new user
           await register({

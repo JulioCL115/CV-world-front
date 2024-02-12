@@ -6,8 +6,8 @@ const login = async (idToken) => {
     console.log("EN EL LOGIN", idToken);
 
         try {
-            const response = await axios.post(endpoint, idToken);
-            
+            const response = await axios.post(endpoint, {idToken});
+
 
             const authToken = response.headers['auth-token'];
             console.log(authToken);
