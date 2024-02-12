@@ -1,12 +1,14 @@
 import axios from "axios";
 
-const register = async (registerInfo) => {
-    const endpoint = "http://localhost:3001/user/register"
+const endpoint = "http://localhost:3001/user/register"
 
-    const registrationStatus = {
-        status: null,
-        message: null
-    }
+const registrationStatus = {
+    status: null,
+    message: null
+}
+
+const register = async (registerInfo) => {
+
     try {
         console.log(registerInfo);
 

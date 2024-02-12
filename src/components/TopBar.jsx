@@ -20,7 +20,8 @@ function TopBar() {
 
     // const { token, setToken } = useContext(AuthContext) || {};
 
-    // const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token')
+    console.log(token);
 
     const logOut = async (auth, setToken) => {
         try {
