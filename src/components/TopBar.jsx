@@ -17,16 +17,18 @@ function TopBar() {
     const { token, setToken } = useContext(AuthContext) || {};
     const navigate = useNavigate()
 
-    function logOut() {
-        const fn = async () => {
-            const lg = await signOut(auth);
-            console.log('User disconnected.', lg);
-        };
-        fn();
-        setToken(null);
-        localStorage.removeItem('token');
-        navigate('/home');
-    }
+    const logOut = async (auth, setToken) => {
+        try {
+          await signOut(auth);
+          console.log('User disconnected.');
+        } catch (error) {
+          console.error('Error during logout:', error);
+        } finally {
+          setToken(null);
+          localStorage.removeItem('token');
+          navigate('/home');
+        }
+      };
 
     if (token?.token) {
         console.log('Usuario autenticado:', token.token);

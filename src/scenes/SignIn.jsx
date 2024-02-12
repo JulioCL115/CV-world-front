@@ -6,15 +6,15 @@ import { Link, useNavigate } from "react-router-dom";
 import image from "../assets/Working-Man-Illustration.jpg";
 import login from "../redux/actions/users/login";
 import register from "../redux/actions/users/register";
-import { AuthContext } from "../AuthProvider/authProvider"
+// import { AuthContext } from "../AuthProvider/authProvider"
 
 import { auth } from "../config/firebase-config";
 import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 function SignIn() {
-  const [authentication, setAuthentication] = useState(false)
-  const { token, setToken } = useContext(AuthContext) || {};
+  // const [authentication, setAuthentication] = useState(false)
+  // const { token, setToken } = useContext(AuthContext) || {};
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const provider = new GoogleAuthProvider()
@@ -67,8 +67,9 @@ function SignIn() {
 
       if (userCredential) {
         console.log("User Credential: ", userCredential);
-        setAuthentication(true);
-        setToken({ token: userCredential.user });
+        // setAuthentication(true);
+        // setToken({ token: userCredential.user });
+        dispatch(login(userCredential.user.accessToken));
         navigate("/home");
 
         await register({
@@ -92,17 +93,16 @@ function SignIn() {
       userCredential = await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
     } catch (error) {
       console.log("Error de logueo: ", error)
-    }
+    };
 
     if (userCredential) {
       console.log("Credential: ", userCredential)
-      setAuthentication(true)
-      setToken({ token: userCredential })
+      // setAuthentication(true);
+      // setToken({ token: userCredential })
+      dispatch(login(userCredential.user.accessToken));
       navigate("/home")
     }
-
-    const loginStatus = await login(loginInfo);
-    setLoginStatus({ ...loginStatus })
+    // setLoginStatus({ ...loginStatus })
   };
 
   return (
@@ -182,7 +182,7 @@ function SignIn() {
           <Link className={styles.txtSemiBold12Purple} to="/resetpassword">¿Olvidaste tu contraseña?</Link>
           <button className={styles.btnLogin}>INICIAR SESION</button>
         </form>
-        {loginStatus.status === "Fail" ? <p className={styles.txtError16}>{loginStatus.message}</p> : null}
+        {/* {loginStatus.status === "Fail" ? <p className={styles.txtError16}>{loginStatus.message}</p> : null} */}
         <p className={styles.txtSemiBold12Purple}>O INICIA SESION CON</p>
         <button className={styles.btnGoogle} onClick={loginWithGoggle}>
           <svg className={styles.icn} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">
