@@ -1,20 +1,21 @@
 import styles from "./SingIn.module.css"
 
-import { useState, useEffect , useContext} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import image from "../assets/Working-Man-Illustration.jpg";
 import login from "../redux/actions/users/login";
-import {AuthContext} from "../AuthProvider/authProvider"
+import register from "../redux/actions/users/register";
+import { AuthContext } from "../AuthProvider/authProvider"
 
-import { app, auth } from "../config/firebase-config";
-import { GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from "../config/firebase-config";
+import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 function SignIn() {
-  const [authentication,setAuthentication] = useState(false)
-  const {token, setToken} = useContext(AuthContext) || {};
-  const navigate = useNavigate ();
+  const [authentication, setAuthentication] = useState(false)
+  const { token, setToken } = useContext(AuthContext) || {};
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const provider = new GoogleAuthProvider()
 
@@ -22,6 +23,11 @@ function SignIn() {
     email: "",
     password: "",
   });
+
+  const [loginStatus, setLoginStatus] = useState({
+    status: null,
+    message: null
+  })
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -39,9 +45,8 @@ function SignIn() {
       } else {
         setAuthentication(false);
       }
-  })});
-    console.log("este es el token",token)
-    console.log("este es el authcontext",setToken)
+    })
+  });
 
   const handleChange = (event) => {
     setLoginInfo({
@@ -50,32 +55,54 @@ function SignIn() {
     });
   };
 
-
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const loginWithGoggle = async () => { 
-    const userCredential = await signInWithPopup(auth , provider)
-    if(userCredential){
-      setAuthentication(true)
-      setToken({token:userCredential.user})
-      navigate("/home")
-    }
-        console.log(userCredential)
-      
-  };
+  const loginWithGoggle = async () => {
+    try {
+      const userCredential = await signInWithPopup(auth, provider);
 
-  useEffect(() => {
-    console.log('Valor actualizado de auth:', token);
-  }, [token]);
+      console.log("USER CREDENTIALS:", userCredential);
+
+      if (userCredential) {
+        console.log("User Credential: ", userCredential);
+        setAuthentication(true);
+        setToken({ token: userCredential.user });
+        navigate("/home");
+
+        await register({
+          name: userCredential.user.displayName,
+          email: userCredential.user.email,
+          image: userCredential.user.photoURL,
+          password: "",
+        });
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(login(loginInfo));
-    
-    const credential = await signInWithEmailAndPassword(auth,loginInfo.email, loginInfo.password)
-    console.log(credential)
+
+    let userCredential = null;
+
+    try {
+      userCredential = await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
+    } catch (error) {
+      console.log("Error de logueo: ", error)
+    }
+
+    if (userCredential) {
+      console.log("Credential: ", userCredential)
+      setAuthentication(true)
+      setToken({ token: userCredential })
+      navigate("/home")
+    }
+
+    const loginStatus = await login(loginInfo);
+    setLoginStatus({ ...loginStatus })
   };
 
   return (
@@ -109,6 +136,7 @@ function SignIn() {
                 value={loginInfo.password}
               />
               <button
+                type="button"
                 className={styles.btnEye}
                 onClick={handleTogglePassword}
               >
@@ -154,6 +182,7 @@ function SignIn() {
           <Link className={styles.txtSemiBold12Purple} to="/resetpassword">¿Olvidaste tu contraseña?</Link>
           <button className={styles.btnLogin}>INICIAR SESION</button>
         </form>
+        {loginStatus.status === "Fail" ? <p className={styles.txtError16}>{loginStatus.message}</p> : null}
         <p className={styles.txtSemiBold12Purple}>O INICIA SESION CON</p>
         <button className={styles.btnGoogle} onClick={loginWithGoggle}>
           <svg className={styles.icn} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">
@@ -162,7 +191,7 @@ function SignIn() {
           Google
         </button>
         <div className={styles.containerSignUp}>
-          <p className={styles.txtSemiBold16Green}>¿No tenés cuenta</p>
+          <p className={styles.txtSemiBold16Green}>¿No tenés cuenta?</p>
           <Link className={styles.txtSemiBold16Green} to="/signup">Registrate</Link>
         </div>
       </div>

@@ -28,10 +28,6 @@ function TopBar() {
         navigate('/home');
     }
 
-    useEffect(() => {
-        console.log('Valor actualizado de auth:', token);
-    }, [token]);
-
     if (token?.token) {
         console.log('Usuario autenticado:', token.token);
     }

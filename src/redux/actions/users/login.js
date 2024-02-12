@@ -1,21 +1,26 @@
 import axios from "axios";
-import { setCurrentUser } from "../../slices/usersSlice"
 
-const login = (loginInfo) => {
+const login = async (loginInfo) => {
     const endpoint = "http://localhost:3001/user/login"
 
-    return async (dispatch) => {
-        try {
-            const response = await axios.post(endpoint, loginInfo);
-            let data = response.data;
+    const loginStatus = {
+        status: null,
+        message: null
+    }
 
-            console.log(data)
+    try {
+        await axios.post(endpoint, loginInfo);
 
-            return dispatch(setCurrentUser(data));
-        } catch (error) {
-            console.log(error);
-        }
+        loginStatus.status = "Success";
+    } catch (error) {
+        console.log(error);
+
+        loginStatus.status = "Fail";
+        loginStatus.message = "Contraseña o mail incorrectos"
     };
+
+    return loginStatus
 };
+
 
 export default login;

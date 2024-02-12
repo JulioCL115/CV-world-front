@@ -1,21 +1,34 @@
 import axios from "axios";
-import { setCurrentUser } from "../../slices/usersSlice"
 
-const register = (registerInfo) => {
+const register = async (registerInfo) => {
     const endpoint = "http://localhost:3001/user/register"
 
-    return async (dispatch) => {
-        try {
-            const response = await axios.post(endpoint, registerInfo);
-            let data = response.data;
+    const registrationStatus = {
+        status: null,
+        message: null
+    }
+    try {
+        console.log(registerInfo);
 
-            console.log(data)
+        await axios.post(endpoint, registerInfo);
 
-            return dispatch(setCurrentUser(data));
-        } catch (error) {
-            console.log(error);
-        }
+        registrationStatus.status = "Success";
+        registrationStatus.message = "¡Te registraste con éxito!";
+    } catch (error) {
+        console.log(error);
+
+        const errorStatus = error.response.status
+
+        if (errorStatus === 409) {
+            registrationStatus.status = "Fail";
+            registrationStatus.message = "Ya existe un usuario con ese email"
+        } else {
+            registrationStatus.status = "Fail";
+            registrationStatus.message = "Error del servidor"
+        };
     };
+
+    return registrationStatus
 };
 
 export default register;
