@@ -104,12 +104,9 @@ function SignIn() {
 
     if (userCredential) {
       console.log("Credential: ", userCredential)
-      // setAuthentication(true);
-      // setToken({ token: userCredential })
-      dispatch(login(userCredential.user.accessToken));
+      login(userCredential.user.accessToken);
       navigate("/home")
     }
-    // setLoginStatus({ ...loginStatus })
   };
 
   return (

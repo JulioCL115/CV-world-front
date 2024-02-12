@@ -1,24 +1,24 @@
 import axios from "axios";
-import { setCurrentUser } from "../../slices/usersSlice";
 
-const login = async (token) => {
-    const endpoint = "http://localhost:3001/user/firebase"
+const login = async (idToken) => {
+    const endpoint = "http://localhost:3001/user/firebase";
 
-    return async (dispatch) => {
+    console.log("EN EL LOGIN", idToken);
+
         try {
-            const response = await axios.post(endpoint, token);
-    
+            const response = await axios.post(endpoint, idToken);
+            
+
             const authToken = response.headers['auth-token'];
+            console.log(authToken);
             localStorage.setItem('token', authToken);
-    
-            // let data = response.data;
-            // localStorage.setItem('user', data);
-    
+
         } catch (error) {
             console.log(error);
-        };
-    }
+        }
+
 };
 
-
 export default login;
+
+

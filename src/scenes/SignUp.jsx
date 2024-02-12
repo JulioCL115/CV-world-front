@@ -66,8 +66,6 @@ function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-
-
     if (registerInfo.name &&
       registerInfo.email &&
       registerInfo.password &&
