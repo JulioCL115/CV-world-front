@@ -9,7 +9,7 @@ const login = async (token) => {
     //     message: null
     // }
     try {
-        await axios.post(endpoint, token);
+        const response = await axios.post(endpoint, token);
 
         const authToken = response.headers['auth-token'];
         localStorage.setItem('token', authToken);
@@ -23,7 +23,7 @@ const login = async (token) => {
         // loginStatus.message = "Contraseña o mail incorrectos"
     };
 
-    return loginStatus
+    // return loginStatus
 };
 
 

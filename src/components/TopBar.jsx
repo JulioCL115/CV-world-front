@@ -7,14 +7,14 @@ import React, { useContext, useEffect, useState } from "react";
 import Logo from "../assets/Logo-Black.png";
 import LogoProfile from "../assets/Logo_Round.png"
 
-import { AuthContext } from "../AuthProvider/authProvider";
-import { app, auth } from "../config/firebase-config"
+// import { AuthContext } from "../AuthProvider/authProvider";
+// import { app, auth } from "../config/firebase-config"
 import { signOut } from "firebase/auth"
 
 
 function TopBar() {
 
-    const { token, setToken } = useContext(AuthContext) || {};
+    // const { token, setToken } = useContext(AuthContext) || {};
     const navigate = useNavigate()
 
     const logOut = async (auth, setToken) => {
@@ -24,7 +24,7 @@ function TopBar() {
         } catch (error) {
           console.error('Error during logout:', error);
         } finally {
-          setToken(null);
+        //   setToken(null);
           localStorage.removeItem('token');
           navigate('/home');
         }

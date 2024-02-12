@@ -31,22 +31,22 @@ function SignIn() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (userCred) => {
-      if (userCred) {
-        console.log(userCred);
-        setAuthentication(true);
-        try {
-          const token = await userCred.getIdToken();
-          // Resto de tu lógica con el token...
-        } catch (error) {
-          console.error('Error al obtener el token:', error);
-        }
-      } else {
-        setAuthentication(false);
-      }
-    })
-  });
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, async (userCred) => {
+  //     if (userCred) {
+  //       console.log(userCred);
+  //       // setAuthentication(true);
+  //       try {
+  //         const token = await userCred.getIdToken();
+  //         // Resto de tu lógica con el token...
+  //       } catch (error) {
+  //         console.error('Error al obtener el token:', error);
+  //       }
+  //     } else {
+  //       // setAuthentication(false);
+  //     }
+  //   })
+  // });
 
   const handleChange = (event) => {
     setLoginInfo({
