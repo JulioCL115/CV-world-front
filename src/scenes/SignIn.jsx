@@ -24,10 +24,10 @@ function SignIn() {
     password: "",
   });
 
-  const [loginStatus, setLoginStatus] = useState({
-    status: null,
-    message: null
-  })
+  // const [loginStatus, setLoginStatus] = useState({
+  //   status: null,
+  //   message: null
+  // })
 
   const [showPassword, setShowPassword] = useState(false);
 

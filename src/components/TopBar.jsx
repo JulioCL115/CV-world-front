@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import Logo from "../assets/Logo-Black.png";
 import LogoProfile from "../assets/Logo_Round.png"
+import logut from "../redux/actions/users/logout";
 
 // import { AuthContext } from "../AuthProvider/authProvider";
 // import { app, auth } from "../config/firebase-config"
@@ -13,28 +14,29 @@ import { signOut } from "firebase/auth"
 
 
 function TopBar() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const currentUser = useSelector((state) => state.users.currentUser);
 
     // const { token, setToken } = useContext(AuthContext) || {};
-    const navigate = useNavigate()
+
+    const token = localStorage.getItem('token')
 
     const logOut = async (auth, setToken) => {
         try {
-          await signOut(auth);
-          console.log('User disconnected.');
+            await signOut(auth);
+            dispatch(logut());
+            navigate('/home');
         } catch (error) {
-          console.error('Error during logout:', error);
-        } finally {
-        //   setToken(null);
-          localStorage.removeItem('token');
-          navigate('/home');
+            console.error('Error during logout:', error);
         }
-      };
+    };
 
-    if (token?.token) {
-        console.log('Usuario autenticado:', token.token);
-    }
+    // if (token?.token) {
+    //     console.log('Usuario autenticado:', token.token);
+    // }
 
-    const tokenInfo = token?.token
+    // const tokenInfo = token?.token
 
     return (
         <div className={styles.topbar}>
@@ -48,7 +50,7 @@ function TopBar() {
                 <img className={styles.logo} src={Logo} alt="logo"></img>
             </div>
             <div className={styles.containerRight}>
-                {tokenInfo ?
+                {token ?
                     <button className={styles.btn}>
                         <svg className={styles.icn} id={styles.icnBell} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-30 h-30">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
@@ -56,7 +58,7 @@ function TopBar() {
                     </button>
                     : null}
                 <div className={styles.containerLogin}>
-                    {tokenInfo ?
+                    {token ?
                         <div className={styles.dropdown}>
 
                             <button className={styles.btnDropdown}>
@@ -64,7 +66,7 @@ function TopBar() {
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
 
-                                {tokenInfo.displayName ? tokenInfo.displayName : tokenInfo.name}
+                                {currentUser.name ? currentUser.name : null}
                             </button>
 
                             <div className={styles.dropdownContent}>
