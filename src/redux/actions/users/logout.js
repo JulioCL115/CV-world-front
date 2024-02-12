@@ -7,7 +7,6 @@ const logout = async () => {
             localStorage.removeItem('token');
     
             dispatch(setCurrentUser(null));
-
         } catch (error) {
             console.log(error);
 
@@ -16,4 +15,4 @@ const logout = async () => {
 };
 
 
-export default logut;
+export default logout;
