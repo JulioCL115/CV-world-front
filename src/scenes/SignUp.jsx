@@ -15,6 +15,7 @@ function SignUp() {
   const dispatch = useDispatch();
 
   const [registerInfo, setRegisterInfo] = useState({
+    name: "jaime3333",
     email: "",
     password: "",
     repeatPassword: "",
@@ -42,9 +43,30 @@ function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(register(registerInfo));
-    const credential = await createUserWithEmailAndPassword(auth,registerInfo.email, registerInfo.password)
-    console.log("sign up")
+  
+    if (registerInfo.password !== registerInfo.repeatPassword) {
+      console.error('Las contraseñas no coinciden');
+      // Puedes mostrar un mensaje de error o realizar otra acción
+      return;
+    }
+  
+    try {
+      // Intenta registrar al usuario
+      const credential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password);
+      console.log('Registro exitoso', credential);
+      dispatch(register(registerInfo))
+  
+      // Puedes redirigir al usuario a la página de inicio de sesión o hacer cualquier otra acción aquí
+  
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        console.error('Correo electrónico ya está en uso');
+        // Puedes mostrar un mensaje de error o realizar otra acción
+      } else {
+        console.error('Error al crear el usuario:', error);
+        // Puedes manejar otros tipos de errores según sea necesario
+      }
+    }
   };
 
   return (

@@ -32,7 +32,6 @@ function SignIn() {
         setAuthentication(true);
         try {
           const token = await userCred.getIdToken();
-          // Resto de tu lógica con el token...
         } catch (error) {
           console.error('Error al obtener el token:', error);
         }
