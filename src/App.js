@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import getAllCategories from "./redux/actions/categories/getAllCategories";
 import getAllLanguages from "./redux/actions/languages/getAllLanguages";
 import getAllSubscriptions from "./redux/actions/subscriptions/getAllSubscriptions";
+import getAllCvs from "../src/redux/actions/cvs/getAllCvs"
 
 import Home from "./scenes/Home";
 import Curriculums from "./scenes/Curriculums";
@@ -30,6 +31,7 @@ function App() {
     dispatch(getAllCategories());
     dispatch(getAllLanguages());
     dispatch(getAllSubscriptions());
+    dispatch(getAllCvs());
   });
 
 
@@ -38,7 +40,7 @@ function App() {
       <AuthProvider>
       <TopBar/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/curriculums" element={<Curriculums />} />
         <Route path="/subscriptions" element={<Subscriptions />} />
         <Route path="/cart" element={<Cart />} />

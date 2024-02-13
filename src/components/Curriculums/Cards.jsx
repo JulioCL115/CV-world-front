@@ -1,7 +1,10 @@
 import styles from "./Cards.module.css"
 import Card from "./Card";
+import { useSelector } from "react-redux";
 
-function Cards(cvs) {
+function Cards() {
+    const cvs = useSelector((state) => state.cvs.allCvs);
+
     return (
         <div className={styles.cards}>
             {

@@ -5,17 +5,23 @@ const login = async (idToken) => {
 
     console.log("EN EL LOGIN", idToken);
 
-        try {
-            const response = await axios.post(endpoint, {idToken});
+    try {
+        const response = await axios.post(endpoint, { idToken });
 
+        const token = response.data.token;
+        const currentUser = response.data.userFoundFiltered;
 
-            const authToken = response.headers['auth-token'];
-            console.log(authToken);
-            localStorage.setItem('token', authToken);
+        console.log(response.data);
 
-        } catch (error) {
-            console.log(error);
-        }
+        localStorage.setItem('authToken', JSON.stringify(token));
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+        // Add this line to trigger a global event
+        window.dispatchEvent(new Event('storage'));
+
+    } catch (error) {
+        console.log(error);
+    }
 
 };
 

@@ -20,7 +20,6 @@ function Curriculums() {
                     </div>
                 </div>
             </div>
-
             <div className={styles.containerBottom}>
                 <Pagination />
             </div>
