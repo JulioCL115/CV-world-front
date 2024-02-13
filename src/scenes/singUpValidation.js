@@ -11,7 +11,7 @@ function validation(registerInfo, targetName) {
     }
 
     if (targetName === 'name') {
-        if (regexName.test(registerInfo.name)) {
+        if (regexName.test(registerInfo.userName)) {
             errors.name = null;
         } else {
             errors.name = 'Sólo puede contener letras';

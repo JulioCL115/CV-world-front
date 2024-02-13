@@ -16,11 +16,13 @@ function SignUp() {
   const navigate = useNavigate();
 
   const [registerInfo, setRegisterInfo] = useState({
-    name: null,
+    userName: null,
     email: null,
     password: null,
     repeatPassword: null,
   });
+
+  console.log(registerInfo.userName)
 
   const [registrationStatus, setRegistrationStatus] = useState({
     status: null,
@@ -28,7 +30,7 @@ function SignUp() {
   })
 
   const [errors, setErrors] = useState({
-    name: null,
+    userName: null,
     email: null,
     password: null,
     repeatPassword: null,
@@ -68,11 +70,11 @@ function SignUp() {
 
 
 
-    if (registerInfo.name &&
+    if (registerInfo.userName &&
       registerInfo.email &&
       registerInfo.password &&
       registerInfo.repeatPassword &&
-      !errors.name &&
+      !errors.userName &&
       !errors.email &&
       !errors.password &&
       !errors.repeatPassword) {
@@ -105,13 +107,13 @@ function SignUp() {
             <label className={styles.txtSemiBold16Purple}>NOMBRE DE USUARIO</label>
             <input
               className={styles.input}
-              name='name'
+              name='userName'
               type='text'
               placeholder='Ingresá un nombre de usuario...'
               onChange={handleChange}
-              value={registerInfo.name}
+              value={registerInfo.userName}
             />
-            {errors.name ? <p className={styles.txtError}>{errors.name}</p> : null}
+            {errors.userName ? <p className={styles.txtError}>{errors.userName}</p> : null}
           </div>
           <div className={styles.vertical}>
             <label className={styles.txtSemiBold16Purple}>EMAIL</label>

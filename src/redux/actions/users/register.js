@@ -11,8 +11,14 @@ const register = async (registerInfo) => {
 
     try {
         console.log(registerInfo);
+        const response = {
+            userName:registerInfo.userName,
+            email:registerInfo.email,
+            password:registerInfo.password
+        }
+        console.log(response);
 
-        await axios.post(endpoint, registerInfo);
+        await axios.post(endpoint, response);
 
         registrationStatus.status = "Success";
         registrationStatus.message = "¡Te registraste con éxito!";
