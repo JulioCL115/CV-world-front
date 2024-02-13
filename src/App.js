@@ -15,8 +15,13 @@ import SignIn from "./scenes/SignIn";
 import SignUp from "./scenes/SignUp";
 import Cart from "./scenes/Cart";
 import FormCreateCv from "./scenes/FormCreateCv";
+import Detail from "./scenes/Detail";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
+import MyProfile from "./scenes/MyProfile";
+import MyCvs from "./scenes/MyCvs";
+
+import { AuthProvider } from "./AuthProvider/authProvider";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,9 +32,10 @@ function App() {
     dispatch(getAllSubscriptions());
   });
 
-  return (
 
+  return (
     <div>
+      <AuthProvider>
       <TopBar/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -39,8 +45,12 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/createcv" element={<FormCreateCv />} />
+        <Route path="/detail" element={<Detail/>}></Route>
+        <Route path="/mycvs" element={<MyCvs/>}></Route>
+        <Route path="/profile" element={<MyProfile/>}></Route>
       </Routes>
       <Footer/>
+      </AuthProvider>
     </div>
   );
 }

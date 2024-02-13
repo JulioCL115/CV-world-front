@@ -1,9 +1,9 @@
 import styles from "./Card.module.css"
 
-function Card () {
+function Card() {
     return (
         <div className={styles.card}>
-            CARD
+
         </div>
     )
 };

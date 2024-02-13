@@ -109,7 +109,59 @@
     height: 30px;
 }
 
+#icnDropdown {
+    height: 30px;
+    margin-right: 5px;
+}
+
 .btn {
     background-color: transparent;
     border: none;
+}
+
+.btnDropdown {
+    border: none;
+    background-color: transparent;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: underline;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdownContent a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdownContent a:hover {background-color: #ddd;}
+
+  .dropdown:hover .dropdownContent {display: block;}
+
+.profilePicture {
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
 }
