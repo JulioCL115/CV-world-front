@@ -1,7 +1,7 @@
+import styles from './Pagination.module.css';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import getAllCvs from "../../redux/actions/cvs/getAllCvs";
-import setCurrentPage from "../../redux/actions/pagination/setCurrentPage";
 
 function generateOptions(n) {
     const options = [];
@@ -12,44 +12,53 @@ function generateOptions(n) {
     return options;
 };
 
-const Pagination = () => {
+const Pagination = ({ currentPage, setCurrentPage, numberOfPages, setNumberOfPages, filters }) => {
     const dispatch = useDispatch();
-    const filters = useSelector(state => state.filters.filters);
-    const totalPages = useSelector(state => state.pagination.numberOfPages);
-    const currentPage = useSelector(state => state.pagination.currentPage);
-
     // console.log(currentPage);
 
-    useEffect(() => {
-        dispatch(getAllCvs(filters, 12, currentPage * 12 - 12));
-    }, [currentPage]); 
-
-    const options = generateOptions(totalPages);
+    const options = generateOptions(numberOfPages);
 
     const handlePrev = () => {
         if (currentPage > 1) {
-            dispatch(setCurrentPage(currentPage - 1))
+            setCurrentPage(currentPage - 1)
         };
     };
 
     const handleNext = () => {
-        if (currentPage < totalPages) {
-            dispatch(setCurrentPage(currentPage + 1))
+        if (currentPage < numberOfPages) {
+            setCurrentPage(currentPage + 1)
         };
     };
 
     const handlePageChange = (event) => {
-        dispatch(setCurrentPage(parseInt(event.target.value)))
+        setCurrentPage(parseInt(event.target.value))
     };
 
     return (
-        <div className='pagination'>
-            <button className='pagination-btn' onClick={handlePrev}>Prev</button>
-            <select className='pagination-dropdown' onChange={handlePageChange} value={currentPage}>
+        <div className={styles.pagination}>
+            <button className={styles.btn} onClick={handlePrev}>
+                <svg className={styles.icn} 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" viewBox="0 0 24 24" 
+                strokeWidth="1.5" 
+                stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            <select className={styles.dropdown} onChange={handlePageChange} value={currentPage}>
                 {options}
             </select>
-            <p className='pagination-txt'> {`de ${totalPages}`}</p>
-            <button className='pagination-btn' onClick={handleNext}>Next</button>
+            <p className={styles.txtRegular16Black}> {`de ${numberOfPages}`}</p>
+            <button className={styles.btn} onClick={handleNext}>
+                <svg className={styles.icn} 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                strokeWidth="1.5" 
+                stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
         </div>
     )
 };

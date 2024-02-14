@@ -12,7 +12,6 @@ import { setFilters } from '../redux/slices/filtersSlice';
 function Curriculums() {
     const dispatch = useDispatch();
     const cvs = useSelector(state => state.cvs.allCvs);
-    const currentPage = useSelector(state => state.pagination.currentPage);
 
     // console.log(currentPage);
 
@@ -24,10 +23,14 @@ function Curriculums() {
         categories: [],
     });
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [numberOfPages, setNumberOfPages] = useState(1);
+
     console.log(filters);
 
     useEffect(() => {
         dispatch(getAllCvs(filters, 12, currentPage * 12 - 12));
+        setNumberOfPages(Math.ceil(cvs.length / 16));
     }, [filters])
 
 
@@ -47,7 +50,7 @@ function Curriculums() {
                 </div>
             </div>
             <div className={styles.containerBottom}>
-                <Pagination />
+                <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} filters={filters}/>
             </div>
         </div>
     )

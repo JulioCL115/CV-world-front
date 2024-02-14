@@ -2,6 +2,7 @@ import styles from "./Cards.module.css"
 
 import Card from "./Card";
 import getCvDetail from "../../redux/actions/cvs/getCvDetail";
+import updateCv from "../../redux/actions/cvs/updateCv";
 import Error404 from "../../scenes/Error404"
 
 import { useSelector, useDispatch } from "react-redux";
@@ -14,12 +15,13 @@ function Cards() {
 
     const handleClick = (id) => {
         dispatch(getCvDetail(id));
+        dispatch(updateCv({ id, views: 1 }));
     }
 
     return (
         <div className={styles.cards}>
             {
-                cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests }) => {
+                cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate, category, language, subscription }) => {
                     return <Link className={styles.btn} 
                     to={`/detail/${id}`} 
                     onClick={handleClick(id)}
@@ -32,7 +34,8 @@ function Cards() {
                             education={education}
                             speakingLanguages={speakingLanguages}
                             skills={skills}
-                            otherInterests={otherInterests}>
+                            otherInterests={otherInterests}
+                            >
                         <Card key={id}
                             id={id}
                             name={name}
@@ -46,8 +49,11 @@ function Cards() {
                             skills={skills}
                             otherInterests={otherInterests}
                         />
-                        <p>Nombre de usuario</p>
-                        <p>Título del cv</p>
+                        <p>{views}</p>
+                        <p>{creationDate}</p>
+                        <p>{category}</p>
+                        <p>{language}</p>
+                        <p>{subscription}</p>
                     </Link>
 
                 }) : <Error404 />
