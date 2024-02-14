@@ -2,8 +2,10 @@ import styles from "./Detail.module.css";
 import Comments from "../components/Detail/Comments";
 import Contact from "../components/Detail/Contact";
 import Cv from "../components/Detail/Cv";
+import { useSelector } from "react-redux";
 
 function Detail() {
+    const cv = useSelector((state) => state.cvs.cvDetail);
 
     return (
         <div className={styles.detail}>

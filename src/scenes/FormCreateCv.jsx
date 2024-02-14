@@ -3,7 +3,7 @@ import styles from "./FormCreateCv.module.css";
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 
-import postCv from "../redux/actions/csv/postCv";
+import postCv from "../redux/actions/cvs/postCv";
 
 function FormCreateCv() {
     const dispatch = useDispatch();

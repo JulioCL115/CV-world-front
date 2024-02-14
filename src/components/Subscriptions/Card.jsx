@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 
 function Card({ id, name, price, included, notIncluded }) {
 
-    console.log(included);
-    console.log(notIncluded);
-
-
     const renderPrice = () => {
         if (price === 0) {
             return (

@@ -2,42 +2,41 @@
 import styles from "./TopBar.module.css";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-
 
 import Logo from "../assets/Logo-Black.png";
 import logout from "../redux/actions/users/logout";
-
-// import { AuthContext } from "../AuthProvider/authProvider";
-// import { app, auth } from "../config/firebase-config"
+import { auth } from "../config/firebase-config"
 import { signOut } from "firebase/auth"
+import { useState, useEffect } from 'react';
 
 
 function TopBar() {
-    const dispatch = useDispatch();
     const navigate = useNavigate()
-    const currentUser = useSelector((state) => state.users.currentUser);
 
-    // const { token, setToken } = useContext(AuthContext) || {};
+    const storedUser = localStorage.getItem('currentUser');
+    const [currentUser, setCurrentUser] = useState(
+        storedUser && storedUser !== "[object Object]" ? JSON.parse(storedUser) : null
+    );
 
-    const token = localStorage.getItem('token')
-    console.log(token);
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
+        };
+        window.addEventListener('storage', handleStorageChange);
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
 
-    const logOut = async (auth, setToken) => {
+    const logOut = async () => {
         try {
             await signOut(auth);
-            dispatch(logout());
-            navigate('/home');
+            logout();
+            navigate('/signin');
         } catch (error) {
             console.error('Error during logout:', error);
         }
     };
-
-    // if (token?.token) {
-    //     console.log('Usuario autenticado:', token.token);
-    // }
-
-    // const tokenInfo = token?.token
 
     return (
         <div className={styles.topbar}>
@@ -67,7 +66,7 @@ function TopBar() {
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
 
-                                {currentUser.name}
+                                {currentUser.userName}
                             </button>
 
                             <div className={styles.dropdownContent}>
@@ -85,7 +84,6 @@ function TopBar() {
                         </svg>
                     }
                 </div>
-
             </div>
         </div>
     );
