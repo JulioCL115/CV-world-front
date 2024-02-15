@@ -7,6 +7,10 @@ import postCv from "../redux/actions/cvs/postCv";
 
 function FormCreateCv() {
     const dispatch = useDispatch();
+    const storedUser = localStorage.getItem('currentUser');
+
+    const userId = JSON.parse(storedUser).id;
+
 
     const [cv, setCv] = useState({
         name: "",
@@ -86,6 +90,7 @@ function FormCreateCv() {
             experience: updatedExperience
         });
     };
+
     const handleEducationChange = (index, name, value) => {
         const updatedEducation = [...cv.education];
         updatedEducation[index][name] = value;
@@ -125,6 +130,7 @@ function FormCreateCv() {
             education: updatedEducation
         });
     };
+
     const handleContactChange = (index, name, value) => {
         const updatedContact = [...cv.contact];
         updatedContact[index][name] = value;
@@ -158,6 +164,7 @@ function FormCreateCv() {
             contact: updatedContact
         });
     };
+
     const formatDateRange = (from, to) => {
         if (!from && !to) return "";
         if (from && !to) return `${from} - Present`;
@@ -166,7 +173,7 @@ function FormCreateCv() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(postCv(cv));
+        dispatch(postCv(userId, cv));
     };
 
     return (

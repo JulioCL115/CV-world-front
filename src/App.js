@@ -32,7 +32,7 @@ function App() {
     dispatch(getAllLanguages());
     dispatch(getAllSubscriptions());
     dispatch(getAllCvs());
-  });
+  });  
 
 
   return (
@@ -47,7 +47,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/createcv" element={<FormCreateCv />} />
-        <Route path="/detail" element={<Detail/>}></Route>
+        <Route path="/detail/:id" element={<Detail/>}></Route>
         <Route path="/mycvs" element={<MyCvs/>}></Route>
         <Route path="/profile" element={<MyProfile/>}></Route>
       </Routes>
