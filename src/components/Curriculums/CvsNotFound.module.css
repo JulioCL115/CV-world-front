@@ -1,0 +1,17 @@
+.cvsNotFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.txtSemiBold16Purple {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #3E3E70;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 0px;
+    padding: 0px;
+}

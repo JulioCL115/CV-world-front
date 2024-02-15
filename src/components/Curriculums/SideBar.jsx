@@ -5,7 +5,6 @@ import { useState } from 'react';
 function SideBar({ filters, setFilters }) {
     const languages = useSelector((state) => state.languages.allLanguages);
     const categories = useSelector((state) => state.categories.allCategories);
-    const subscriptions = useSelector((state) => state.subscriptions.allSubscriptions);
 
     const handleCheckboxChange = (filterType, value) => {
         setFilters((prevFilters) => ({
@@ -35,23 +34,6 @@ function SideBar({ filters, setFilters }) {
                         </div>
                     )) : null
                     }
-                </div>
-                <hr class="solid" className={styles.divider} />
-                <div className={styles.list}>
-                    <h2 className={styles.txtSemiBold16Black}>Subscriptions</h2>
-                    {subscriptions ? subscriptions.map((subscription) => (
-                        <div className={styles.listItem} key={subscription.id}>
-                            <input
-                                className={styles.checkbox}
-                                type="checkbox"
-                                id={`subscription-${subscription.id}`}
-                                checked={filters.subscriptions.includes(subscription.name)}
-                                onChange={() => handleCheckboxChange('subscriptions', subscription.name)}
-                            />
-                            <label className={styles.txtRegular16Black} htmlFor={`subscription-${subscription.id}`}>{subscription.name}</label>
-                        </div>
-                    )) : null
-                }
                 </div>
                 <hr class="solid" className={styles.divider} />
                 <div className={styles.list}>

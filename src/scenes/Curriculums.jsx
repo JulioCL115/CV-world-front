@@ -4,33 +4,33 @@ import SideBar from '../components/Curriculums/SideBar';
 import Cards from '../components/Curriculums/Cards';
 import Pagination from '../components/Curriculums/Pagination';
 import getAllCvs from '../redux/actions/cvs/getAllCvs';
+import CvsNotFound from '../components/Curriculums/CvsNotFound';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../redux/slices/filtersSlice';
 
 function Curriculums() {
     const dispatch = useDispatch();
     const cvs = useSelector(state => state.cvs.allCvs);
 
-    // console.log(currentPage);
+    console.log(cvs);
 
     const [filters, setFilters] = useState({
         search: "",
         sort: "Más recientes",
         languages: [],
-        subscriptions: [],
         categories: [],
     });
 
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
+    const limit = 12;
 
     console.log(filters);
 
     useEffect(() => {
-        dispatch(getAllCvs(filters, 16, currentPage * 16 - 16));
-        setNumberOfPages(Math.ceil(cvs.length / 16));
+        dispatch(getAllCvs(filters, limit, currentPage * limit - limit));
+        setNumberOfPages(Math.ceil(cvs && cvs.length ? cvs.length / limit : 1));
     }, [filters])
 
 
@@ -45,7 +45,7 @@ function Curriculums() {
                         <SearchBar filters={filters} setFilters={setFilters} />
                     </div>
                     <div className={styles.containerRightBottom}>
-                        {cvs ? <Cards cvs={cvs}/> : <p>No se encontraron cvs</p>}
+                        {cvs && cvs.length ? <Cards cvs={cvs}/> : <CvsNotFound/>}
                     </div>
                 </div>
             </div>
