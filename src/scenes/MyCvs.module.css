@@ -1,0 +1,62 @@
+.myCvs {
+    max-width: 100%;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 45px;
+    padding-bottom: 85px;
+}
+
+/*FONT STYLES*/
+
+.txtSemiBold16Purple {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #3E3E70;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 50px;
+    padding: 0px;
+}
+
+.txtSemiBold32Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+/*CONTAINERS*/
+
+.containerBottom {
+    width: 100%;
+    text-align: left;
+}
+.containerBottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    height: 50px;
+    width: 300px;
+    background-color: #098D85;
+    border-color: transparent;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.img {
+    margin: 0px
+}
