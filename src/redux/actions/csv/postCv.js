@@ -6,7 +6,11 @@ const postCv = (cv) => {
 
     return async () => {
         try {
-            const response = await axiosInstance.post(endpoint, cv)
+            const response = await axiosInstance.post(endpoint, cv , {
+                headers : {
+                  "Content-Type" : "multipart/form-data",
+                },
+              })
 
             console.log("Response:", response.data);
         } catch (error) {

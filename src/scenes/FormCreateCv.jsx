@@ -166,8 +166,46 @@ function FormCreateCv() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(postCv(cv));
-    };
+        try {
+            const formData = new FormData();
+            formData.append('name', cv.name);
+            formData.append('header', cv.header);
+            cv.experience.forEach((experience) => {
+              formData.append('experience', experience);
+            });
+            formData.append('description', cv.description);
+            cv.education.forEach((education) => {
+              formData.append("education", education);
+            });
+            cv.contact.forEach((contact) => {
+                formData.append("contact", contact);
+              });
+              cv.skills.forEach((skills) => {
+                formData.append("skills", skills);
+              });
+              cv.speakingLanguages.forEach((speakingLanguages) => {
+                formData.append("speakingLanguages", speakingLanguages);
+              });
+              cv.otherInterests.forEach((otherInterests) => {
+                formData.append("otherInterests", otherInterests);
+              });
+    
+            const inputFile = document.querySelector("input[name='image']").files;
+              for (let i = 0 ; i < inputFile.length; i++){
+              formData.append('image', inputFile[i]);
+            }
+    
+            for (let [key, value] of formData.entries()) {
+              console.log(`${key}: ${value}`);
+            }
+            console.log(cv.image)
+            console.log(formData)
+            console.log(inputFile)
+            const response = dispatch(postCv(cv));        
+    }catch(error){
+
+    }
+} 
 
     return (
         <div className={styles.Container}>
@@ -186,6 +224,7 @@ function FormCreateCv() {
                 <label className='form-txt'>Imagen:</label>
                 <input
                     type="file"
+                    name="image"
                     accept="image/*"
                     onChange={handleImageUpload}
                 />

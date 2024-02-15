@@ -79,7 +79,7 @@ function SignIn() {
         ) {
           // Register the new user
           await register({
-            name: userCredential.user.displayName,
+            userName: userCredential.user.displayName,
             email: userCredential.user.email,
             image: userCredential.user.photoURL,
             password: "",
