@@ -11,10 +11,10 @@ const getAllCvs = (filters = {}, limit, offset) => {
     let search = "";
 
     if (filters.sort && filters.sort === "Más recientes") {
-        sort = "date"
+        sort = "Más recientes"
     } 
     if (filters.sort && filters.sort === "Más vistos") {
-        sort = "views"
+        sort = "Más vistos"
     };
 
     if (filters.categories) {

@@ -8,15 +8,15 @@ import { Link } from "react-router-dom";
 function MyCvs() {
     // const storedUser = localStorage.getItem('currentUser');
 
+     const storedUser = {
+        cvs: [{},],
+         subscription: "Plan Básico"
+     }
+
     // const storedUser = {
-    //     cvs: [{ name: "Florencia" },],
+    //     cvs: [],
     //     subscription: "Plan Premium"
     // }
-
-    const storedUser = {
-        cvs: [],
-        subscription: "Plan Premium"
-    }
 
     return (
         <div className={styles.myCvs}>
@@ -25,7 +25,7 @@ function MyCvs() {
             </div>
             {storedUser && storedUser.cvs.length ?
                 <div className={styles.containerCenter}>
-                    {storedUser.cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests }) => {
+                    {/* {storedUser.cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests }) => {
                         return (
                             <Card key={id}
                                 id={id}
@@ -41,7 +41,7 @@ function MyCvs() {
                                 otherInterests={otherInterests}
                             />
                         )
-                    })}
+                    })} */}
                 </div> :
                 <div className={styles.containerCenter}>
                     <img className={styles.img} src={Illustration} alt="Illustration" />
