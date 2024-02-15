@@ -44,7 +44,7 @@ const getAllCvs = (filters = {}, limit, offset) => {
                     languages: languages,
                     subscriptions: subscriptions,
                     limit: limit,
-                    offset: offset,
+                    page: offset,
                 }
             });
             let data = response.data;

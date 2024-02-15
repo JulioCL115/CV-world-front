@@ -15,7 +15,8 @@ import Subscriptions from "./scenes/Subscriptions";
 import SignIn from "./scenes/SignIn";
 import SignUp from "./scenes/SignUp";
 import Cart from "./scenes/Cart";
-import FormCreateCv from "./scenes/FormCreateCv";
+import CreateCv from "./scenes/CreateCv";
+import UpgradeSubscription from "./scenes/UpgradeSubscription";
 import Detail from "./scenes/Detail";
 import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
@@ -46,10 +47,11 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/createcv" element={<FormCreateCv />} />
+        <Route path="/createcv" element={<CreateCv />} />
         <Route path="/detail/:id" element={<Detail/>}></Route>
         <Route path="/mycvs" element={<MyCvs/>}></Route>
         <Route path="/profile" element={<MyProfile/>}></Route>
+        <Route path="/upgradesubscription" element={<UpgradeSubscription/>}></Route>
       </Routes>
       <Footer/>
       </AuthProvider>

@@ -4,6 +4,10 @@
     padding-right: 45px;
     padding-top: 45px;
     padding-bottom: 85px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /*FONT STYLES*/
@@ -32,11 +36,12 @@
 
 /*CONTAINERS*/
 
-.containerBottom {
+.containerTop {
     width: 100%;
     text-align: left;
 }
-.containerBottom {
+.containerCenter {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
