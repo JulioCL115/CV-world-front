@@ -1,3 +1,44 @@
+.form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+  
+  .FormIzq, .FormDer {
+    margin:  0  15%; /* Añade margen para separarlos */
+    
+  }
 
+  .FormIzq label, .FormDer label {
+    display: block;
+    margin-bottom:  15px; /* Espacio entre los inputs */
+  }
+  .titulo{
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 10%;
+  }
+.FormDer{
+
+}
+
+.FormDer button, .FormIzq button{
+    background-color: aliceblue;
+
+}
+.Selector {
+    border: none;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+  
   
   
