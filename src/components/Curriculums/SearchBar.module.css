@@ -11,25 +11,24 @@
 
 .searchbarContainer{
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     position: relative;
 }
 .searchInput {
     width: 400px;
     height: 40px;
-    padding-left: 30px;
+    padding-left: 35px;
     border-radius: 10px;
     border-color: #000000;
     font-size: 16px;
 }
 .icon {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     position: absolute;
-    top:  13px;
+    top:  10px;
     bottom:  10px;
-    left:  10px;
+    left:  7px;
     z-index:  2;
 }
 
@@ -47,5 +46,4 @@
     font-style: normal;
     color: black;
     font-size: 16px;
-    font-weight: 400;
 }
