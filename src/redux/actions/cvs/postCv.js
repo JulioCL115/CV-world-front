@@ -1,8 +1,8 @@
 import axiosInstance from "../../../config/axios-config";
 
-const endpoint = "http://localhost:3001/cv/:userId";
+const postCv = (userId, cv) => {
 
-const postCv = (cv) => {
+    const endpoint = "http://localhost:3001/cv/" + userId;
 
     return async () => {
         try {
