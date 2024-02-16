@@ -2,11 +2,15 @@ import styles from "./CreateCv.module.css";
 
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 import postCv from "../redux/actions/cvs/postCv";
+import validation from "./createCvValidation"
+
 
 function CreateCv() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const storedUser = localStorage.getItem('currentUser');
     const languages = useSelector((state) => state.languages.allLanguages);
     const categories = useSelector((state) => state.categories.allCategories);
@@ -32,12 +36,53 @@ function CreateCv() {
         otherInterests: []
     });
 
+    // Seteo de estado de creacion del formulario
+
+    const [creationStatus, setCreationStatus] = useState({
+        status: null,
+        message: null
+    })
+
+    // Seteo de errores
+
+    const [errors, setErrors] = useState({
+        name: null,
+        image: null,
+        description: null,
+        experience: null,
+        education: null,
+        contact: {
+            location: null,
+            email: null,
+            phone: null,
+            website: null
+        },
+        skills: null,
+        speakingLanguages: null,
+        otherInterests: null
+    });
+
+    // Para inputs normales
+
     const handleChange = (event) => {
         setCv({
             ...cv,
             [event.target.name]: event.target.value
         });
+
+        const validationErrors = validation({
+            ...cv,
+            [event.target.name]: event.target.value,
+        }, event.target.name);
+
+        setErrors({
+            ...errors,
+            [event.target.name]: validationErrors[event.target.name]
+        }
+        );
     };
+
+    // Para añadir una imagen 
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -55,6 +100,8 @@ function CreateCv() {
             reader.readAsDataURL(file);
         }
     };
+
+    // Para añadir o eliminar experiencia laboral
 
     const handleExperienceChange = (index, name, value) => {
         const updatedExperience = [...cv.experience];
@@ -96,6 +143,8 @@ function CreateCv() {
         });
     };
 
+    // Para añadir o eliminar educación
+
     const handleEducationChange = (index, name, value) => {
         const updatedEducation = [...cv.education];
         updatedEducation[index][name] = value;
@@ -117,8 +166,8 @@ function CreateCv() {
                 {
                     from: "",
                     to: "",
-                    where: "",
-                    about: ""
+                    institution: "",
+                    title: ""
                 }
             ]
         });
@@ -134,54 +183,105 @@ function CreateCv() {
         });
     };
 
-    const handleContactChange = (index, name, value) => {
-        const updatedContact = [...cv.contact];
-        updatedContact[index][name] = value;
+    // Para añadir o eliminar idiomas
 
+    const handleAddLanguage = () => {
         setCv({
             ...cv,
-            contact: updatedContact
+            speakingLanguages: [...cv.speakingLanguages, ""],
         });
     };
 
-    const handleAddContact = () => {
-        setCv({
-            ...cv,
-            contact: [
-                ...cv.contact,
-                {
-                    direccion: "",
-                    telefono: "",
-                    correo: ""
-                }
-            ]
-        });
-    };
-
-    const handleRemoveContact = (index) => {
-        const updatedContact = [...cv.contact];
-        updatedContact.splice(index, 1);
+    const handleRemoveLanguage = (index) => {
+        const updatedLanguages = [...cv.speakingLanguages];
+        updatedLanguages.splice(index, 1);
 
         setCv({
             ...cv,
-            contact: updatedContact
+            speakingLanguages: updatedLanguages,
         });
     };
 
-    const formatDateRange = (from, to) => {
-        if (!from && !to) return "";
-        if (from && !to) return `${from} - Present`;
-        return `${from} - ${to}`;
+    // Para añadir o eliminar habilidades
+
+    const handleAddSkill = () => {
+        setCv({
+            ...cv,
+            skills: [...cv.skills, ""],
+        });
     };
+
+    const handleRemoveSkill = (index) => {
+        const updatedSkills = [...cv.skills];
+        updatedSkills.splice(index, 1);
+
+        setCv({
+            ...cv,
+            skills: updatedSkills,
+        });
+    };
+
+    // Para añadir o eliminar otros intereses
+
+    const handleAddInterest = () => {
+        setCv({
+            ...cv,
+            otherInterests: [...cv.otherInterests, ""],
+        });
+    };
+
+    const handleRemoveInterest = (index) => {
+        const updatedInterests = [...cv.otherInterests];
+        updatedInterests.splice(index, 1);
+
+        setCv({
+            ...cv,
+            otherInterests: updatedInterests,
+        });
+    };
+
+    // Para enviar el formulario 
 
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(postCv(userId, cv));
+
+
+        if (cv.name &&
+            cv.header &&
+            cv.description &&
+            cv.experience &&
+            cv.education &&
+            cv.contact &&
+            cv.skills &&
+            cv.speakingLanguages &&
+            cv.otherInterests &&
+            !errors.name &&
+            !errors.header &&
+            !errors.description &&
+            !errors.experience &&
+            !errors.education &&
+            !errors.contact &&
+            !errors.skills &&
+            !errors.speakingLanguages &&
+            !errors.otherInterests) {
+
+            const creationStatus = dispatch(postCv(cv));
+
+            setCreationStatus({ ...creationStatus })
+
+            if (creationStatus.status === "Success") {
+
+                setTimeout(() => {
+                    navigate("/mycvs");
+                }, 2000);
+            }
+        };
     };
 
     return (
         <div className={styles.createCv}>
-            <h1 >Crear CV</h1>
+            <h1 className={styles.txtSemiBold32Black}>Crear CV</h1>
 
             <form className={styles.form} onSubmit={handleSubmit}>
 
@@ -218,6 +318,7 @@ function CreateCv() {
                         onChange={handleChange}
                         value={cv.name}
                     />
+                    {errors.name ? <p className={styles.txtError}>{errors.name}</p> : null}
                 </div>
 
                 <div className={styles.containerSection}>
@@ -228,6 +329,7 @@ function CreateCv() {
                         accept="image/*"
                         onChange={handleImageUpload}
                     />
+                    {errors.image ? <p className={styles.txtError}>{errors.image}</p> : null}
                 </div>
 
                 <div className={styles.containerSection}>
@@ -240,6 +342,7 @@ function CreateCv() {
                         onChange={handleChange}
                         value={cv.header}
                     />
+                    {errors.header ? <p className={styles.txtError}>{errors.header}</p> : null}
                 </div>
 
                 <div className={styles.containerSection}>
@@ -252,6 +355,7 @@ function CreateCv() {
                             placeholder='Ingrese su país y ciudad de residencia...'
                             onChange={handleChange}
                             value={cv.contact.location} />
+                        {errors.contact.location ? <p className={styles.txtError}>{errors.contact.location}</p> : null}
                         <input
                             className={styles.input}
                             name='email'
@@ -259,6 +363,7 @@ function CreateCv() {
                             placeholder='Ingrese su mail...'
                             onChange={handleChange}
                             value={cv.contact.email} />
+                        {errors.contact.email ? <p className={styles.txtError}>{errors.contact.email}</p> : null}
                         <input
                             className={styles.input}
                             name='phone'
@@ -266,6 +371,7 @@ function CreateCv() {
                             placeholder='Ingrese su número de celular...'
                             onChange={handleChange}
                             value={cv.contact.phone} />
+                        {errors.contact.phone ? <p className={styles.txtError}>{errors.contact.phone}</p> : null}
                         <input
                             className={styles.input}
                             name='website'
@@ -273,6 +379,7 @@ function CreateCv() {
                             placeholder='Ingrese el link a su página web...'
                             onChange={handleChange}
                             value={cv.contact.website} />
+                        {errors.contact.website ? <p className={styles.txtError}>{errors.contact.website}</p> : null}
                     </div>
                 </div>
 
@@ -286,6 +393,7 @@ function CreateCv() {
                         onChange={handleChange}
                         value={cv.description}
                     />
+                    {errors.description ? <p className={styles.txtError}>{errors.description}</p> : null}
                 </div>
 
                 <div className={styles.containerSection}>
@@ -320,7 +428,7 @@ function CreateCv() {
                                         type="text"
                                         name="company"
                                         value={exp.company}
-                                        onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                        onChange={(e) => handleExperienceChange(index, "company", e.target.value)}
                                     />
                                 </div>
                                 <div>
@@ -330,7 +438,7 @@ function CreateCv() {
                                         type="text"
                                         name="role"
                                         value={exp.role}
-                                        onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                        onChange={(e) => handleExperienceChange(index, "role", e.target.value)}
                                     />
                                 </div>
                                 <div>
@@ -340,7 +448,7 @@ function CreateCv() {
                                         type="text"
                                         name="responsibilities"
                                         value={exp.responsibilities}
-                                        onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                        onChange={(e) => handleExperienceChange(index, "responsibilities", e.target.value)}
                                     />
                                 </div>
                                 <button
@@ -351,10 +459,10 @@ function CreateCv() {
                                 </button>
                             </div>
                         ))}
-                        <button 
-                        className={styles.btnSection}
-                        type="button" 
-                        onClick={handleAddExperience}>
+                        <button
+                            className={styles.btnSection}
+                            type="button"
+                            onClick={handleAddExperience}>
                             Agregar
                         </button>
                     </div>
@@ -387,17 +495,17 @@ function CreateCv() {
                             <input
                                 className={styles.input}
                                 type="text"
-                                name="where"
+                                name="institution"
                                 value={educ.where}
-                                onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                onChange={(e) => handleEducationChange(index, "institution", e.target.value)}
                             />
                             <label>Titulo obtenido:</label>
                             <input
                                 className={styles.input}
                                 type="text"
-                                name="about"
+                                name="title"
                                 value={educ.abou}
-                                onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                onChange={(e) => handleEducationChange(index, "title", e.target.value)}
                             />
                             <button type="button" onClick={() => handleRemoveEducation(index)}>
                                 Eliminar
@@ -414,15 +522,114 @@ function CreateCv() {
                 </div>
 
                 <div className={styles.containerSection}>
+                    <label className={styles.txtSemiBold16Purple}>Idiomas:</label>
+                    {cv.speakingLanguages.map((language, index) => (
+                        <div key={index}>
+                            <input
+                                className={styles.input}
+                                type="text"
+                                placeholder={`Idioma ${index + 1}`}
+                                value={language}
+                                onChange={(e) => {
+                                    const updatedLanguages = [...cv.speakingLanguages];
+                                    updatedLanguages[index] = e.target.value;
+
+                                    setCv({
+                                        ...cv,
+                                        speakingLanguages: updatedLanguages,
+                                    });
+                                }}
+                            />
+                            <button
+                                className={styles.btnSection}
+                                type="button"
+                                onClick={() => handleRemoveLanguage(index)}
+                            >
+                                Eliminar
+                            </button>
+                        </div>
+                    ))}
+                    <button
+                        className={styles.btnSection}
+                        type="button"
+                        onClick={handleAddLanguage}
+                    >
+                        Agregar
+                    </button>
+                </div>
+
+                <div className={styles.containerSection}>
+                    <label className={styles.txtSemiBold16Purple}>Habilidades:</label>
+                    {cv.skills.map((skill, index) => (
+                        <div key={index}>
+                            <input
+                                className={styles.input}
+                                type="text"
+                                placeholder={`Habilidad ${index + 1}`}
+                                value={skill}
+                                onChange={(e) => {
+                                    const updatedSkills = [...cv.skills];
+                                    updatedSkills[index] = e.target.value;
+
+                                    setCv({
+                                        ...cv,
+                                        skills: updatedSkills,
+                                    });
+                                }}
+                            />
+                            <button
+                                className={styles.btnSection}
+                                type="button"
+                                onClick={() => handleRemoveSkill(index)}
+                            >
+                                Eliminar
+                            </button>
+                        </div>
+                    ))}
+                    <button
+                        className={styles.btnSection}
+                        type="button"
+                        onClick={handleAddSkill}
+                    >
+                        Agregar
+                    </button>
+                </div>
+
+                <div className={styles.containerSection}>
                     <label className={styles.txtSemiBold16Purple}>Otros intereses:</label>
-                    <input
-                        className='form-input'
-                        name='otherInterests'
-                        type='text'
-                        placeholder='Escribí otros intereses'
-                        onChange={handleChange}
-                        value={cv.otherInterests}
-                    />
+                    {cv.otherInterests.map((interest, index) => (
+                        <div key={index}>
+                            <input
+                                className={styles.input}
+                                type="text"
+                                placeholder={`Interés ${index + 1}`}
+                                value={interest}
+                                onChange={(e) => {
+                                    const updatedInterests = [...cv.otherInterests];
+                                    updatedInterests[index] = e.target.value;
+
+                                    setCv({
+                                        ...cv,
+                                        otherInterests: updatedInterests,
+                                    });
+                                }}
+                            />
+                            <button
+                                className={styles.btnSection}
+                                type="button"
+                                onClick={() => handleRemoveInterest(index)}
+                            >
+                                Eliminar
+                            </button>
+                        </div>
+                    ))}
+                    <button
+                        className={styles.btnSection}
+                        type="button"
+                        onClick={handleAddInterest}
+                    >
+                        Agregar
+                    </button>
                 </div>
                 <button className={styles.btn} type="submit">Crear</button>
             </form>

@@ -31,7 +31,7 @@ function Curriculums() {
     useEffect(() => {
         dispatch(getAllCvs(filters, limit, currentPage * limit - limit));
         setNumberOfPages(Math.ceil(cvs && cvs.length ? cvs.length / limit : 1));
-    }, [filters])
+    }, [cvs])
 
 
     return (
