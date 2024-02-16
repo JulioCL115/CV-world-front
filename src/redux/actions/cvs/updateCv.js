@@ -1,12 +1,11 @@
 import axiosInstance from "../../../config/axios-config";
 
-const endpoint = "http://localhost:3001/cv/:userId";
-
-const postCv = (cv) => {
+const updateCv = (id, cv) => {
+    const endpoint = "http://localhost:3001/cv/" + id;
 
     return async () => {
         try {
-            const response = await axiosInstance.post(endpoint, cv , {
+            const response = await axiosInstance.put(endpoint, cv , {
                 headers : {
                   "Content-Type" : "multipart/form-data",
                 },
@@ -19,4 +18,4 @@ const postCv = (cv) => {
     };
 };
 
-export default postCv;
+export default updateCv;

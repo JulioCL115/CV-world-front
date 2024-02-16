@@ -1,17 +1,13 @@
-import { setCurrentUser } from "../../slices/usersSlice";
-
 const logout = async () => {
 
-    return async (dispatch) => {
         try {    
             localStorage.removeItem('token');
-    
-            dispatch(setCurrentUser(null));
+            localStorage.removeItem('currentUser');
+            window.dispatchEvent(new Event('storage'));
         } catch (error) {
             console.log(error);
 
         };
-    }
 };
 
 

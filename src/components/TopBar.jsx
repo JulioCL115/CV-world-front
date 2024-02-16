@@ -2,42 +2,42 @@
 import styles from "./TopBar.module.css";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-
 
 import Logo from "../assets/Logo-Black.png";
 import logout from "../redux/actions/users/logout";
-
-// import { AuthContext } from "../AuthProvider/authProvider";
-// import { app, auth } from "../config/firebase-config"
+import { auth } from "../config/firebase-config"
 import { signOut } from "firebase/auth"
+import { useState, useEffect } from 'react';
 
 
 function TopBar() {
-    const dispatch = useDispatch();
     const navigate = useNavigate()
-    const currentUser = useSelector((state) => state.users.currentUser);
 
-    // const { token, setToken } = useContext(AuthContext) || {};
+    const storedUser = localStorage.getItem('currentUser');
+    const [currentUser, setCurrentUser] = useState(
+        storedUser && storedUser !== "[object Object]" ? JSON.parse(storedUser) : null
+    );
 
-    const token = localStorage.getItem('token')
-    console.log(token);
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
+        };
+        console.log(currentUser)
+        window.addEventListener('storage', handleStorageChange);
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
 
-    const logOut = async (auth, setToken) => {
+    const logOut = async () => {
         try {
             await signOut(auth);
-            dispatch(logout());
-            navigate('/home');
+            logout();
+            navigate('/signin');
         } catch (error) {
             console.error('Error during logout:', error);
         }
     };
-
-    // if (token?.token) {
-    //     console.log('Usuario autenticado:', token.token);
-    // }
-
-    // const tokenInfo = token?.token
 
     return (
         <div className={styles.topbar}>
@@ -79,13 +79,12 @@ function TopBar() {
                         : <Link className={styles.txtRegular16Underlined} to="/signin">Iniciar sesión</Link>
                     }
                     {currentUser ?
-                        <img className={styles.profilePicture} src={currentUser.image} alt="logo"></img>
+                        <img className={styles.profilePicture} src={currentUser.photo} alt="logo"></img>
                         : <svg className={styles.icn} id={styles.icnUser} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         </svg>
                     }
                 </div>
-
             </div>
         </div>
     );

@@ -1,22 +1,17 @@
 import styles from "./SingIn.module.css"
 
-import { useState, useEffect, useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import image from "../assets/Working-Man-Illustration.jpg";
 import login from "../redux/actions/users/login";
 import register from "../redux/actions/users/register";
-// import { AuthContext } from "../AuthProvider/authProvider"
 
 import { auth } from "../config/firebase-config";
-import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 function SignIn() {
-  // const [authentication, setAuthentication] = useState(false)
-  // const { token, setToken } = useContext(AuthContext) || {};
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const provider = new GoogleAuthProvider()
 
   const [loginInfo, setLoginInfo] = useState({
@@ -24,29 +19,7 @@ function SignIn() {
     password: "",
   });
 
-  // const [loginStatus, setLoginStatus] = useState({
-  //   status: null,
-  //   message: null
-  // })
-
   const [showPassword, setShowPassword] = useState(false);
-
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, async (userCred) => {
-  //     if (userCred) {
-  //       console.log(userCred);
-  //       // setAuthentication(true);
-  //       try {
-  //         const token = await userCred.getIdToken();
-  //         // Resto de tu lógica con el token...
-  //       } catch (error) {
-  //         console.error('Error al obtener el token:', error);
-  //       }
-  //     } else {
-  //       // setAuthentication(false);
-  //     }
-  //   })
-  // });
 
   const handleChange = (event) => {
     setLoginInfo({
@@ -67,24 +40,23 @@ function SignIn() {
   
       if (userCredential) {
         console.log("User Credential: ", userCredential);
-        // setAuthentication(true);
-        // setToken({ token: userCredential.user });
-        dispatch(login(userCredential.user.accessToken));
-        navigate("/home");
-  
-        // Check if it's a new user
+        console.log(userCredential._tokenResponse)
+        console.log(userCredential._tokenResponse.isNewUser)
+
         if (
-          userCredential.additionalUserInfo &&
-          userCredential.additionalUserInfo.isNewUser
+          userCredential._tokenResponse &&
+          userCredential._tokenResponse.isNewUser
         ) {
-          // Register the new user
           await register({
-            userName: userCredential.user.displayName,
+            name: userCredential.user.displayName,
+            photo: userCredential.user.photoURL,
             email: userCredential.user.email,
             image: userCredential.user.photoURL,
             password: "",
           });
         }
+        login(userCredential.user.accessToken);
+        navigate("/home");
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -104,12 +76,9 @@ function SignIn() {
 
     if (userCredential) {
       console.log("Credential: ", userCredential)
-      // setAuthentication(true);
-      // setToken({ token: userCredential })
-      dispatch(login(userCredential.user.accessToken));
+      login(userCredential.user.accessToken);
       navigate("/home")
     }
-    // setLoginStatus({ ...loginStatus })
   };
 
   return (

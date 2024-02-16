@@ -12,7 +12,8 @@ const register = async (registerInfo) => {
     try {
         console.log(registerInfo);
         const response = {
-            userName:registerInfo.userName,
+            name:registerInfo.name,
+            photo:registerInfo.photo,
             email:registerInfo.email,
             password:registerInfo.password
         }
