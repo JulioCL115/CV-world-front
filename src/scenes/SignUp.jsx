@@ -55,6 +55,8 @@ function SignUp() {
     );
   };
 
+  // Para mostrar y ocultar la contraseña
+
   const handleToggleFirstPassword = () => {
     setShowFirstPassword((prevShowPassword) => !prevShowPassword);
   };
@@ -62,6 +64,8 @@ function SignUp() {
   const handleToggleSecondPassword = () => {
     setShowSecondPassword((prevShowPassword) => !prevShowPassword);
   };
+
+  // Para enviar el formilario 
 
   const handleSubmit = async (event) => {
     event.preventDefault();

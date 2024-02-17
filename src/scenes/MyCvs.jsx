@@ -9,7 +9,7 @@ function MyCvs() {
     // const storedUser = localStorage.getItem('currentUser');
 
      const storedUser = {
-        cvs: [{},],
+        cvs: [],
          subscription: "Plan Básico"
      }
 

@@ -5,13 +5,11 @@ const endpoint = "http://localhost:3001/user/register"
 const registrationStatus = {
     status: null,
     message: null
-}
+};
 
 const register = async (registerInfo) => {
 
     try {
-        console.log(registerInfo);
-
         await axios.post(endpoint, registerInfo);
 
         registrationStatus.status = "Success";
@@ -19,7 +17,7 @@ const register = async (registerInfo) => {
     } catch (error) {
         console.log(error);
 
-        const errorStatus = error.response.status
+        const errorStatus = error.response.status;
 
         if (errorStatus === 409) {
             registrationStatus.status = "Fail";
@@ -30,7 +28,7 @@ const register = async (registerInfo) => {
         };
     };
 
-    return registrationStatus
+    return registrationStatus;
 };
 
 export default register;
