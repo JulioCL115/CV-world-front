@@ -49,7 +49,8 @@ const getAllCvs = (filters = {}, limit, offset) => {
             });
             let data = response.data;
 
-            return dispatch(setAllCvs(data));
+            dispatch(setAllCvs(data.cvs));
+            return data.numberOfPages
         } catch (error) {
             console.log(error);
         }

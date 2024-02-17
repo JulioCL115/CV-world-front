@@ -11,7 +11,7 @@ const login = async (idToken) => {
         const token = response.data.token;
         const currentUser = response.data.userFoundFiltered;
 
-        console.log(response.data);
+        console.log("LO QUE ME DEVUELVE EL BACK AL LOGUEARME: ", response.data);
 
         localStorage.setItem('authToken', JSON.stringify(token));
         localStorage.setItem('currentUser', JSON.stringify(currentUser));

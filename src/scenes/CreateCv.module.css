@@ -11,10 +11,30 @@
 
 /*FONT STYLES*/
 
+.txtError {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  color: red;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0px;
+  padding-left: 5px;
+}
+
 .txtError16 {
   font-family: "Poppins", sans-serif;
   font-style: normal;
   color: red;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0px;
+  padding-left: 5px;
+}
+
+.txtSuccess {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  color: #098D85;
   font-size: 16px;
   font-weight: 600;
   margin: 0px;
@@ -28,7 +48,7 @@
   text-decoration: none;
   font-size: 32px;
   font-weight: 600;
-  margin: 0px;
+  margin-bottom: 50px;
   padding: 0px;
 }
 
@@ -38,6 +58,17 @@
   color: #3E3E70;
   font-size: 16px;
   font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 10px;
+  padding-left: 5px;
+}
+
+.txtRegular16Purple {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  color: #3E3E70;
+  font-size: 16px;
+  font-weight: 400;
   text-decoration: none;
   margin-bottom: 10px;
   padding-left: 5px;
@@ -94,10 +125,11 @@
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
-  justify-self: center;
+  margin-top: 30px;
+  align-self: center;
 }
 
-.btnSection {
+.btnAdd {
   height: 40px;
   width: 200px;
   background-color: #098D85;
@@ -109,4 +141,16 @@
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
+}
+
+.btnDelete {
+  background-color: transparent;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  color: #098D85;
+  text-decoration: underline;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
