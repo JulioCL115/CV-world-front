@@ -1,8 +1,9 @@
 import axios from "axios";
-import { setAllCvs } from "../../slices/cvsSlice"
+import { setAllCvs,setTotalPage } from "../../slices/cvsSlice"
 import { async } from "q";
 
-const getAllCvs = (filters = {}, limit = 12, currentPage = 1) => {
+const getAllCvs = (filters = {}, limit= 2, currentPage=1 ) => {
+  console.log("este es el page en la actions",currentPage)
     return async (dispatch) => {
     try {
       const queryParams = {
@@ -37,7 +38,8 @@ const getAllCvs = (filters = {}, limit = 12, currentPage = 1) => {
         const response = await axios.get(url);
         console.log(response);
         const data = response.data;
-        dispatch(setAllCvs(data));
+        dispatch(setAllCvs(data.cvs));
+        dispatch(setTotalPage(data.totalPages));
       
     } catch (error) {
       console.error("Error al traer los cv:", error);

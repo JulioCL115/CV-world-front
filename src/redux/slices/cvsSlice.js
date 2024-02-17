@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     allCvs: null,
+    totalpages: null,
     cvDetail: null
   }
   const cvsSlice = createSlice({
@@ -11,11 +12,14 @@ const initialState = {
       setAllCvs(state, action) {
         state.allCvs = action.payload
       },
+      setTotalPage(state,action){
+        state.totalpages = action.payload
+      },
       setCvDetail(state, action) {
         state.cvDetail = action.payload
       },
     },
   });
   
-  export const { setAllCvs, setCvDetail} = cvsSlice.actions;
+  export const { setAllCvs, setCvDetail,setTotalPage} = cvsSlice.actions;
   export default cvsSlice.reducer;

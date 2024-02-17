@@ -8,10 +8,12 @@ import CvsNotFound from '../components/Curriculums/CvsNotFound';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { current } from '@reduxjs/toolkit';
 
 function Curriculums() {
     const dispatch = useDispatch();
-    const cvs = useSelector(state => state.cvs.allCvs);
+    const cvs = useSelector(state => state?.cvs?.allCvs);
+    const totalPages = useSelector(state => state?.cvs?.totalpages);
 
     console.log(cvs);
 
@@ -24,9 +26,12 @@ function Curriculums() {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(1);
-    const limit = 12;
+    const limit = 4;
+    // const totalPages = Math.ceil(cvs?.length / limit)
 
     console.log(filters);
+    console.log("page",currentPage)
+    console.log("numberOfPages",numberOfPages)
 
     useEffect(() => {
         const filtersChanged =
@@ -35,14 +40,17 @@ function Curriculums() {
         filters.sort !== "" ||
         filters.search !== "";
 
+    
     // Dispatch the getAllCvs action only if filters have changed
-    if (filtersChanged) {
+    if (filtersChanged ) {
         dispatch(getAllCvs(filters, limit, currentPage));
-        setNumberOfPages(Math.ceil(cvs && cvs.length ? cvs.length / limit : 1));
+        if (totalPages === 1) {
+            setCurrentPage(1);
+        }
     }
-        dispatch(getAllCvs(filters, limit, currentPage));
-        setNumberOfPages(Math.ceil(cvs && cvs.length ? cvs.length / limit : 1));
-    }, [filters])
+    dispatch(getAllCvs(filters, limit, currentPage))
+        setNumberOfPages(totalPages);
+    }, [filters,currentPage,numberOfPages,limit,dispatch,totalPages])
 
 
     return (
@@ -61,7 +69,7 @@ function Curriculums() {
                 </div>
             </div>
             <div className={styles.containerBottom}>
-                <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} filters={filters}/>
+                <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={totalPages} setNumberOfPages={setNumberOfPages} filters={filters}/>
             </div>
         </div>
     )

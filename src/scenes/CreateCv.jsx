@@ -8,11 +8,11 @@ import postCv from "../redux/actions/cvs/postCv";
 function CreateCv() {
     const dispatch = useDispatch();
     const storedUser = localStorage.getItem('currentUser');
-    const languages = useSelector((state) => state.languages.allLanguages);
-    const categories = useSelector((state) => state.categories.allCategories);
-
-    const userId = JSON.parse(storedUser).id;
-
+    const languages = useSelector((state) => state?.languages?.allLanguages);
+    const categories = useSelector((state) => state?.categories?.allCategories);
+    console.log(categories)
+    const userId = JSON.parse(storedUser)?.id;
+    
 
     const [cv, setCv] = useState({
         name: "",

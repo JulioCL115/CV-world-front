@@ -82,6 +82,9 @@ function DetailCv({ id, name, image, header, contact, description, experience, e
                         }
                     </ul>
                 </div>
+                <div>
+                <img src={cv.image[0].secure_url} alt="logo" width={"50%"}></img>
+                </div>
             </div>
         </div>
     )
