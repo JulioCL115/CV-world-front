@@ -1,0 +1,15 @@
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 45px;
+    align-items: flex-start;
+    row-gap: 30px;
+    column-gap: 70px;
+}
+
+.btn {
+    width: 20%;
+    background-color: transparent;
+    border: none;
+}
