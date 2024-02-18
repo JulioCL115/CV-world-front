@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 function Card({ id, name, price, included, notIncluded }) {
 
+    const currentUser = localStorage.getItem('currentUser');
+
     const renderPrice = () => {
         if (price === 0) {
             return (
@@ -72,7 +74,7 @@ function Card({ id, name, price, included, notIncluded }) {
                 {renderIncluded()}
                 {notIncluded !== null && renderNotIncluded()}
             </div>
-            <Link to="/cart">
+            <Link to={currentUser ? "/cart" : "/signin"}>
                 <button className={styles.btn}>Empezar</button>
             </Link>
         </div>
