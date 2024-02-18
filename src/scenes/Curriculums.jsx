@@ -29,7 +29,7 @@ function Curriculums() {
     console.log(filters);
 
     useEffect( () => {
-        setNumberOfPages = dispatch(getAllCvs(filters, limit, currentPage * limit - limit));
+        // setNumberOfPages = dispatch(getAllCvs(filters, limit, currentPage * limit - limit));
     }, [cvs])
 
 
