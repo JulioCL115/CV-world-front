@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './MyProfile.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import getCurrentUser from "../redux/actions/users/getCurrentUser";
 import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import getCurrentUser from '../redux/actions/users/getCurrentUser';
+
 
 function UpdateProfile() {
     const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.users.currentUser);
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userEmail = localStorageUser.email
-    const currentUser = useSelector(state => state.users.currentUser);
-
 
     useEffect(() => {
         dispatch(getCurrentUser(userEmail))
@@ -17,10 +17,10 @@ function UpdateProfile() {
 
     return (
         <div className={styles.updateProfile}>
-            {currentUser ?
+            {localStorageUser ?
                 <div>
-                    <h1>{currentUser.name}</h1>
-                    <p>{currentUser.email}</p>
+                    <h1>{currentUser ? currentUser.name : null}</h1>
+                    <p>{currentUser ? currentUser.email: null}</p>
                     <Link to="/updateprofile">
                         <button className={styles.btn}>
                             <svg xmlns="http://www.w3.org/2000/svg"

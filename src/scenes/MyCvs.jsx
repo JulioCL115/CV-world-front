@@ -15,13 +15,13 @@ function MyCvs() {
     const userEmail = localStorageUser.email
     const currentUser = useSelector(state => state.users.currentUser);
 
+    console.log('CURRENT USER: ', currentUser)
+
+    console.log(currentUser ? currentUser.Cvs.length : "No hay usuario");
 
     useEffect(() => {
         dispatch(getCurrentUser(userEmail))
-    }, [userEmail, dispatch])
-
-   
-
+    }, [userEmail, dispatch, currentUser.Cvs])
 
     return (
         <div className={styles.myCvs}>

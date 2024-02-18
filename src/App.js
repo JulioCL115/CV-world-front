@@ -24,6 +24,8 @@ import MyProfile from "./scenes/MyProfile";
 import MyCvs from "./scenes/MyCvs";
 import UpdateCv from "./scenes/UpdateCv";
 import UpdateProfile from "./scenes/UpdateProfile";
+import ResetPassword from "./scenes/ResetPassword";
+
 
 import { AuthProvider } from "./AuthProvider/authProvider";
 
@@ -34,7 +36,7 @@ function App() {
     dispatch(getAllCategories());
     dispatch(getAllLanguages());
     dispatch(getAllSubscriptions());
-    dispatch(getAllCvs());
+    // dispatch(getAllCvs());
   });  
 
 
@@ -56,6 +58,7 @@ function App() {
         <Route path="/upgradesubscription" element={<UpgradeSubscription/>}></Route>
         <Route path="/upadatecv" element={<UpdateCv/>}></Route>
         <Route path="/updateprofile" element={<UpdateProfile/>}></Route>
+        <Route path="/resetpassword" element={<ResetPassword/>}></Route>
       </Routes>
       <Footer/>
       </AuthProvider>

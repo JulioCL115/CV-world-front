@@ -4,13 +4,18 @@ import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import updateUser from "../redux/actions/users/updateUser";
 
+
 import { auth } from "../config/firebase-config";
+import { updateProfile } from 'firebase/auth';
+
 
 import validation from "./updateProfileValidation"
 
 
 function UpdateProfile() {
     const navigate = useNavigate();
+    const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
+    const userId = localStorageUser.id;
 
     const [newUserInfo, setNewUserInfo] = useState({
         name: null,
@@ -62,7 +67,7 @@ function UpdateProfile() {
         const validationErrors = validation({
             ...newUserInfo,
             [event.target.name]: event.target.value,
-        }, event.target.name);
+        });
 
         setErrors({
             ...errors,
@@ -85,34 +90,42 @@ function UpdateProfile() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("ADENTRO DEL HADLE SUBMIT", newUserInfo);
 
         if (newUserInfo.name &&
             newUserInfo.email &&
             newUserInfo.password &&
-            newUserInfo.repeatPassword &&
-            !errors.name &&
-            !errors.email &&
-            !errors.password &&
-            !errors.repeatPassword
-        ) {
+            newUserInfo.repeatPassword) {
+            if (!errors.name &&
+                !errors.email &&
+                !errors.password &&
+                !errors.repeatPassword) {
 
-            const updateStatus = await updateUser(newUserInfo);
+                console.log("ADENTRO DEL IF");
 
-            setUpdateStatus({ ...updateStatus })
+                const updateStatus = await updateUser(userId, newUserInfo);
+                setUpdateStatus({ ...updateStatus })
 
-            if (updateStatus.status === "Success") {
+                if (updateStatus.status === "Success") {
 
-                await auth.currentUser.updateProfile(auth.currentUser, {
-                    displayName: newUserInfo.name,
-                    email: newUserInfo.email,
-                    password: newUserInfo.password,
-                    photoURL: newUserInfo.photo
-                });
+                    await updateProfile(auth.currentUser, {
+                        displayName: newUserInfo.name,
+                        email: newUserInfo.email,
+                        password: newUserInfo.password,
+                        photoURL: newUserInfo.photo
+                    });
 
-                setTimeout(() => {
-                    navigate("/myprofile");
-                }, 2000);
+                    setTimeout(() => {
+                        navigate("/myprofile");
+                    }, 2000);
+                }
             }
+
+        } else {
+            setUpdateStatus({
+                status: "Fail",
+                message: "Faltan completar campos obligatorios"
+            })
         };
     };
 
@@ -166,6 +179,7 @@ function UpdateProfile() {
                             />
                             <button
                                 className={styles.btnEye}
+                                type="button"
                                 onClick={handleToggleFirstPassword}
                             >
                                 {showFirstPassword ? (
@@ -221,6 +235,7 @@ function UpdateProfile() {
                             />
                             <button
                                 className={styles.btnEye}
+                                type="button"
                                 onClick={handleToggleSecondPassword}
                             >
                                 {showSecondPassword ? (

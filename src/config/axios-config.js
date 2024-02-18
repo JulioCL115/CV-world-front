@@ -6,7 +6,10 @@ instance.interceptors.request.use(
   config => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      config.headers['auth-token'] = token;
+      // Aca hay que parsear el token ya que le hacemos un stringify al guardarlo en el localstorage
+      const parsedtoken = JSON.parse(token);
+
+      config.headers['auth-token'] = parsedtoken;
     }
     return config;
   },

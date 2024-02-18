@@ -5,8 +5,8 @@ const updateStatus = {
     message: null
 };
 
-const updateUser = async (user) => {
-    const endpoint = "http://localhost:3001/user/";
+const updateUser = async (id, user) => {
+    const endpoint = "http://localhost:3001/user/" + id;
 
         try {
             await axiosInstance.put(endpoint, user)
