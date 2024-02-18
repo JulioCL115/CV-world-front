@@ -23,6 +23,7 @@ import Footer from "./components/Footer";
 import MyProfile from "./scenes/MyProfile";
 import MyCvs from "./scenes/MyCvs";
 import UpdateCv from "./scenes/UpdateCv";
+import UpdateProfile from "./scenes/UpdateProfile";
 
 import { AuthProvider } from "./AuthProvider/authProvider";
 
@@ -51,9 +52,10 @@ function App() {
         <Route path="/createcv" element={<CreateCv />} />
         <Route path="/detail/:id" element={<Detail/>}></Route>
         <Route path="/mycvs" element={<MyCvs/>}></Route>
-        <Route path="/profile" element={<MyProfile/>}></Route>
+        <Route path="/myprofile" element={<MyProfile/>}></Route>
         <Route path="/upgradesubscription" element={<UpgradeSubscription/>}></Route>
         <Route path="/upadatecv" element={<UpdateCv/>}></Route>
+        <Route path="/updateprofile" element={<UpdateProfile/>}></Route>
       </Routes>
       <Footer/>
       </AuthProvider>

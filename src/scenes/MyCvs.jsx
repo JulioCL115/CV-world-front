@@ -13,14 +13,14 @@ function MyCvs() {
     const dispatch = useDispatch();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userEmail = localStorageUser.email
-    useSelector(state => state.users.currentUser);
+    const currentUser = useSelector(state => state.users.currentUser);
 
 
     useEffect(() => {
         dispatch(getCurrentUser(userEmail))
     }, [userEmail, dispatch])
 
-    const currentUser = useSelector(state => state.users.currentUser);
+   
 
 
     return (

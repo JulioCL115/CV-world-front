@@ -6,7 +6,6 @@ const getCurrentUser = (email) => {
 
     return async (dispatch) => {
         try {
-            console.log(email);
             const response = await axios.get(endpoint, {
                 params: {
                     email: email,
