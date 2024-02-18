@@ -32,7 +32,7 @@ function Card({ id, name, price, included, notIncluded }) {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     style={{ verticalAlign: 'middle', width: '30px', height: '30px' }} // Add this style
                 >
@@ -53,7 +53,7 @@ function Card({ id, name, price, included, notIncluded }) {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     style={{ verticalAlign: 'middle', width: '30px', height: '30px' }} // Add this style
                 >

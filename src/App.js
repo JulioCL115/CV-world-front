@@ -22,6 +22,7 @@ import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import MyProfile from "./scenes/MyProfile";
 import MyCvs from "./scenes/MyCvs";
+import UpdateCv from "./scenes/UpdateCv";
 
 import { AuthProvider } from "./AuthProvider/authProvider";
 
@@ -52,6 +53,7 @@ function App() {
         <Route path="/mycvs" element={<MyCvs/>}></Route>
         <Route path="/profile" element={<MyProfile/>}></Route>
         <Route path="/upgradesubscription" element={<UpgradeSubscription/>}></Route>
+        <Route path="/upadatecv" element={<UpdateCv/>}></Route>
       </Routes>
       <Footer/>
       </AuthProvider>
