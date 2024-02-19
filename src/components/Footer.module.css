@@ -1,0 +1,177 @@
+.footer{
+    background-color: #3E3E70;
+    max-width: 100%;
+    height: auto;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-bottom: 40px;
+    padding-top: 60px;
+  }
+
+  /*FONT SYLES*/
+
+.txtRegular16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtLogo {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtRegular16Underlined {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: underline;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtRegular12 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+  /*CONTAINERS*/
+
+  #containerTop {
+    width:100%;
+    align-items: flex-start;
+}
+
+#containerTopLeft {
+    width: 40%;
+    padding-right: 10%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+#containerTopRight {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#containerBottom {
+    width:100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#containerBottomRight {
+    width:50%;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: underline;
+    color: white;
+}
+
+#containerBottomLeft {
+    width:50%;
+}
+
+  /*HORIZONTAL AND VERTICAL DISPOSITION*/
+
+.horizontal {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}  
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 12px;
+}
+
+  /*UI ELEMENTS*/
+
+.logo {
+    width: 70px;
+    height: 39.38px;
+}
+
+.input {
+    width: 80%;
+    height: 40px;
+    padding-left: 15px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.input::placeholder {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: #3E3E70;
+}
+
+.btn {
+    width: 20%;
+    height: 40px;
+    background-color: transparent;
+    border-color: white;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+.icn {
+    margin-right: 20px;
+    height: 20px;
+    stroke-width: 2.5px;
+}
+
+.divider {
+    width: 100%;
+    margin-top: 20px;
+    border-color: white;
+}
+
+

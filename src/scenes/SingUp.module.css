@@ -1,0 +1,217 @@
+.signUp {
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-top: 85px;
+    padding-bottom: 85px;
+    align-items: flex-start;
+}
+
+/*FONT STYLES*/
+
+.txtError {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+.txtError16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: red;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+.txtSuccess {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #098D85;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+.txtSemiBold32Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold16Purple {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #3E3E70;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+.txtSemiBold12Purple {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #3E3E70;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+.txtSemiBold16Green {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #098D85;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+/*CONTAINERS*/
+
+.containerLeft {
+    width: 50%;
+    margin: 0;
+}
+
+.containerRight {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    margin: 0;
+    text-align: center;
+    align-items: center;
+}
+
+.vertical {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.containerSignIn {
+    margin-top: 30px;
+}
+
+.containerPassword {
+    width: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/*UI ELEMENTS*/
+
+.illustration {
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+}
+
+.input {
+    width: 400px;
+    height: 40px;
+    background-color: transparent;
+    border-color: #3E3E70;
+    border-width: 1px;
+    border-radius: 10px;
+    margin: 0px;
+    padding-left: 15px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.input::placeholder {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #3E3E70;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.btnRegister {
+    width: 400px;
+    height: 50px;
+    background-color: #098D85;
+    border-color: transparent;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.btnGoogle{
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    border-color: #3E3E70;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #3E3E70;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icn {
+    height: 20px;
+    width: 20px;
+    color: #3E3E70;
+}
+
+.btnEye {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust the right spacing for the eye icon */
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }

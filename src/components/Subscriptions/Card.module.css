@@ -1,0 +1,128 @@
+.card {
+    max-width: 420px;
+    height: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    border: double 3px transparent;
+    border-radius: 80px;
+    background-image: linear-gradient(white, white), radial-gradient(circle at top left, #098D85,#3E3E70);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+
+  /*FONT SYLES*/
+
+  .txtRegular16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold16Green {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #098D85;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0px;
+    padding-bottom: 7px;
+}
+
+  .txtSemiBold32Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold32Green {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #098D85;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+ /*CONTAINERS*/
+
+ .containerPrice {
+    display: flex;
+    flex-direction: row;
+    row-gap: 0px;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0px;
+    margin: 0px;
+ }
+
+.containerList {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+
+.containerListItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+}
+
+.icnCheck {
+    color: #098D85;
+    margin-right: 15px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.icnCross {
+    color: #3E3E70;
+    margin-right: 15px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.btn {
+    height: 50px;
+    width: 80%;
+    background-color: #098D85;
+    border-color: transparent;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+

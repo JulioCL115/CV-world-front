@@ -1,9 +1,11 @@
+
+
 function Home() {
     return (
         <div>
-            HOME
+            Home
         </div>
     )
 };
 
-export default Home; 
+export default Home;

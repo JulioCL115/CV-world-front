@@ -1,0 +1,44 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height:  100vh; /* Esto hace que el contenedor ocupe toda la altura de la ventana */
+}
+
+.errorMessage {
+    font-size: 50px;
+    background-color: transparent;
+    color: #3E3E70;
+}
+
+.goBackButton {
+    position: absolute; /* Posiciona absolutamente el botón */
+    bottom:  1%; /* Distancia desde el borde inferior */
+    left:  60px; 
+    background-color:  #4d52e8;
+    color: rgb(249, 244, 244);
+    padding: 20px;
+    height: 10%;
+    border-radius: 70px;
+    font-size: 30px;
+}
+
+.goBackButton:hover {
+    background-color:white;
+    color: #4f4fe9;
+    border: solid black 2px;
+}
+
+@media screen and (max-width: 768px) {
+    .errorMessage {
+    margin-top: 1700px;
+    margin-left: 1000px;
+    }
+    .goBackButton {
+    padding: 20px;
+    height: 10%;
+    border-radius: 70px;
+    font-size: 30px;
+    }
+}
