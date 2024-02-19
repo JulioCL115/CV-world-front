@@ -12,9 +12,7 @@ const getCurrentUser = (email) => {
                 }
             });
             let data = response.data;
-
-            console.log("DATA: ", data)
-
+            
             return dispatch(setCurrentUser(data));
         } catch (error) {
             console.log(error);

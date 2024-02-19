@@ -56,7 +56,7 @@ function App() {
         <Route path="/mycvs" element={<MyCvs/>}></Route>
         <Route path="/myprofile" element={<MyProfile/>}></Route>
         <Route path="/upgradesubscription" element={<UpgradeSubscription/>}></Route>
-        <Route path="/upadatecv" element={<UpdateCv/>}></Route>
+        <Route path="/updatecv/:cvId" element={<UpdateCv/>}></Route>
         <Route path="/updateprofile" element={<UpdateProfile/>}></Route>
         <Route path="/resetpassword" element={<ResetPassword/>}></Route>
       </Routes>

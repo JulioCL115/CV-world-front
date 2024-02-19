@@ -1,17 +1,35 @@
 import styles from "./Cards.module.css"
 
+import Spinner from "../Spinner";
 import Card from "./Card";
 // import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import deleteCv from "../../redux/actions/cvs/deleteCv";
+import getCurrentUser from "../../redux/actions/users/getCurrentUser";
 
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+
 
 function Cards({ cvs }) {
     const dispatch = useDispatch();
+    const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
+    const userEmail = localStorageUser.email
+    const navigate = useNavigate()
 
-    const handleDelete = (id) => {
-        dispatch(deleteCv(id));
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleDelete = async (id) => {
+        setIsLoading(true); // Step  2
+        /* eslint-disable-next-line no-restricted-globals */
+        if (window.confirm("¿Estás seguro que querés eliminar este CV?")) {
+            await deleteCv(id);
+            dispatch(getCurrentUser(userEmail));
+            setTimeout(() => {
+                navigate("/mycvs");
+                setIsLoading(false);
+            }, 500)
+        }
     };
 
 
@@ -21,6 +39,7 @@ function Cards({ cvs }) {
 
     return (
         <div className={styles.cards}>
+            {isLoading && <Spinner />}
             {cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate, category, language, subscription }) => {
                 return (
                     <div>
@@ -53,7 +72,7 @@ function Cards({ cvs }) {
                             />
                             <p>{header}</p>
                         </Link>
-                        <Link to="updatecv">
+                        <Link to={`/updatecv/${id}`}>
                             <svg className={styles.icn}
                                 height="20px"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +87,7 @@ function Cards({ cvs }) {
                                 />
                             </svg>
                         </Link>
-                        <button className={styles.btnIcn} onClick={() => handleDelete(id)}>
+                        <button className={styles.btnIcn} onClick={async () => await handleDelete(id)}>
                             <svg className={styles.icn}
                                 height="20px"
                                 xmlns="http://www.w3.org/2000/svg"
