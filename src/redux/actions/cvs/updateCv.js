@@ -1,17 +1,25 @@
 import axiosInstance from "../../../config/axios-config";
 
-const updateCv = (id, cv) => {
-    const endpoint = "http://localhost:3001/cv/" + id;
+const updateStatus = {
+    status: null,
+    message: null
+};
 
-    return async () => {
+const updateCv = async (cvId, cv) => {
+    const endpoint = "http://localhost:3001/cv/" + cvId;
+
         try {
-            const response = await axiosInstance.post(endpoint, cv)
+            await axiosInstance.put(endpoint, cv)
 
-            console.log("Response:", response.data);
+            updateStatus.status = "Success";
+            updateStatus.message = "¡Tus cambios de guardaron con éxito!";
         } catch (error) {
             console.log("Error:", error);
+
+            updateStatus.status = "Fail";
+            updateStatus.message = "No se pudieron guardar tus cambios";
         }
-    };
+        return updateStatus;
 };
 
 export default updateCv;

@@ -9,19 +9,17 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 
+
 function MyCvs() {
     const dispatch = useDispatch();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userEmail = localStorageUser.email
     const currentUser = useSelector(state => state.users.currentUser);
 
-    console.log('CURRENT USER: ', currentUser)
-
-    console.log(currentUser ? currentUser.Cvs.length : "No hay usuario");
 
     useEffect(() => {
         dispatch(getCurrentUser(userEmail))
-    }, [userEmail, dispatch, currentUser.Cvs])
+    }, [userEmail, dispatch] )
 
     return (
         <div className={styles.myCvs}>
