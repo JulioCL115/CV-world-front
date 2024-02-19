@@ -6,11 +6,16 @@
     border-width: 1px;
     padding: 10%;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    margin-bottom: 30px;
 }
 
 /*CONTAINERS*/
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
 
 .containerLeft {
     width: 50%;

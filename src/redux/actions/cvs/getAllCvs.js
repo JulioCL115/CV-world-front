@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setAllCvs } from "../../slices/cvsSlice"
+import { setAllCvs, setNumberOfPages } from "../../slices/cvsSlice"
 
 const getAllCvs = (filters = {}, limit, offset) => {
     const endpoint = "http://localhost:3001/cv"
@@ -7,14 +7,13 @@ const getAllCvs = (filters = {}, limit, offset) => {
     let sort = "";
     let categories = "";
     let languages = "";
-    let subscriptions = "";
     let search = "";
 
     if (filters.sort && filters.sort === "Más recientes") {
-        sort = "Más recientes"
+        sort = "date"
     } 
     if (filters.sort && filters.sort === "Más vistos") {
-        sort = "Más vistos"
+        sort = "views"
     };
 
     if (filters.categories) {
@@ -25,32 +24,28 @@ const getAllCvs = (filters = {}, limit, offset) => {
         languages = filters.languages
     }
 
-    if (filters.subscriptions) {
-        subscriptions = filters.subscriptions
-    }
-
     if (filters.search) {
         search = filters.search
     }
    
     return async (dispatch) => {
         try {
-            console.log("haciendo el dispatch de getAllCvs");
             const response = await axios.get(endpoint, {
                 params: {
                     search: search,
                     sort: sort,
                     categories: categories,
                     languages: languages,
-                    subscriptions: subscriptions,
                     limit: limit,
-                    page: offset,
+                    offset: offset,
                 }
             });
             let data = response.data;
 
             dispatch(setAllCvs(data.cvs));
-            return data.numberOfPages
+            dispatch(setNumberOfPages(data.totalPages));
+
+            return
         } catch (error) {
             console.log(error);
         }

@@ -12,9 +12,7 @@ function generateOptions(n) {
     return options;
 };
 
-const Pagination = ({ currentPage, setCurrentPage, numberOfPages, setNumberOfPages, filters }) => {
-    const dispatch = useDispatch();
-    // console.log(currentPage);
+const Pagination = ({ currentPage, setCurrentPage, numberOfPages }) => {
 
     const options = generateOptions(numberOfPages);
 

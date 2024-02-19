@@ -8,34 +8,25 @@ import Error404 from "../../scenes/Error404"
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-function Cards() {
+function Cards({ cvs }) {
     const dispatch = useDispatch();
-    const cvs = useSelector((state) => state.cvs.allCvs);
+    // const cvs = useSelector((state) => state.cvs.allCvs);
+
+    console.log(cvs);
 
 
     const handleClick = (id) => {
-        dispatch(getCvDetail(id));
-        dispatch(updateCv({ id, views: 1 }));
+        updateCv({ id, views: 1 });
     }
 
     return (
         <div className={styles.cards}>
             {
                 cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate, category, language, subscription }) => {
-                    return <Link className={styles.btn} 
-                    to={`/detail/${id}`} 
-                    onClick={handleClick(id)}
-                    name={name}
-                            image={image}
-                            header={header}
-                            contact={contact}
-                            description={description}
-                            experience={experience}
-                            education={education}
-                            speakingLanguages={speakingLanguages}
-                            skills={skills}
-                            otherInterests={otherInterests}
-                            >
+                    return <Link className={styles.btn}
+                        to={`/detail/${id}`}
+                        onClick={() => handleClick(id)}
+                    >
                         <Card key={id}
                             id={id}
                             name={name}

@@ -7,6 +7,7 @@ import categoriesReducer from "./slices/categoriesSlice";
 import authReducer from "./slices/authSlice";
 import filtersReducer from "./slices/filtersSlice";
 import paginationReducer from "./slices/paginationSlice";
+import paymentsReducer from "./slices/paymentsSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   categories: categoriesReducer,
   filters: filtersReducer,
   pagination: paginationReducer,
+  payments: paymentsReducer,
 });
 
 export default rootReducer;

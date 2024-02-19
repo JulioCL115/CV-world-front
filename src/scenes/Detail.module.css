@@ -4,6 +4,7 @@
     margin-top: 8px;
     padding-left: 20%;
     padding-right: 20%;
+    padding-bottom: 85px;
 }
 
 /*CONTAINERS*/
@@ -34,5 +35,27 @@
 }
 
 /*FONT STYLES*/
+
+.txtRegular16Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold16Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
 
 
