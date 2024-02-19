@@ -1,10 +1,10 @@
 import styles from './Curriculums.module.css';
-import SearchBar from '../components/Curriculums/SearchBar';
-import SideBar from '../components/Curriculums/SideBar';
-import Cards from '../components/Curriculums/Cards';
-import Pagination from '../components/Curriculums/Pagination';
-import CvsNotFound from '../components/Curriculums/CvsNotFound';
-import getAllCvs from '../redux/actions/cvs/getAllCvs';
+import SearchBar from '../../components/Curriculums/SearchBar';
+import SideBar from '../../components/Curriculums/SideBar';
+import Cards from '../../components/Curriculums/Cards';
+import Pagination from '../../components/Curriculums/Pagination';
+import CvsNotFound from '../../components/Curriculums/CvsNotFound';
+import getAllCvs from '../../redux/actions/cvs/getAllCvs';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +28,7 @@ function Curriculums() {
 
     useEffect( () => {
         dispatch(getAllCvs(filters, limit, currentPage * limit - limit));
-    }, [currentPage, filters, numberOfPages])
+    }, [currentPage, filters, limit, numberOfPages, dispatch])
 
 
     return (

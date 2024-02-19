@@ -1,10 +1,10 @@
 import styles from "./Detail.module.css";
-import Comments from "../components/Detail/Comments";
-import Contact from "../components/Detail/Contact";
-import Cv from "../components/Detail/Cv";
+import Comments from "../../components/Detail/Comments";
+import Contact from "../../components/Detail/Contact";
+import Cv from "../../components/Detail/Cv";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import getCvDetail from "../redux/actions/cvs/getCvDetail";
+import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import { useParams } from "react-router-dom";
 
 function Detail() {
@@ -17,7 +17,7 @@ function Detail() {
 
    useEffect(() => {
     dispatch(getCvDetail(cvId))
-   }, [])
+   }, [cvId, dispatch])
 
     return (
         <div className={styles.detail}>

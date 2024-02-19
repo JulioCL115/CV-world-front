@@ -3,10 +3,10 @@ import styles from "./SingUp.module.css"
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
-import image from "../assets/Working-Man-Illustration.jpg"
-import register from "../redux/actions/users/register";
+import image from "../../assets/Working-Man-Illustration.jpg"
+import register from "../../redux/actions/users/register";
 
-import { auth } from "../config/firebase-config";
+import { auth } from "../../config/firebase-config";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import validation from "./singUpValidation"

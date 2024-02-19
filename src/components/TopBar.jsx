@@ -9,10 +9,11 @@ import logout from "../redux/actions/users/logout";
 import { auth } from "../config/firebase-config"
 import { signOut } from "firebase/auth"
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom"; 
 
 
 function TopBar() {
-
+    const navigate = useNavigate();
     const storedUser = localStorage.getItem('currentUser');
     const [currentUser, setCurrentUser] = useState(
         storedUser && storedUser !== "[object Object]" ? JSON.parse(storedUser) : null
@@ -32,6 +33,10 @@ function TopBar() {
         try {
             await signOut(auth);
             logout();
+
+            setTimeout(() => {
+                navigate("/signin");
+            }, 2000);
         } catch (error) {
             console.error('Error during logout:', error);
         }

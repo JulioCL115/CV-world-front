@@ -20,7 +20,7 @@ function Cards({ cvs }) {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleDelete = async (id) => {
-        setIsLoading(true); // Step  2
+        setIsLoading(true); 
         /* eslint-disable-next-line no-restricted-globals */
         if (window.confirm("¿Estás seguro que querés eliminar este CV?")) {
             await deleteCv(id);
@@ -33,10 +33,6 @@ function Cards({ cvs }) {
     };
 
 
-    // const handleClick = (id) => {
-    //     dispatch(getCvDetail(id));
-    // }
-
     return (
         <div className={styles.cards}>
             {isLoading && <Spinner />}
@@ -44,18 +40,7 @@ function Cards({ cvs }) {
                 return (
                     <div>
                         <Link className={styles.btn}
-                            // to={`/detail/${id}`}
-                            // onClick={() => handleClick(id)}  
-                            name={name}
-                            image={image}
-                            header={header}
-                            contact={contact}
-                            description={description}
-                            experience={experience}
-                            education={education}
-                            speakingLanguages={speakingLanguages}
-                            skills={skills}
-                            otherInterests={otherInterests}
+                            to={`/detail/${id}`}
                         >
                             <Card key={id}
                                 id={id}
