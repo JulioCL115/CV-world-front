@@ -24,7 +24,6 @@ import MyCvs from "./scenes/MyCvs";
 import UpdateCv from "./scenes/UpdateCv";
 import UpdateProfile from "./scenes/UpdateProfile";
 import ResetPassword from "./scenes/ResetPassword";
-import Payment from "./scenes/Payment";
 
 
 import { AuthProvider } from "./AuthProvider/authProvider";
@@ -58,7 +57,6 @@ function App() {
         <Route path="/updatecv/:cvId" element={<UpdateCv/>}></Route>
         <Route path="/updateprofile" element={<UpdateProfile/>}></Route>
         <Route path="/resetpassword" element={<ResetPassword/>}></Route>
-        <Route path="/payment" element={<Payment/>}></Route>
       </Routes>
       <Footer/>
       </AuthProvider>
