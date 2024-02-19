@@ -1,12 +1,10 @@
 const regexName = /^[a-zA-Z\p{L}' ]+$/u;
 const regexLocation = /^[a-zA-Z\p{L}', ]+$/u;
 const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const regexPhone = /^[0-9]{13}$/;
+const regexPhone = /^[0-9()+-]*$/;
 const regexWebsite = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
 
 function validation(cv, targetName, errors) {
-
-    console.log(targetName, cv, errors)
 
     if (targetName === 'location' || targetName === 'email' || targetName === 'phone' || targetName === 'website') {
         if (!cv.contact[targetName] || cv.contact[targetName].length === 0) {
@@ -64,7 +62,15 @@ function validation(cv, targetName, errors) {
         if (regexPhone.test(cv.contact.phone)) {
             errors.contact.phone = null;
         } else {
-            errors.contact.phone = 'Debe contener código de país y código de área';
+            errors.contact.phone = 'No puede contener letras';
+        }
+    }
+
+    if (targetName === 'phone') {
+        if (cv.contact.phone.length < 15 || cv.contact.phone.length > 10) {
+            errors.contact.phone = null;
+        } else {
+            errors.contact.phone = 'Debe contener entre 10 y 15 caracteres';
         }
     }
 

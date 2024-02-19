@@ -74,7 +74,7 @@ function Card({ id, name, price, included, notIncluded }) {
                 {renderIncluded()}
                 {notIncluded !== null && renderNotIncluded()}
             </div>
-            <Link to={currentUser ? "/cart" : "/signin"}>
+            <Link to={currentUser ? "/checkout" : "/signin"}>
                 <button className={styles.btn}>Empezar</button>
             </Link>
         </div>

@@ -3,8 +3,8 @@ import SearchBar from '../components/Curriculums/SearchBar';
 import SideBar from '../components/Curriculums/SideBar';
 import Cards from '../components/Curriculums/Cards';
 import Pagination from '../components/Curriculums/Pagination';
-import getAllCvs from '../redux/actions/cvs/getAllCvs';
 import CvsNotFound from '../components/Curriculums/CvsNotFound';
+import getAllCvs from '../redux/actions/cvs/getAllCvs';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,8 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function Curriculums() {
     const dispatch = useDispatch();
     const cvs = useSelector(state => state.cvs.allCvs);
-
-    console.log(cvs);
+    const numberOfPages = useSelector(state => state.cvs.numberOfPages);
 
     const [filters, setFilters] = useState({
         search: "",
@@ -23,14 +22,13 @@ function Curriculums() {
     });
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [numberOfPages, setNumberOfPages] = useState(1);
-    const limit = 12;
+    const limit = 16;
 
     console.log(filters);
 
     useEffect( () => {
-        // setNumberOfPages = dispatch(getAllCvs(filters, limit, currentPage * limit - limit));
-    }, [cvs])
+        dispatch(getAllCvs(filters, limit, currentPage * limit - limit));
+    }, [currentPage, filters, numberOfPages])
 
 
     return (
@@ -49,7 +47,7 @@ function Curriculums() {
                 </div>
             </div>
             <div className={styles.containerBottom}>
-                <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} setNumberOfPages={setNumberOfPages} filters={filters}/>
+                <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} filters={filters}/>
             </div>
         </div>
     )

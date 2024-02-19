@@ -9,19 +9,19 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 
+
 function MyCvs() {
     const dispatch = useDispatch();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userEmail = localStorageUser.email
-    useSelector(state => state.users.currentUser);
+    const currentUser = useSelector(state => state.users.currentUser);
+
+    console.log(currentUser);
 
 
     useEffect(() => {
         dispatch(getCurrentUser(userEmail))
-    }, [userEmail, dispatch])
-
-    const currentUser = useSelector(state => state.users.currentUser);
-
+    }, [userEmail, dispatch] )
 
     return (
         <div className={styles.myCvs}>
@@ -36,7 +36,7 @@ function MyCvs() {
                     <p className={styles.txtSemiBold16Purple}>Parece que todavía no tenés currículums cargados</p>
                 </div>
             }
-            <Link to={currentUser && currentUser.Cvs.length === 1 && currentUser.Subscription.name === "Basic" ? "/upgradesubscription" : "/createcv"}>
+            <Link to={currentUser && currentUser.Cvs.length === 1 && currentUser.Subscription.price === 0 ? "/upgradesubscription" : "/createcv"}>
                 <button className={styles.btn}>Cargar CV</button>
             </Link>
         </div>

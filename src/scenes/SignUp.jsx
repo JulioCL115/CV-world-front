@@ -140,6 +140,7 @@ function SignUp() {
               />
               <button
                 className={styles.btnEye}
+                type="button"
                 onClick={handleToggleFirstPassword}
               >
                 {showFirstPassword ? (
@@ -195,6 +196,7 @@ function SignUp() {
               />
               <button
                 className={styles.btnEye}
+                type="button"
                 onClick={handleToggleSecondPassword}
               >
                 {showSecondPassword ? (
