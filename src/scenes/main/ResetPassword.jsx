@@ -1,11 +1,13 @@
 import styles from './ResetPassword.module.css';
 
-import Illustration from '../assets/3916134.webp';
+import Illustration from '../../assets/3916134.webp';
 import { useState } from 'react';
-import { auth } from "../config/firebase-config";
+import { auth } from "../../config/firebase-config";
 import { sendPasswordResetEmail } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 function ResetPassword() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [resetStatus, setResetStatus] = useState({
         status: null,
@@ -19,12 +21,16 @@ function ResetPassword() {
     const handleClick = async () => {
         try {
             setResetStatus('loading');
-            const userCredential = await sendPasswordResetEmail(auth, email);
-            console.log("Credential: ", userCredential)
-            setResetStatus({
-                status: "Success",
-                message: "¡Mail enviado! Revisá tu casilla de correo."
-            });
+            await sendPasswordResetEmail(auth, email);
+                setResetStatus({
+                    status: "Success",
+                    message: "¡Mail enviado! Revisá tu casilla de correo."
+                });
+
+                setTimeout(() => {
+                    navigate("/signin");
+                }, 2000);
+
         } catch (error) {
             console.log("Error de reseteo: ", error)
             setResetStatus({

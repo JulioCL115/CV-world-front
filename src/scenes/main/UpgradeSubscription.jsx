@@ -1,5 +1,5 @@
 import styles from './UpgradeSubscription.module.css';
-import Illustration from '../assets/hr-analyzing-candidates-resume-3611324-3022084.webp';
+import Illustration from '../../assets/hr-analyzing-candidates-resume-3611324-3022084.webp';
 
 import { Link } from 'react-router-dom';
 

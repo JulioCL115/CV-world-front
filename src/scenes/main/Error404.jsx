@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './Error.module.css'
-import imagen from '../assets/undraw_Page_not_found_re_e9o6.png'
+import imagen from '../../assets/undraw_Page_not_found_re_e9o6.png'
 
 
 

@@ -2,11 +2,11 @@ import styles from "./SingIn.module.css"
 
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import image from "../assets/Working-Man-Illustration.jpg";
-import login from "../redux/actions/users/login";
-import register from "../redux/actions/users/register";
+import image from "../../assets/Working-Man-Illustration.jpg";
+import login from "../../redux/actions/users/login";
+import register from "../../redux/actions/users/register";
 
-import { auth } from "../config/firebase-config";
+import { auth } from "../../config/firebase-config";
 import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 
 
@@ -17,6 +17,11 @@ function SignIn() {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
+  });
+
+  const [loginStatus, setLoginStatus] = useState({
+    status: null,
+    message: null
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -35,16 +40,14 @@ function SignIn() {
   const loginWithGoogle = async () => {
     try {
       const userCredential = await signInWithPopup(auth, provider);
-  
-      console.log("USER CREDENTIALS:", userCredential);
-  
+
       if (userCredential) {
         console.log("User Credential: ", userCredential);
         console.log(userCredential._tokenResponse)
         console.log(userCredential._tokenResponse.isNewUser)
 
         login(userCredential.user.accessToken);
-        navigate("/home");
+        navigate("/curriculums");
 
         if (
           userCredential._tokenResponse &&
@@ -67,19 +70,17 @@ function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let userCredential = null;
-
     try {
-      userCredential = await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
+      const userCredential = await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
+
+      login(userCredential.user.accessToken);
+
+      navigate("/curriculums");
+
     } catch (error) {
       console.log("Error de logueo: ", error)
     };
 
-    if (userCredential) {
-      console.log("Credential: ", userCredential)
-      login(userCredential.user.accessToken);
-      navigate("/home")
-    }
   };
 
   return (
@@ -123,7 +124,7 @@ function SignIn() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth="1.5"
+                    strokeWidth="2"
                     stroke="currentColor"
                   >
                     <path
@@ -143,7 +144,7 @@ function SignIn() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth="1.5"
+                    strokeWidth="2"
                     stroke="currentColor"
                   >
                     <path

@@ -9,8 +9,6 @@ const getAllSubscriptions = () => {
             const response = await axios.get(endpoint);
             let data = response.data;
 
-            console.log(data)
-
             return dispatch(setAllSubscriptions(data));
         } catch (error) {
             console.log(error);

@@ -2,7 +2,7 @@ import styles from './Subscriptions.module.css';
 
 import { useSelector } from 'react-redux';
 
-import Cards from "../components/Subscriptions/Cards";
+import Cards from "../../components/Subscriptions/Cards";
 
 function Subscriptions() {
     const subscriptions = useSelector((state) => state.subscriptions.allSubscriptions);

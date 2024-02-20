@@ -2,10 +2,10 @@ import styles from "./SingUp.module.css"
 
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import updateUser from "../redux/actions/users/updateUser";
+import updateUser from "../../redux/actions/users/updateUser";
 
 
-import { auth } from "../config/firebase-config";
+import { auth } from "../../config/firebase-config";
 import { updateProfile } from 'firebase/auth';
 
 
