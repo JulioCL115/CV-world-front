@@ -77,8 +77,9 @@ function Card({ id, name, price, included, notIncluded }) {
                 {notIncluded !== null && renderNotIncluded()}
             </div>
             <Link to={currentUser ? "/checkout" : "/signin"}>
-                <button className={styles.btn}>Empezar</button>
+                <button className={styles.btn}>{isCheckout ? "Pagar con Mercado Pago" : "Empezar"}</button>
             </Link>
+            {isCheckout ? <p className={styles.txtRegular16Black}>*Este botón te va a redirigir a Mercado Pago</p> : null}
         </div>
     )
 };

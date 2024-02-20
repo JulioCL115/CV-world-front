@@ -17,8 +17,6 @@ const Checkout = () => {
     const { subscriptionId } = useParams();
     const dispatch = useDispatch();
     const subscription = useSelector((state) => state.subscriptions.subscriptionDetail);
-    
-  
 
     useEffect(() => {
         dispatch(getSubscriptionDetail(subscriptionId));
@@ -54,7 +52,13 @@ const Checkout = () => {
                     <img src={Illustration} alt="Ilustración de checkout" />
                 </div>
                 <div className={styles.containerRight}>
-                    <Card/>
+                    <Card
+                    id={subscription.id}
+                    name={subscription.name}
+                    price={subscription.price}
+                    included={subscription.included}
+                    notIncluded={subscription.notIncluded}
+                    />
                 </div>
             </div>
         </div>
@@ -62,3 +66,4 @@ const Checkout = () => {
 };
 
 export default Checkout;
+
