@@ -1,5 +1,5 @@
 import styles from "./MyCvs.module.css"
-import Illustration from "../../assets/CV-Example-Creation-Illustration.webp"
+import Illustration from "../../assets/upload-cv.png"
 import Cards from "../../components/MyCvs/Cards";
 import getCurrentUser from "../../redux/actions/users/getCurrentUser";
 

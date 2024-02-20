@@ -11,7 +11,7 @@ function Detail() {
     const { cvId } = useParams();
     const dispatch = useDispatch();
     const cv = useSelector((state) => state.cvs.cvDetail);
-    const comments = cv ? cv.comments : null
+    const comments = cv ? cv.Comments : null
 
     console.log(cv);
 
