@@ -27,7 +27,7 @@ function Comments({ cvId, comments }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-       const postStatus = await dispatch(postComment(comment, cvId, userId))
+        const postStatus = await dispatch(postComment(comment, cvId, userId))
 
         if (postStatus === "Success") {
             setComment('');
@@ -58,7 +58,14 @@ function Comments({ cvId, comments }) {
                 </div>
             }
             {comments && comments.length ? comments.map((comment) => (
-                <p>{comment}</p>
+                <div>
+                    <img src={comment.userImage} alt="foto de perfil del usuario" />
+                    <div>
+                        <p>{comment.createdAt}</p>
+                        <p>{comment.userName}</p>
+                        <p>{comment.comment}</p>
+                    </div>
+                </div>
             )) : <div className={styles.containerComments}>
                 <p className={styles.txtRegular16Purple}>Nadie comentó este CV todavía</p>
                 <img className={styles.img} src={Illustrations} alt="Illustrations" />

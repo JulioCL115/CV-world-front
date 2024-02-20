@@ -24,10 +24,10 @@ function Detail() {
             {
                 cv ? 
                 <div className={styles.containerHeader}>
-                <img src="" alt="foto de perfil del usuario" />
+                <img src={cv.image} alt="foto de perfil del usuario" />
                 <div>
                     <p className={styles.txtSemiBold16Black}>{cv.header}</p>
-                    <p className={styles.txtRegular16Black}>Nombre del usuario</p>
+                    <p className={styles.txtRegular16Black}>{cv.userName}</p>
                 </div>
             </div> : null
             }
