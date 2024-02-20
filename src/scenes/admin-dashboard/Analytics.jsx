@@ -1,4 +1,4 @@
-function Analytics () {
+function AdminAnalytics () {
     return (
         <div>
             <h1>Analytics</h1>
@@ -6,4 +6,4 @@ function Analytics () {
     );
 };
 
-export default Analytics;
+export default AdminAnalytics;

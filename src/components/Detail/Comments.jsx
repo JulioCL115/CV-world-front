@@ -1,14 +1,15 @@
 import styles from "./Comments.module.css";
 
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import postComment from "../../redux/actions/comments/postComment";
-import { useDispatch } from "react-redux";
 
 function Comments({ cvId, comments }) {
     const dispatch = useDispatch();
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userId = currentUser.id;
+    const userId = currentUser ? currentUser.id : null;
 
 
     const [comment, setComment] = useState(null);
@@ -37,7 +38,12 @@ function Comments({ cvId, comments }) {
                         </input>
                         <button className={styles.btn} type="submit">Dejar comentario</button>
                     </form>
-                </div> : null}
+                </div> : 
+                <div>
+                <p className={styles.txtSemiBold16Purple}>Inicia sesión para dejar un comentario</p>
+                <Link to="" >Iniciar sesión</Link>
+                </div>
+                }
             {comments && comments.length ? comments.map((comment) => (
                 <p>{comment}</p>
             )) : <p className={styles.txtSemiBold16Purple}>Nadie comentó este CV todavía</p>}

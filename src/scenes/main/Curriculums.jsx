@@ -35,7 +35,7 @@ function Curriculums() {
         <div className={styles.curriculums}>
             <div className={styles.containerTop}>
                 <div className={styles.containerLeft}>
-                    <SideBar filters={filters} setFilters={setFilters} />
+                    <SideBar filters={filters} setFilters={setFilters} setCurrentPage={setCurrentPage}/>
                 </div>
                 <div className={styles.containerRight}>
                     <div className={styles.containerRightTop}>

@@ -47,7 +47,7 @@ function SignIn() {
         console.log(userCredential._tokenResponse.isNewUser)
 
         login(userCredential.user.accessToken);
-        navigate("/home");
+        navigate("/curriculums");
 
         if (
           userCredential._tokenResponse &&
@@ -71,11 +71,11 @@ function SignIn() {
     event.preventDefault();
 
     try {
-      await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
+      const userCredential = await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
 
-      setTimeout(() => {
-        navigate("/signin");
-      }, 2000);
+      login(userCredential.user.accessToken);
+
+      navigate("/curriculums");
 
     } catch (error) {
       console.log("Error de logueo: ", error)
@@ -124,7 +124,7 @@ function SignIn() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth="1.5"
+                    strokeWidth="2"
                     stroke="currentColor"
                   >
                     <path
@@ -144,7 +144,7 @@ function SignIn() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth="1.5"
+                    strokeWidth="2"
                     stroke="currentColor"
                   >
                     <path
