@@ -1,0 +1,31 @@
+.checkout {
+    padding: 45px;
+}
+
+/*CONTAINERS*/
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.containferLeft{
+    width: 50%;
+}
+
+.containferRight{
+    width: 50%;
+}
+
+/*FONT STYLES*/ 
+
+.txtSemiBold32Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}

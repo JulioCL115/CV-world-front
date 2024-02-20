@@ -1,21 +1,35 @@
+import styles from './Checkout.module.css';
+
+import Card from '../../components/Subscriptions/Card';
 import createOrder from '../../redux/actions/payments/createOrder';
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import getSubscriptionDetail from '../../redux/actions/subscriptions/getSubscriptionDetail';
+import Illustration from "../../assets/checkout.png";
+
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Checkout = () => {
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser.id
     const [paymentLinkData, setPaymentLinkData] = useState(null);
+    const { subscriptionId } = useParams();
+    const dispatch = useDispatch();
+    const subscription = useSelector((state) => state.subscriptions.subscriptionDetail);
+    
+  
 
-    console.log(paymentLinkData);
+    useEffect(() => {
+        dispatch(getSubscriptionDetail(subscriptionId));
+    }, [subscriptionId, dispatch]);
+
 
     const paymentInfo = {
-        title: "Plan Premium",
+        title: subscription.name,
         description: "Descripción de prueba",
         quantity: 1,
-        unit_price: 2000,
+        unit_price: subscription.price,
     }
 
     useEffect(() => {
@@ -33,10 +47,16 @@ const Checkout = () => {
     }, [userId, paymentInfo]);
 
     return (
-        <div >
-            <h2>Shopping Cart</h2>
-            <p>This is an example of Checkout Pro integration of Mercado Pago</p>
-            <Link to={paymentLinkData ? paymentLinkData : null}>Checkout</Link>
+        <div className={styles.checkout}>
+            <h1 className={styles.txtSemiBold32Black}>Checkout</h1>
+            <div className={styles.container}>
+                <div className={styles.containerLeft}>
+                    <img src={Illustration} alt="Ilustración de checkout" />
+                </div>
+                <div className={styles.containerRight}>
+                    <Card/>
+                </div>
+            </div>
         </div>
     );
 };

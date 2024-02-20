@@ -1,10 +1,12 @@
 import styles from './Card.module.css';
 
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
+
 
 function Card({ id, name, price, included, notIncluded }) {
-
     const currentUser = localStorage.getItem('currentUser');
+    const location = useLocation();
+    const isCheckout = location.pathname.startsWith('/checkout');
 
     const renderPrice = () => {
         if (price === 0) {

@@ -6,7 +6,6 @@ const getCvDetail = (id) => {
 
     return async (dispatch) => {
         try {
-        console.log("EN EL DISPATCH DE GETCVDETAIL");
             const response = await axios.get(endpoint);
             let data = response.data;
 
