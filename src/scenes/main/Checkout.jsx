@@ -12,47 +12,57 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Checkout = () => {
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userId = localStorageUser.id
+    const userId = localStorageUser.id;
     const [paymentLink, setPaymentLink] = useState(null);
     const { subscriptionId } = useParams();
     const dispatch = useDispatch();
     const subscription = useSelector((state) => state.subscriptions.subscriptionDetail);
 
     useEffect(() => {
-        dispatch(getSubscriptionDetail(subscriptionId));
+        const fetchSubscriptionDetail = async () => {
+            try {
+                await dispatch(getSubscriptionDetail(subscriptionId));
+            } catch (error) {
+                console.error('Error fetching subscription detail:', error);
+            }
+        };
+
+        fetchSubscriptionDetail();
     }, [subscriptionId, dispatch]);
-
-    const paymentInfo = {
-        title: subscription ? subscription.name : null,
-        description: "Descripción de prueba",
-        quantity: 1,
-        unit_price: subscription ? subscription.price : null,
-    }
-
-    console.log(subscription);
 
     useEffect(() => {
         const getPaymentLink = async () => {
-            try {
-                if (subscription && paymentInfo.unit_price && paymentInfo.title && paymentInfo.description && paymentInfo.quantity) {
+            if (subscription && subscription.name && subscription.price) {
+                const paymentInfo = {
+                    title: subscription.name,
+                    description: "Descripción de prueba",
+                    quantity:  1,
+                    unit_price: subscription.price,
+                };
+
+                try {
                     const link = await createOrder(userId, paymentInfo);
                     setPaymentLink(link);
-                } else {
-                    console.log("no se cargo la suscripcion al momento de hacer el createOrder");
+                } catch (error) {
+                    console.error('Error creating order:', error);
                 }
-            } catch (error) {
-                console.error('Error creating order:', error);
+            } else {
+                console.log("no se cargo la suscripcion al momento de hacer el createOrder");
             }
         };
-        getPaymentLink();
-    }, [userId, subscriptionId]);
+
+        if (subscription) {
+            getPaymentLink();
+        }
+    }, [subscription, userId]); 
+
 
     return (
         <div className={styles.checkout}>
             <h1 className={styles.txtSemiBold32Black}>Checkout</h1>
             <div className={styles.container}>
                 <div className={styles.containerLeft}>
-                    <img  className={styles.img} src={Illustration} alt="Ilustración de checkout" />
+                    <img className={styles.img} src={Illustration} alt="Ilustración de checkout" />
                 </div>
                 {
                     subscription ?
@@ -70,7 +80,7 @@ const Checkout = () => {
             </div>
         </div>
     );
-};
+}
 
 export default Checkout;
 
