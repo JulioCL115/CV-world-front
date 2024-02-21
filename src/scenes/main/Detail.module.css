@@ -2,7 +2,7 @@
     max-width: 100%;
     background-color: #F4F3F3;
     margin-top: 8px;
-    padding-top: 20px;
+    padding-top: 45px;
     padding-left: 20%;
     padding-right: 20%;
     padding-bottom: 85px;
@@ -13,8 +13,9 @@
 .containerHeader {
     display: flex;
     flex-direction: row;
-    margin-left: 45px;
-    margin-right: 45px;
+    align-items: center;
+    column-gap: 20px;
+    margin-bottom: 20px;
 }
 
 .containerTop {
@@ -25,6 +26,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .containerBottomLeft {
@@ -32,7 +34,7 @@
 }
 
 .containerBottomRight {
-    width: 50%;
+    width: 47%;
 }
 
 /*FONT STYLES*/
@@ -58,5 +60,8 @@
     margin: 0px;
     padding: 0px;
 }
-
-
+.img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
