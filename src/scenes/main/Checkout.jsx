@@ -1,12 +1,10 @@
-import createOrder from '../redux/actions/payments/createOrder';
-import { useDispatch, useSelector } from 'react-redux';
+import createOrder from '../../redux/actions/payments/createOrder';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 
 const Checkout = () => {
-    const dispatch = useDispatch();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser.id
     const [paymentLinkData, setPaymentLinkData] = useState(null);

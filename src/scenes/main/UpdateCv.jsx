@@ -1,20 +1,20 @@
-import styles from "./CreateCv.module.css";
+import styles from './UpdateCv.module.css';
 
 import { useState } from "react";
 import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import postCv from "../redux/actions/cvs/postCv";
+import updateCv from '../../redux/actions/cvs/updateCv';
 import validation from "./createCvValidation"
 
 
-function CreateCv() {
+function UpdateCv() {
     const navigate = useNavigate();
-    const storedUser = localStorage.getItem('currentUser');
+    const { cvId } = useParams();
     const languages = useSelector((state) => state.languages.allLanguages);
     const categories = useSelector((state) => state.categories.allCategories);
 
-    const userId = JSON.parse(storedUser).id;
+    console.log(cvId);
 
 
     const [cv, setCv] = useState({
@@ -336,7 +336,7 @@ function CreateCv() {
                 !errors.speakingLanguages &&
                 !errors.otherInterests) {
 
-                const creationStatus = await postCv(userId, cv);
+                const creationStatus = await updateCv(cvId, cv);
 
                 setCreationStatus({ ...creationStatus })
 
@@ -361,8 +361,8 @@ function CreateCv() {
     };
 
     return (
-        <div className={styles.createCv}>
-            <h1 className={styles.txtSemiBold32Black}>Crear CV</h1>
+        <div className={styles.updateCv}>
+            <h1 className={styles.txtSemiBold32Black}>Editar CV</h1>
 
             <form className={styles.form} onSubmit={handleSubmit}>
 
@@ -748,7 +748,7 @@ function CreateCv() {
                         Agregar
                     </button>
                 </div>
-                <button className={styles.btn} type="submit">Crear</button>
+                <button className={styles.btn} type="submit">Actualizar</button>
             </form>
             {creationStatus ?
                 <p className={creationStatus.status === "Success" ? styles.txtSuccess : styles.txtError16}>{creationStatus.message}</p>
@@ -757,4 +757,4 @@ function CreateCv() {
     )
 };
 
-export default CreateCv;
+export default UpdateCv;

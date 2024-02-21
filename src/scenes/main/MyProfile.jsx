@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styles from './MyProfile.module.css';
 import { Link } from "react-router-dom";
 import { useEffect } from 'react';
-import getCurrentUser from '../redux/actions/users/getCurrentUser';
+import getCurrentUser from '../../redux/actions/users/getCurrentUser';
 
 
 function UpdateProfile() {

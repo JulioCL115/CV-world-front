@@ -1,10 +1,11 @@
 import styles from "./Card.module.css"
 
-function Card({ name, header, contact, description, experience, education, speakingLanguages, skills, otherInterests }) {
+function Card({ image, name, header, contact, description, experience, education, speakingLanguages, skills, otherInterests }) {
 
     return (
         <div className={styles.card}>
             <div className={styles.containerLeft}>
+                <img className={styles.img} src={image} alt="foto de perfil del usuario" />
                 <h1 className={styles.txtRegular64Black}>{name}</h1>
                 <h2 className={styles.txtSemiBold24Black}>{header}</h2>
                 <div className={styles.containerSection}>

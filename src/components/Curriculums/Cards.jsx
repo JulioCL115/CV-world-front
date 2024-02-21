@@ -1,17 +1,12 @@
 import styles from "./Cards.module.css"
 
 import Card from "./Card";
-import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import updateCv from "../../redux/actions/cvs/updateCv";
-import Error404 from "../../scenes/Error404"
+import Error404 from "../../scenes/main/Error404"
 
-import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Cards({ cvs }) {
-    const dispatch = useDispatch();
-    // const cvs = useSelector((state) => state.cvs.allCvs);
-
     console.log(cvs);
 
 
