@@ -1,0 +1,64 @@
+.sidebar {
+    width: auto;
+    height: auto;
+}
+
+/*FONT STYLES*/
+
+.txtRegular16Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold16Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 10px;
+    padding: 0px;
+}
+
+.txtSemiBold24Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+/*UI ELEMENTS */
+.divider {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-color: white;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.listItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkbox {
+    margin-right: 5px;
+}
+

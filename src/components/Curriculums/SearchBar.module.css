@@ -1,0 +1,84 @@
+.searchbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* CONTAINERS */
+  
+  .containerLeft {
+    display: flex;
+    flex-direction: row;
+    row-gap: 10px;
+    align-items: center;
+  }
+  
+  .containerInput {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  /* FONT STYLES */
+  
+  .txtRegular16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  .txtSemiBold16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  /* UI ELEMENTS */
+  
+  .input {
+    width: 400px;
+    height: 40px;
+    padding-left: 35px;
+    border-radius: 10px;
+    border-color: #000000;
+    position: relative;
+    padding-left: 50px;
+  }
+  
+  .input::placeholder {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+  }
+  
+  .icn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .selector {
+    background-color: transparent;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+}

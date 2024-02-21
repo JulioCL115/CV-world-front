@@ -1,0 +1,39 @@
+.sideBar {
+    background-color: #3E3E70;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    height: 100vw;
+    width: 25%;
+    align-items: center;
+    padding-top: 45px;
+}
+
+/*CONTAINERS*/
+
+.containerSection {
+    display: flex;
+    align-items: center;
+}
+
+.containerMenus {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    align-items: flex-start;
+}
+
+/*FONT STYLES*/
+
+.txtRegular16White {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    margin-left: 10px;
+    padding: 0px;
+}
+
+/*UI ELEMENTS*/

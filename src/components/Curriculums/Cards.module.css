@@ -1,0 +1,13 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    width:   100%; /* Take up the full width of the parent */
+    column-gap: 100px; /* Add space between each card */
+    row-gap: 150px; /* Add space between each card */
+}
+
+.containerCards {
+    width:   200px; /* Fixed width for each card */
+    height:   300px; /* Fixed height for each card */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
