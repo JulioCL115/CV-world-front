@@ -85,7 +85,10 @@ function SignUp() {
 
       if (registrationStatus.status === "Success") {
 
-        await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
+        const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
+        const user = userCredential.user;
+        await user.sendEmailVerification();
+
         console.log("sign up")
 
         setTimeout(() => {
