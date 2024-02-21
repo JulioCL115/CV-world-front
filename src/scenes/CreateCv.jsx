@@ -32,6 +32,8 @@ function CreateCv() {
         otherInterests: []
     });
 
+    console.log(cv)
+
     const handleChange = (event) => {
         setCv({
             ...cv,
@@ -135,7 +137,7 @@ function CreateCv() {
     };
 
     const handleContactChange = (index, name, value) => {
-        const updatedContact = [...cv.contact];
+        const updatedContact = [cv.contact];
         updatedContact[index][name] = value;
 
         setCv({
@@ -228,7 +230,7 @@ function CreateCv() {
                     <label className={styles.txtSemiBold16Purple}>¿En qué categoría pondrías tu CV?</label>
                     <select className={styles.input}>
                         <option></option>
-                        {categories.map((category) => {
+                        {categories?.map((category) => {
                             return <option key={category.id}>{category.name}</option>
 
                         })}
@@ -239,7 +241,7 @@ function CreateCv() {
                     <label className={styles.txtSemiBold16Purple}>¿En qué idioma vas a escribir tu CV?</label>
                     <select className={styles.input}>
                         <option></option>
-                        {languages.map((language) => {
+                        {languages?.map((language) => {
                             return <option key={language.id}>{language.name}</option>
 
                         })}
@@ -330,7 +332,7 @@ function CreateCv() {
                 <div className={styles.containerSection}>
                     <label className={styles.txtSemiBold16Purple}>Experiencia Laboral:</label>
                     <div className={styles.containerSubSection}>
-                        {cv.experience.map((exp, index) => (
+                        {cv?.experience.map((exp, index) => (
                             <div key={index}>
                                 <label>Desde:</label>
                                 <div>
@@ -359,7 +361,7 @@ function CreateCv() {
                                         type="text"
                                         name="company"
                                         value={exp.company}
-                                        onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                        onChange={(e) => handleExperienceChange(index, e.target.name, e.target.value)}
                                     />
                                 </div>
                                 <div>
@@ -369,7 +371,7 @@ function CreateCv() {
                                         type="text"
                                         name="role"
                                         value={exp.role}
-                                        onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                        onChange={(e) => handleExperienceChange(index, e.target.name, e.target.value)}
                                     />
                                 </div>
                                 <div>
@@ -379,7 +381,7 @@ function CreateCv() {
                                         type="text"
                                         name="responsibilities"
                                         value={exp.responsibilities}
-                                        onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                        onChange={(e) => handleExperienceChange(index, e.target.name, e.target.value)}
                                     />
                                 </div>
                                 <button
@@ -428,7 +430,7 @@ function CreateCv() {
                                 type="text"
                                 name="where"
                                 value={educ.where}
-                                onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                onChange={(e) => handleEducationChange(index, e.target.name, e.target.value)}
                             />
                             <label>Titulo obtenido:</label>
                             <input
@@ -436,7 +438,7 @@ function CreateCv() {
                                 type="text"
                                 name="about"
                                 value={educ.abou}
-                                onChange={(e) => handleContactChange(index, e.target.name, e.target.value)}
+                                onChange={(e) => handleEducationChange(index, e.target.name, e.target.value)}
                             />
                             <button type="button" onClick={() => handleRemoveEducation(index)}>
                                 Eliminar
