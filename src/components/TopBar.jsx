@@ -19,8 +19,6 @@ function TopBar() {
         storedUser && storedUser !== "[object Object]" ? JSON.parse(storedUser) : null
     );
 
-    console.log(currentUser);
-
     useEffect(() => {
         const handleStorageChange = () => {
             setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
@@ -96,6 +94,7 @@ function TopBar() {
                             <div className={styles.dropdownContent}>
                                 <Link className={styles.txtRegular16} to="/myprofile">Mi Perfil</Link>
                                 <Link className={styles.txtRegular16} to="/mycvs">Mis CVs</Link>
+                                {currentUser.role === "admin" ? <Link className={styles.txtRegular16} to="/admin/analytics">Admin Dashboard</Link> : null}
                                 <a href="/signin" onClick={logOut}>Cerrar sesión</a>
                             </div>
                         </div>

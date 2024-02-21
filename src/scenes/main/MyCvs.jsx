@@ -1,6 +1,6 @@
 import styles from "./MyCvs.module.css"
 import Illustration from "../../assets/upload-cv.png"
-import Cards from "../../components/MyCvs/Cards";
+import Cards from "../../components/Curriculums/Cards";
 import getCurrentUser from "../../redux/actions/users/getCurrentUser";
 
 

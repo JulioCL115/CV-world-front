@@ -3,11 +3,13 @@ import styles from "./Cards.module.css"
 import Card from "./Card";
 import updateCv from "../../redux/actions/cvs/updateCv";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Cards({ cvs }) {
     const navigate = useNavigate();
-    console.log(cvs);
+    const location = useLocation();
+    const isMyCvs = location.pathname === "/mycvs";
+    const isCurriculums = location.pathname === "/curriculums";
 
     const handleClick = (id) => {
         updateCv({ id, views: 1 });
@@ -18,21 +20,22 @@ function Cards({ cvs }) {
         <div className={styles.cards}>
             {
                 cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate }) => (
-                    <div className={styles.containerCards}>
-                        <Card
-                            onClick={() => handleClick(id)}
-                            id={id}
-                            name={name}
-                            image={image}
-                            header={header}
-                            contact={contact}
-                            description={description}
-                            experience={experience}
-                            education={education}
-                            speakingLanguages={speakingLanguages}
-                            skills={skills}
-                            otherInterests={otherInterests}
-                        />
+                    <div key={id} className={styles.containerCards}>
+                        <div onClick={() => handleClick(id)}>
+                            <Card
+                                id={id}
+                                name={name}
+                                image={image}
+                                header={header}
+                                contact={contact}
+                                description={description}
+                                experience={experience}
+                                education={education}
+                                speakingLanguages={speakingLanguages}
+                                skills={skills}
+                                otherInterests={otherInterests}
+                            />
+                        </div>
                         <p>{views}</p>
                         <p>{creationDate}</p>
                     </div>

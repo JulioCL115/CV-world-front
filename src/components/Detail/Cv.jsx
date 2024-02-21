@@ -12,7 +12,7 @@ function DetailCv({ cv }) {
                         <div className={styles.containerSection}>
                             <h3 className={styles.txtSemiBold20Black}>/ INFORMACIÓN DE CONTACTO</h3>
                             <div className={styles.containerList}>
-                                <p className={styles.txtRegular16Black}>{cv.contact[0].location}</p>
+                            <p className={styles.txtRegular16Black}>{cv && cv.contact && cv.contact.length > 0 ? cv.contact[0].location : null}</p>
                                 <p className={styles.txtRegular16Black}>{cv.contact[0].phone}</p>
                                 <p className={styles.txtRegular16Black}>{cv.contact[0].email}</p>
                                 <p className={styles.txtRegular16Black}>{cv.contact[0].website}</p>

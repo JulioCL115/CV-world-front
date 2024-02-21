@@ -17,13 +17,15 @@ function Detail() {
     const header = cv ? cv.header : null
     const userName = cv ? cv.userName : null
     const userImage = cv ? cv.userImage : null
-    const email = cv ? cv.contact[0].email : null
+    const email = cv && cv.contact && cv.contact.length > 0 ? cv.contact[0].email : null
 
-    console.log(cv);
 
    useEffect(() => {
     dispatch(getCvDetail(cvId))
    }, [cvId, dispatch])
+
+
+   console.log(cv);
 
     return (
         <div className={styles.detail}>
