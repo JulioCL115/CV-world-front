@@ -18,7 +18,6 @@ function MyCvs() {
 
     console.log(currentUser);
 
-
     useEffect(() => {
         dispatch(getCurrentUser(userEmail))
     }, [userEmail, dispatch] )

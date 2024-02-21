@@ -1,20 +1,33 @@
 .checkout {
-    padding: 45px;
+    padding-top: 45px;
+    padding-right: 45px;
+    padding-left: 45px;
+    padding-bottom: 85px;
 }
 
 /*CONTAINERS*/
 
 .container {
+    width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
 }
 
 .containferLeft{
     width: 50%;
+    align-items: center;
+    justify-content: center;
 }
 
-.containferRight{
+.containerRight{
+    display: flex;
     width: 50%;
+    align-items: center;
+    justify-content: center;
 }
 
 /*FONT STYLES*/ 
@@ -28,4 +41,9 @@
     font-weight: 600;
     margin: 0px;
     padding: 0px;
+}
+
+
+.img {
+    height: 600px;
 }

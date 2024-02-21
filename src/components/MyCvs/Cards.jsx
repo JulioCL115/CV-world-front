@@ -32,7 +32,6 @@ function Cards({ cvs }) {
         }
     };
 
-
     return (
         <div className={styles.cards}>
             {isLoading && <Spinner />}

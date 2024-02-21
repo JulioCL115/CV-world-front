@@ -6,60 +6,67 @@ import getSubscriptionDetail from '../../redux/actions/subscriptions/getSubscrip
 import Illustration from "../../assets/checkout.png";
 
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const Checkout = () => {
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser.id
-    const [paymentLinkData, setPaymentLinkData] = useState(null);
+    const [paymentLink, setPaymentLink] = useState(null);
     const { subscriptionId } = useParams();
     const dispatch = useDispatch();
     const subscription = useSelector((state) => state.subscriptions.subscriptionDetail);
 
-    useEffect(() => {
-        dispatch(getSubscriptionDetail(subscriptionId));
-    }, [subscriptionId, dispatch]);
-
+    // useEffect(() => {
+    //     dispatch(getSubscriptionDetail(subscriptionId));
+    // }, [subscriptionId, dispatch]);
 
     const paymentInfo = {
-        title: subscription.name,
+        title: subscription ? subscription.name : null,
         description: "Descripción de prueba",
         quantity: 1,
-        unit_price: subscription.price,
+        unit_price: subscription ? subscription.price : null,
     }
 
+    console.log(subscription);
+
     useEffect(() => {
-        const fetchPaymentLink = async () => {
+        const getPaymentLink = async () => {
             try {
-                const data = await createOrder(userId, paymentInfo);
-                console.log('Payment link data:', data);
-                setPaymentLinkData(data);
+                if (subscription) {
+                    const link = await createOrder(userId, paymentInfo);
+                    setPaymentLink(link);
+                } else {
+                    console.log("no se cargo la suscripcion al momento de hacer el createOrder");
+                }
             } catch (error) {
                 console.error('Error creating order:', error);
             }
         };
-
-        fetchPaymentLink();
-    }, [userId, paymentInfo]);
+        getPaymentLink();
+    }, [userId, paymentInfo, subscriptionId, dispatch]);
 
     return (
         <div className={styles.checkout}>
             <h1 className={styles.txtSemiBold32Black}>Checkout</h1>
             <div className={styles.container}>
                 <div className={styles.containerLeft}>
-                    <img src={Illustration} alt="Ilustración de checkout" />
+                    <img  className={styles.img} src={Illustration} alt="Ilustración de checkout" />
                 </div>
-                <div className={styles.containerRight}>
-                    <Card
-                    id={subscription.id}
-                    name={subscription.name}
-                    price={subscription.price}
-                    included={subscription.included}
-                    notIncluded={subscription.notIncluded}
-                    />
-                </div>
+                {
+                    subscription ?
+                        <div className={styles.containerRight}>
+                            <Card
+                                id={subscription.id}
+                                name={subscription.name}
+                                price={subscription.price}
+                                included={subscription.included}
+                                notIncluded={subscription.notIncluded}
+                                paymentLink={paymentLink}
+                            />
+                        </div> : null
+                }
             </div>
         </div>
     );

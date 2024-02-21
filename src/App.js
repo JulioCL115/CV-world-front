@@ -55,7 +55,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/curriculums" element={<Curriculums />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
-            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/checkout/:subscriptionId" element={<Checkout />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/createcv" element={<CreateCv />} />
