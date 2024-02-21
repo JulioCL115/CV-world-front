@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import { useParams } from "react-router-dom";
 import ProfilePicture from "../../assets/blank-profile-picture-973460_960_720.webp";
+import { legacy_createStore } from "@reduxjs/toolkit";
 
 
 function Detail() {
@@ -19,13 +20,15 @@ function Detail() {
     const userImage = cv ? cv.userImage : null
     const email = cv && cv.contact && cv.contact.length > 0 ? cv.contact[0].email : null
 
+    console.log(cvId);
 
    useEffect(() => {
     dispatch(getCvDetail(cvId))
    }, [cvId, dispatch])
 
-
    console.log(cv);
+
+   
 
     return (
         <div className={styles.detail}>

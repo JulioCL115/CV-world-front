@@ -12,9 +12,11 @@ function Cards({ cvs }) {
     const isCurriculums = location.pathname === "/curriculums";
 
     const handleClick = (id) => {
-        updateCv({ id, views: 1 });
+        // updateCv({ id, views: 1 });
         navigate(`/detail/${id}`);
     }
+
+    console.log(cvs);
 
     return (
         <div className={styles.cards}>

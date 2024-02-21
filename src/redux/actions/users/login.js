@@ -14,7 +14,6 @@ const login = async (idToken) => {
 
         // Add this line to trigger a global event
         window.dispatchEvent(new Event('storage'));
-
     } catch (error) {
         console.log(error);
     }
