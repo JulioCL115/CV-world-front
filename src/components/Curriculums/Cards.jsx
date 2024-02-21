@@ -36,8 +36,8 @@ function Cards({ cvs }) {
                                 otherInterests={otherInterests}
                             />
                         </div>
-                        <p>{views}</p>
-                        <p>{creationDate}</p>
+                        <p className={styles.txtLight12Black}> views: {views}</p>
+                        <p className={styles.txtLight12Black}>{creationDate}</p>
                     </div>
                 )) : null
             }

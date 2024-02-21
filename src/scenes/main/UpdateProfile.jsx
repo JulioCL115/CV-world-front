@@ -1,10 +1,11 @@
 import styles from "./SingUp.module.css"
 
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import updateUser from "../../redux/actions/users/updateUser";
-
-
+import getCurrentUser from '../../redux/actions/users/getCurrentUser';
 import { auth } from "../../config/firebase-config";
 import { updateProfile } from 'firebase/auth';
 
@@ -14,8 +15,12 @@ import validation from "./updateProfileValidation"
 
 function UpdateProfile() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser.id;
+    const userEmail = localStorageUser.email
+    const currentUser = useSelector(state => state.users.currentUser);
+
 
     const [newUserInfo, setNewUserInfo] = useState({
         name: null,
@@ -40,6 +45,23 @@ function UpdateProfile() {
 
     const [showFirstPassword, setShowFirstPassword] = useState(false);
     const [showSecondPassword, setShowSecondPassword] = useState(false);
+
+    useEffect(() => {
+        const getUserData = async () => {
+            const userData = await dispatch(getCurrentUser(userEmail));
+
+            setNewUserInfo({
+                name: userData.name || '',
+                email: userData.email || '',
+                password: '', 
+                repeatPassword: '', 
+                photo: userData.photo || '',
+            });
+        };
+
+        getUserData();
+    }, [dispatch, userId, userEmail]);
+        
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];

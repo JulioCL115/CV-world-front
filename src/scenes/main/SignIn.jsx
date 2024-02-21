@@ -46,26 +46,27 @@ function SignIn() {
         console.log(userCredential._tokenResponse)
         console.log(userCredential._tokenResponse.isNewUser)
 
-        login(userCredential.user.accessToken);
-        navigate("/curriculums");
-
         if (
           userCredential._tokenResponse &&
           userCredential._tokenResponse.isNewUser
-        ) {console.log(userCredential.user.photoURL);
+        ) {
+          console.log(userCredential.user.photoURL);
           await register({
             name: userCredential.user.displayName,
             email: userCredential.user.email,
             image: userCredential.user.photoURL,
             password: "",
           });
-
         }
+
+        login(userCredential.user.accessToken);
+        navigate("/curriculums");
       }
     } catch (error) {
       console.error("Error during login:", error);
     }
   };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();

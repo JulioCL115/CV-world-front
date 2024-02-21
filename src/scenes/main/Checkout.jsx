@@ -18,9 +18,9 @@ const Checkout = () => {
     const dispatch = useDispatch();
     const subscription = useSelector((state) => state.subscriptions.subscriptionDetail);
 
-    // useEffect(() => {
-    //     dispatch(getSubscriptionDetail(subscriptionId));
-    // }, [subscriptionId, dispatch]);
+    useEffect(() => {
+        dispatch(getSubscriptionDetail(subscriptionId));
+    }, [subscriptionId, dispatch]);
 
     const paymentInfo = {
         title: subscription ? subscription.name : null,
@@ -34,7 +34,7 @@ const Checkout = () => {
     useEffect(() => {
         const getPaymentLink = async () => {
             try {
-                if (subscription) {
+                if (subscription && paymentInfo.unit_price && paymentInfo.title && paymentInfo.description && paymentInfo.quantity) {
                     const link = await createOrder(userId, paymentInfo);
                     setPaymentLink(link);
                 } else {
@@ -45,7 +45,7 @@ const Checkout = () => {
             }
         };
         getPaymentLink();
-    }, [userId, paymentInfo, subscriptionId, dispatch]);
+    }, [userId, subscriptionId]);
 
     return (
         <div className={styles.checkout}>

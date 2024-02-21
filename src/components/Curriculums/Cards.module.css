@@ -11,3 +11,16 @@
     height:   300px; /* Fixed height for each card */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
+
+/*FONT STYLES*/
+
+.txtLight12Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding-left: 5px;
+}
