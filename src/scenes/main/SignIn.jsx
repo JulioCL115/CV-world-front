@@ -59,7 +59,7 @@ function SignIn() {
           await register({
             name: userCredential.user.displayName,
             email: userCredential.user.email,
-            image: userCredential.user.photoURL,
+            photo: userCredential.user.photoURL,
             password: "",
           });
         }
