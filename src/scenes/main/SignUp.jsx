@@ -43,6 +43,11 @@ function SignUp() {
       [event.target.name]: event.target.value
     });
 
+    setRegistrationStatus({
+      status: null,
+      message: null,
+    })
+
     const validationErrors = validation({
       ...registerInfo,
       [event.target.name]: event.target.value,
@@ -91,7 +96,7 @@ function SignUp() {
 
             const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
             const user = userCredential.user;
-            await sendEmailVerification(auth, user);
+            // await sendEmailVerification(auth, user);
 
             setRegistrationStatus({
               status: "Success",
@@ -265,7 +270,7 @@ function SignUp() {
           <button className={styles.btnRegister}>REGISTRARME</button>
         </form>
         {registrationStatus ?
-          <p className={registrationStatus.status === "Success" ? styles.txtSuccess : styles.txtError16}>{registrationStatus.message}</p>
+          <p className={registrationStatus.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{registrationStatus.message}</p>
           : null}
         {/* <p className={styles.txtSemiBold12Purple}>O INICIA SESION CON</p>
         <button className={styles.btnGoogle}>
