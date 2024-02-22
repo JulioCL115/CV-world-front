@@ -4,6 +4,7 @@ import Card from "./Card";
 // import updateCv from "../../redux/actions/cvs/updateCv";
 import deleteCv from "../../redux/actions/cvs/deleteCv";
 import getUserByEmail from "../../redux/actions/users/getUserByEmail";
+import updateCvViews from "../../redux/actions/cvs/updateCvViews";
 import Spinner from "../Spinner";
 
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -21,7 +22,7 @@ function Cards({ cvs }) {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleClick = (id) => {
-        // updateCv({ id, views: 1 });
+        updateCvViews(id);
         navigate(`/detail/${id}`);
     }
 
