@@ -2,11 +2,12 @@ import styles from './SideBar.module.css';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
-function SideBar({ filters, setFilters }) {
+function SideBar({ filters, setFilters, setCurrentPage }) {
     const languages = useSelector((state) => state.languages.allLanguages);
     const categories = useSelector((state) => state.categories.allCategories);
 
     const handleCheckboxChange = (filterType, value) => {
+        setCurrentPage(1);
         setFilters((prevFilters) => ({
             ...prevFilters,
             [filterType]: prevFilters[filterType].includes(value)

@@ -1,62 +1,45 @@
 import styles from "./Cards.module.css"
 
 import Card from "./Card";
-import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import updateCv from "../../redux/actions/cvs/updateCv";
-import Error404 from "../../scenes/Error404"
 
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-function Cards() {
-    const dispatch = useDispatch();
-    const cvs = useSelector((state) => state.cvs.allCvs);
-
+function Cards({ cvs }) {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isMyCvs = location.pathname === "/mycvs";
+    const isCurriculums = location.pathname === "/curriculums";
 
     const handleClick = (id) => {
-        dispatch(getCvDetail(id));
-        dispatch(updateCv({ id, views: 1 }));
+        updateCv({ id, views: 1 });
+        navigate(`/detail/${id}`);
     }
 
     return (
         <div className={styles.cards}>
             {
-                cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate, category, language, subscription }) => {
-                    return <Link className={styles.btn} 
-                    to={`/detail/${id}`} 
-                    onClick={handleClick(id)}
-                    name={name}
-                            image={image}
-                            header={header}
-                            contact={contact}
-                            description={description}
-                            experience={experience}
-                            education={education}
-                            speakingLanguages={speakingLanguages}
-                            skills={skills}
-                            otherInterests={otherInterests}
-                            >
-                        <Card key={id}
-                            id={id}
-                            name={name}
-                            image={image}
-                            header={header}
-                            contact={contact}
-                            description={description}
-                            experience={experience}
-                            education={education}
-                            speakingLanguages={speakingLanguages}
-                            skills={skills}
-                            otherInterests={otherInterests}
-                        />
+                cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate }) => (
+                    <div key={id} className={styles.containerCards}>
+                        <div onClick={() => handleClick(id)}>
+                            <Card
+                                id={id}
+                                name={name}
+                                image={image}
+                                header={header}
+                                contact={contact}
+                                description={description}
+                                experience={experience}
+                                education={education}
+                                speakingLanguages={speakingLanguages}
+                                skills={skills}
+                                otherInterests={otherInterests}
+                            />
+                        </div>
                         <p>{views}</p>
                         <p>{creationDate}</p>
-                        <p>{category}</p>
-                        <p>{language}</p>
-                        <p>{subscription}</p>
-                    </Link>
-
-                }) : <Error404 />
+                    </div>
+                )) : null
             }
         </div>
     )

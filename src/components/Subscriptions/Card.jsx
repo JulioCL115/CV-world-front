@@ -1,8 +1,21 @@
 import styles from './Card.module.css';
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-function Card({ id, name, price, included, notIncluded }) {
+import getSubscriptionDetail from '../../redux/actions/subscriptions/getSubscriptionDetail';
+
+function Card({ id, name, price, included, notIncluded, paymentLink }) {
+    const currentUser = localStorage.getItem('currentUser');
+    const location = useLocation();
+    const isCheckout = location.pathname.startsWith('/checkout');
+    const dispatch = useDispatch();
+
+    const handleClick = (id) => {
+        if (currentUser) {
+            dispatch(getSubscriptionDetail(id));
+        }
+    };
 
     const renderPrice = () => {
         if (price === 0) {
@@ -30,7 +43,7 @@ function Card({ id, name, price, included, notIncluded }) {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     style={{ verticalAlign: 'middle', width: '30px', height: '30px' }} // Add this style
                 >
@@ -40,7 +53,7 @@ function Card({ id, name, price, included, notIncluded }) {
             </div>
         ));
     };
-    
+
     const renderNotIncluded = () => {
         return notIncluded.map((item, index) => (
             <div key={index} className={styles.containerListItem} id={styles.list}>
@@ -51,7 +64,7 @@ function Card({ id, name, price, included, notIncluded }) {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     style={{ verticalAlign: 'middle', width: '30px', height: '30px' }} // Add this style
                 >
@@ -61,8 +74,6 @@ function Card({ id, name, price, included, notIncluded }) {
             </div>
         ));
     };
-    
-    
 
     return (
         <div className={styles.card}>
@@ -72,9 +83,15 @@ function Card({ id, name, price, included, notIncluded }) {
                 {renderIncluded()}
                 {notIncluded !== null && renderNotIncluded()}
             </div>
-            <Link to="/cart">
-                <button className={styles.btn}>Empezar</button>
-            </Link>
+            {isCheckout ?
+                <Link to={paymentLink}>
+                    <button className={styles.btn}>Pagar con Mercado Pago</button>
+                </Link> :
+                <Link to={currentUser ? `/checkout/${id}` : "/signin"}>
+                    <button onClick={() => handleClick(id)} className={styles.btn}>Empezar</button>
+                </Link>
+            }
+            {isCheckout ? <p className={styles.txtRegular12Purple}>*Este botón te va a redirigir a Mercado Pago</p> : null}
         </div>
     )
 };

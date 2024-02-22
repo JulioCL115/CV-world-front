@@ -10,6 +10,8 @@ const getCvDetail = (id) => {
             const response = await axios.get(endpoint);
             let data = response.data;
 
+            console.log(data);
+
             return dispatch(setCvDetail(data));
         } catch (error) {
             console.log(error);
