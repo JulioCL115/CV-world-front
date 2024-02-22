@@ -66,7 +66,7 @@ function Detail() {
             </div>
             <div className={styles.containerBottom}>
                 <div className={styles.containerBottomLeft}>
-                    <Comments cvId={cvId} comments={cv.comments} />
+                    <Comments cvId={cvId} comments={cv.Comments} setCv={setCv}/>
                 </div>
                 <div className={styles.containerBottomRight}>
                     <Contact
