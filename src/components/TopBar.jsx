@@ -9,16 +9,35 @@ import logout from "../redux/actions/users/logout";
 import { auth } from "../config/firebase-config"
 import { signOut } from "firebase/auth"
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate, useLocation } from "react-router-dom"; 
 
 
 function TopBar() {
     const navigate = useNavigate();
+    const location = useLocation();
     const storedUser = localStorage.getItem('currentUser');
     const [currentUser, setCurrentUser] = useState(
         storedUser && storedUser !== "[object Object]" ? JSON.parse(storedUser) : null
     );
     const [selectedMenu, setSelectedMenu] = useState("home");
+
+    useEffect(() => {
+        // Set the selectedMenu based on the current path
+        switch (location.pathname) {
+          case '/':
+            setSelectedMenu('home');
+            break;
+          case '/curriculums':
+            setSelectedMenu('curriculums');
+            break;
+          case '/subscriptions':
+            setSelectedMenu('subscriptions');
+            break;
+          // Add more cases for other paths if needed
+          default:
+            setSelectedMenu('home');
+        }
+      }, [location.pathname]); 
 
     useEffect(() => {
         const handleStorageChange = () => {
@@ -30,9 +49,6 @@ function TopBar() {
         };
     }, []);
 
-    const handleLinkClick = (menuName) => {
-        setSelectedMenu(menuName);
-      };
 
     const logOut = async () => {
         try {
@@ -50,9 +66,9 @@ function TopBar() {
     return (
         <div className={styles.topbar}>
             <div className={styles.containerLeft}>
-                <Link className={selectedMenu === "home" ? styles.txtSemiBold16Black : styles.txtRegular16Black}  to="/" onClick={() => handleLinkClick("home")}>Home</Link>
-                <Link className={selectedMenu === "curriculums" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/curriculums" onClick={() => handleLinkClick("curriculums")}>Currículums</Link>
-                <Link className={selectedMenu === "subscriptions" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/subscriptions" onClick={() => handleLinkClick("subscriptions")}>Suscripciones</Link>
+                <Link className={selectedMenu === "home" ? styles.txtSemiBold16Black : styles.txtRegular16Black}  to="/" >Home</Link>
+                <Link className={selectedMenu === "curriculums" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/curriculums" >Currículums</Link>
+                <Link className={selectedMenu === "subscriptions" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/subscriptions" >Suscripciones</Link>
             </div>
             <div className={styles.containerCenter}>
                 <h1 className={styles.txt} id={styles.h1}>CV World</h1>
