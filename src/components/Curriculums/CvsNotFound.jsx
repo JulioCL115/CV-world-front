@@ -1,8 +1,6 @@
 import Illustration from "../../assets/resume-assessment-3611330-3022090.webp";
 import styles from "./CvsNotFound.module.css"
 
-import { Link } from 'react-router-dom';
-
 function UpgradeSubscription() {
 
     return (

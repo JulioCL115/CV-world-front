@@ -1,6 +1,5 @@
 import styles from './SideBar.module.css';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
 
 function SideBar({ filters, setFilters, setCurrentPage }) {
     const languages = useSelector((state) => state.languages.allLanguages);
