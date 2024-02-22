@@ -18,6 +18,7 @@ function TopBar() {
     const [currentUser, setCurrentUser] = useState(
         storedUser && storedUser !== "[object Object]" ? JSON.parse(storedUser) : null
     );
+    const [selectedMenu, setSelectedMenu] = useState("home");
 
     useEffect(() => {
         const handleStorageChange = () => {
@@ -28,6 +29,10 @@ function TopBar() {
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
+
+    const handleLinkClick = (menuName) => {
+        setSelectedMenu(menuName);
+      };
 
     const logOut = async () => {
         try {
@@ -45,9 +50,9 @@ function TopBar() {
     return (
         <div className={styles.topbar}>
             <div className={styles.containerLeft}>
-                <Link className={styles.txtRegular16} to="/">Home</Link>
-                <Link className={styles.txtRegular16} to="/curriculums">Currículums</Link>
-                <Link className={styles.txtRegular16} to="/subscriptions">Suscripciones</Link>
+                <Link className={selectedMenu === "home" ? styles.txtSemiBold16Black : styles.txtRegular16Black}  to="/" onClick={() => handleLinkClick("home")}>Home</Link>
+                <Link className={selectedMenu === "curriculums" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/curriculums" onClick={() => handleLinkClick("curriculums")}>Currículums</Link>
+                <Link className={selectedMenu === "subscriptions" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/subscriptions" onClick={() => handleLinkClick("subscriptions")}>Suscripciones</Link>
             </div>
             <div className={styles.containerCenter}>
                 <h1 className={styles.txt} id={styles.h1}>CV World</h1>
@@ -73,7 +78,6 @@ function TopBar() {
                 <div className={styles.containerLogin}>
                     {currentUser ?
                         <div className={styles.dropdown}>
-
                             <button className={styles.btnDropdown}>
                                 <svg className={styles.icn}
                                     id={styles.icnDropdown}
@@ -87,14 +91,13 @@ function TopBar() {
                                         strokeLinejoin="round"
                                         d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
-
                                 {currentUser.name}
                             </button>
 
                             <div className={styles.dropdownContent}>
-                                <Link className={styles.txtRegular16} to="/myprofile">Mi Perfil</Link>
-                                <Link className={styles.txtRegular16} to="/mycvs">Mis CVs</Link>
-                                {currentUser.role === "admin" ? <Link className={styles.txtRegular16} to="/admin/analytics">Admin Dashboard</Link> : null}
+                                <Link className={styles.txtRegular16Black} to="/myprofile">Mi Perfil</Link>
+                                <Link className={styles.txtRegular16Black} to="/mycvs">Mis CVs</Link>
+                                {currentUser.role === "admin" ? <Link className={styles.txtRegular16Black} to="/admin/analytics">Admin Dashboard</Link> : null}
                                 <a href="/signin" onClick={logOut}>Cerrar sesión</a>
                             </div>
                         </div>

@@ -31,6 +31,11 @@ function SignIn() {
       ...loginInfo,
       [event.target.name]: event.target.value
     });
+
+    setLoginStatus({
+      status: null,
+      message: null
+    });
   };
 
   const handleTogglePassword = () => {
