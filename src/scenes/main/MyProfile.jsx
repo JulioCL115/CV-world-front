@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import getCurrentUser from '../../redux/actions/users/getCurrentUser';
+import getUserByEmail from '../../redux/actions/users/getUserByEmail';
 
 function UpdateProfile() {
     const dispatch = useDispatch();
@@ -13,7 +13,7 @@ function UpdateProfile() {
     const userEmail = localStorageUser.email
 
     useEffect(() => {
-        dispatch(getCurrentUser(userEmail))
+        dispatch(getUserByEmail(userEmail))
     }, [userEmail, dispatch])
 
     return (

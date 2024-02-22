@@ -3,9 +3,11 @@ import styles from './Card.module.css';
 import { Link, useLocation } from "react-router-dom";
 
 function Card({ id, name, price, included, notIncluded, paymentLink }) {
-    const currentUser = localStorage.getItem('currentUser');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const location = useLocation();
     const isCheckout = location.pathname.startsWith('/checkout');
+
+    console.log(currentUser);
 
     const renderPrice = () => {
         if (price === 0) {
@@ -77,8 +79,8 @@ function Card({ id, name, price, included, notIncluded, paymentLink }) {
                 <Link to={paymentLink}>
                     <button className={styles.btn}>Pagar con Mercado Pago</button>
                 </Link> :
-                <Link to={currentUser ? `/checkout/${id}` : "/signin"}>
-                    <button className={styles.btn}>Empezar</button>
+                <Link to={currentUser ? (currentUser.Subscription.name !== name ? `/checkout/${id}` : "/curriculums") : "/signin"}>
+                    <button className={styles.btn}>{currentUser && currentUser.Subscription.name === name ? "Tu plan actual" : "Empezar"}</button>
                 </Link>
             }
             {isCheckout ? <p className={styles.txtRegular12Purple}>*Este botón te va a redirigir a Mercado Pago</p> : null}

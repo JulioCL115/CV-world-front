@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import updateUser from "../../redux/actions/users/updateUser";
-import getCurrentUser from '../../redux/actions/users/getCurrentUser';
+import getUserByEmail from '../../redux/actions/users/getUserByEmail';
 import { auth } from "../../config/firebase-config";
 import { updateProfile } from 'firebase/auth';
 
@@ -48,7 +48,7 @@ function UpdateProfile() {
 
     useEffect(() => {
         const getUserData = async () => {
-            const userData = await dispatch(getCurrentUser(userEmail));
+            const userData = await dispatch(getUserByEmail(userEmail));
 
             setNewUserInfo({
                 name: userData.name || '',
