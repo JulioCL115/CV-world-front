@@ -98,7 +98,6 @@ function Cards({ cvs }) {
                                 </button>
                             </div>
                         }
-
                     </div>
                 )) : null
             }

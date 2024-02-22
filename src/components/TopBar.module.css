@@ -63,12 +63,23 @@
     padding: 0px;
 }
 
-.txtRegular16 {
+.txtRegular16Black {
     font-family: "Poppins", sans-serif;
     font-style: normal;
     color: black;
     font-size: 16px;
     font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold16Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
     text-decoration: none;
     margin: 0px;
     padding: 0px;

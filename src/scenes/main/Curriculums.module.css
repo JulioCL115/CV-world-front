@@ -32,7 +32,7 @@
 
 .containerRightBottom {
     margin-top: 30px;
-    height: fit-content;
+    height: auto;
     padding-right: 45px;
 }
 
