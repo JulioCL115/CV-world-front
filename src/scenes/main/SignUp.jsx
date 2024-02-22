@@ -7,7 +7,7 @@ import image from "../../assets/Working-Man-Illustration.jpg"
 import register from "../../redux/actions/users/register";
 
 import { auth } from "../../config/firebase-config";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 
 import validation from "./singUpValidation"
 
@@ -91,7 +91,7 @@ function SignUp() {
 
             const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
             const user = userCredential.user;
-            // await user.sendEmailVerification();
+            await sendEmailVerification(auth, user);
 
             setRegistrationStatus({
               status: "Success",

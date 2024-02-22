@@ -4,11 +4,11 @@ import Spinner from "../Spinner";
 import Card from "./Card";
 // import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import deleteCv from "../../redux/actions/cvs/deleteCv";
-import getCurrentUser from "../../redux/actions/users/getCurrentUser";
+import getUserByEmail from "../../redux/actions/users/getUserByEmail";
 
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 
 function Cards({ cvs }) {
@@ -24,7 +24,7 @@ function Cards({ cvs }) {
         /* eslint-disable-next-line no-restricted-globals */
         if (window.confirm("¿Estás seguro que querés eliminar este CV?")) {
             await deleteCv(id);
-            dispatch(getCurrentUser(userEmail));
+            dispatch(getUserByEmail(userEmail));
             setTimeout(() => {
                 navigate("/mycvs");
                 setIsLoading(false);

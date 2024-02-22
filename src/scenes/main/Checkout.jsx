@@ -38,6 +38,7 @@ const Checkout = () => {
                     description: "Descripción de prueba",
                     quantity:  1,
                     unit_price: subscription.price,
+                    subscriptionId: subscriptionId
                 };
 
                 try {

@@ -44,8 +44,6 @@ function Detail() {
 
     let contact = getContactFromCV(cv);
 
-    console.log("CV: ", cv);
-
     return (
         <div className={styles.detail}>
             {cv ? (
