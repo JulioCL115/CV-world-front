@@ -69,9 +69,9 @@ function App() {
             <Route path="/updateprofile" element={<UpdateProfile />}></Route>
             <Route path="/resetpassword" element={<ResetPassword />}></Route>
             <Route path="/verifyemail" element={<VerifyEmail />}></Route>
-            <Route path="/success/*" element={<PaymentFeedback />} />            
-            <Route path="/pending/*" element={<PaymentFeedback />}></Route>
-            <Route path="/failure/*" element={<PaymentFeedback />}></Route>
+            <Route path="/success/*" element={<PaymentFeedback feedbackType="success" />} />
+            <Route path="/pending/*" element={<PaymentFeedback feedbackType="pending" />} />
+            <Route path="/failure/*" element={<PaymentFeedback feedbackType="failure" />} />
           </Routes>
           {!isAdminRoute && <Footer />}
         </div>

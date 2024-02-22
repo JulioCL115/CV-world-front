@@ -70,33 +70,52 @@ function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (registerInfo.name &&
-      registerInfo.email &&
-      registerInfo.password &&
-      registerInfo.repeatPassword &&
-      !errors.name &&
-      !errors.email &&
-      !errors.password &&
-      !errors.repeatPassword) {
+    if (!registerInfo.name ||
+      !registerInfo.email ||
+      !registerInfo.password ||
+      !registerInfo.repeatPassword) {
+      setRegistrationStatus({
+        status: "Fail",
+        message: "Por favor, completar todos los campos"
+      })
+    } else {
+      if (!errors.name &&
+        !errors.email &&
+        !errors.password &&
+        !errors.repeatPassword) {
 
-      const registrationStatus = await register(registerInfo);
+        try{
+          const registrationStatus = await register(registerInfo);
 
-      setRegistrationStatus({ ...registrationStatus })
+          if (registrationStatus.status === "Success") {
 
-      if (registrationStatus.status === "Success") {
+            const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
+            const user = userCredential.user;
+            // await user.sendEmailVerification();
 
-        const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
-        const user = userCredential.user;
-        await user.sendEmailVerification();
+            setRegistrationStatus({
+              status: "Success",
+              message: "¡Te registraste con éxito!"
+            })
 
-        console.log("sign up")
-
-        setTimeout(() => {
-          navigate("/signin");
-        }, 2000);
-      }
-    };
-  };
+            setTimeout(() => {
+              navigate("/signin");
+            }, 2000);
+          } else {
+            setRegistrationStatus({
+              status: "Fail",
+              message: "Ya existe un usuario con ese email"
+            })
+          }
+        } catch (error) {
+          setRegistrationStatus({
+            status: "Fail",
+            message: "Ya existe un usuario con ese email"
+          })
+        }
+      };
+    }
+  }
 
   return (
     <div className={styles.signUp}>

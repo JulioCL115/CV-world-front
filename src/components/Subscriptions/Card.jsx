@@ -1,7 +1,6 @@
 import styles from './Card.module.css';
 
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 function Card({ id, name, price, included, notIncluded, paymentLink }) {
     const currentUser = localStorage.getItem('currentUser');
