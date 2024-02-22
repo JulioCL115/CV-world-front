@@ -87,7 +87,6 @@ function SignUp() {
 
         const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
         const user = userCredential.user;
-        await user.sendEmailVerification();
 
         console.log("sign up")
 

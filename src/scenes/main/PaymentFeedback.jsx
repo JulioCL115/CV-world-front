@@ -1,24 +1,17 @@
+import React from "react";
 import { useLocation } from "react-router-dom";
 
 function PaymentFeedback() {
-    const location = useLocation();
-    const isSuccess = location.pathname === "/success";
-    const isPending = location.pathname === "/pending";
-    const isFailure = location.pathname === "/failure";
+  const location = useLocation();
+  const feedbackType = location.pathname.split("/")[1];
 
-    return (
-        <div>
-            {
-                isSuccess ? <h1>El pago se realizó con éxito</h1> : null
-            }
-            {
-                isPending ? <h1>El pago está pendiente</h1> : null
-            }
-            {
-                isFailure ? <h1>El pago ha fallado</h1> : null
-            }
-        </div>
-    )
-};
+  return (
+    <div>
+      {feedbackType === "success" && <h1>El pago se realizó con éxito</h1>}
+      {feedbackType === "pending" && <h1>El pago está pendiente</h1>}
+      {feedbackType === "failure" && <h1>El pago ha fallado</h1>}
+    </div>
+  );
+}
 
 export default PaymentFeedback;
