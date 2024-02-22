@@ -185,7 +185,7 @@ function SignIn() {
             <Link className={styles.txtSemiBold12Purple} to="/resetpassword">¿Olvidaste tu contraseña?</Link>
             <button className={styles.btnLogin}>INICIAR SESION</button>
           </form>
-          {loginStatus.status ? <p className={loginStatus === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{loginStatus.message}</p> : null}
+          {loginStatus.status ? <p className={loginStatus.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{loginStatus.message}</p> : null}
           <p className={styles.txtSemiBold12Purple}>O INICIA SESION CON</p>
           <button className={styles.btnGoogle} onClick={loginWithGoogle}>
             <svg className={styles.icn} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">

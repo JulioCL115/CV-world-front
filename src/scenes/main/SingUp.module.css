@@ -28,17 +28,7 @@
     font-size: 16px;
     font-weight: 600;
     margin: 0px;
-    padding-left: 5px;
-}
-
-.txtSuccess {
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    color: #098D85;
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0px;
-    padding-left: 5px;
+    padding: 0px;
 }
 
 .txtSemiBold32Black {
@@ -80,7 +70,7 @@
     font-size: 16px;
     font-weight: 600;
     margin: 0px;
-    padding-left: 5px;
+    padding: 0px;
 }
 
 /*CONTAINERS*/
