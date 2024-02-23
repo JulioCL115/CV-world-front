@@ -45,7 +45,6 @@ const SideBar = () => {
     const [selected, setSelected] = useState("Dashboard");
     const currentUser = JSON.parse(localStorage.getItem("user"));
 
-
     return (
         <Box>
             <Sidebar collapsed={isCollapsed}
@@ -54,18 +53,14 @@ const SideBar = () => {
                         backgroundColor: `${colors.purple[500]} !important`,
                         height: "100vh !important",
                     },
-                    // "& .pro-icon-wrapper": {
-                    //     backgroundColor: "transparent !important",
-                    // },
                      "& .ps-inner-item": {
                          padding: "5px 35px 5px 20px !important",
                      },
-                    "& .ps-inner-item:hover": {
-                         color: `${colors.purple[700]} !important`
+                    "& .ps-menu-button:hover": {
+                         backgroundColor: `${colors.purple[600]} !important`,
                  },
                 }}>
                 <Menu iconShape="square">
-                    {/* LOGO AND MENU ICON */}
                     <MenuItem
                         onClick={() => setIsCollapsed(!isCollapsed)}
                         icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -84,7 +79,11 @@ const SideBar = () => {
                                 <Typography variant="h4" color={colors.white[500]}>
                                     ADMIN
                                 </Typography>
-                                <IconButton onClick={() => setIsCollapsed(!isCollapsed)} >
+                                <IconButton onClick={() => setIsCollapsed(!isCollapsed)} 
+                                style={{
+                                    margin: "10px 0 20px 0",
+                                    color: colors.white[500],
+                                }}>
                                     <MenuOutlinedIcon />
                                 </IconButton>
                             </Box>

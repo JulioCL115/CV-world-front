@@ -13,7 +13,7 @@ function DetailCv({ cv }) {
                 <div className={styles.container}>
                     <div className={styles.containerLeft}>
                         {cv.image ? <img className={styles.img} src={cv.image} alt="Profile" /> : null}
-                        <h1 className={styles.txtRegular64Black}>{cv.userName}</h1>
+                        <h1 className={styles.txtRegular64Black}>{cv.name}</h1>
                         <h2 className={styles.txtSemiBold24Black}>{cv.header}</h2>
                         <div className={styles.containerSection}>
                             <h3 className={styles.txtSemiBold20Black}>/ INFORMACIÓN DE CONTACTO</h3>
