@@ -2,7 +2,7 @@ import "./App.css";
 
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import getAllCategories from "./redux/actions/categories/getAllCategories";
 import getAllLanguages from "./redux/actions/languages/getAllLanguages";
@@ -31,14 +31,22 @@ import AdminSubscriptions from "./scenes/admin-dashboard/Subscriptions";
 import AdminCategories from "./scenes/admin-dashboard/Categories";
 import AdminLanguages from "./scenes/admin-dashboard/Languages";
 import AdminComments from "./scenes/admin-dashboard/Comments";
-import SideBar from "./components/admin-dashboard/SideBar";
+import SideBar from "./components/admin-dashboard/Sidebar";
+import Topbar from "./components/admin-dashboard/Topbar";
 import PaymentFeedback from "./scenes/main/PaymentFeedback";
+import VerifyEmail from "./scenes/main/VerifyEmail";
 import { AuthProvider } from "./AuthProvider/authProvider";
+
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { ColorModeContext, useMode } from "./scenes/admin-dashboard/theme";
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
 
   useEffect(() => {
     dispatch(getAllCategories());
@@ -67,28 +75,37 @@ function App() {
             <Route path="/updatecv/:cvId" element={<UpdateCv />}></Route>
             <Route path="/updateprofile" element={<UpdateProfile />}></Route>
             <Route path="/resetpassword" element={<ResetPassword />}></Route>
+            <Route path="/verifyemail" element={<VerifyEmail />}></Route>
             <Route path="/success/*" element={<PaymentFeedback feedbackType="success" />} />
             <Route path="/pending/*" element={<PaymentFeedback feedbackType="pending" />} />
             <Route path="/failure/*" element={<PaymentFeedback feedbackType="failure" />} />
           </Routes>
           {!isAdminRoute && <Footer />}
         </div>
-          {isAdminRoute && (
-            <div className="containerAdmin">
-              <SideBar />
-              <Routes>
-                <Route path="/admin/analytics" element={<AdminAnalytics />} />
-                <Route path="/admin/users" element={<AdminUsers />} />
-                <Route path="/admin/curriculums" element={<AdminCurriculums />} />
-                <Route path="/admin/subscriptions" element={<AdminSubscriptions />} />
-                <Route path="/admin/categories" element={<AdminCategories />} />
-                <Route path="/admin/languages" element={<AdminLanguages />} />
-                <Route path="/admin/comments" element={<AdminComments />} />
-              </Routes>
-            </div>
-          )}
+        {isAdminRoute && (
+          <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <div className="containerAdmin">
+                <SideBar />
+                <div className="containerViews">
+                  <Topbar />
+                  <Routes>
+                    <Route path="/admin/analytics" element={<AdminAnalytics />} />
+                    <Route path="/admin/users" element={<AdminUsers />} />
+                    <Route path="/admin/curriculums" element={<AdminCurriculums />} />
+                    <Route path="/admin/subscriptions" element={<AdminSubscriptions />} />
+                    <Route path="/admin/categories" element={<AdminCategories />} />
+                    <Route path="/admin/languages" element={<AdminLanguages />} />
+                    <Route path="/admin/comments" element={<AdminComments />} />
+                  </Routes>
+                </div>
+              </div>
+            </ThemeProvider>
+          </ColorModeContext.Provider>
+        )}
       </AuthProvider>
-    </div>
+    </div >
   );
 }
 

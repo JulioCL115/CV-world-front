@@ -7,7 +7,7 @@ import image from "../../assets/Working-Man-Illustration.jpg"
 import register from "../../redux/actions/users/register";
 
 import { auth } from "../../config/firebase-config";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 
 import validation from "./singUpValidation"
 
@@ -45,6 +45,11 @@ function SignUp() {
       [event.target.name]: event.target.value
     });
 
+    setRegistrationStatus({
+      status: null,
+      message: null,
+    })
+
     const validationErrors = validation({
       ...registerInfo,
       [event.target.name]: event.target.value,
@@ -73,30 +78,52 @@ function SignUp() {
     event.preventDefault();
 
 
-    if (registerInfo.name &&
-      registerInfo.email &&
-      registerInfo.password &&
-      registerInfo.repeatPassword &&
-      !errors.name &&
-      !errors.email &&
-      !errors.password &&
-      !errors.repeatPassword) {
+    if (!registerInfo.name ||
+      !registerInfo.email ||
+      !registerInfo.password ||
+      !registerInfo.repeatPassword) {
+      setRegistrationStatus({
+        status: "Fail",
+        message: "Por favor, completar todos los campos"
+      })
+    } else {
+      if (!errors.name &&
+        !errors.email &&
+        !errors.password &&
+        !errors.repeatPassword) {
 
-      const registrationStatus = await register(registerInfo);
+        try{
+          const registrationStatus = await register(registerInfo);
 
-      setRegistrationStatus({ ...registrationStatus })
+          if (registrationStatus.status === "Success") {
 
-      if (registrationStatus.status === "Success") {
+            const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
+            const user = userCredential.user;
+            // await sendEmailVerification(auth, user);
 
-        await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
-        console.log("sign up")
+            setRegistrationStatus({
+              status: "Success",
+              message: "¡Te registraste con éxito!"
+            })
 
-        setTimeout(() => {
-          navigate("/signin");
-        }, 2000);
-      }
-    };
-  };
+            setTimeout(() => {
+              navigate("/signin");
+            }, 2000);
+          } else {
+            setRegistrationStatus({
+              status: "Fail",
+              message: "Ya existe un usuario con ese email"
+            })
+          }
+        } catch (error) {
+          setRegistrationStatus({
+            status: "Fail",
+            message: "Ya existe un usuario con ese email"
+          })
+        }
+      };
+    }
+  }
 
   return (
     <div className={styles.signUp}>
@@ -246,7 +273,7 @@ function SignUp() {
           <button className={styles.btnRegister}>REGISTRARME</button>
         </form>
         {registrationStatus ?
-          <p className={registrationStatus.status === "Success" ? styles.txtSuccess : styles.txtError16}>{registrationStatus.message}</p>
+          <p className={registrationStatus.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{registrationStatus.message}</p>
           : null}
         {/* <p className={styles.txtSemiBold12Purple}>O INICIA SESION CON</p>
         <button className={styles.btnGoogle}>

@@ -9,7 +9,7 @@ import ProfilePicture from "../../assets/blank-profile-picture-973460_960_720.we
 import postComment from "../../redux/actions/comments/postComment";
 import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 
-function Comments({ cvId, comments }) {
+function Comments({ cvId, comments, setCv }) {
     const dispatch = useDispatch();
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = currentUser ? currentUser.id : null;
@@ -28,12 +28,14 @@ function Comments({ cvId, comments }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const postStatus = await dispatch(postComment(comment, cvId, userId))
+        const postStatus = await postComment(comment, cvId, userId)
 
         if (postStatus === "Success") {
             setComment('');
-            dispatch(getCvDetail(cvId))
-        }
+            const cvDetail = await (getCvDetail(cvId))
+            setCv(cvDetail);
+        } else 
+           { console.log("Error posting comment")}
     };
 
     return (

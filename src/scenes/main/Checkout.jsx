@@ -38,9 +38,8 @@ const Checkout = () => {
                     description: "Descripción de prueba",
                     quantity:  1,
                     unit_price: subscription.price,
-                    subscriptionId:subscriptionId
+                    subscriptionId: subscriptionId
                 };
-                console.log("este es la subscription id en el front",subscriptionId)
 
                 try {
                     const link = await createOrder(userId, paymentInfo);
@@ -56,14 +55,15 @@ const Checkout = () => {
         if (subscription) {
             getPaymentLink();
         }
-    }, [subscription, userId]);
+    }, [subscription, userId]); 
+
 
     return (
         <div className={styles.checkout}>
             <h1 className={styles.txtSemiBold32Black}>Checkout</h1>
             <div className={styles.container}>
                 <div className={styles.containerLeft}>
-                    <img  className={styles.img} src={Illustration} alt="Ilustración de checkout" />
+                    <img className={styles.img} src={Illustration} alt="Ilustración de checkout" />
                 </div>
                 {
                     subscription ?
@@ -81,7 +81,7 @@ const Checkout = () => {
             </div>
         </div>
     );
-};
+}
 
 export default Checkout;
 

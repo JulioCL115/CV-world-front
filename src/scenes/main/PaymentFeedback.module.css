@@ -1,0 +1,44 @@
+.container {
+    padding-top: 45px;
+    padding-right: 45px;
+    padding-left: 45px;
+    padding-bottom: 85px;
+    justify-content: center;
+    text-align: center;
+}
+
+/*FONT STYLES*/
+
+.txtSemiBold16Purple {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #3E3E70;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0px;
+    padding-left: 5px;
+}
+.txtError16 {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: red;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding-left: 5px;
+} {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: red;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+/*UI ELEMENTS*/
+
+.img {
+    height: 600px;
+}

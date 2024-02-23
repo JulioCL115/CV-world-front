@@ -9,15 +9,37 @@ import logout from "../redux/actions/users/logout";
 import { auth } from "../config/firebase-config"
 import { signOut } from "firebase/auth"
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate, useLocation } from "react-router-dom"; 
 
 
 function TopBar() {
     const navigate = useNavigate();
+    const location = useLocation();
     const storedUser = localStorage.getItem('currentUser');
     const [currentUser, setCurrentUser] = useState(
         storedUser && storedUser !== "[object Object]" ? JSON.parse(storedUser) : null
     );
+    const [selectedMenu, setSelectedMenu] = useState("home");
+
+    console.log(currentUser);
+
+    useEffect(() => {
+        // Set the selectedMenu based on the current path
+        switch (location.pathname) {
+          case '/':
+            setSelectedMenu('home');
+            break;
+          case '/curriculums':
+            setSelectedMenu('curriculums');
+            break;
+          case '/subscriptions':
+            setSelectedMenu('subscriptions');
+            break;
+          // Add more cases for other paths if needed
+          default:
+            setSelectedMenu('home');
+        }
+      }, [location.pathname]); 
 
     useEffect(() => {
         const handleStorageChange = () => {
@@ -29,6 +51,7 @@ function TopBar() {
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
+
 
     const logOut = async () => {
         try {
@@ -46,9 +69,9 @@ function TopBar() {
     return (
         <div className={styles.topbar}>
             <div className={styles.containerLeft}>
-                <Link className={styles.txtRegular16} to="/">Home</Link>
-                <Link className={styles.txtRegular16} to="/curriculums">Currículums</Link>
-                <Link className={styles.txtRegular16} to="/subscriptions">Suscripciones</Link>
+                <Link className={selectedMenu === "home" ? styles.txtSemiBold16Black : styles.txtRegular16Black}  to="/" >Home</Link>
+                <Link className={selectedMenu === "curriculums" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/curriculums" >Currículums</Link>
+                <Link className={selectedMenu === "subscriptions" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/subscriptions" >Suscripciones</Link>
             </div>
             <div className={styles.containerCenter}>
                 <h1 className={styles.txt} id={styles.h1}>CV World</h1>
@@ -74,7 +97,6 @@ function TopBar() {
                 <div className={styles.containerLogin}>
                     {currentUser ?
                         <div className={styles.dropdown}>
-
                             <button className={styles.btnDropdown}>
                                 <svg className={styles.icn}
                                     id={styles.icnDropdown}
@@ -88,14 +110,13 @@ function TopBar() {
                                         strokeLinejoin="round"
                                         d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
-
                                 {currentUser.name}
                             </button>
 
                             <div className={styles.dropdownContent}>
-                                <Link className={styles.txtRegular16} to="/myprofile">Mi Perfil</Link>
-                                <Link className={styles.txtRegular16} to="/mycvs">Mis CVs</Link>
-                                {currentUser.role === "admin" ? <Link className={styles.txtRegular16} to="/admin/analytics">Admin Dashboard</Link> : null}
+                                <Link className={styles.txtRegular16Black} to="/myprofile">Mi Perfil</Link>
+                                <Link className={styles.txtRegular16Black} to="/mycvs">Mis CVs</Link>
+                                {currentUser.role === "admin" ? <Link className={styles.txtRegular16Black} to="/admin/analytics">Admin Dashboard</Link> : null}
                                 <a href="/signin" onClick={logOut}>Cerrar sesión</a>
                             </div>
                         </div>
@@ -103,7 +124,7 @@ function TopBar() {
                     }
                     {currentUser ?
                         (currentUser?.photo ?
-                            <img className={styles.profilePicture} src={currentUser?.photo} alt="logo"></img> :
+                            <img className={styles.profilePicture} src={currentUser && currentUser?.photo} alt="logo"></img> :
                             <img className={styles.profilePicture} src={LogoProfileImage} alt="logo"></img>)
                             : <svg className={styles.icn} id={styles.icnUser} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.2" stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />

@@ -1,9 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
 import styles from './MyProfile.module.css';
+
 import { Link } from "react-router-dom";
 import { useEffect } from 'react';
-import getCurrentUser from '../../redux/actions/users/getCurrentUser';
+import { useSelector, useDispatch } from 'react-redux';
 
+import getUserByEmail from '../../redux/actions/users/getUserByEmail';
 
 function UpdateProfile() {
     const dispatch = useDispatch();
@@ -12,11 +13,11 @@ function UpdateProfile() {
     const userEmail = localStorageUser.email
 
     useEffect(() => {
-        dispatch(getCurrentUser(userEmail))
+        dispatch(getUserByEmail(userEmail))
     }, [userEmail, dispatch])
 
     return (
-        <div className={styles.updateProfile}>
+        <div className={styles.myProfile}>
             {localStorageUser ?
                 <div>
                     <h1>{currentUser ? currentUser.name : null}</h1>

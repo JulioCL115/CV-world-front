@@ -2,20 +2,26 @@ import styles from "./Cv.module.css";
 
 function DetailCv({ cv }) {
 
+    console.log(cv);
+
+    let contact = cv && cv.contact && Array.isArray(cv.contact) ? cv.contact[0] : cv.contact;
+
+
     return (
         <div className={styles.cv}>
             {cv ?
                 <div className={styles.container}>
                     <div className={styles.containerLeft}>
+                        {cv.image ? <img className={styles.img} src={cv.image} alt="Profile" /> : null}
                         <h1 className={styles.txtRegular64Black}>{cv.name}</h1>
                         <h2 className={styles.txtSemiBold24Black}>{cv.header}</h2>
                         <div className={styles.containerSection}>
                             <h3 className={styles.txtSemiBold20Black}>/ INFORMACIÓN DE CONTACTO</h3>
                             <div className={styles.containerList}>
-                            <p className={styles.txtRegular16Black}>{cv && cv.contact && cv.contact.length > 0 ? cv.contact[0].location : null}</p>
-                                <p className={styles.txtRegular16Black}>{cv.contact[0].phone}</p>
-                                <p className={styles.txtRegular16Black}>{cv.contact[0].email}</p>
-                                <p className={styles.txtRegular16Black}>{cv.contact[0].website}</p>
+                                <p className={styles.txtRegular16Black}>{cv && contact ? contact.location : null}</p>
+                                <p className={styles.txtRegular16Black}>{cv && contact ? contact.phone : null}</p>
+                                <p className={styles.txtRegular16Black}>{cv && contact ? contact.email : null}</p>
+                                <p className={styles.txtRegular16Black}>{cv && contact ? contact.website : null}</p>
                             </div>
                         </div>
                         <div className={styles.containerSection}>

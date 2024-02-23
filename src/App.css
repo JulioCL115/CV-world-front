@@ -7,5 +7,14 @@
 
 .containerAdmin {
   display: flex;
-  flex-direction: row;
+  flex-direction: row; /* Stack children vertically */
+  width: auto;
+  height: auto;
+}
+
+.containerViews {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  width: auto;
+  height: auto;
 }

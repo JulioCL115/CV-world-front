@@ -11,6 +11,8 @@
     flex-direction: row;
     align-items: flex-start;
     text-align: left;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 /*CONTAINERS*/
@@ -85,4 +87,11 @@
     font-weight: 400;
     margin: 0px;
     padding: 0px;
+}
+
+.img {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
 }
