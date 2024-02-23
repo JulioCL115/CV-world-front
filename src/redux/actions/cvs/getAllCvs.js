@@ -9,10 +9,10 @@ const getAllCvs = (filters = {}, limit, offset) => {
     let languages = "";
     let search = "";
 
-    if (filters.sort && filters.sort === "Más recientes") {
+    if (filters.sort && filters.sort === "date") {
         sort = "date"
     } 
-    if (filters.sort && filters.sort === "Más vistos") {
+    if (filters.sort && filters.sort === "views") {
         sort = "views"
     };
 

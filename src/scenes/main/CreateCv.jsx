@@ -11,8 +11,8 @@ import validation from "./createCvValidation"
 function CreateCv() {
     const navigate = useNavigate();
     const storedUser = localStorage.getItem('currentUser');
-    const languages = useSelector((state) => state.languages.allLanguages);
-    const categories = useSelector((state) => state.categories.allCategories);
+    const languages = useSelector((state) => state?.languages?.allLanguages);
+    const categories = useSelector((state) => state?.categories?.allCategories);
 
     const userId = JSON.parse(storedUser).id;
 

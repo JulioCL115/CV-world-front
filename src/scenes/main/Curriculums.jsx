@@ -16,10 +16,11 @@ function Curriculums() {
 
     const [filters, setFilters] = useState({
         search: "",
-        sort: "Más recientes",
+        sort: "",
         languages: [],
         categories: [],
     });
+    console.log(filters)
 
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 12;
