@@ -88,7 +88,7 @@ function App() {
               <CssBaseline />
               <div className="containerAdmin">
                 <SideBar />
-                <div className="viewsContainer">
+                <div className="containerViews">
                   <Topbar />
                   <Routes>
                     <Route path="/admin/analytics" element={<AdminAnalytics />} />

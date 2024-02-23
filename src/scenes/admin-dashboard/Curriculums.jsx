@@ -7,9 +7,8 @@ import deleteUser from "../../redux/actions/users/deleteUser";
 import restoreUser from "../../redux/actions/users/restoreUser";
 import getUserByEmail from "../../redux/actions/users/getUserByEmail";
 
-import { Box, IconButton, Button } from "@mui/material";
+import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import Header from "../../components/admin-dashboard/Header";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
 
@@ -17,7 +16,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
-function AdminUsers() {
+function AdminCurriculums() {
   const dispatch = useDispatch();
   const cvs = useSelector((state) => state.cvs.allCvs);
   const theme = useTheme();
@@ -45,27 +44,68 @@ function AdminUsers() {
     {
       field: "id",
       headerName: "ID",
-      flex: 0.5
-    },
-    {
-      field: "name",
-      headerName: "Nombre",
-      flex: 1,
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "contact",
-      headerName: "Contacto",
-      flex: 1,
+      flex: 1
     },
     {
       field: "photo",
       headerName: "Imagen",
+      width: 100,
+    },
+    {
+      field: "name",
+      headerName: "Nombre",
+      width: 200,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "contact.location",
+      headerName: "Ubicación",
+      width: 200,
+      valueGetter: (params) => params.row.contact?.location || '',
+    },
+    {
+      field: "contact.email",
+      headerName: "Email",
+      width: 200,
+    },
+    {
+      field: "contact.phone",
+      headerName: "Nro. de teléfono",
+      width: 200,
+    },
+    {
+      field: "contact.website",
+      headerName: "Sitio web",
+      width: 200,
+    },
+    {
+      field: "experience",
+      headerName: "Experiencia",
+      flex: 1,
+    },
+    {
+      field: "education",
+      headerName: "Educación",
+      flex: 1,
+    },
+    {
+      field: "skills",
+      headerName: "Competencias",
+      flex: 1,
+    },
+    {
+      field: "speakingLanguages",
+      headerName: "Idiomas",
+      flex: 1,
+    },
+    {
+      field: "otherInterests",
+      headerName: "Otros intereses",
       flex: 1,
     },
     {
       field: "deleted",
-      headerName: "",
+      headerName: "Deshabilitado",
       flex: 1,
     },
     {
@@ -116,11 +156,20 @@ function AdminUsers() {
   ];
 
   return (
-    <Box m="20px" width="100%">
-      <Header
-        title="Curriculums"
-      />
-      <Box display="flex" justifyContent="end" mt="20px" >
+    <Box
+      height="auto"
+      width="auto"
+      display="flex"
+      flexDirection="column"
+      p={2}>
+      <Typography
+        variant="h1"
+        color={colors.black[500]}
+        fontWeight="600"
+      >
+       Curriculums
+      </Typography>
+      <Box display="flex" justifyContent="end">
         <Button
           component={Link}
           to="/admin/users/createcv"
@@ -130,9 +179,12 @@ function AdminUsers() {
         </Button>
       </Box>
       <Box
-
-        m="40px 0 0 0"
+        pt={4}
+        pl={4}
         height="75vh"
+        display="flex" // Enable flexbox
+        justifyContent="flex-start" // Center content horizontally
+        flexGrow={1}
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -142,6 +194,7 @@ function AdminUsers() {
           },
           "& .name-column--cell": {
             color: colors.green[500],
+            fontWeight: "400",
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: colors.purple[500],
@@ -156,24 +209,28 @@ function AdminUsers() {
             backgroundColor: colors.white[500],
           },
           "& .MuiCheckbox-root": {
-            color: `${colors.green[200]} !important`,
+            color: `${colors.green[400]} !important`,
           },
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.purple[500]} !important`,
           },
         }}
       >
-        <DataGrid
-          rows={cvs ? cvs : []}
-          columns={columns}
-          components={{ Toolbar: GridToolbar }}
-        />
+        <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
+          <DataGrid
+            width="auto"
+            rows={cvs ? cvs : []}
+            columns={columns}
+            slots={{ Toolbar: GridToolbar }}
+            checkboxSelection
+          />
+        </div>
       </Box>
     </Box>
   );
 };
 
-export default AdminUsers;
+export default AdminCurriculums;
 
 
 
