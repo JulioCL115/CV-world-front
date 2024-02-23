@@ -1,4 +1,5 @@
 import axiosInstance from "../../../config/axios-config";
+import axios from "axios";
 
 const updateStatus = {
     status: null,
@@ -6,7 +7,7 @@ const updateStatus = {
 };
 
 const updateCv = async (cvId, cv) => {
-    const endpoint = "http://localhost:3001/cv/" + cvId;
+    const endpoint = axios.defaults.baseURL + "cv/" + cvId;
 
         try {
             await axiosInstance.put(endpoint, cv)

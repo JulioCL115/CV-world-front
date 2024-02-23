@@ -1,4 +1,6 @@
 import axiosInstance from "../../../config/axios-config";
+import axios from "axios";
+
 
 const creationStatus = {
     status: null,
@@ -6,7 +8,7 @@ const creationStatus = {
 };
 
 const postCv = async (userId, cv) => {
-    const endpoint = "http://localhost:3001/cv/" + userId;
+    const endpoint = axios.defaults.baseURL + "cv/" + userId;
 
         try {
             await axiosInstance.post(endpoint, cv);

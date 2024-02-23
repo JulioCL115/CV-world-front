@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const login = async (idToken) => {
-    const endpoint = "http://localhost:3001/user/firebase";
+    const endpoint = axios.defaults.baseURL + "user/firebase";
 
     try {
         const response = await axios.post(endpoint, { idToken });
