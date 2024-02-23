@@ -5,6 +5,7 @@
     width: 100%; /* Take up the full width of the parent */
     column-gap: 100px; /* Add space between each card */
     row-gap: 50px; /* Add space between each card */
+    align-items: flex-end;
 }
 
 .containerCards {
