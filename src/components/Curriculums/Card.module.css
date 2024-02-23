@@ -11,6 +11,8 @@
     flex-direction: row;
     align-items: flex-start;
     text-align: left;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 /*CONTAINERS*/

@@ -14,7 +14,56 @@
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
+.containerHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.containerViews {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: grey;
+    margin: 0px;
+    padding: 0px;
+}
+
+.containerFooter {
+    width: 230px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    margin-top: 5px;
+    padding: 0px;
+    height: auto;
+}
+
 /*FONT STYLES*/
+
+.txtSemiBold16Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtLight12Grey {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: grey;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
 
 .txtLight12Black {
     font-family: "Poppins", sans-serif;
