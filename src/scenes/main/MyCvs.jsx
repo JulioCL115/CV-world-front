@@ -1,7 +1,7 @@
 import styles from "./MyCvs.module.css"
 import Illustration from "../../assets/upload-cv.png"
-import Cards from "../../components/MyCvs/Cards";
-import getCurrentUser from "../../redux/actions/users/getCurrentUser";
+import Cards from "../../components/Curriculums/Cards";
+import getUserByEmail from "../../redux/actions/users/getUserByEmail";
 
 
 import { Link } from "react-router-dom";
@@ -18,9 +18,8 @@ function MyCvs() {
 
     console.log(currentUser);
 
-
     useEffect(() => {
-        dispatch(getCurrentUser(userEmail))
+        dispatch(getUserByEmail(userEmail))
     }, [userEmail, dispatch] )
 
     return (

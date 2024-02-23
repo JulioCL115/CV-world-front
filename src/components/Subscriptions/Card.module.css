@@ -65,6 +65,17 @@
     padding: 0px;
 }
 
+.txtRegular12Purple {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #3E3E70;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
  /*CONTAINERS*/
 
  .containerPrice {

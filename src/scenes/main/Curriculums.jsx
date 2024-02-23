@@ -22,9 +22,7 @@ function Curriculums() {
     });
 
     const [currentPage, setCurrentPage] = useState(1);
-    const limit = 16;
-
-    console.log(filters);
+    const limit = 12;
 
     useEffect( () => {
         dispatch(getAllCvs(filters, limit, currentPage * limit - limit));

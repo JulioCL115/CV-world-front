@@ -1,5 +1,3 @@
-import styles from "./Curriculums.module.css";
-
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -5,11 +5,11 @@ const updateStatus = {
     message: null
 };
 
-const updateUser = async (id, user) => {
-    const endpoint = "http://localhost:3001/user/" + id;
+const updateUser = async (userId, user, subscriptionId) => {
+    const endpoint = "http://localhost:3001/user/" + userId;
 
         try {
-            await axiosInstance.put(endpoint, user)
+            await axiosInstance.put(endpoint, user, subscriptionId)
             
             updateStatus.status = "Success";
             updateStatus.message = "¡Tu usuario se actualizó con éxito!";

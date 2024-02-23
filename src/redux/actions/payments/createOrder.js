@@ -5,6 +5,7 @@ const createOrder = async (userId, paymentInfo) => {
     const endpoint = "http://localhost:3001/create-order/" + userId
 
     try {
+        console.log("Payment info: ", paymentInfo);
         const response = await axiosInstance.post(endpoint, paymentInfo);
         const data = response.data;
 

@@ -1,10 +1,13 @@
 import styles from './Card.module.css';
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-function Card({ id, name, price, included, notIncluded }) {
+function Card({ id, name, price, included, notIncluded, paymentLink }) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const location = useLocation();
+    const isCheckout = location.pathname.startsWith('/checkout');
 
-    const currentUser = localStorage.getItem('currentUser');
+    console.log(currentUser);
 
     const renderPrice = () => {
         if (price === 0) {
@@ -42,7 +45,7 @@ function Card({ id, name, price, included, notIncluded }) {
             </div>
         ));
     };
-    
+
     const renderNotIncluded = () => {
         return notIncluded.map((item, index) => (
             <div key={index} className={styles.containerListItem} id={styles.list}>
@@ -63,8 +66,6 @@ function Card({ id, name, price, included, notIncluded }) {
             </div>
         ));
     };
-    
-    
 
     return (
         <div className={styles.card}>
@@ -74,9 +75,15 @@ function Card({ id, name, price, included, notIncluded }) {
                 {renderIncluded()}
                 {notIncluded !== null && renderNotIncluded()}
             </div>
-            <Link to={currentUser ? "/checkout" : "/signin"}>
-                <button className={styles.btn}>Empezar</button>
-            </Link>
+            {isCheckout ?
+                <Link to={paymentLink}>
+                    <button className={styles.btn}>Pagar con Mercado Pago</button>
+                </Link> :
+                <Link to={currentUser ? (currentUser.Subscription.name !== name ? `/checkout/${id}` : "/curriculums") : "/signin"}>
+                    <button className={styles.btn}>{currentUser && currentUser.Subscription.name === name ? "Tu plan actual" : "Empezar"}</button>
+                </Link>
+            }
+            {isCheckout ? <p className={styles.txtRegular12Purple}>*Este botón te va a redirigir a Mercado Pago</p> : null}
         </div>
     )
 };

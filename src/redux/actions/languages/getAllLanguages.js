@@ -9,8 +9,6 @@ const getAllLanguages = () => {
             const response = await axios.get(endpoint);
             let data = response.data;
 
-            console.log(data)
-
             return dispatch(setAllLanguages(data));
         } catch (error) {
             console.log(error);
