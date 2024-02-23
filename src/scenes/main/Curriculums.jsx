@@ -16,7 +16,7 @@ function Curriculums() {
 
     const [filters, setFilters] = useState({
         search: "",
-        sort: "",
+        sort: "Más recientes",
         languages: [],
         categories: [],
     });

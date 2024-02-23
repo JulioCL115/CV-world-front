@@ -14,11 +14,8 @@ const getAllCvs = (filters = {}, limit, offset) => {
     } 
     if (filters.sort && filters.sort === "Más vistos") {
         sort = "views"
-    };
-    if (filters.sort && filters.sort === "Todos") {
-        sort = ""
-    };
-
+    }
+ 
     if (filters.categories) {
         categories = filters.categories
     }
