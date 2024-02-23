@@ -5,10 +5,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Illustrations from "../../assets/customer-review-3949821-3277282.webp";
+import ProfilePicture from "../../assets/blank-profile-picture-973460_960_720.webp";
 import postComment from "../../redux/actions/comments/postComment";
 import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 
-function Comments({ cvId, comments }) {
+function Comments({ cvId, comments, setCv }) {
     const dispatch = useDispatch();
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = currentUser ? currentUser.id : null;
@@ -27,12 +28,14 @@ function Comments({ cvId, comments }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-       const postStatus = await dispatch(postComment(comment, cvId, userId))
+        const postStatus = await postComment(comment, cvId, userId)
 
         if (postStatus === "Success") {
             setComment('');
-            dispatch(getCvDetail(cvId))
-        }
+            const cvDetail = await (getCvDetail(cvId))
+            setCv(cvDetail);
+        } else 
+           { console.log("Error posting comment")}
     };
 
     return (
@@ -57,12 +60,26 @@ function Comments({ cvId, comments }) {
                     </Link>
                 </div>
             }
-            {comments && comments.length ? comments.map((comment) => (
-                <p>{comment}</p>
-            )) : <div className={styles.containerComments}>
-                <p className={styles.txtRegular16Purple}>Nadie comentó este CV todavía</p>
-                <img className={styles.img} src={Illustrations} alt="Illustrations" />
-            </div>}
+            {comments && comments.length ?
+                <div className={styles.vertical}>
+                    {comments.map((comment) => (
+                        <div className={styles.horizontal}>
+                            <img className={styles.img}
+                                src={comment.userImage ? comment.userImage : ProfilePicture} alt="foto de perfil del usuario" />
+                            <div>
+                                <div className={styles.horizontal} id={styles.txt}>
+                                    <p className={styles.txtSemiBold16Black}>{comment.userName}</p>
+                                    <p className={styles.txtLight12Black}>{comment.createdAt}</p>
+                                </div>
+                                <p className={styles.txtRegular16Black}>{comment.comment}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                : <div className={styles.containerComments}>
+                    <p className={styles.txtRegular16Purple}>Nadie comentó este CV todavía</p>
+                    <img className={styles.illustration} src={Illustrations} alt="Illustrations" />
+                </div>}
         </div>
     )
 };

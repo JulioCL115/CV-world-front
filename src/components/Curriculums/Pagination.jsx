@@ -1,7 +1,5 @@
 import styles from './Pagination.module.css';
-import { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import getAllCvs from "../../redux/actions/cvs/getAllCvs";
+
 
 function generateOptions(n) {
     const options = [];

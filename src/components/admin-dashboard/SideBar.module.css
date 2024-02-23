@@ -1,3 +1,9 @@
+
+.menuItem {
+    text-decoration: none;
+    color: white;
+}
+
 .sideBar {
     background-color: #3E3E70;
     display: flex;
@@ -37,3 +43,4 @@
 }
 
 /*UI ELEMENTS*/
+

@@ -1,0 +1,47 @@
+.verifyEmail {
+    padding-top: 45px;
+    padding-bottom: 85px;
+    padding-left: 45px;
+    padding-right: 85px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+/*FONT STYLES*/
+
+.txtSemiBold16Purple {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #3E3E70;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+/*UI ELEMENTS*/
+
+.img{
+    height: 600px;
+    width: auto;
+    object-fit: contain;
+}
+
+.btn {
+    width: 400px;
+    height: 50px;
+    background-color: #098D85;
+    border-color: transparent;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+

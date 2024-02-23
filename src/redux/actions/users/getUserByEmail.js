@@ -1,7 +1,7 @@
 import axios from "axios";
 import { setCurrentUser } from "../../slices/usersSlice"
 
-const getCurrentUser = (email) => {
+const getUserByEmail = (email) => {
     const endpoint = "http://localhost:3001/user/";
 
     return async (dispatch) => {
@@ -20,4 +20,4 @@ const getCurrentUser = (email) => {
     };
 };
 
-export default getCurrentUser;
+export default getUserByEmail;

@@ -1,20 +1,28 @@
 import styles from "./CreateCv.module.css";
 
-import { useState } from "react";
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 import postCv from "../../redux/actions/cvs/postCv";
-import validation from "./createCvValidation"
+import getAllCategories from "../../redux/actions/categories/getAllCategories";
+import getAllLanguages from "../../redux/actions/languages/getAllLanguages";
+import validation from "./createCvValidation";
 
 
 function CreateCv() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const storedUser = localStorage.getItem('currentUser');
     const languages = useSelector((state) => state.languages.allLanguages);
     const categories = useSelector((state) => state.categories.allCategories);
 
     const userId = JSON.parse(storedUser).id;
+
+    useEffect(() => {
+        dispatch(getAllCategories());
+        dispatch(getAllLanguages());
+    }, []); 
 
 
     const [cv, setCv] = useState({
@@ -374,7 +382,7 @@ function CreateCv() {
                         value={cv.category}
                         onChange={handleChange}>
                         <option></option>
-                        {categories.map((category) => {
+                        {categories && categories.map((category) => {
                             return <option key={category.id}>{category.name}</option>
 
                         })}
@@ -389,7 +397,7 @@ function CreateCv() {
                         value={cv.language}
                         onChange={handleChange}>
                         <option></option>
-                        {languages.map((language) => {
+                        {languages && languages.map((language) => {
                             return <option key={language.id}>{language.name}</option>
 
                         })}

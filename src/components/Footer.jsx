@@ -51,7 +51,7 @@ function Footer() {
                                 <Link className={styles.txtRegular16} to="/curriculums">Currículums</Link>
                             </p>
                             <p className={styles.txtRegular16}>
-                                <Link className={styles.txtRegular16} to="/suscripciones">Suscripciones</Link>
+                                <Link className={styles.txtRegular16} to="/subscriptions">Suscripciones</Link>
                             </p>
                         </div>
                         <div className={styles.vertical}>
