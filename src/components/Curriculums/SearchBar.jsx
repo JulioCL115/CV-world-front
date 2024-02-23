@@ -51,6 +51,7 @@ function SearchBar({ filters, setFilters }) {
           value={filters.sort}
           onChange={handleSelect}
         >
+          <option>Todos</option>
           <option>Más recientes</option>
           <option>Más vistos</option>
         </select>
