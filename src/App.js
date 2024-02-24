@@ -1,5 +1,7 @@
 import "./App.css";
 
+import axios from "axios";
+
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
@@ -39,6 +41,8 @@ import { AuthProvider } from "./AuthProvider/authProvider";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./scenes/admin-dashboard/theme";
+
+axios.defaults.baseURL = "http://localhost:3001/"
 
 function App() {
   const dispatch = useDispatch();
