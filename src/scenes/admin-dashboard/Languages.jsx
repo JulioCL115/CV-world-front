@@ -55,7 +55,7 @@ function AdminLanguages() {
     {
       field: "deleted",
       headerName: "Deshabilitado",
-      width: 200,
+      width: 150,
     },
     {
       field: "delete",
@@ -111,7 +111,7 @@ function AdminLanguages() {
         color={colors.black[500]}
         fontWeight="600"
       >
-       Curriculums
+       Idiomas
       </Typography>
       <Box display="flex" justifyContent="end">
         <Button

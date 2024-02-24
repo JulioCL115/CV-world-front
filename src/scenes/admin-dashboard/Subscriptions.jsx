@@ -71,7 +71,7 @@ function AdminSubscriptions() {
         {
             field: "deleted",
             headerName: "Deshabilitado",
-            width: 200,
+            width: 150,
         },
         {
             field: "delete",
@@ -127,7 +127,7 @@ function AdminSubscriptions() {
                 color={colors.black[500]}
                 fontWeight="600"
             >
-                Curriculums
+                Suscripciones
             </Typography>
             <Box display="flex" justifyContent="end">
                 <Button
