@@ -3,7 +3,7 @@ import styles from "./Cards.module.css"
 import Card from "./Card";
 // import updateCv from "../../redux/actions/cvs/updateCv";
 import deleteCv from "../../redux/actions/cvs/deleteCv";
-import getUserByEmail from "../../redux/actions/users/getUserByEmail";
+import getUserByEmail from "../../redux/actions/users/getUserById";
 import updateCvViews from "../../redux/actions/cvs/updateCvViews";
 import Spinner from "../Spinner";
 

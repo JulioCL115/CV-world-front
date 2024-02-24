@@ -13,6 +13,7 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined';
 import CardMembershipOutlinedIcon from '@mui/icons-material/CardMembershipOutlined';
+import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 // import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../scenes/admin-dashboard/theme";
@@ -53,12 +54,12 @@ const SideBar = () => {
                         backgroundColor: `${colors.purple[500]} !important`,
                         height: "100vh !important",
                     },
-                     "& .ps-inner-item": {
-                         padding: "5px 35px 5px 20px !important",
-                     },
+                    "& .ps-inner-item": {
+                        padding: "5px 35px 5px 20px !important",
+                    },
                     "& .ps-menu-button:hover": {
-                         backgroundColor: `${colors.purple[600]} !important`,
-                 },
+                        backgroundColor: `${colors.purple[600]} !important`,
+                    },
                 }}>
                 <Menu iconShape="square">
                     <MenuItem
@@ -79,11 +80,11 @@ const SideBar = () => {
                                 <Typography variant="h4" color={colors.white[500]}>
                                     ADMIN
                                 </Typography>
-                                <IconButton onClick={() => setIsCollapsed(!isCollapsed)} 
-                                style={{
-                                    margin: "10px 0 20px 0",
-                                    color: colors.white[500],
-                                }}>
+                                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}
+                                    style={{
+                                        margin: "10px 0 20px 0",
+                                        color: colors.white[500],
+                                    }}>
                                     <MenuOutlinedIcon />
                                 </IconButton>
                             </Box>
@@ -119,7 +120,7 @@ const SideBar = () => {
 
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
                         <Item
-                            title="Analytics"
+                            title="Estadísticas"
                             to="/admin/analytics"
                             icon={<BarChartOutlinedIcon />}
                             selected={selected}
@@ -127,7 +128,7 @@ const SideBar = () => {
                         />
 
                         <Item
-                            title="Users"
+                            title="Usuarios"
                             to="/admin/users"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
@@ -142,7 +143,7 @@ const SideBar = () => {
                             setSelected={setSelected}
                         />
                         <Item
-                            title="Categories"
+                            title="Categorías"
                             to="/admin/categories"
                             icon={<CategoryOutlinedIcon />}
                             selected={selected}
@@ -150,20 +151,28 @@ const SideBar = () => {
                         />
 
                         <Item
-                            title="Languages"
+                            title="Idiomas"
                             to="/admin/languages"
                             icon={<TranslateOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
+
                         <Item
-                            title="Subscriptions"
+                            title="Suscripciones"
                             to="/admin/subscriptions"
                             icon={<CardMembershipOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
 
+                        <Item
+                            title="Comentarios"
+                            to="/admin/comments"
+                            icon={<CommentOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
                     </Box>
                 </Menu>
             </Sidebar>

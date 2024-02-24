@@ -18,7 +18,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminCategories() {
     const dispatch = useDispatch();
-    const categories = useSelector((state) => state.categories.allSCategories);
+    const categories = useSelector((state) => state.categories.allCategories);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -49,13 +49,13 @@ function AdminCategories() {
         {
             field: "name",
             headerName: "Nombre",
-            width: 200,
+            width: 400,
             cellClassName: "name-column--cell",
         },
         {
             field: "deleted",
             headerName: "Deshabilitado",
-            width: 200,
+            width: 150,
         },
         {
             field: "delete",
@@ -111,7 +111,7 @@ function AdminCategories() {
                 color={colors.black[500]}
                 fontWeight="600"
             >
-                Curriculums
+                Categorías
             </Typography>
             <Box display="flex" justifyContent="end">
                 <Button
