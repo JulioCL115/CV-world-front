@@ -1,7 +1,7 @@
 import styles from "./MyCvs.module.css"
 import Illustration from "../../assets/upload-cv.png"
 import Cards from "../../components/Curriculums/Cards";
-import getUserByEmail from "../../redux/actions/users/getUserByEmail";
+import getUserById from "../../redux/actions/users/getUserById";
 
 
 import { Link } from "react-router-dom";
@@ -13,21 +13,21 @@ import { useDispatch, useSelector } from "react-redux";
 function MyCvs() {
     const dispatch = useDispatch();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userEmail = localStorageUser.email
+    const userId = localStorageUser.id
     const currentUser = useSelector(state => state.users.currentUser);
 
-    console.log(currentUser);
+    console.log(localStorageUser);
 
     useEffect(() => {
-        dispatch(getUserByEmail(userEmail))
-    }, [userEmail, dispatch] )
+        dispatch(getUserById(userId))
+    }, [userId, dispatch] )
 
     return (
         <div className={styles.myCvs}>
             <div className={styles.containerTop}>
                 <h1 className={styles.txtSemiBold32Black}>Mis CV's</h1>
             </div>
-            {currentUser && currentUser.Cvs.length ?
+            {currentUser && currentUser.Cvs && currentUser.Cvs.length ?
                 <Cards cvs={currentUser.Cvs} />
                 :
                 <div className={styles.containerCenter}>

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import updateUser from "../../redux/actions/users/updateUser";
-import getUserByEmail from '../../redux/actions/users/getUserByEmail';
+import getUserByEmail from '../../redux/actions/users/getUserById';
 import { auth } from "../../config/firebase-config";
 import { updateProfile } from 'firebase/auth';
 
