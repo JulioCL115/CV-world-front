@@ -1,4 +1,5 @@
 import axiosInstance from "../../../config/axios-config";
+import axios from "axios";
 
 const deleteLanguage = async (languageId) => {
     const endpoint = axios.defaults.baseURL + "language/delete/" + languageId
