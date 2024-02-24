@@ -15,7 +15,11 @@ function Comments({ cvId, comments, setCv }) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = currentUser ? currentUser.id : null;
 
+    console.log(userId);
+
     const [comment, setComment] = useState('');
+
+    console.log(comments);
 
     useEffect(() => {
         // This effect will run whenever the `comments` prop changes
@@ -70,13 +74,13 @@ function Comments({ cvId, comments, setCv }) {
                                 <div className={styles.horizontal} id={styles.txt}>
                                     <p className={styles.txtSemiBold16Black}>{comment.userName}</p>
                                     <p className={styles.txtLight12Black}>{comment.createdAt}</p>
-                                    {userId === comment.userId ?
-                                        <button className={styles.btn}
-                                            onClick={() => dispatch(deleteComment(comment.id))} >Eliminar
-                                        </button> : null
-                                    }
                                 </div>
                                 <p className={styles.txtRegular16Black}>{comment.comment}</p>
+                                {userId === comment.userId ?
+                                        <button className={styles.btnDelete}
+                                            onClick={() => deleteComment(comment.id)} >Eliminar
+                                        </button> : null
+                                    }
                             </div>
                         </div>
                     ))}
