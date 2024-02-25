@@ -21,6 +21,8 @@ function Cards({ cvs }) {
     const userId = localStorageUser ? localStorageUser.id : null
     const [isLoading, setIsLoading] = useState(false);
 
+    console.log(userId);
+
     const handleClick = (id, UserId) => {
         if (UserId !== localStorageUser.id) {
             updateCvViews(id);
