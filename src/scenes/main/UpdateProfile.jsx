@@ -45,19 +45,20 @@ function UpdateProfile() {
 
     useEffect(() => {
         const getUserData = async () => {
-            const userData = await dispatch(getUserById(userId));
-
-            setNewUserInfo({
-                name: userData.name || '',
-                email: userData.email || '',
-                password: '', 
-                repeatPassword: '', 
-                photo: userData.photo || '',
-            });
+            const userData = await getUserById(userId);
+            if (userData) {
+                setNewUserInfo({
+                    name: userData.name || '',
+                    email: userData.email || '',
+                    password: '', 
+                    repeatPassword: '', 
+                    photo: userData.photo || '',
+                });
+            }
         };
 
         getUserData();
-    }, [dispatch, userId, userId]);
+    }, [userId, userId]);
         
 
     const handleImageUpload = (event) => {
