@@ -3,7 +3,7 @@ import styles from "./Cards.module.css"
 import Card from "./Card";
 // import updateCv from "../../redux/actions/cvs/updateCv";
 import deleteCv from "../../redux/actions/cvs/deleteCv";
-import getUserByEmail from "../../redux/actions/users/getUserById";
+import getUserById from "../../redux/actions/users/getUserById";
 import updateCvViews from "../../redux/actions/cvs/updateCvViews";
 import Spinner from "../Spinner";
 
@@ -18,7 +18,7 @@ function Cards({ cvs }) {
     // const isMyCvs = location.pathname === "/mycvs";
     const isCurriculums = location.pathname === "/curriculums";
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userEmail = localStorageUser ? localStorageUser.email : null
+    const userId = localStorageUser ? localStorageUser.id : null
     const [isLoading, setIsLoading] = useState(false);
 
     const handleClick = (id, UserId) => {
@@ -33,7 +33,7 @@ function Cards({ cvs }) {
         /* eslint-disable-next-line no-restricted-globals */
         if (window.confirm("¿Estás seguro que querés eliminar este CV?")) {
             await deleteCv(id);
-            dispatch(getUserByEmail(userEmail));
+            dispatch(getUserById(userId));
             setTimeout(() => {
                 navigate("/mycvs");
                 setIsLoading(false);
