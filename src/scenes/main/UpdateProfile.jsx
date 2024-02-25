@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import updateUser from "../../redux/actions/users/updateUser";
-import getUserByEmail from '../../redux/actions/users/getUserById';
+import getUserById from '../../redux/actions/users/getUserById';
 import { auth } from "../../config/firebase-config";
 import { updateProfile } from 'firebase/auth';
 
@@ -18,9 +18,6 @@ function UpdateProfile() {
     const dispatch = useDispatch();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser.id;
-    const userEmail = localStorageUser.email
-    const currentUser = useSelector(state => state.users.currentUser);
-
 
     const [newUserInfo, setNewUserInfo] = useState({
         name: null,
@@ -48,7 +45,7 @@ function UpdateProfile() {
 
     useEffect(() => {
         const getUserData = async () => {
-            const userData = await dispatch(getUserByEmail(userEmail));
+            const userData = await dispatch(getUserById(userId));
 
             setNewUserInfo({
                 name: userData.name || '',
@@ -60,7 +57,7 @@ function UpdateProfile() {
         };
 
         getUserData();
-    }, [dispatch, userId, userEmail]);
+    }, [dispatch, userId, userId]);
         
 
     const handleImageUpload = (event) => {

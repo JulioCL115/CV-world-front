@@ -16,7 +16,7 @@ function MyCvs() {
     const userId = localStorageUser.id
     const currentUser = useSelector(state => state.users.currentUser);
 
-    console.log(localStorageUser);
+    console.log(currentUser);
 
     useEffect(() => {
         dispatch(getUserById(userId))
