@@ -3,6 +3,7 @@ import styles from './MyProfile.module.css';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import getUserById from '../../redux/actions/users/getUserById';
 
 function UpdateProfile() {

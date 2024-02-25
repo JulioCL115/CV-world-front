@@ -3,7 +3,7 @@ import styles from './Checkout.module.css';
 import Card from '../../components/Subscriptions/Card';
 import createOrder from '../../redux/actions/payments/createOrder';
 import getSubscriptionDetail from '../../redux/actions/subscriptions/getSubscriptionDetail';
-import updateSubscriptionId from '../../redux/actions/payments/updateSubscriptionId';
+// import updateSubscriptionId from '../../redux/actions/payments/updateSubscriptionId';
 import Illustration from "../../assets/checkout.png";
 
 import { useEffect, useState } from 'react';
@@ -20,7 +20,7 @@ const Checkout = () => {
     const subscription = useSelector((state) => state.subscriptions.subscriptionDetail);
 
     useEffect(() => {
-        dispatch(updateSubscriptionId(subscriptionId));
+        // dispatch(updateSubscriptionId(subscriptionId));
 
         const fetchSubscriptionDetail = async () => {
             try {
