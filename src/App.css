@@ -8,11 +8,13 @@
 .containerAdmin {
   display: flex;
   flex-direction: row; /* Stack children vertically */
-  width: 83vw;
+  width: auto;
+  height: auto;
 }
 
-.viewsContainer {
+.containerViews {
   display: flex;
   flex-direction: column; /* Stack children vertically */
-  width: 83vw;
+  width: auto;
+  height: auto;
 }

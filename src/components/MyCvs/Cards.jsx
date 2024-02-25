@@ -4,7 +4,7 @@ import Spinner from "../Spinner";
 import Card from "./Card";
 // import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import deleteCv from "../../redux/actions/cvs/deleteCv";
-import getUserByEmail from "../../redux/actions/users/getUserByEmail";
+import getUserBydId from "../../redux/actions/users/getUserById";
 
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ import { useState } from 'react';
 function Cards({ cvs }) {
     const dispatch = useDispatch();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userEmail = localStorageUser.email
+    const userId = localStorageUser.id
     const navigate = useNavigate()
 
     const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +24,7 @@ function Cards({ cvs }) {
         /* eslint-disable-next-line no-restricted-globals */
         if (window.confirm("¿Estás seguro que querés eliminar este CV?")) {
             await deleteCv(id);
-            dispatch(getUserByEmail(userEmail));
+            dispatch(getUserBydId(userId));
             setTimeout(() => {
                 navigate("/mycvs");
                 setIsLoading(false);

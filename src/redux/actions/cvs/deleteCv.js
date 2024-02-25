@@ -1,14 +1,15 @@
 import axiosInstance from "../../../config/axios-config";
+import axios from "axios";
 
-const deleteCv = async(id) => {
-    const endpoint = "http://localhost:3001/cv/delete/" + id;
+const deleteCv = async (cvId) => {
+    const endpoint = axios.defaults.baseURL + "cv/delete/" + cvId;
 
     try {
         const response = await axiosInstance.put(endpoint)
 
-        console.log("Response:", response.data);
+        return true
     } catch (error) {
-        console.log("Error:", error);
+        return false
     }
 
 };

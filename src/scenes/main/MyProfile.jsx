@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import getUserByEmail from '../../redux/actions/users/getUserByEmail';
+import getUserById from '../../redux/actions/users/getUserById';
 
 function UpdateProfile() {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.users.currentUser);
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userEmail = localStorageUser.email
+    const userId = localStorageUser.id
 
     useEffect(() => {
-        dispatch(getUserByEmail(userEmail))
-    }, [userEmail, dispatch])
+        dispatch(getUserById(userId))
+    }, [userId, dispatch])
 
     return (
         <div className={styles.myProfile}>

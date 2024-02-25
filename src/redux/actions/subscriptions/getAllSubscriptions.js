@@ -2,7 +2,7 @@ import axios from "axios";
 import { setAllSubscriptions } from "../../slices/subscriptionsSlice"
 
 const getAllSubscriptions = () => {
-    const endpoint = "http://localhost:3001/subscription"
+    const endpoint = axios.defaults.baseURL + "subscription"
 
     return async (dispatch) => {
         try {

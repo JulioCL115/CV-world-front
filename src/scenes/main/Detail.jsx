@@ -34,7 +34,8 @@ function Detail() {
         };
 
         fetchCvDetail();
-    }, [cvId]);
+    }, [cvId, setCv, setLoading]);
+
 
     if (loading) {
         return <div>

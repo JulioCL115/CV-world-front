@@ -1,7 +1,7 @@
 function AdminAnalytics () {
     return (
         <div>
-            <h1>Analytics</h1>
+            <h1>Estadísticas</h1>
         </div>
     );
 };
