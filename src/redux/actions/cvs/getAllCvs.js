@@ -2,7 +2,7 @@ import axios from "axios";
 import { setAllCvs, setNumberOfPages } from "../../slices/cvsSlice"
 
 const getAllCvs = (filters = {}, limit, offset) => {
-    const endpoint = axios.defaults.baseURL + "cv"
+    const endpoint = "cv-world-back-production.up.railway.app/cv"
 
     let sort = "";
     let categories = "";
