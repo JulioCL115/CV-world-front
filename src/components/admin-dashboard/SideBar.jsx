@@ -1,7 +1,9 @@
+
 import styles from "./SideBar.module.css"
 
-import { useState } from "react";
+
 import { Link } from "react-router-dom";
+
 
 import ProfilePicture from "../../assets/blank-profile-picture-973460_960_720.webp"
 
@@ -177,6 +179,7 @@ const SideBar = () => {
                 </Menu>
             </Sidebar>
         </Box>
+
     );
 };
 
