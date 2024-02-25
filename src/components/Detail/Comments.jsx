@@ -8,6 +8,7 @@ import Illustrations from "../../assets/customer-review-3949821-3277282.webp";
 import ProfilePicture from "../../assets/blank-profile-picture-973460_960_720.webp";
 import postComment from "../../redux/actions/comments/postComment";
 import getCvDetail from "../../redux/actions/cvs/getCvDetail";
+import deleteComment from "../../redux/actions/comments/deleteComment";
 
 function Comments({ cvId, comments, setCv }) {
     const dispatch = useDispatch();
@@ -34,8 +35,7 @@ function Comments({ cvId, comments, setCv }) {
             setComment('');
             const cvDetail = await (getCvDetail(cvId))
             setCv(cvDetail);
-        } else 
-           { console.log("Error posting comment")}
+        } else { console.log("Error posting comment") }
     };
 
     return (
@@ -70,6 +70,11 @@ function Comments({ cvId, comments, setCv }) {
                                 <div className={styles.horizontal} id={styles.txt}>
                                     <p className={styles.txtSemiBold16Black}>{comment.userName}</p>
                                     <p className={styles.txtLight12Black}>{comment.createdAt}</p>
+                                    {userId === comment.userId ?
+                                        <button className={styles.btn}
+                                            onClick={() => dispatch(deleteComment(comment.id))} >Eliminar
+                                        </button> : null
+                                    }
                                 </div>
                                 <p className={styles.txtRegular16Black}>{comment.comment}</p>
                             </div>

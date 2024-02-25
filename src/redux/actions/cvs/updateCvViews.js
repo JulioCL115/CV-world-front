@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const updateCvViews = async (cvId) => {
-    const endpoint = "http://localhost:3001/cv/updateView/" + cvId;
+    const endpoint = axios.defaults.baseURL + "cv/updateView/" + cvId;
 
     console.log(cvId);
         try {

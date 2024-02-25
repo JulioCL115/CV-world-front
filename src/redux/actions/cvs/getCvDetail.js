@@ -1,8 +1,7 @@
 import axios from "axios";
-import { setCvDetail } from "../../slices/cvsSlice"
 
-const getCvDetail = async (id) => {
-    const endpoint = "http://localhost:3001/cv/" + id;
+const getCvDetail = async (cvId) => {
+    const endpoint = axios.defaults.baseURL + "cv/" + cvId;
 
     try {
         const response = await axios.get(endpoint);

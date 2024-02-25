@@ -76,36 +76,29 @@ function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-
-    if (!registerInfo.name ||
-      !registerInfo.email ||
-      !registerInfo.password ||
-      !registerInfo.repeatPassword) {
+  
+    if (!registerInfo.name || !registerInfo.email || !registerInfo.password || !registerInfo.repeatPassword) {
       setRegistrationStatus({
         status: "Fail",
-        message: "Por favor, completar todos los campos"
-      })
+        message: "Por favor, completa todos los campos"
+      });
     } else {
-      if (!errors.name &&
-        !errors.email &&
-        !errors.password &&
-        !errors.repeatPassword) {
-
-        try{
+      if (!errors.name && !errors.email && !errors.password && !errors.repeatPassword) {
+        try {
           const registrationStatus = await register(registerInfo);
-
+  
           if (registrationStatus.status === "Success") {
-
-            const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
+            const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password);
             const user = userCredential.user;
-            // await sendEmailVerification(auth, user);
-
+  
+            // Enviar correo electrónico de verificación
+            await sendEmailVerification(user);
+  
             setRegistrationStatus({
               status: "Success",
-              message: "¡Te registraste con éxito!"
-            })
-
+              message: "¡Te registraste con éxito! Se ha enviado un correo electrónico de verificación."
+            });
+  
             setTimeout(() => {
               navigate("/signin");
             }, 2000);
@@ -113,15 +106,15 @@ function SignUp() {
             setRegistrationStatus({
               status: "Fail",
               message: "Ya existe un usuario con ese email"
-            })
+            });
           }
         } catch (error) {
           setRegistrationStatus({
             status: "Fail",
-            message: "Ya existe un usuario con ese email"
-          })
+            message: "Error al registrar. Por favor, inténtalo de nuevo."
+          });
         }
-      };
+      }
     }
   }
 

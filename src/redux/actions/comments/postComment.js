@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const postComment = async(comment, cvId, userId) => {
-    const endpoint = "http://localhost:3001/comment/" + cvId + "/" + userId;
+    const endpoint = axios.defaults.baseURL + "comment/" + cvId + "/" + userId;
 
         try {
             await axios.post(endpoint, {comment: comment});

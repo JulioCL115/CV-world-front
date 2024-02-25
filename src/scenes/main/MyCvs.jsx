@@ -16,7 +16,7 @@ function MyCvs() {
     const userEmail = localStorageUser.email
     const currentUser = useSelector(state => state.users.currentUser);
 
-    console.log(currentUser);
+    console.log("este es el current user",currentUser);
 
     useEffect(() => {
         dispatch(getUserByEmail(userEmail))

@@ -5,6 +5,7 @@ function DetailCv({ cv }) {
     console.log(cv);
 
     let contact = cv && cv.contact && Array.isArray(cv.contact) ? cv.contact[0] : cv.contact;
+    console.log("este es el cv",cv)
 
 
     return (

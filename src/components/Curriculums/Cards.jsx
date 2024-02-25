@@ -15,11 +15,13 @@ function Cards({ cvs }) {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
+    console.log("este es el cvs de cards",cvs)
     // const isMyCvs = location.pathname === "/mycvs";
     const isCurriculums = location.pathname === "/curriculums";
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userEmail = localStorageUser ? localStorageUser.email : null
     const [isLoading, setIsLoading] = useState(false);
+    console.log("Weste es el user",localStorageUser)
 
     const handleClick = (id) => {
         updateCvViews(id);
@@ -39,7 +41,7 @@ function Cards({ cvs }) {
         }
     };
 
-    console.log(cvs);
+    console.log("este es el cvs",cvs);
 
     return (
         <div className={styles.cards}>

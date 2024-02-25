@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const endpoint = "http://localhost:3001/user/register"
+const endpoint =`http://localhost:3001/user/register`
 
 const registrationStatus = {
     status: null,

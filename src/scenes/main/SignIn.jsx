@@ -7,7 +7,7 @@ import login from "../../redux/actions/users/login";
 import register from "../../redux/actions/users/register";
 
 import { auth } from "../../config/firebase-config";
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword  } from 'firebase/auth';
 
 
 function SignIn() {
@@ -75,12 +75,8 @@ function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-
-    if (
-      !loginInfo.email ||
-      !loginInfo.password
-    ) {
+  
+    if (!loginInfo.email || !loginInfo.password) {
       setLoginStatus({
         status: "Fail",
         message: "Por favor, completá todos los campos"
@@ -88,29 +84,34 @@ function SignIn() {
       return;
     } else {
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password)
+        const userCredential = await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password);
+        console.log("User Credential: ", userCredential);
+        const emailVerified = userCredential.user.emailVerified;
 
-        if (userCredential) {
-          
-            login(userCredential.user.accessToken);
-
-            setLoginStatus({
-              status: "Success",
-              message: "¡Bienvenido!"
-            });
-
-            setTimeout(() => {
-              navigate("/curriculums");
-            }, 2000);
-          }  
-        } catch (error) {
+        if (emailVerified) {
+          login(userCredential.user.accessToken);
+  
+          setLoginStatus({
+            status: "Success",
+            message: "¡Bienvenido!"
+          });
+  
+          setTimeout(() => {
+            navigate("/curriculums");
+          }, 2000);
+        } else {
           setLoginStatus({
             status: "Fail",
-            message: "Email o contraseña incorrectos"
+            message: "Tu correo electrónico aún no está verificado. Por favor, verifica tu correo electrónico."
           });
         }
+      } catch (error) {
+        setLoginStatus({
+          status: "Fail",
+          message: "Email o contraseña incorrectos"
+        });
       }
-
+    }
   };
 
     return (
