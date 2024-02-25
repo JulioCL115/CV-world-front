@@ -62,10 +62,9 @@ function SignIn() {
             photo: userCredential.user.photoURL,
             password: "",
           });
-
-          login(userCredential.user.accessToken);
-          navigate("/curriculums");
         }
+        login(userCredential.user.accessToken);
+        navigate("/curriculums");
       }
     } catch (error) {
       console.error("Error during login:", error);
