@@ -35,7 +35,7 @@ function MyCvs() {
                     <p className={styles.txtSemiBold16Purple}>Parece que todavía no tenés currículums cargados</p>
                 </div>
             }
-            <Link to={currentUser && currentUser.Cvs.length === 1 && currentUser.Subscription.price === 0 ? "/upgradesubscription" : "/createcv"}>
+            <Link to={currentUser && currentUser.Cvs.length === 1 && currentUser.Subscription && currentUser.Subscription.price === 0 ? "/upgradesubscription" : "/createcv"}>
                 <button className={styles.btn}>Cargar CV</button>
             </Link>
         </div>
