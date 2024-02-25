@@ -1,15 +1,32 @@
 import styles from "./PaymentFeedback.module.css";
 
-import React from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import IllustrationApproved from "../../assets/payment-approved.png"
 import IllustrationPending from "../../assets/payment-pending.png"
 import IllustrationFailure from "../../assets/payment-failure.png"
 
+// import updateUserSubscription from "../../redux/actions/users/updateUserSubscription";
+// import { useSelector } from "react-redux";
+
 function PaymentFeedback() {
     const location = useLocation();
     const feedbackType = location.pathname.split("/")[1];
+    // const isSuccess = location.pathname.startsWith("/success");
+    // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    // const userId = currentUser ? currentUser.id : null;
+    // const subscriptionId = useSelector(state => state.payments.subscriptionId);
+
+    // console.log(subscriptionId);
+    // console.log(userId);
+    
+    // useEffect(() => {
+    //     if (isSuccess && subscriptionId && userId) {
+    //         updateUserSubscription(userId, subscriptionId)
+    //     }
+    // }, [isSuccess, userId, subscriptionId]);
+
 
     return (
         <div className={styles.container}>

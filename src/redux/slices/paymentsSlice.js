@@ -1,21 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    paymentStatus: null,
-    paymentLink: null,
+    subscriptionId: null,
 }
 const paymentsSlice = createSlice({
     name: "payments",
     initialState,
     reducers: {
-        setPaymentStaus(state, action) {
-            state.paymentStatus = action.payload
-        },
-        setPaymentLink(state, action) {
-            state.paymentStatus = action.payload
+        setSubscriptionId(state, action) {
+            console.log("SET SUBSCRIPTION ID: " + action.payload);    
+            state.subscriptionId = action.payload
         },
     },
 });
 
-export const {setPaymentLink, setPaymentStaus} = paymentsSlice.actions;
+export const { setSubscriptionId } = paymentsSlice.actions;
 export default paymentsSlice.reducer;
