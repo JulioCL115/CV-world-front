@@ -119,7 +119,7 @@ function AdminCategories() {
                     to="/admin/users/createcv"
                     variant="contained"
                 >
-                    Crear nuevo usuario
+                    Crear Categoría
                 </Button>
             </Box>
             <Box

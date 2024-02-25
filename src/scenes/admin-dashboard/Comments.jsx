@@ -108,15 +108,6 @@ function AdminComments () {
             >
                 Comentarios
             </Typography>
-            <Box display="flex" justifyContent="end">
-                <Button
-                    component={Link}
-                    to="/admin/users/createcv"
-                    variant="contained"
-                >
-                    Crear nuevo usuario
-                </Button>
-            </Box>
             <Box
                 pt={4}
                 pl={4}

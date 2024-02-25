@@ -45,7 +45,7 @@ function Footer() {
                         <div className={styles.vertical}>
                             <h2 className={styles.txtSemiBold16}>Páginas</h2>
                             <p className={styles.txtRegular16}>
-                                <Link className={styles.txtRegular16} to="/">Home</Link>
+                                <Link className={styles.txtRegular16} to="/home">Home</Link>
                             </p>
                             <p className={styles.txtRegular16}>
                                 <Link className={styles.txtRegular16} to="/curriculums">Currículums</Link>

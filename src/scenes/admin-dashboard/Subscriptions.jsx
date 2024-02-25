@@ -135,7 +135,7 @@ function AdminSubscriptions() {
                     to="/admin/users/createcv"
                     variant="contained"
                 >
-                    Crear nuevo usuario
+                    Crear Suscripción 
                 </Button>
             </Box>
             <Box

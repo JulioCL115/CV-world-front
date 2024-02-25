@@ -119,7 +119,7 @@ function AdminLanguages() {
           to="/admin/users/createcv"
           variant="contained"
         >
-          Crear nuevo usuario
+          Crear Idioma
         </Button>
       </Box>
       <Box

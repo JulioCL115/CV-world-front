@@ -14,8 +14,10 @@ function UpdateProfile() {
 
     useEffect(() => {
         const fetchUserDetail = async () => {
-            const userDetail = await getUserById(userId);;
-            setCurrentUser(userDetail);
+            const userDetail = await getUserById(userId);
+            if (userDetail) {
+                setCurrentUser(userDetail);
+            }   
         };
 
         fetchUserDetail();

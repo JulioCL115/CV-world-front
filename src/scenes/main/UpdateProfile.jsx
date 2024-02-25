@@ -2,7 +2,7 @@ import styles from "./SingUp.module.css"
 
 import { useState , useEffect} from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import updateUser from "../../redux/actions/users/updateUser";
 import getUserById from '../../redux/actions/users/getUserById';
@@ -45,19 +45,20 @@ function UpdateProfile() {
 
     useEffect(() => {
         const getUserData = async () => {
-            const userData = await dispatch(getUserById(userId));
-
-            setNewUserInfo({
-                name: userData.name || '',
-                email: userData.email || '',
-                password: '', 
-                repeatPassword: '', 
-                photo: userData.photo || '',
-            });
+            const userData = await getUserById(userId);
+            if (userData) {
+                setNewUserInfo({
+                    name: userData.name || '',
+                    email: userData.email || '',
+                    password: '', 
+                    repeatPassword: '', 
+                    photo: userData.photo || '',
+                });
+            }
         };
 
         getUserData();
-    }, [dispatch, userId, userId]);
+    }, [userId, userId]);
         
 
     const handleImageUpload = (event) => {
