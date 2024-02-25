@@ -2,7 +2,7 @@ import axios from "axios";
 import { setAllCategories } from "../../slices/categoriesSlice"
 
 const getAllCategories = () => {
-    const endpoint = "http://localhost:3001/category"
+    const endpoint = axios.defaults.baseURL + "category"
 
     return async (dispatch) => {
         try {

@@ -1,4 +1,5 @@
 import axiosInstance from "../../../config/axios-config";
+import axios from "axios";
 
 const updateStatus = {
     status: null,
@@ -6,7 +7,7 @@ const updateStatus = {
 };
 
 const updateUser = async (userId, user, subscriptionId) => {
-    const endpoint = "http://localhost:3001/user/" + userId;
+    const endpoint = axios.defaults.baseURL + "user/" + userId;
 
         try {
             await axiosInstance.put(endpoint, user, subscriptionId)

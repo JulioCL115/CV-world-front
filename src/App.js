@@ -1,5 +1,7 @@
 import "./App.css";
 
+import axios from "axios";
+
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
@@ -31,7 +33,7 @@ import AdminSubscriptions from "./scenes/admin-dashboard/Subscriptions";
 import AdminCategories from "./scenes/admin-dashboard/Categories";
 import AdminLanguages from "./scenes/admin-dashboard/Languages";
 import AdminComments from "./scenes/admin-dashboard/Comments";
-import SideBar from "./components/admin-dashboard/Sidebar";
+import SideBar from "./components/admin-dashboard/SideBar";
 import Topbar from "./components/admin-dashboard/Topbar";
 import PaymentFeedback from "./scenes/main/PaymentFeedback";
 import VerifyEmail from "./scenes/main/VerifyEmail";
@@ -39,6 +41,8 @@ import { AuthProvider } from "./AuthProvider/authProvider";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./scenes/admin-dashboard/theme";
+
+axios.defaults.baseURL = "http://localhost:3001/"
 
 function App() {
   const dispatch = useDispatch();
@@ -88,7 +92,7 @@ function App() {
               <CssBaseline />
               <div className="containerAdmin">
                 <SideBar />
-                <div className="viewsContainer">
+                <div className="containerViews">
                   <Topbar />
                   <Routes>
                     <Route path="/admin/analytics" element={<AdminAnalytics />} />

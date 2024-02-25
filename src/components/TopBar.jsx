@@ -26,7 +26,7 @@ function TopBar() {
     useEffect(() => {
         // Set the selectedMenu based on the current path
         switch (location.pathname) {
-          case '/':
+          case '/home':
             setSelectedMenu('home');
             break;
           case '/curriculums':
@@ -37,7 +37,7 @@ function TopBar() {
             break;
           // Add more cases for other paths if needed
           default:
-            setSelectedMenu('home');
+            setSelectedMenu('');
         }
       }, [location.pathname]); 
 
@@ -68,7 +68,7 @@ function TopBar() {
     return (
         <div className={styles.topbar}>
             <div className={styles.containerLeft}>
-                <Link className={selectedMenu === "home" ? styles.txtSemiBold16Black : styles.txtRegular16Black}  to="/" >Home</Link>
+                <Link className={selectedMenu === "home" ? styles.txtSemiBold16Black : styles.txtRegular16Black}  to="/home" >Home</Link>
                 <Link className={selectedMenu === "curriculums" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/curriculums" >Currículums</Link>
                 <Link className={selectedMenu === "subscriptions" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/subscriptions" >Suscripciones</Link>
             </div>
