@@ -21,8 +21,10 @@ function Cards({ cvs }) {
     const userEmail = localStorageUser ? localStorageUser.email : null
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleClick = (id) => {
-        updateCvViews(id);
+    const handleClick = (id, UserId) => {
+        if (UserId !== localStorageUser.id) {
+            updateCvViews(id);
+        }
         navigate(`/detail/${id}`);
     }
 
@@ -44,7 +46,7 @@ function Cards({ cvs }) {
     return (
         <div className={styles.cards}>
             {isLoading && <Spinner />}
-            {cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate, User }) => (
+            {cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate, User, UserId }) => (
                 <div key={id} className={styles.containerCards}>
                     {isCurriculums ?
                         <div className={styles.containerHeader}>
@@ -65,7 +67,7 @@ function Cards({ cvs }) {
                             <h1 className={styles.txtSemiBold16Black}>{User.name}</h1>
                         </div> : null
                     }
-                    <div onClick={() => handleClick(id)}>
+                    <div onClick={() => handleClick(id, UserId)}>
                         <Card
                             id={id}
                             name={name}
