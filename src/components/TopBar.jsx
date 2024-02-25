@@ -21,8 +21,6 @@ function TopBar() {
     );
     const [selectedMenu, setSelectedMenu] = useState("home");
 
-    console.log(currentUser);
-
     useEffect(() => {
         // Set the selectedMenu based on the current path
         switch (location.pathname) {

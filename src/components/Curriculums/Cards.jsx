@@ -11,7 +11,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from 'react';
 
-function Cards({ cvs }) {
+function Cards({ cvs, setCurrentUser }) {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
@@ -30,12 +30,23 @@ function Cards({ cvs }) {
         navigate(`/detail/${id}`);
     }
 
+
+
     const handleDelete = async (id) => {
         setIsLoading(true);
         /* eslint-disable-next-line no-restricted-globals */
         if (window.confirm("¿Estás seguro que querés eliminar este CV?")) {
-            await deleteCv(id);
-            dispatch(getUserById(userId));
+
+            const isDeleted = await deleteCv(id);
+            if (isDeleted) {
+                setCurrentUser(prevUser => ({
+                    ...prevUser,
+                    Cvs: prevUser.Cvs.filter(cv => cv.id !== id)
+                }));
+            }
+
+            getUserById(userId);
+
             setTimeout(() => {
                 navigate("/mycvs");
                 setIsLoading(false);
