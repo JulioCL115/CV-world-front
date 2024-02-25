@@ -34,7 +34,9 @@ function Detail() {
         };
 
         fetchCvDetail();
-    }, [cvId]);
+    }, [cvId, setCv, setLoading]);
+
+    console.log(cv);
 
     if (loading) {
         return <div>
