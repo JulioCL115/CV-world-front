@@ -3,7 +3,7 @@ import styles from "./Cards.module.css"
 import Card from "./Card";
 // import updateCv from "../../redux/actions/cvs/updateCv";
 import deleteCv from "../../redux/actions/cvs/deleteCv";
-import getUserByEmail from "../../redux/actions/users/getUserByEmail";
+import getUserById from "../../redux/actions/users/getUserById";
 import updateCvViews from "../../redux/actions/cvs/updateCvViews";
 import Spinner from "../Spinner";
 
@@ -19,12 +19,16 @@ function Cards({ cvs }) {
     // const isMyCvs = location.pathname === "/mycvs";
     const isCurriculums = location.pathname === "/curriculums";
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userEmail = localStorageUser ? localStorageUser.email : null
+    const userId = localStorageUser ? localStorageUser.id : null
     const [isLoading, setIsLoading] = useState(false);
     console.log("Weste es el user",localStorageUser)
 
-    const handleClick = (id) => {
-        updateCvViews(id);
+    console.log(userId);
+
+    const handleClick = (id, UserId) => {
+        if (UserId !== localStorageUser.id) {
+            updateCvViews(id);
+        }
         navigate(`/detail/${id}`);
     }
 
@@ -33,7 +37,7 @@ function Cards({ cvs }) {
         /* eslint-disable-next-line no-restricted-globals */
         if (window.confirm("¿Estás seguro que querés eliminar este CV?")) {
             await deleteCv(id);
-            dispatch(getUserByEmail(userEmail));
+            dispatch(getUserById(userId));
             setTimeout(() => {
                 navigate("/mycvs");
                 setIsLoading(false);
@@ -46,26 +50,28 @@ function Cards({ cvs }) {
     return (
         <div className={styles.cards}>
             {isLoading && <Spinner />}
-            {cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate, User }) => (
+            {cvs ? cvs.map(({ id, name, image, header, contact, description, experience, education, speakingLanguages, skills, otherInterests, views, creationDate, User, UserId }) => (
                 <div key={id} className={styles.containerCards}>
-                    <div className={styles.containerHeader}>
-                        {User.Subscription.price !== 0 ?
-                            <svg className={styles.ic}
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                height="30px"
-                                width="30px"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="#098D85"
-                                class="w-6 h-6">
-                                <path strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-                            </svg> : null}
-                        <h1 className={styles.txtSemiBold16Black}>{User.name}</h1>
-                    </div>
-                    <div onClick={() => handleClick(id)}>
+                    {isCurriculums ?
+                        <div className={styles.containerHeader}>
+                            {User.Subscription.price !== 0 ?
+                                <svg className={styles.ic}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    height="30px"
+                                    width="30px"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="#098D85"
+                                    class="w-6 h-6">
+                                    <path strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                                </svg> : null}
+                            <h1 className={styles.txtSemiBold16Black}>{User.name}</h1>
+                        </div> : null
+                    }
+                    <div onClick={() => handleClick(id, UserId)}>
                         <Card
                             id={id}
                             name={name}

@@ -1,4 +1,5 @@
 import axiosInstance from "../../../config/axios-config";
+import axios from "axios";
 
 const deleteSubscription = async (subscriptionId) => {
     const endpoint = axios.defaults.baseURL + "subscription/delete/" + subscriptionId

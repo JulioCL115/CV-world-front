@@ -63,7 +63,6 @@ function SignIn() {
             password: "",
           });
         }
-
         login(userCredential.user.accessToken);
         navigate("/curriculums");
       }

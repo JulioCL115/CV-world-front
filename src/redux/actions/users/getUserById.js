@@ -1,16 +1,12 @@
 import axios from "axios";
 import { setCurrentUser } from "../../slices/usersSlice"
 
-const getUserByEmail = (email) => {
-    const endpoint = axios.defaults.baseURL + "user/";
+const getUserById = (userId) => {
+    const endpoint = axios.defaults.baseURL + "user/" + userId;
 
     return async (dispatch) => {
         try {
-            const response = await axios.get(endpoint, {
-                params: {
-                    email: email,
-                }
-            });
+            const response = await axios.get(endpoint)
             let data = response.data;
             
             return dispatch(setCurrentUser(data));
@@ -20,4 +16,4 @@ const getUserByEmail = (email) => {
     };
 };
 
-export default getUserByEmail;
+export default getUserById;

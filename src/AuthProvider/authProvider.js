@@ -9,8 +9,12 @@ export const AuthProvider = ({ children }) => {
  });
 
  useEffect(() => {
-    localStorage.setItem('token', JSON.stringify(token));
- }, [token]);
+   if (token !== null && token !== undefined) {
+      localStorage.setItem('token', JSON.stringify(token));
+   } else {
+     localStorage.removeItem('token');
+   }
+}, [token]);
 
  return (
     <AuthContext.Provider value={{ token, setToken }}>

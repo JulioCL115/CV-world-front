@@ -1,7 +1,6 @@
 import styles from "./Comments.module.css";
 
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Illustrations from "../../assets/customer-review-3949821-3277282.webp";
@@ -10,12 +9,15 @@ import postComment from "../../redux/actions/comments/postComment";
 import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import deleteComment from "../../redux/actions/comments/deleteComment";
 
-function Comments({ cvId, comments, setCv }) {
-    const dispatch = useDispatch();
+function Comments({ cvId, comments , setCv }) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = currentUser ? currentUser.id : null;
 
+    console.log(userId);
+
     const [comment, setComment] = useState('');
+
+    console.log(comments);
 
     useEffect(() => {
         // This effect will run whenever the `comments` prop changes
@@ -36,6 +38,17 @@ function Comments({ cvId, comments, setCv }) {
             const cvDetail = await (getCvDetail(cvId))
             setCv(cvDetail);
         } else { console.log("Error posting comment") }
+    };
+
+    const handleDelete = async (commentId) => {
+        // Assuming deleteComment is an async function that deletes a comment and returns true on success
+        const isDeleted = await deleteComment(commentId);
+        if (isDeleted) {
+            setCv(prevCv => ({
+                ...prevCv,
+                Comments: prevCv.Comments.filter(comment => comment.id !== commentId)
+            }));
+        }
     };
 
     return (
@@ -70,13 +83,13 @@ function Comments({ cvId, comments, setCv }) {
                                 <div className={styles.horizontal} id={styles.txt}>
                                     <p className={styles.txtSemiBold16Black}>{comment.userName}</p>
                                     <p className={styles.txtLight12Black}>{comment.createdAt}</p>
-                                    {userId === comment.userId ?
-                                        <button className={styles.btn}
-                                            onClick={() => dispatch(deleteComment(comment.id))} >Eliminar
-                                        </button> : null
-                                    }
                                 </div>
                                 <p className={styles.txtRegular16Black}>{comment.comment}</p>
+                                {userId === comment.userId ?
+                                        <button className={styles.btnDelete}
+                                            onClick={() => handleDelete(comment.id)} >Eliminar
+                                        </button> : null
+                                    }
                             </div>
                         </div>
                     ))}

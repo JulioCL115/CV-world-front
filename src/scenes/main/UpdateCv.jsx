@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import updateCv from '../../redux/actions/cvs/updateCv';
 import getAllCategories from "../../redux/actions/categories/getAllCategories";
 import getAllLanguages from "../../redux/actions/languages/getAllLanguages";
+import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import validation from "./createCvValidation"
 
 
@@ -16,14 +17,10 @@ function UpdateCv() {
     const { cvId } = useParams();
     const languages = useSelector((state) => state.languages.allLanguages);
     const categories = useSelector((state) => state.categories.allCategories);
+    const [currentCv, setCurrentCv] = useState({});
+    const [loading, setLoading] = useState(true);
 
     console.log(cvId);
-
-    useEffect(() => {
-        dispatch(getAllCategories());
-        dispatch(getAllLanguages());
-    }, []); 
-
 
     const [cv, setCv] = useState({
         category: "",
@@ -44,6 +41,19 @@ function UpdateCv() {
         speakingLanguages: [],
         otherInterests: []
     });
+
+    useEffect( () => {
+        dispatch(getAllCategories());
+        dispatch(getAllLanguages());
+        const fetchCvDetail = async () => {
+            const cvDetail = await getCvDetail(cvId);
+            setCv(cvDetail);
+            setLoading(false);
+        };
+
+        fetchCvDetail();
+    }, []); 
+
 
     const [showEducationDateField, setShowEducationDateField] = useState([]);
     const [showExperienceDateField, setShowExperienceDateField] = useState([]);
