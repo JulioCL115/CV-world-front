@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import getAllCommentsUnfiltered from "../../redux/actions/comments/getAllCommentsUnfiltered";
 import deleteComment from "../../redux/actions/comments/deleteComment";
 import updateComment from "../../redux/actions/comments/updateComment";
+import restoreComment from "../../redux/actions/comments/restoreComment";
 
 import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -26,11 +27,11 @@ function AdminComments () {
     console.log(comments);
 
     const onDelete = (e, params) => {
-        dispatch(deleteComment(params.userID));
+        deleteComment(params.id);
     };
 
     const onRestore = (e, params) => {
-        dispatch(updateComment(params.userID));
+        restoreComment(params.id);
     };
 
 

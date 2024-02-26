@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import deleteSubscription from "../../redux/actions/subscriptions/deleteSubscription";
 import updateSubscription from "../../redux/actions/subscriptions/updateSubscription";
 import getAllCategoriesUnfiltered from "../../redux/actions/categories/getAllCategoriesUnfiltered";
+import restoreCategory from "../../redux/actions/categories/restoreCategory";
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -28,11 +29,11 @@ function AdminCategories() {
     console.log(categories);
 
     const onDelete = (e, params) => {
-        dispatch(deleteSubscription(params.userID));
+        deleteSubscription(params.id);
     };
 
     const onRestore = (e, params) => {
-        dispatch(updateSubscription(params.userID));
+        restoreCategory(params.id);
     };
 
     const onEdit = (e, params) => {
