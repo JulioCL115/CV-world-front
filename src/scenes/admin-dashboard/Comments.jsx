@@ -49,8 +49,7 @@ function AdminComments () {
         {
             field: "createdAt",
             headerName: "Fecha de creación",
-            width: 200,
-            cellClassName: "name-column--cell",
+            width: 250,
         },
         {
             field: "deleted",
