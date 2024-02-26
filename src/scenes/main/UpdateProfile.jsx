@@ -2,7 +2,7 @@ import styles from "./SingUp.module.css"
 
 import { useState , useEffect} from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import updateUser from "../../redux/actions/users/updateUser";
 import getUserById from '../../redux/actions/users/getUserById';

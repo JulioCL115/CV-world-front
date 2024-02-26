@@ -25,13 +25,13 @@
 /*UI ELEMENTS*/
 
 .img{
-    height: 600px;
+    height: 500px;
     width: auto;
     object-fit: contain;
 }
 
 .btn {
-    width: 400px;
+    width: 300px;
     height: 50px;
     background-color: #098D85;
     border-color: transparent;
@@ -42,6 +42,6 @@
     text-decoration: none;
     font-size: 16px;
     font-weight: 600;
-    margin-top: 10px;
+    margin-top: 50px;
 }
 

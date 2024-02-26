@@ -1,11 +1,11 @@
 import styles from "./Detail.module.css";
 
-import Comments from "../../components/Detail/Comments";
-import Contact from "../../components/Detail/Contact";
-import Cv from "../../components/Detail/Cv";
+import Comments from "../../components/main/Detail/Comments";
+import Contact from "../../components/main/Detail/Contact";
+import Cv from "../../components/main/Detail/Cv";
 import getCvDetail from "../../redux/actions/cvs/getCvDetail";
 import ProfilePicture from "../../assets/blank-profile-picture-973460_960_720.webp";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/main/Spinner";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";

@@ -1,6 +1,6 @@
 import styles from "./Contact.module.css";
 
-import ProfilePicture from "../../assets/blank-profile-picture-973460_960_720.webp";
+import ProfilePicture from "../../../assets/blank-profile-picture-973460_960_720.webp";
 
 function Contact({ header, userName, userImage, email }) {
 

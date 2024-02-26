@@ -1,9 +1,8 @@
 import styles from "./MyCvs.module.css"
 
 import Illustration from "../../assets/upload-cv.png"
-import Cards from "../../components/Curriculums/Cards";
+import Cards from "../../components/main/Curriculums/Cards";
 import getUserById from "../../redux/actions/users/getUserById";
-import Spinner from "../../components/Spinner";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";

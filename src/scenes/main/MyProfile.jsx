@@ -17,7 +17,7 @@ function UpdateProfile() {
             const userDetail = await getUserById(userId);
             if (userDetail) {
                 setCurrentUser(userDetail);
-            }
+            }   
         };
 
         fetchUserDetail();

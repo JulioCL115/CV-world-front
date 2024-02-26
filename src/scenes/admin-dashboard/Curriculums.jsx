@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import getAllCvs from "../../redux/actions/cvs/getAllCvs";
+import getAllCvsUnfiltered from "../../redux/actions/cvs/getAllCvsUnfiltered";
 import deleteUser from "../../redux/actions/users/deleteUser";
 import restoreUser from "../../redux/actions/users/restoreUser";
 import getUserById from "../../redux/actions/users/getUserById";
@@ -18,12 +18,12 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminCurriculums() {
   const dispatch = useDispatch();
-  const cvs = useSelector((state) => state.cvs.allCvs);
+  const cvs = useSelector((state) => state.cvs.allCvsUnfiltered);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
-    dispatch(getAllCvs());
+    dispatch(getAllCvsUnfiltered());
   }, [dispatch]);
 
   console.log(cvs);
@@ -169,15 +169,6 @@ function AdminCurriculums() {
       >
        Curriculums
       </Typography>
-      <Box display="flex" justifyContent="end">
-        <Button
-          component={Link}
-          to="/admin/users/createcv"
-          variant="contained"
-        >
-          Crear nuevo usuario
-        </Button>
-      </Box>
       <Box
         pt={4}
         pl={4}

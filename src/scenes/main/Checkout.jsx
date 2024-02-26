@@ -1,6 +1,6 @@
 import styles from './Checkout.module.css';
 
-import Card from '../../components/Subscriptions/Card';
+import Card from '../../components/main/Subscriptions/Card';
 import createOrder from '../../redux/actions/payments/createOrder';
 import getSubscriptionDetail from '../../redux/actions/subscriptions/getSubscriptionDetail';
 // import updateSubscriptionId from '../../redux/actions/payments/updateSubscriptionId';

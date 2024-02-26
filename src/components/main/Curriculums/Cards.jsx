@@ -2,9 +2,9 @@ import styles from "./Cards.module.css"
 
 import Card from "./Card";
 // import updateCv from "../../redux/actions/cvs/updateCv";
-import deleteCv from "../../redux/actions/cvs/deleteCv";
-import getUserById from "../../redux/actions/users/getUserById";
-import updateCvViews from "../../redux/actions/cvs/updateCvViews";
+import deleteCv from "../../../redux/actions/cvs/deleteCv";
+import getUserById from "../../../redux/actions/users/getUserById";
+import updateCvViews from "../../../redux/actions/cvs/updateCvViews";
 import Spinner from "../Spinner";
 
 import { Link, useNavigate, useLocation } from "react-router-dom";
