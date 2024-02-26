@@ -6,6 +6,8 @@ import getAllCvsUnfiltered from "../../redux/actions/cvs/getAllCvsUnfiltered";
 import deleteUser from "../../redux/actions/users/deleteUser";
 import restoreUser from "../../redux/actions/users/restoreUser";
 import getUserById from "../../redux/actions/users/getUserById";
+import ProfilePciture from "./../../assets/blank-profile-picture-973460_960_720.webp"
+
 
 import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -47,9 +49,12 @@ function AdminCurriculums() {
       flex: 1
     },
     {
-      field: "photo",
+      field: "image",
       headerName: "Imagen",
       width: 100,
+      renderCell: (params) => (
+        <img src={params.row.image ? params.row.image : ProfilePciture} alt="User Photo" style={{ width: '30px', height: '30px', borderRadius: "50%", objectFit: "cover" }} />
+      ),
     },
     {
       field: "name",
@@ -61,57 +66,80 @@ function AdminCurriculums() {
       field: "contact.location",
       headerName: "Ubicación",
       width: 200,
-      valueGetter: (params) => params.row.contact?.location || '',
+      valueGetter: (params) => params.row.contact[0]?.location || '',
     },
     {
       field: "contact.email",
       headerName: "Email",
-      width: 200,
+      width: 400,
+      valueGetter: (params) => params.row.contact[0]?.email || '',
     },
     {
       field: "contact.phone",
       headerName: "Nro. de teléfono",
       width: 200,
+      valueGetter: (params) => params.row.contact[0]?.phone || '',
     },
     {
       field: "contact.website",
       headerName: "Sitio web",
-      width: 200,
+      width: 400,
+      valueGetter: (params) => params.row.contact[0]?.website || '',
     },
     {
       field: "experience",
       headerName: "Experiencia",
-      flex: 1,
+      width: 300,
+      valueGetter: (params) => {
+        let array = []
+
+        params.row.experience.map((exp) => {
+          let role = exp.role
+          let responsibilities = exp.responsibilities
+          let dateRange = exp.dateRange
+          let company = exp.company
+
+          return array.push(`${role} - ${company} -(${dateRange}) - ${responsibilities}, `)
+        })
+        return array
+      }
     },
     {
       field: "education",
       headerName: "Educación",
-      flex: 1,
+      width: 300,
+      valueGetter: (params) => {
+        let array = []
+
+        params.row.education.map((edu) => {
+          let career = edu.career
+          let dateRange = edu.dateRange
+          let institution = edu.institution
+
+          return array.push(`${career} - ${institution} -(${dateRange}), `)
+        })
+        return array
+      }
     },
     {
       field: "skills",
       headerName: "Competencias",
-      flex: 1,
+      width: 200,
     },
     {
       field: "speakingLanguages",
       headerName: "Idiomas",
-      flex: 1,
+      width: 200,
     },
     {
       field: "otherInterests",
       headerName: "Otros intereses",
-      flex: 1,
+      width: 200,
     },
     {
       field: "deleted",
       headerName: "Deshabilitado",
-      flex: 1,
-    },
-    {
-      field: "role",
-      headerName: "Role",
-      flex: 1,
+      width: 150,
     },
     {
       field: "delete",
@@ -167,7 +195,7 @@ function AdminCurriculums() {
         color={colors.black[500]}
         fontWeight="600"
       >
-       Curriculums
+        Curriculums
       </Typography>
       <Box
         pt={4}
