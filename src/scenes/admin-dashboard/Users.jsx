@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import getAllUsersUnfiltered from "../../redux/actions/users/getAllUsersUnfiltered";
 import deleteUser from "../../redux/actions/users/deleteUser";
 import updateUser from "../../redux/actions/users/updateUser";
+import restoreUser from "../../redux/actions/users/restoreUser";
+
 import ProfilePciture from "./../../assets/blank-profile-picture-973460_960_720.webp"
 
 import { Box, IconButton, Typography } from "@mui/material";
