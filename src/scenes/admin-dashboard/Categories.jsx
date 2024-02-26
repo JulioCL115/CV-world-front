@@ -115,7 +115,7 @@ function AdminCategories() {
             <Box display="flex" justifyContent="end">
                 <Button
                     component={Link}
-                    to="/admin/users/createcv"
+                    to="/admin/createcategory"
                     variant="contained"
                     sx={{
                         backgroundColor: "#098D85",
