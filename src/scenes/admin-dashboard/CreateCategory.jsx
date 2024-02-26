@@ -25,7 +25,6 @@ const CreateCategory = () => {
         name: "",
     };
 
-
     const handleFormSubmit = (values) => {
         postCategory(values.name);
     };
