@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import getAllUsersUnfiltered from "../../redux/actions/users/getAllUsersUnfiltered";
 import deleteUser from "../../redux/actions/users/deleteUser";
 import updateUser from "../../redux/actions/users/updateUser";
+import ProfilePciture from "./../../assets/blank-profile-picture-973460_960_720.webp"
 
-import { Box, IconButton, Button, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
@@ -48,7 +49,10 @@ function AdminUsers() {
         {
             field: "photo",
             headerName: "Imagen",
-            width: 200,
+            width: 100,
+            renderCell: (params) => (
+                <img src={params.row.photo ? params.row.photo : ProfilePciture} alt="User Photo" style={{ width: '30px', height: '30px', borderRadius: "50%" }} />
+            ),
         },
         {
             field: "name",
@@ -59,7 +63,7 @@ function AdminUsers() {
         {
             field: "email",
             headerName: "Email",
-            width: 200,
+            width: 400,
         },
         {
             field: "role",
@@ -72,7 +76,7 @@ function AdminUsers() {
             width: 150,
         },
         {
-            field: "subscriptionId",
+            field: "SubscriptionId",
             headerName: "ID Suscripción",
             width: 100,
         },

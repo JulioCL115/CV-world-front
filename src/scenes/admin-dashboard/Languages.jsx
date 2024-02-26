@@ -115,7 +115,7 @@ function AdminLanguages() {
       <Box display="flex" justifyContent="end">
         <Button
           component={Link}
-          to="/admin/users/createcv"
+          to="/admin/createlanguage"
           variant="contained"
           sx={{
             backgroundColor: "#098D85",
