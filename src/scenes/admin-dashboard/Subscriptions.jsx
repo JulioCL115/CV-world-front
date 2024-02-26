@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import getAllSubscriptionsUnfiltered from "../../redux/actions/subscriptions/getAllSubscriptionsUnfiltered";
 import deleteSubscription from "../../redux/actions/subscriptions/deleteSubscription";
 import updateSubscription from "../../redux/actions/subscriptions/updateSubscription";
+import restoreSubscription from "../../redux/actions/subscriptions/restoreSubscription";
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -28,11 +29,11 @@ function AdminSubscriptions() {
     console.log(subscriptions);
 
     const onDelete = (e, params) => {
-        dispatch(deleteSubscription(params.userID));
+        deleteSubscription(params.id);
     };
 
     const onRestore = (e, params) => {
-        dispatch(updateSubscription(params.userID));
+        restoreSubscription(params.id);
     };
 
     const onEdit = (e, params) => {

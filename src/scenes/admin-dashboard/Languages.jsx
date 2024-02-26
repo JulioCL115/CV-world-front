@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import getAllLanguagesUnfiltered from "../../redux/actions/languages/getAllLanguagesUnfiltered";
 import deleteLanguage from "../../redux/actions/languages/deleteLanguage";
 import updateLanguage from "../../redux/actions/languages/updateLanguage";
+import restoreLanguage from "../../redux/actions/languages/restoreLanguage";
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -32,7 +33,7 @@ function AdminLanguages() {
   };
 
   const onRestore = (e, params) => {
-    dispatch(updateLanguage(params.userID));
+    restoreLanguage(params.id);
   };
 
   const onEdit = (e, params) => {

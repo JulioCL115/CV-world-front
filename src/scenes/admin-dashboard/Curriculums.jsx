@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import getAllCvsUnfiltered from "../../redux/actions/cvs/getAllCvsUnfiltered";
-import deleteUser from "../../redux/actions/users/deleteUser";
-import restoreUser from "../../redux/actions/users/restoreUser";
+import deleteCv from "../../redux/actions/cvs/deleteCv";
+import restoreCv from "../../redux/actions/cvs/restoreCv";
 import getUserById from "../../redux/actions/users/getUserById";
-import ProfilePciture from "./../../assets/blank-profile-picture-973460_960_720.webp"
 
+import ProfilePciture from "./../../assets/blank-profile-picture-973460_960_720.webp"
 
 import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -31,11 +31,11 @@ function AdminCurriculums() {
   console.log(cvs);
 
   const onDelete = (e, params) => {
-    dispatch(deleteUser(params.userID));
+    deleteCv(params.id);
   };
 
   const onRestore = (e, params) => {
-    dispatch(restoreUser(params.userID));
+    restoreCv(params.id);
   };
 
   const onEdit = (e, params) => {
