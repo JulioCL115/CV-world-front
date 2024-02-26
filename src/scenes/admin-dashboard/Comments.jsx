@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
-import getAllComments from "../../redux/actions/comments/getAllComments";
+import getAllCommentsUnfiltered from "../../redux/actions/comments/getAllCommentsUnfiltered";
 import deleteComment from "../../redux/actions/comments/deleteComment";
 import updateComment from "../../redux/actions/comments/updateComment";
 
@@ -16,12 +15,12 @@ import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 
 function AdminComments () {
     const dispatch = useDispatch();
-    const comments = useSelector((state) => state.comments.allComments);
+    const comments = useSelector((state) => state.comments.allCommentsUnfiltered);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     useEffect(() => {
-        dispatch(getAllComments());
+        dispatch(getAllCommentsUnfiltered());
     }, [dispatch]);
 
     console.log(comments);
@@ -108,15 +107,6 @@ function AdminComments () {
             >
                 Comentarios
             </Typography>
-            <Box display="flex" justifyContent="end">
-                <Button
-                    component={Link}
-                    to="/admin/users/createcv"
-                    variant="contained"
-                >
-                    Crear nuevo usuario
-                </Button>
-            </Box>
             <Box
                 pt={4}
                 pl={4}

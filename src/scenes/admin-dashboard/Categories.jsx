@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 
 import deleteSubscription from "../../redux/actions/subscriptions/deleteSubscription";
 import updateSubscription from "../../redux/actions/subscriptions/updateSubscription";
-import getAllCategories from "../../redux/actions/categories/getAllCategories";
-
+import getAllCategoriesUnfiltered from "../../redux/actions/categories/getAllCategoriesUnfiltered";
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -18,12 +17,12 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminCategories() {
     const dispatch = useDispatch();
-    const categories = useSelector((state) => state.categories.allCategories);
+    const categories = useSelector((state) => state.categories.allCategoriesUnfiltered);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     useEffect(() => {
-        dispatch(getAllCategories());
+        dispatch(getAllCategoriesUnfiltered());
     }, [dispatch]);
 
     console.log(categories);
@@ -118,8 +117,14 @@ function AdminCategories() {
                     component={Link}
                     to="/admin/users/createcv"
                     variant="contained"
+                    sx={{
+                        backgroundColor: "#098D85",
+                        '&:hover': {
+                            backgroundColor: "#098D85",
+                        }
+                    }}
                 >
-                    Crear nuevo usuario
+                    Crear Categoría
                 </Button>
             </Box>
             <Box

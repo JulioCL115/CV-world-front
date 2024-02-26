@@ -2,7 +2,7 @@ import axios from "axios";
 import { setAllLanguages } from "../../slices/languagesSlice"
 
 const getAllLanguages = () => {
-    const endpoint = "http://localhost:3001/language"
+    const endpoint = axios.defaults.baseURL + "language"
 
     return async (dispatch) => {
         try {

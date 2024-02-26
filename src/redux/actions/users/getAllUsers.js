@@ -1,6 +1,5 @@
 import axios from "axios";
 import { setAllUsers } from "../../slices/usersSlice"
-import { logDOM } from "@testing-library/react";
 
 const getAllUsers = () => {
     const endpoint = axios.defaults.baseURL + "user"

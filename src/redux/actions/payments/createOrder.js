@@ -1,5 +1,4 @@
 import axiosInstance from "../../../config/axios-config";
-import { setPaymentLink } from "../../slices/paymentsSlice";
 
 const createOrder = async (userId, paymentInfo) => {
     const endpoint = `http://localhost:3001/create-order/${userId}`

@@ -2,16 +2,16 @@ import styles from "./Cards.module.css"
 
 import Card from "./Card";
 // import updateCv from "../../redux/actions/cvs/updateCv";
-import deleteCv from "../../redux/actions/cvs/deleteCv";
-import getUserById from "../../redux/actions/users/getUserById";
-import updateCvViews from "../../redux/actions/cvs/updateCvViews";
+import deleteCv from "../../../redux/actions/cvs/deleteCv";
+import getUserById from "../../../redux/actions/users/getUserById";
+import updateCvViews from "../../../redux/actions/cvs/updateCvViews";
 import Spinner from "../Spinner";
 
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from 'react';
 
-function Cards({ cvs }) {
+function Cards({ cvs, setCurrentUser }) {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
@@ -26,18 +26,29 @@ function Cards({ cvs }) {
     console.log(userId);
 
     const handleClick = (id, UserId) => {
-        if (UserId !== localStorageUser.id) {
+        if (UserId !== localStorageUser?.id) {
             updateCvViews(id);
         }
         navigate(`/detail/${id}`);
     }
 
+
+
     const handleDelete = async (id) => {
         setIsLoading(true);
         /* eslint-disable-next-line no-restricted-globals */
         if (window.confirm("¿Estás seguro que querés eliminar este CV?")) {
-            await deleteCv(id);
-            dispatch(getUserById(userId));
+
+            const isDeleted = await deleteCv(id);
+            if (isDeleted) {
+                setCurrentUser(prevUser => ({
+                    ...prevUser,
+                    Cvs: prevUser.Cvs.filter(cv => cv.id !== id)
+                }));
+            }
+
+            getUserById(userId);
+
             setTimeout(() => {
                 navigate("/mycvs");
                 setIsLoading(false);

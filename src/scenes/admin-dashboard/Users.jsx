@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import getAllUsers from "../../redux/actions/users/getAllUsers";
+import getAllUsersUnfiltered from "../../redux/actions/users/getAllUsersUnfiltered";
 import deleteUser from "../../redux/actions/users/deleteUser";
 import updateUser from "../../redux/actions/users/updateUser";
 
@@ -17,12 +17,12 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminUsers() {
     const dispatch = useDispatch();
-    const users = useSelector((state) => state.users.allUsers);
+    const users = useSelector((state) => state.users.allUsersUnfiltered);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     useEffect(() => {
-        dispatch(getAllUsers());
+        dispatch(getAllUsersUnfiltered());
     }, [dispatch]);
 
     console.log(users);
@@ -132,15 +132,6 @@ function AdminUsers() {
             >
                 Usuarios
             </Typography>
-            <Box display="flex" justifyContent="end">
-                <Button
-                    component={Link}
-                    to="/admin/users/createcv"
-                    variant="contained"
-                >
-                    Crear nuevo usuario
-                </Button>
-            </Box>
             <Box
                 pt={4}
                 pl={4}

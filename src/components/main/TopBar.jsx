@@ -3,10 +3,10 @@ import styles from "./TopBar.module.css";
 
 import { Link } from "react-router-dom";
 
-import Logo from "../assets/Logo-Black.png";
-import LogoProfileImage from "../assets/Logo_Round.png"
-import logout from "../redux/actions/users/logout";
-import { auth } from "../config/firebase-config"
+import Logo from "../../assets/Logo-Black.png";
+import LogoProfileImage from "../../assets/Logo_Round.png"
+import logout from "../../redux/actions/users/logout";
+import { auth } from "../../config/firebase-config"
 import { signOut } from "firebase/auth"
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom"; 
@@ -20,8 +20,6 @@ function TopBar() {
         storedUser && storedUser !== "[object Object]" ? JSON.parse(storedUser) : null
     );
     const [selectedMenu, setSelectedMenu] = useState("home");
-
-    console.log(currentUser);
 
     useEffect(() => {
         // Set the selectedMenu based on the current path

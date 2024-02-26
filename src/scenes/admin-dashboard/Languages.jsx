@@ -2,10 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import getAllLanguages from "../../redux/actions/languages/getAllLanguages";
+import getAllLanguagesUnfiltered from "../../redux/actions/languages/getAllLanguagesUnfiltered";
 import deleteLanguage from "../../redux/actions/languages/deleteLanguage";
 import updateLanguage from "../../redux/actions/languages/updateLanguage";
-
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -18,12 +17,12 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminLanguages() {
   const dispatch = useDispatch();
-  const languages = useSelector((state) => state.languages.allLanguages);
+  const languages = useSelector((state) => state.languages.allLanguagesUnfiltered);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
-    dispatch(getAllLanguages());
+    dispatch(getAllLanguagesUnfiltered());
   }, [dispatch]);
 
   console.log(languages);
@@ -118,8 +117,14 @@ function AdminLanguages() {
           component={Link}
           to="/admin/users/createcv"
           variant="contained"
+          sx={{
+            backgroundColor: "#098D85",
+            '&:hover': {
+              backgroundColor: "#098D85",
+          }
+        }}
         >
-          Crear nuevo usuario
+          Crear Idioma
         </Button>
       </Box>
       <Box

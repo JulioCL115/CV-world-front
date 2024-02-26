@@ -2,10 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import getAllSubscriptions from "../../redux/actions/subscriptions/getAllSubscriptions";
+import getAllSubscriptionsUnfiltered from "../../redux/actions/subscriptions/getAllSubscriptionsUnfiltered";
 import deleteSubscription from "../../redux/actions/subscriptions/deleteSubscription";
 import updateSubscription from "../../redux/actions/subscriptions/updateSubscription";
-
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -15,16 +14,15 @@ import { useTheme } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import AdminCurriculums from "./Curriculums";
 
 function AdminSubscriptions() {
     const dispatch = useDispatch();
-    const subscriptions = useSelector((state) => state.subscriptions.allSubscriptions);
+    const subscriptions = useSelector((state) => state.subscriptions.allSubscriptionsUnfiltered);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     useEffect(() => {
-        dispatch(getAllSubscriptions());
+        dispatch(getAllSubscriptionsUnfiltered());
     }, [dispatch]);
 
     console.log(subscriptions);
@@ -134,8 +132,14 @@ function AdminSubscriptions() {
                     component={Link}
                     to="/admin/users/createcv"
                     variant="contained"
+                    sx={{
+                        backgroundColor: "#098D85",
+                        '&:hover': {
+                            backgroundColor: "#098D85",
+                        }
+                    }}
                 >
-                    Crear nuevo usuario
+                    Crear Suscripción 
                 </Button>
             </Box>
             <Box

@@ -1,20 +1,29 @@
 import styles from './MyProfile.module.css';
 
 import { Link } from "react-router-dom";
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import getUserById from '../../redux/actions/users/getUserById';
 
 function UpdateProfile() {
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => state.users.currentUser);
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser.id
+    const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
-        dispatch(getUserById(userId))
+        const fetchUserDetail = async () => {
+            const userDetail = await getUserById(userId);
+            if (userDetail) {
+                setCurrentUser(userDetail);
+            }   
+        };
+
+        fetchUserDetail();
     }, [userId, dispatch])
+
+    console.log(currentUser);
 
     return (
         <div className={styles.myProfile}>

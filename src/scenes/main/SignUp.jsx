@@ -90,19 +90,19 @@ function SignUp() {
           if (registrationStatus.status === "Success") {
             const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password);
             const user = userCredential.user;
-  
-            // Enviar correo electrónico de verificación
+            
             await sendEmailVerification(user);
-  
+
             setRegistrationStatus({
               status: "Success",
               message: "¡Te registraste con éxito! Se ha enviado un correo electrónico de verificación."
             });
   
             setTimeout(() => {
-              navigate("/signin");
+              navigate("/verifyemail");
             }, 2000);
           } else {
+            
             setRegistrationStatus({
               status: "Fail",
               message: "Ya existe un usuario con ese email"

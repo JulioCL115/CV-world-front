@@ -1,11 +1,14 @@
 import styles from "./PaymentFeedback.module.css";
 
-import React from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import IllustrationApproved from "../../assets/payment-approved.png"
 import IllustrationPending from "../../assets/payment-pending.png"
 import IllustrationFailure from "../../assets/payment-failure.png"
+
+// import updateUserSubscription from "../../redux/actions/users/updateUserSubscription";
+// import { useSelector } from "react-redux";
 
 function PaymentFeedback() {
   const location = useLocation();
