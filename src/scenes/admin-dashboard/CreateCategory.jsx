@@ -17,7 +17,7 @@ const CreateCategory = () => {
     const checkoutSchema = yup.object().shape({
         name: yup
             .string()
-            .matches(nameRegex, "Phone number is not valid")
+            .matches(nameRegex, "Sólo puede contener letras y guiones")
             .required("required"),
     });
 
