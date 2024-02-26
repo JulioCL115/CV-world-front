@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import getAllUsersUnfiltered from "../../redux/actions/users/getAllUsersUnfiltered";
 import deleteUser from "../../redux/actions/users/deleteUser";
 import updateUser from "../../redux/actions/users/updateUser";
+import ProfilePciture from "./../../assets/blank-profile-picture-973460_960_720.webp"
 
-import { Box, IconButton, Button, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
@@ -14,6 +15,8 @@ import { useTheme } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 function AdminUsers() {
     const dispatch = useDispatch();
@@ -48,7 +51,10 @@ function AdminUsers() {
         {
             field: "photo",
             headerName: "Imagen",
-            width: 200,
+            width: 100,
+            renderCell: (params) => (
+                <img src={params.row.photo ? params.row.photo : ProfilePciture} alt="User Photo" style={{ width: '30px', height: '30px', borderRadius: "50%" }} />
+            ),
         },
         {
             field: "name",
@@ -59,12 +65,35 @@ function AdminUsers() {
         {
             field: "email",
             headerName: "Email",
-            width: 200,
+            width: 400,
         },
         {
             field: "role",
             headerName: "Rol",
             width: 200,
+            renderCell: ({ row: { role } }) => {
+                return (
+                  <Box
+                    width="60%"
+                    m="0 auto"
+                    p="5px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    backgroundColor={
+                        colors.green[500]
+                
+                    }
+                    borderRadius="4px"
+                  >
+                    {role === "admin" && <AdminPanelSettingsOutlinedIcon style={{ color: 'white'}}/>}
+                    {role === "user" && <LockOutlinedIcon style={{ color: 'white', width: 20, height: 20 }}/>}
+                    <Typography color={colors.white[500]} sx={{ ml: "5px" }}>
+                      {role}
+                    </Typography>
+                  </Box>
+                );
+              },
         },
         {
             field: "deleted",
@@ -72,7 +101,7 @@ function AdminUsers() {
             width: 150,
         },
         {
-            field: "subscriptionId",
+            field: "SubscriptionId",
             headerName: "ID Suscripción",
             width: 100,
         },
