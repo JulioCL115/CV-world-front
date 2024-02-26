@@ -5,7 +5,7 @@ import getAllCommentsUnfiltered from "../../redux/actions/comments/getAllComment
 import deleteComment from "../../redux/actions/comments/deleteComment";
 import updateComment from "../../redux/actions/comments/updateComment";
 
-import { Box, IconButton, Button, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
@@ -58,12 +58,12 @@ function AdminComments () {
             width: 150,
         },
         {
-            field: "cvId",
+            field: "CvId",
             headerName: "ID CV",
             width: 150,
         },
         {
-            field: "userId",
+            field: "UserId",
             headerName: "ID Usuario",
             width: 150,
         },
