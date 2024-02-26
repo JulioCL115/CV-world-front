@@ -32,12 +32,15 @@ function AdminUsers() {
 
     console.log(users);
 
-    const onDelete = (e, params) => {
-        deleteUser(params.id);
+    const onDelete = async (e, params) => {
+        await deleteUser(params.id);
+        dispatch(getAllUsersUnfiltered());
+
     };
 
-    const onRestore = (e, params) => {
-        restoreUser(params.id);
+    const onRestore = async (e, params) => {
+        await restoreUser(params.id);
+        dispatch(getAllUsersUnfiltered());
     };
 
     const onEdit = (e, params) => {

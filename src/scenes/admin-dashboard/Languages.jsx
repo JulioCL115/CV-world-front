@@ -28,12 +28,14 @@ function AdminLanguages() {
 
   console.log(languages);
 
-  const onDelete = (e, params) => {
-    deleteLanguage(params.id);
+  const onDelete = async (e, params) => {
+    await deleteLanguage(params.id);
+    dispatch(getAllLanguagesUnfiltered());
   };
 
-  const onRestore = (e, params) => {
-    restoreLanguage(params.id);
+  const onRestore = async (e, params) => {
+    await restoreLanguage(params.id);
+    dispatch(getAllLanguagesUnfiltered());
   };
 
   const onEdit = (e, params) => {

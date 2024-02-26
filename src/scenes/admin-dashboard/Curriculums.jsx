@@ -30,12 +30,14 @@ function AdminCurriculums() {
 
   console.log(cvs);
 
-  const onDelete = (e, params) => {
-    deleteCv(params.id);
+  const onDelete = async (e, params) => {
+    await deleteCv(params.id);
+    dispatch(getAllCvsUnfiltered());
   };
 
-  const onRestore = (e, params) => {
-    restoreCv(params.id);
+  const onRestore = async (e, params) => {
+    await restoreCv(params.id);
+    dispatch(getAllCvsUnfiltered());
   };
 
   const onEdit = (e, params) => {

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import deleteSubscription from "../../redux/actions/subscriptions/deleteSubscription";
+import deleteCategory from "../../redux/actions/categories/deleteCategory";
 import updateSubscription from "../../redux/actions/subscriptions/updateSubscription";
 import getAllCategoriesUnfiltered from "../../redux/actions/categories/getAllCategoriesUnfiltered";
 import restoreCategory from "../../redux/actions/categories/restoreCategory";
@@ -28,12 +28,14 @@ function AdminCategories() {
 
     console.log(categories);
 
-    const onDelete = (e, params) => {
-        deleteSubscription(params.id);
+    const onDelete = async (e, params) => {
+        await deleteCategory(params.id);
+        dispatch(getAllCategoriesUnfiltered());
     };
 
-    const onRestore = (e, params) => {
-        restoreCategory(params.id);
+    const onRestore = async (e, params) => {
+        await restoreCategory(params.id);
+        dispatch(getAllCategoriesUnfiltered());
     };
 
     const onEdit = (e, params) => {
