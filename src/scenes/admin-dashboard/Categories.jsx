@@ -118,6 +118,9 @@ function AdminCategories() {
                     component={Link}
                     to="/admin/users/createcv"
                     variant="contained"
+                    sx={{
+                        backgroundColor: "#098D85",
+                    }}
                 >
                     Crear Categoría
                 </Button>

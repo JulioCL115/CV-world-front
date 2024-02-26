@@ -3,7 +3,7 @@ import styles from "./Footer.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import Logo from "./../assets/Logo-White.png";
+import Logo from "../../assets/Logo-White.png";
 
 function Footer() {
 

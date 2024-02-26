@@ -3,11 +3,11 @@ import styles from "./Comments.module.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import Illustrations from "../../assets/customer-review-3949821-3277282.webp";
-import ProfilePicture from "../../assets/blank-profile-picture-973460_960_720.webp";
-import postComment from "../../redux/actions/comments/postComment";
-import getCvDetail from "../../redux/actions/cvs/getCvDetail";
-import deleteComment from "../../redux/actions/comments/deleteComment";
+import Illustrations from "../../../assets/customer-review-3949821-3277282.webp";
+import ProfilePicture from "../../../assets/blank-profile-picture-973460_960_720.webp";
+import postComment from "../../../redux/actions/comments/postComment";
+import getCvDetail from "../../../redux/actions/cvs/getCvDetail";
+import deleteComment from "../../../redux/actions/comments/deleteComment";
 
 function Comments({ cvId, comments , setCv }) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));

@@ -1,7 +1,7 @@
 import styles from './UpdateCv.module.css';
 
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from "react-router-dom";
 
 import updateCv from '../../redux/actions/cvs/updateCv';
@@ -17,7 +17,6 @@ function UpdateCv() {
     const { cvId } = useParams();
     const languages = useSelector((state) => state.languages.allLanguages);
     const categories = useSelector((state) => state.categories.allCategories);
-    const [currentCv, setCurrentCv] = useState({});
     const [loading, setLoading] = useState(true);
 
     console.log(cvId);
@@ -42,17 +41,40 @@ function UpdateCv() {
         otherInterests: []
     });
 
-    useEffect( () => {
+    useEffect(() => {
         dispatch(getAllCategories());
         dispatch(getAllLanguages());
         const fetchCvDetail = async () => {
             const cvDetail = await getCvDetail(cvId);
+            console.log(cvDetail);
             setCv(cvDetail);
+
+            // Update the cv state with the names instead of the objects
+            setCv({
+                ...cvDetail,
+                category: cvDetail.category.name ? cvDetail.category.name : "",
+                language: cvDetail.language.name ? cvDetail.language.name : "",
+                name: cvDetail.name ? cvDetail.name : "",
+                image: cvDetail.image ? cvDetail.image : "",
+                header: cvDetail.header ? cvDetail.header : "",
+                description: cvDetail.description ? cvDetail.description : "",
+                experience: cvDetail.experience ? cvDetail.experience : [],
+                education: cvDetail.education ? cvDetail.education : [],
+                contact: cvDetail.contact ? cvDetail.contact : {
+                    location: "",
+                    email: "",
+                    phone: "",
+                    website: ""
+                },
+                skills: cvDetail.skills ? cvDetail.skills : [],
+                speakingLanguages: cvDetail.speakingLanguages ? cvDetail.speakingLanguages : [],
+                otherInterests: cvDetail.otherInterests ? cvDetail.otherInterests : []
+            });
             setLoading(false);
         };
 
         fetchCvDetail();
-    }, []); 
+    }, []);
 
 
     const [showEducationDateField, setShowEducationDateField] = useState([]);
@@ -198,7 +220,7 @@ function UpdateCv() {
 
         const copyShowExperienceDateField = [...showExperienceDateField];
         copyShowExperienceDateField.splice(index, 1);
-        
+
         setShowExperienceDateField([...copyShowExperienceDateField]);
         setCv({
             ...cv,
@@ -385,7 +407,7 @@ function UpdateCv() {
             <form className={styles.form} onSubmit={handleSubmit}>
 
                 <div className={styles.containerSection}>
-                    <label className={styles.txtSemiBold16Purple}>¿En qué categoría pondrías tu CV?</label>{}
+                    <label className={styles.txtSemiBold16Purple}>¿En qué categoría pondrías tu CV?</label>{ }
                     <select
                         className={styles.input}
                         name='category'

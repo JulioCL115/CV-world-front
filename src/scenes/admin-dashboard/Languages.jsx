@@ -118,6 +118,9 @@ function AdminLanguages() {
           component={Link}
           to="/admin/users/createcv"
           variant="contained"
+          sx={{
+            backgroundColor: "#098D85",
+        }}
         >
           Crear Idioma
         </Button>

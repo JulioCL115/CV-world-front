@@ -96,7 +96,8 @@ function SignUp() {
 
             const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
             const user = userCredential.user;
-            // await sendEmailVerification(auth, user);
+            
+            await sendEmailVerification(user);
 
             setRegistrationStatus({
               status: "Success",
@@ -104,9 +105,10 @@ function SignUp() {
             })
 
             setTimeout(() => {
-              navigate("/signin");
+              navigate("/verifyemail");
             }, 2000);
           } else {
+            
             setRegistrationStatus({
               status: "Fail",
               message: "Ya existe un usuario con ese email"
