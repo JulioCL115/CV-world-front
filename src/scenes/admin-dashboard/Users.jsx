@@ -15,6 +15,8 @@ import { useTheme } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 function AdminUsers() {
     const dispatch = useDispatch();
@@ -69,6 +71,29 @@ function AdminUsers() {
             field: "role",
             headerName: "Rol",
             width: 200,
+            renderCell: ({ row: { role } }) => {
+                return (
+                  <Box
+                    width="60%"
+                    m="0 auto"
+                    p="5px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    backgroundColor={
+                        colors.green[500]
+                
+                    }
+                    borderRadius="4px"
+                  >
+                    {role === "admin" && <AdminPanelSettingsOutlinedIcon style={{ color: 'white'}}/>}
+                    {role === "user" && <LockOutlinedIcon style={{ color: 'white', width: 20, height: 20 }}/>}
+                    <Typography color={colors.white[500]} sx={{ ml: "5px" }}>
+                      {role}
+                    </Typography>
+                  </Box>
+                );
+              },
         },
         {
             field: "deleted",
