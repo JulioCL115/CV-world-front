@@ -1,10 +1,11 @@
 import axios from "axios";
+import axiosInstance from "../../../config/axios-config";
 
 const postComment = async(comment, cvId, userId) => {
     const endpoint = axios.defaults.baseURL + "comment/" + cvId + "/" + userId;
 
         try {
-            await axios.post(endpoint, {comment: comment});
+            await axiosInstance.post(endpoint, {comment: comment});
 
             return "Success"; // This is the value that the handleSubmit function will
         } catch (error) {
@@ -14,3 +15,5 @@ const postComment = async(comment, cvId, userId) => {
 };
 
 export default postComment;
+
+
