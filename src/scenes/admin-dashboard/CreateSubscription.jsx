@@ -1,18 +1,36 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
+
+import postSubscription from "../../redux/actions/subscriptions/postSubscription";
 
 const CreateSubscription = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
+    const nameRegex = /^[a-zA-Z\s-]+$/;
+
+    const checkoutSchema = yup.object().shape({
+        name: yup
+            .string()
+            .matches(nameRegex, "Sólo puede contener letras y guiones")
+            .required("required"),
+    });
+
+    const initialValues = {
+        name: "",
+        price: "",
+        included: "",
+        notIncluded: "",
+    };
 
     const handleFormSubmit = (values) => {
         console.log(values);
+        postSubscription(values);
     };
 
     return (
@@ -22,7 +40,7 @@ const CreateSubscription = () => {
                 color={colors.black[500]}
                 fontWeight="600"
             >
-                Crear Categoría
+                Crear Suscripción
             </Typography>
             <Formik
                 onSubmit={handleFormSubmit}
@@ -36,8 +54,9 @@ const CreateSubscription = () => {
                     handleBlur,
                     handleChange,
                     handleSubmit,
+                    isSubmitting
                 }) => (
-                    <form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit}>
                         <Box
                             display="grid"
                             gap="30px"
@@ -53,46 +72,73 @@ const CreateSubscription = () => {
                                 label="Nombre"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                value={values.contact}
+                                value={values.name}
                                 name="name"
-                                error={!!touched.contact && !!errors.contact}
-                                helperText={touched.contact && errors.contact}
+                                error={!!touched.name && !!errors.name}
+                                helperText={touched.name && errors.name}
+                                sx={{ gridColumn: "span 4" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Precio"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.price}
+                                name="price"
+                                error={!!touched.name && !!errors.name}
+                                helperText={touched.name && errors.name}
+                                sx={{ gridColumn: "span 4" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="Incluye..."
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.included}
+                                name="included"
+                                error={!!touched.name && !!errors.name}
+                                helperText={touched.name && errors.name}
+                                sx={{ gridColumn: "span 4" }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                label="notIncluded"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.notIncluded}
+                                name="notIncluded"
+                                error={!!touched.name && !!errors.name}
+                                helperText={touched.name && errors.name}
                                 sx={{ gridColumn: "span 4" }}
                             />
                         </Box>
                         <Box display="flex" justifyContent="end" mt="20px">
-                            <Button type="submit" color="secondary" variant="contained">
-                                Crear Categoria
+                            <Button type="submit"
+                                color="secondary"
+                                variant="contained"
+                                sx={{
+                                    backgroundColor: "#098D85",
+                                    '&:hover': {
+                                        backgroundColor: "#098D85",
+                                    }
+                                }}
+                                disabled={isSubmitting}
+                            >
+                                Crear
                             </Button>
                         </Box>
-                    </form>
+                    </Form>
                 )}
             </Formik>
         </Box>
     );
 };
 
-const phoneRegExp =
-    /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-    firstName: yup.string().required("required"),
-    lastName: yup.string().required("required"),
-    email: yup.string().email("invalid email").required("required"),
-    contact: yup
-        .string()
-        .matches(phoneRegExp, "Phone number is not valid")
-        .required("required"),
-    address1: yup.string().required("required"),
-    address2: yup.string().required("required"),
-});
-const initialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    contact: "",
-    address1: "",
-    address2: "",
-};
 
 export default CreateSubscription;

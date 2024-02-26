@@ -28,7 +28,7 @@ function AdminLanguages() {
   console.log(languages);
 
   const onDelete = (e, params) => {
-    dispatch(deleteLanguage(params.userID));
+    deleteLanguage(params.id);
   };
 
   const onRestore = (e, params) => {
@@ -115,7 +115,7 @@ function AdminLanguages() {
       <Box display="flex" justifyContent="end">
         <Button
           component={Link}
-          to="/admin/users/createcv"
+          to="/admin/createlanguage"
           variant="contained"
           sx={{
             backgroundColor: "#098D85",
