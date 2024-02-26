@@ -28,12 +28,14 @@ function AdminSubscriptions() {
 
     console.log(subscriptions);
 
-    const onDelete = (e, params) => {
-        deleteSubscription(params.id);
+    const onDelete = async (e, params) => {
+         await deleteSubscription(params.id);
+         dispatch(getAllSubscriptionsUnfiltered())
     };
 
-    const onRestore = (e, params) => {
-        restoreSubscription(params.id);
+    const onRestore = async(e, params) => {
+        await restoreSubscription(params.id);
+        dispatch(getAllSubscriptionsUnfiltered());
     };
 
     const onEdit = (e, params) => {

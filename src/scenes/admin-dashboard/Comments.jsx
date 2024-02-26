@@ -26,12 +26,14 @@ function AdminComments () {
 
     console.log(comments);
 
-    const onDelete = (e, params) => {
-        deleteComment(params.id);
+    const onDelete = async (e, params) => {
+        await deleteComment(params.id);
+        dispatch(getAllCommentsUnfiltered());
     };
 
-    const onRestore = (e, params) => {
-        restoreComment(params.id);
+    const onRestore = async (e, params) => {
+        await restoreComment(params.id);
+        dispatch(getAllCommentsUnfiltered());
     };
 
 
