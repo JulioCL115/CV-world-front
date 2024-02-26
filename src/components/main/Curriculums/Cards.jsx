@@ -24,7 +24,7 @@ function Cards({ cvs, setCurrentUser }) {
     console.log(userId);
 
     const handleClick = (id, UserId) => {
-        if (UserId !== localStorageUser.id) {
+        if (!localStorageUser || UserId !== localStorageUser.id) {
             updateCvViews(id);
         }
         navigate(`/detail/${id}`);

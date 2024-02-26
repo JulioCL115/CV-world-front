@@ -1,4 +1,5 @@
 import axiosInstance from "../../../config/axios-config";
+import axios from "axios";
 
 const postCategory = async (category) => {
     const endpoint = axios.defaults.baseURL + "category" 

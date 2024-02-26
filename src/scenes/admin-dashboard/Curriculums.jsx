@@ -7,7 +7,7 @@ import deleteUser from "../../redux/actions/users/deleteUser";
 import restoreUser from "../../redux/actions/users/restoreUser";
 import getUserById from "../../redux/actions/users/getUserById";
 
-import { Box, IconButton, Button, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
