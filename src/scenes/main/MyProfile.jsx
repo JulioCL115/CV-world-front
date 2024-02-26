@@ -1,5 +1,5 @@
 import styles from './MyProfile.module.css';
-
+import image from '../../assets/Website-Creator-cuate.png'
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -27,10 +27,13 @@ function UpdateProfile() {
 
     return (
         <div className={styles.myProfile}>
+            <div className={styles.containerLeft}>
+                        <img className={styles.illustration} src={image} alt="ilustración"></img>
+                    </div>
             {localStorageUser ?
-                <div>
+                <div className={styles.Container}>
                     <h1>{currentUser ? currentUser.name : null}</h1>
-                    <p>{currentUser ? currentUser.email: null}</p>
+                    <p>Correo: {currentUser ? currentUser.email: null}</p>
                     <Link to="/updateprofile">
                         <button className={styles.btn}>
                             <svg xmlns="http://www.w3.org/2000/svg"

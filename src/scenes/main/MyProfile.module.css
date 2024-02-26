@@ -1,11 +1,74 @@
-.myprofile {
+.myProfile {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     padding-left: 45px;
-    padding-right: 45px;
+    padding-right: 15%;
     padding-top: 85px;
     padding-bottom: 85px;
+    gap: 20%;
 }
 
+
+.Container{
+    max-width: 420px;
+    height: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 70px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+    border: double 3px transparent;
+    border-radius: 80px;
+    background-image: linear-gradient(white, white), radial-gradient(circle at top left, #098D85,#3E3E70);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    
+}
+
+.Container h1 {
+    color: #098D85;
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0px;
+    padding-bottom: 10px;
+}
+
+.updateProfile h1, .updateProfile p {
+    margin-top: 30px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+
+}
+
+.containerLeft {
+    width: 50%;
+    margin: 0;
+}
+
+.illustration {
+    padding-left: 10%;
+    width: 100%;
+}
+
+.btn {
+    margin-top:  20px;
+    background-color: #098D85;
+    border-color: transparent;
+    border-radius: 5px;
+}
+.btn svg {
+    color: white;
+    width: 30px;
+    height: 30px;
+}
