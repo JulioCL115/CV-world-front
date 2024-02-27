@@ -1,11 +1,11 @@
 import axiosInstance from "../../../config/axios-config";
 import axios from "axios";
 
-const updateCategory = async (categoryId, category) => {
+const updateCategory = async (categoryId, name) => {
     const endpoint = axios.defaults.baseURL + "category/" + categoryId
 
         try {
-            await axiosInstance.put(endpoint, category);
+            await axiosInstance.put(endpoint, { name : name });
 
             return 
         } catch (error) {

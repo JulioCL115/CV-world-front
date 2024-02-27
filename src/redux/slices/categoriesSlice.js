@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     allCategories: null,
-    allCategoriesUnfiltered: null,
-    categoryDetail: null
+    allCategoriesUnfiltered: null
   }
   const categoriesSlice = createSlice({
     name: "categories",
@@ -14,12 +13,9 @@ const initialState = {
       },
       setAllCategoriesUnfiltered(state, action) {
         state.allCategoriesUnfiltered = action.payload
-      },
-      setCategoryDetail(state, action) {
-        state.categoryDetail = action.payload
       }
     },
   });
   
-  export const { setAllCategories, setAllCategoriesUnfiltered, setCategoryDetail} = categoriesSlice.actions;
+  export const { setAllCategories, setAllCategoriesUnfiltered } = categoriesSlice.actions;
   export default categoriesSlice.reducer;
