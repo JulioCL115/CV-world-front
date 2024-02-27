@@ -7,7 +7,7 @@ const updateLanguage = async (languageId, name) => {
     console.log(name);
 
         try {
-            await axiosInstance.put(endpoint, name);
+            await axiosInstance.put(endpoint, { name : name });
 
             return 
         } catch (error) {
