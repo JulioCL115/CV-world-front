@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import getAllSubscriptionsUnfiltered from "../../redux/actions/subscriptions/getAllSubscriptionsUnfiltered";
 import deleteSubscription from "../../redux/actions/subscriptions/deleteSubscription";
-import updateSubscription from "../../redux/actions/subscriptions/updateSubscription";
 import restoreSubscription from "../../redux/actions/subscriptions/restoreSubscription";
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
@@ -36,10 +35,6 @@ function AdminSubscriptions() {
     const onRestore = async(e, params) => {
         await restoreSubscription(params.id);
         dispatch(getAllSubscriptionsUnfiltered());
-    };
-
-    const onEdit = (e, params) => {
-        dispatch(updateSubscription(params.userID));
     };
 
     const columns = [
@@ -105,9 +100,8 @@ function AdminSubscriptions() {
             renderCell: (params) => {
                 return (
                     <IconButton
-                        onClick={(e) => onEdit(e, params.row)}
                         component={Link}
-                        to="/users/form/update"
+                        to={`/admin/updatesubscription/${params.row.id}`}
                     >
                         <EditOutlinedIcon />
                     </IconButton>
@@ -133,7 +127,7 @@ function AdminSubscriptions() {
             <Box display="flex" justifyContent="end">
                 <Button
                     component={Link}
-                    to="/admin/createsubscriptions"
+                    to="/admin/createsubscription"
                     variant="contained"
                     sx={{
                         backgroundColor: "#098D85",

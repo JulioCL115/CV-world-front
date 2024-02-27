@@ -36,6 +36,9 @@ import AdminComments from "./scenes/admin-dashboard/Comments";
 import CreateCategory from "./scenes/admin-dashboard/CreateCategory";
 import CreateLanguage from "./scenes/admin-dashboard/CreateLanguage";
 import CreateSubscription from "./scenes/admin-dashboard/CreateSubscription";
+import UpdateCategory from "./scenes/admin-dashboard/UpdateCategory";
+import UpdateLanguage from "./scenes/admin-dashboard/UpdateLanguage";
+import UpdateSubscription from "./scenes/admin-dashboard/UpdateSubscription";
 import SideBar from "./components/admin-dashboard/SideBar";
 import Topbar from "./components/admin-dashboard/Topbar";
 import PaymentFeedback from "./scenes/main/PaymentFeedback";
@@ -103,11 +106,14 @@ function App() {
                     <Route path="/admin/users" element={<AdminUsers />} />
                     <Route path="/admin/curriculums" element={<AdminCurriculums />} />
                     <Route path="/admin/subscriptions" element={<AdminSubscriptions />} />
-                    <Route path="/admin/createsubscriptions" element={< CreateSubscription />} />
+                    <Route path="/admin/createsubscription" element={< CreateSubscription />} />
+                    <Route path="/admin/updatesubscription/:subscriptionId" element={< UpdateSubscription />} />
                     <Route path="/admin/categories" element={<AdminCategories />} />
                     <Route path="/admin/createcategory" element={< CreateCategory />} />
+                    <Route path="/admin/updatecategory/:categoryId" element={< UpdateCategory />} />
                     <Route path="/admin/languages" element={<AdminLanguages />} />
                     <Route path="/admin/createlanguage" element={< CreateLanguage />} />
+                    <Route path="/admin/updatelanguage/:languageId" element={< UpdateLanguage />} />
                     <Route path="/admin/comments" element={<AdminComments />} />
                   </Routes>
                 </div>

@@ -42,7 +42,7 @@
     color: red;
     font-size: 16px;
     font-weight: 600;
-    margin: 0px;
+    margin-top: 20px;
     padding: 0px;
 }
 
@@ -52,7 +52,7 @@
     color: #098D85;
     font-size: 16px;
     font-weight: 600;
-    margin: 0px;
+    margin-top: 20px;
     padding: 0px;
 }
 
@@ -88,15 +88,6 @@
     padding-left: 5px;
 }
 
-.txtSemiBold16Green {
-    font-family: "Poppins", sans-serif;
-    font-style: normal;
-    color: #098D85;
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0px;
-    padding: 0px;
-}
 
 .txtRegular16PurpleUnderlined {
     font-family: "Poppins", sans-serif;
@@ -105,7 +96,7 @@
     font-size: 16px;
     font-weight: 400;
     text-decoration: underline;
-    margin-bottom: 0px;
+    margin-top: 20px;
     padding: 0px;
 }
 
@@ -167,7 +158,6 @@ input:-webkit-autofill:active{
     font-size: 16px;
     font-weight: 600;
     margin-top: 10px;
-    margin-bottom: 20px;
 }
 
 .icn {

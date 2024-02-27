@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import deleteCategory from "../../redux/actions/categories/deleteCategory";
-import updateSubscription from "../../redux/actions/subscriptions/updateSubscription";
 import getAllCategoriesUnfiltered from "../../redux/actions/categories/getAllCategoriesUnfiltered";
 import restoreCategory from "../../redux/actions/categories/restoreCategory";
 
@@ -36,10 +35,6 @@ function AdminCategories() {
     const onRestore = async (e, params) => {
         await restoreCategory(params.id);
         dispatch(getAllCategoriesUnfiltered());
-    };
-
-    const onEdit = (e, params) => {
-        dispatch(updateSubscription(params.userID));
     };
 
     const columns = [
@@ -90,9 +85,8 @@ function AdminCategories() {
             renderCell: (params) => {
                 return (
                     <IconButton
-                        onClick={(e) => onEdit(e, params.row)}
                         component={Link}
-                        to="/users/form/update"
+                        to={`/admin/updatecategory/${params.row.id}`}
                     >
                         <EditOutlinedIcon />
                     </IconButton>

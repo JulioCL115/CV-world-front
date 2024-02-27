@@ -295,7 +295,7 @@ function UpdateProfile() {
                     </div>
                     {errors.repeatPassword ? <p className={styles.txtError}>{errors.repeatPassword}</p> : null}
                 </div>
-                <button className={styles.btnRegister}>ACTUALIZAR</button>
+                <button className={styles.btnRegister}>Actualizar</button>
             </form>
             {updateStatus ?
                 <p className={updateStatus.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus.message}</p>

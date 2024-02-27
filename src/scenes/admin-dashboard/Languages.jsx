@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
 import getAllLanguagesUnfiltered from "../../redux/actions/languages/getAllLanguagesUnfiltered";
 import deleteLanguage from "../../redux/actions/languages/deleteLanguage";
-import updateLanguage from "../../redux/actions/languages/updateLanguage";
 import restoreLanguage from "../../redux/actions/languages/restoreLanguage";
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
@@ -18,6 +17,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminLanguages() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const languages = useSelector((state) => state.languages.allLanguagesUnfiltered);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -36,10 +36,6 @@ function AdminLanguages() {
   const onRestore = async (e, params) => {
     await restoreLanguage(params.id);
     dispatch(getAllLanguagesUnfiltered());
-  };
-
-  const onEdit = (e, params) => {
-    dispatch(updateLanguage(params.userID));
   };
 
   const columns = [
@@ -90,9 +86,8 @@ function AdminLanguages() {
       renderCell: (params) => {
         return (
           <IconButton
-            onClick={(e) => onEdit(e, params.row)}
             component={Link}
-            to="/users/form/update"
+            to={`/admin/updatelanguage/${params.row.id}`}
           >
             <EditOutlinedIcon />
           </IconButton>
