@@ -1,11 +1,106 @@
-.myprofile {
+.myProfile {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding-left: 45px;
     padding-right: 45px;
-    padding-top: 85px;
+    padding-top: 45px;
     padding-bottom: 85px;
 }
 
+/*CONTAINERS*/
+
+.containerBottom {
+    display: flex;
+    flex-direction: row;
+}
+
+.containerTop {
+    width: 100%;
+    text-align: left;
+}
+
+.containerBottomRight{
+    width: 50%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    padding-left: 10%;
+}
+
+.containerBottomLeft {
+    width: 50%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.card {
+    max-width: 450px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    justify-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 70px;
+    padding-left: 50px;
+    padding-right: 50px;
+    box-sizing: border-box;
+    border: double 3px transparent;
+    border-radius: 80px;
+    background-image: linear-gradient(white, white), radial-gradient(circle at top left, #098D85,#3E3E70);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+/*FONT STYLES*/
+
+.txtSemiBold32Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtRegular16Black {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0px;
+    padding: 0px;
+}
+
+/*UI ELEMENTS*/
+
+.illustration {
+    height: 600px;
+}
+
+.btn {
+    background-color: #098D85;
+    border-color: transparent;
+    border-radius: 5px;
+}
+
+.icn {
+    color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.img {
+    border-radius: 50%;
+    width: 150px;
+    align-self: center;
+}

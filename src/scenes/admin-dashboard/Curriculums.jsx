@@ -40,10 +40,6 @@ function AdminCurriculums() {
     dispatch(getAllCvsUnfiltered());
   };
 
-  const onEdit = (e, params) => {
-    dispatch(getUserById(params.userID));
-  };
-
   const columns = [
     {
       field: "id",
@@ -163,22 +159,6 @@ function AdminCurriculums() {
         return (
           <IconButton onClick={(e) => onRestore(e, params.row)}>
             <RestoreOutlinedIcon />
-          </IconButton>
-        );
-      },
-    },
-    {
-      field: "edit",
-      headerName: "",
-      width: 50,
-      renderCell: (params) => {
-        return (
-          <IconButton
-            onClick={(e) => onEdit(e, params.row)}
-            component={Link}
-            to="/users/form/update"
-          >
-            <EditOutlinedIcon />
           </IconButton>
         );
       },
