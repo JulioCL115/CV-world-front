@@ -5,12 +5,40 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
 
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import updateLanguage from "../../redux/actions/languages/updateLanguage"
+import getLanguageById from "../../redux/actions/languages/getLanguageById"
 
 const UpdateLanguage = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const params = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { languageId } = useParams();
+
+    console.log("LANGUAGE ID: " + languageId);
+
+    const initialValues = {
+        name: "",
+    };
+
+    useEffect(() => {
+        const getLanguageData = async () => {
+            const languageData = await getLanguageById(languageId);
+            if (languageData) {
+                console.log("LANGUAGE DATA: " + languageData);
+                initialValues.name = languageData.name;
+            }
+        };
+
+        getLanguageData();
+    }, [languageId, dispatch]);
+
 
     const nameRegex = /^[a-zA-Z\s-]+$/;
 
@@ -21,12 +49,13 @@ const UpdateLanguage = () => {
             .required("required"),
     });
 
-    const initialValues = {
-        name: "",
-    };
 
-    const handleFormSubmit = (values) => {
-        updateLanguage(values.name);
+    const handleFormSubmit = async (values) => {
+        await updateLanguage(languageId, values.name);
+
+        setTimeout(() => {
+            navigate("/admin/languages");
+        }, 2000);
     };
 
     return (
