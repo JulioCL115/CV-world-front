@@ -6,7 +6,7 @@ import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
 
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import updateLanguage from "../../redux/actions/languages/updateLanguage"
@@ -16,28 +16,29 @@ const UpdateLanguage = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const params = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { languageId } = useParams();
 
     console.log("LANGUAGE ID: " + languageId);
 
-    const initialValues = {
-        name: "",
-    };
+    const [initialValues, setInitialValues] = useState({
+        name: ""
+    })
 
     useEffect(() => {
         const getLanguageData = async () => {
             const languageData = await getLanguageById(languageId);
             if (languageData) {
-                console.log("LANGUAGE DATA: " + languageData);
-                initialValues.name = languageData.name;
+                console.log("LANGUAGE DATA: " + languageData.name);
+                setInitialValues({ name: languageData.name });
             }
         };
 
         getLanguageData();
     }, [languageId, dispatch]);
+
+    console.log(initialValues.name);
 
 
     const nameRegex = /^[a-zA-Z\s-]+$/;
@@ -71,6 +72,7 @@ const UpdateLanguage = () => {
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}
                 validationSchema={checkoutSchema}
+                enableReinitialize
             >
                 {({
                     values,

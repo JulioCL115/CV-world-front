@@ -1,11 +1,13 @@
 import axiosInstance from "../../../config/axios-config";
 import axios from "axios";
 
-const updateLanguage = async (languageId, language) => {
+const updateLanguage = async (languageId, name) => {
     const endpoint = axios.defaults.baseURL + "language/" + languageId
 
+    console.log(name);
+
         try {
-            await axiosInstance.put(endpoint, language);
+            await axiosInstance.put(endpoint, name);
 
             return 
         } catch (error) {
