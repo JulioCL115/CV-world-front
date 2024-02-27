@@ -1,4 +1,3 @@
-import { PhotoSizeSelectLargeTwoTone } from "@mui/icons-material";
 import axiosInstance from "../../../config/axios-config";
 import axios from "axios";
 

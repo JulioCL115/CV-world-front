@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   allLanguages: null,
-  allLanguagesUnfiltered: null
+  allLanguagesUnfiltered: null,
+  languageDetail: null
 }
 const languagesSlice = createSlice({
   name: "languages",
@@ -15,8 +16,11 @@ const languagesSlice = createSlice({
       state.allLanguagesUnfiltered = action.payload
 
     },
+    setLanguageDetail(state, action) {
+      state.languageDetail = action.payload
+    }
   }
 });
 
-export const { setAllLanguages, setAllLanguagesUnfiltered } = languagesSlice.actions;
+export const { setAllLanguages, setAllLanguagesUnfiltered, setLanguageDetail } = languagesSlice.actions;
 export default languagesSlice.reducer;
