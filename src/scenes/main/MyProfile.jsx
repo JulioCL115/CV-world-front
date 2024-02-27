@@ -70,8 +70,4 @@ function MyProfile() {
     )
 };
 
-<<<<<<< HEAD
-export default UpdateProfile;
-=======
 export default MyProfile; 
->>>>>>> 020b7c0c950a6a1cb4411653a93e1ff52d1e8bfa
