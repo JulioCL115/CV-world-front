@@ -5,16 +5,38 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-import updateCategory from "../../redux/actions/categories/updateCategory"
+import updateCategory from "../../redux/actions/categories/updateCategory";
+import getCategoryById from "../../redux/actions/categories/getCategoryById";
 
 const UpdateCategory = () => {
-    const params = useParams();
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const categoryId = params.id;
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { categoryId } = useParams();
+
+    const [initialValues, setInitialValues] = useState({
+        name: ""
+    })
+
+    useEffect(() => {
+        const getCategoryData = async () => {
+            const categoryData = await getCategoryById(categoryId);
+            if (categoryData) {
+                setInitialValues({ name: categoryData.name });
+            }
+        };
+
+        getCategoryData();
+    }, [categoryId, dispatch]);
+
+    console.log(initialValues.name);
+
 
     const nameRegex = /^[a-zA-Z\s-]+$/;
 
@@ -25,12 +47,13 @@ const UpdateCategory = () => {
             .required("required"),
     });
 
-    const initialValues = {
-        name: "",
-    };
 
-    const handleFormSubmit = (values) => {
-        updateCategory(values.name);
+    const handleFormSubmit = async (values) => {
+        await updateCategory(categoryId, values.name);
+
+        setTimeout(() => {
+            navigate("/admin/categories");
+        }, 2000);
     };
 
     return (
@@ -40,12 +63,13 @@ const UpdateCategory = () => {
                 color={colors.black[500]}
                 fontWeight="600"
             >
-                Editar Categoría
+                Editar Idioma
             </Typography>
             <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}
                 validationSchema={checkoutSchema}
+                enableReinitialize
             >
                 {({
                     values,
