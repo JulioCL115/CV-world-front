@@ -2,7 +2,6 @@ import styles from "./UpdateProfile.module.css"
 
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import updateUser from "../../redux/actions/users/updateUser";
 import getUserById from '../../redux/actions/users/getUserById';
@@ -15,7 +14,6 @@ import validation from "./updateProfileValidation"
 
 function UpdateProfile() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser.id;
 
@@ -87,7 +85,7 @@ function UpdateProfile() {
         const validationErrors = validation({
             ...newUserInfo,
             [event.target.name]: event.target.value,
-        });
+        }, event.target.name);
 
         setErrors({
             ...errors,
@@ -300,7 +298,7 @@ function UpdateProfile() {
                 <button className={styles.btnRegister}>ACTUALIZAR</button>
             </form>
             {updateStatus ?
-                <p className={updateStatus.status === "Success" ? styles.txtSuccess : styles.txtError16}>{updateStatus.message}</p>
+                <p className={updateStatus.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus.message}</p>
                 : null}
             <Link className={styles.txtRegular16PurpleUnderlined} to="/myprofile">Volver</Link>
         </div>

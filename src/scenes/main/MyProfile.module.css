@@ -38,7 +38,7 @@
 
 .card {
     max-width: 450px;
-    height: 550px;
+    min-height: 550px;
     display: flex;
     flex-direction: column;
     row-gap: 30px;
