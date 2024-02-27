@@ -17,12 +17,39 @@
     text-align: left;
 }
 
+.containerPassword {
+    width: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
 /*FONT STYLES*/
+
+.txtError {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0px;
+    padding-left: 5px;
+}
 
 .txtError16 {
     font-family: "Poppins", sans-serif;
     font-style: normal;
     color: red;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 0px;
+}
+
+.txtSemiBold16Green {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: #098D85;
     font-size: 16px;
     font-weight: 600;
     margin: 0px;
@@ -120,6 +147,13 @@
     padding-left: 5px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
 .btnRegister {
     width: 400px;
     height: 50px;
@@ -134,6 +168,12 @@
     font-weight: 600;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.icn {
+    height: 20px;
+    width: 20px;
+    color: #3E3E70;
 }
 
 .btnEye {
