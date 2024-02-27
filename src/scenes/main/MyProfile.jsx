@@ -39,7 +39,7 @@ function MyProfile() {
                 <div className={styles.containerBottomRight}>
                     {localStorageUser ?
                         <div className={styles.card}>
-                            <img className={styles.img} src={ProfilePicture} alt="ilustración"></img>
+                            <img className={styles.img} src={currentUser.photo ? currentUser.photo : ProfilePicture} alt="ilustración"></img>
                             <h1 className={styles.txtSemiBold32Black}>{currentUser ? currentUser.name : null}</h1>
                             <p className={styles.txtRegular16Black} >Correo electrónico: {currentUser ? currentUser.email : null}</p>
                             <Link to="/updateprofile">
