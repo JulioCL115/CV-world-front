@@ -16,6 +16,7 @@ function UpdateProfile() {
     const navigate = useNavigate();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser.id;
+    console.log("este es el user",userId)
 
     const [newUserInfo, setNewUserInfo] = useState({
         name: null,
@@ -56,7 +57,7 @@ function UpdateProfile() {
         };
 
         getUserData();
-    }, [ userId ]);
+    }, [userId, userId]);
 
 
     const handleImageUpload = (event) => {
@@ -125,7 +126,7 @@ function UpdateProfile() {
                 console.log("este es el status",updateStatus)
                 setUpdateStatus({ ...updateStatus })
 
-                if (updateStatus.updateStatus.status === "Success") {
+                if (updateStatus.updateStatus?.status === "Success") {
 
                     await updateProfile(auth.currentUser, {
                         displayName: newUserInfo.name,
@@ -306,4 +307,4 @@ function UpdateProfile() {
     )
 };
 
-export default UpdateProfile; 
+export default UpdateProfile;
