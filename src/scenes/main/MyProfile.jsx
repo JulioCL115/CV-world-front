@@ -40,7 +40,23 @@ function MyProfile() {
                     {localStorageUser ?
                         <div className={styles.card}>
                             <img className={styles.img} src={currentUser && currentUser.photo ? currentUser.photo : ProfilePicture} alt="ilustración"></img>
+                            <div className={styles.horizontal}>
+                            {currentUser && currentUser.Subscription && currentUser.Subscription.price !== 0 ?
+                                    <svg className={styles.icn}
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        height="40px"
+                                        width="40px"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="2"
+                                        stroke="#098D85"
+                                        class="w-6 h-6">
+                                        <path strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                                    </svg> : null}
                             <h1 className={styles.txtSemiBold32Black}>{currentUser ? currentUser.name : null}</h1>
+                            </div>
                             <p className={styles.txtRegular16Black} >Correo electrónico: {currentUser ? currentUser.email : null}</p>
                             <Link to="/updateprofile">
                                 <button className={styles.btn}>

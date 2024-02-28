@@ -63,7 +63,7 @@ const CreateSubscription = () => {
         navigate("/admin/subscriptions");
     }, 2000);
     } catch (error) {
-      
+      console.log(error);
     }
   
   };

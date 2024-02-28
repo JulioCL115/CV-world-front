@@ -9,7 +9,7 @@ import logout from "../../redux/actions/users/logout";
 import { auth } from "../../config/firebase-config"
 import { signOut } from "firebase/auth"
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from "react-router-dom"; 
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 function TopBar() {
@@ -19,25 +19,28 @@ function TopBar() {
     const [currentUser, setCurrentUser] = useState(
         storedUser && storedUser !== "[object Object]" ? JSON.parse(storedUser) : null
     );
+
+    console.log(currentUser);
+
     const [selectedMenu, setSelectedMenu] = useState("home");
 
     useEffect(() => {
         // Set the selectedMenu based on the current path
         switch (location.pathname) {
-          case '/home':
-            setSelectedMenu('home');
-            break;
-          case '/curriculums':
-            setSelectedMenu('curriculums');
-            break;
-          case '/subscriptions':
-            setSelectedMenu('subscriptions');
-            break;
-          // Add more cases for other paths if needed
-          default:
-            setSelectedMenu('');
+            case '/home':
+                setSelectedMenu('home');
+                break;
+            case '/curriculums':
+                setSelectedMenu('curriculums');
+                break;
+            case '/subscriptions':
+                setSelectedMenu('subscriptions');
+                break;
+            // Add more cases for other paths if needed
+            default:
+                setSelectedMenu('');
         }
-      }, [location.pathname]); 
+    }, [location.pathname]);
 
     useEffect(() => {
         const handleStorageChange = () => {
@@ -66,7 +69,7 @@ function TopBar() {
     return (
         <div className={styles.topbar}>
             <div className={styles.containerLeft}>
-                <Link className={selectedMenu === "home" ? styles.txtSemiBold16Black : styles.txtRegular16Black}  to="/home" >Home</Link>
+                <Link className={selectedMenu === "home" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/home" >Home</Link>
                 <Link className={selectedMenu === "curriculums" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/curriculums" >Currículums</Link>
                 <Link className={selectedMenu === "subscriptions" ? styles.txtSemiBold16Black : styles.txtRegular16Black} to="/subscriptions" >Suscripciones</Link>
             </div>
@@ -107,6 +110,7 @@ function TopBar() {
                                         strokeLinejoin="round"
                                         d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
+    
                                 {currentUser.name}
                             </button>
 
@@ -123,7 +127,7 @@ function TopBar() {
                         (currentUser?.photo ?
                             <img className={styles.profilePicture} src={currentUser && currentUser?.photo} alt="logo"></img> :
                             <img className={styles.profilePicture} src={LogoProfileImage} alt="logo"></img>)
-                            : <svg className={styles.icn} id={styles.icnUser} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.2" stroke="currentColor" class="w-6 h-6">
+                        : <svg className={styles.icn} id={styles.icnUser} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.2" stroke="currentColor" class="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         </svg>
                     }
