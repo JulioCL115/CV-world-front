@@ -48,12 +48,12 @@ function SignIn() {
     const validationErrors = validation({
       ...loginInfo,
       [event.target.name]: event.target.value,
-    }, event.target.name);
-
-    setErrors({
-      ...errors,
-      [event.target.name]: validationErrors[event.target.name]
     });
+
+    setErrors((errors) => ({
+      ...errors,
+      [event.target.name]: validationErrors[event.target.name],
+    }));
   };
 
   const handleTogglePassword = () => {
@@ -65,28 +65,39 @@ function SignIn() {
       const userCredential = await signInWithPopup(auth, provider);
 
       if (userCredential) {
-        console.log("User Credential: ", userCredential);
-        console.log(userCredential._tokenResponse)
-        console.log(userCredential._tokenResponse.isNewUser)
 
         if (
           userCredential._tokenResponse &&
           userCredential._tokenResponse.isNewUser
         ) {
-          console.log(userCredential.user.photoURL);
-          await register({
+          const loginStatus = await register({
             name: userCredential.user.displayName,
             email: userCredential.user.email,
             photo: userCredential.user.photoURL,
             password: "",
           });
 
+          if (loginStatus.status === "Success") {
+            setLoginStatus({
+              status: "Success",
+              message: "¡Bienvenido!"
+            });
+
+          } else {
+            setLoginStatus({ ...loginStatus })
+            return;
+          }
         }
         login(userCredential.user.accessToken);
-        navigate("/curriculums");
+        setTimeout(() => {
+          navigate("/curriculums");
+        }, 2000);
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      setLoginStatus({
+        status: "Fail",
+        message: "Error de autenticación de terceros"
+      })
     }
   };
 
@@ -97,6 +108,8 @@ function SignIn() {
     const validationErrors = validation(loginInfo, 'all');
     setErrors(validationErrors);
 
+    console.log(errors);
+
     if (
       !loginInfo.email ||
       !loginInfo.password
@@ -105,35 +118,37 @@ function SignIn() {
         status: "Fail",
         message: "Faltan completar campos obligatorios"
       });
-      return;
     } else {
-      try {
-        const userCredential = await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password);
-        console.log("User Credential: ", userCredential);
-        const emailVerified = userCredential.user.emailVerified;
+      if (!errors.email &&
+        !errors.password
+      ) {
+        try {
+          const userCredential = await signInWithEmailAndPassword(auth, loginInfo.email, loginInfo.password);
+          console.log("User Credential: ", userCredential);
+          const emailVerified = userCredential.user.emailVerified;
 
-        if (emailVerified) {
-          login(userCredential.user.accessToken);
+          if (emailVerified) {
+            login(userCredential.user.accessToken);
 
-          setLoginStatus({
-            status: "Success",
-            message: "¡Bienvenido!"
-          });
+            setLoginStatus({
+              status: "Success",
+              message: "¡Bienvenido!"
+            });
 
-          setTimeout(() => {
             navigate("/curriculums");
-          }, 2000);
-        } else {
+
+          } else {
+            setLoginStatus({
+              status: "Fail",
+              message: "Por favor verificá tu correo electrónico con el enlace que enviamos a tu casilla de correo"
+            });
+          }
+        } catch (error) {
           setLoginStatus({
             status: "Fail",
-            message: "Por favor verificá tu correo electrónico con el enlace que enviamos a tu casilla de correo"
+            message: "Email o contraseña incorrectos"
           });
         }
-      } catch (error) {
-        setLoginStatus({
-          status: "Fail",
-          message: "Email o contraseña incorrectos"
-        });
       }
     }
   };
@@ -152,10 +167,11 @@ function SignIn() {
               className={styles.input}
               name="email"
               type="text"
-              placeholder="Ingresá tu contraseña..."
+              placeholder="Ingresá tu email..."
               onChange={handleChange}
               value={loginInfo.email}
             />
+            {errors.email ? <p className={styles.txtError}>{errors.email}</p> : null}
           </div>
           <div className={styles.vertical}>
             <label className={styles.txtSemiBold16Purple}>CONTRASEÑA</label>
@@ -211,6 +227,7 @@ function SignIn() {
                 )}
               </button>
             </div>
+            {errors.password ? <p className={styles.txtError}>{errors.password}</p> : null}
           </div>
           <Link className={styles.txtSemiBold12Purple} to="/resetpassword">¿Olvidaste tu contraseña?</Link>
           <button className={styles.btnLogin}>INICIAR SESION</button>
