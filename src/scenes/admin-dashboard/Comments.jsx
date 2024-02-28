@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import getAllCommentsUnfiltered from "../../redux/actions/comments/getAllCommentsUnfiltered";
 import deleteComment from "../../redux/actions/comments/deleteComment";
-import updateComment from "../../redux/actions/comments/updateComment";
 import restoreComment from "../../redux/actions/comments/restoreComment";
 
 import { Box, IconButton, Typography } from "@mui/material";
@@ -106,6 +105,7 @@ function AdminComments() {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginTop="45px"
             >
                 Comentarios
             </Typography>

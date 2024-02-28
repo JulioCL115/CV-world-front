@@ -18,7 +18,6 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { current } from "@reduxjs/toolkit";
 
 function AdminUsers() {
     const dispatch = useDispatch();
@@ -167,6 +166,7 @@ function AdminUsers() {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginTop="45px"
             >
                 Usuarios
             </Typography>

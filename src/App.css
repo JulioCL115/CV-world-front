@@ -14,7 +14,7 @@
 
 .containerViews {
   display: flex;
-  flex-direction: column; /* Stack children vertically */
   width: auto;
   height: auto;
+  padding: 45px;
 }

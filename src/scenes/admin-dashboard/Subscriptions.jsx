@@ -121,10 +121,11 @@ function AdminSubscriptions() {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginTop="45px"
             >
                 Suscripciones
             </Typography>
-            <Box display="flex" justifyContent="end">
+            <Box display="flex" justifyContent="start" marginTop="50px">
                 <Button
                     component={Link}
                     to="/admin/createsubscription"
