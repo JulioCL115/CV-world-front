@@ -114,31 +114,24 @@ function UpdateProfile() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("ADENTRO DEL HADLE SUBMIT", newUserInfo);
 
-        const validationErrors = validation(newUserInfo, 'all');
-        setErrors(validationErrors);
-
-        if (!newUserInfo.name ||
-            !newUserInfo.email ||
-            !newUserInfo.password ||
-            !newUserInfo.repeatPassword) {
-                
-            setUpdateStatus({
-                status: "Fail",
-                message: "Faltan completar campos obligatorios"
-            })
-
-            console.log(updateStatus);
-        } else {
+        if (newUserInfo.name &&
+            newUserInfo.email &&
+            newUserInfo.password &&
+            newUserInfo.repeatPassword) {
             if (!errors.name &&
                 !errors.email &&
                 !errors.password &&
                 !errors.repeatPassword) {
 
+                console.log("ADENTRO DEL IF");
+
                 const updateStatus = await updateUser(userId, newUserInfo);
+                console.log("este es el status",updateStatus)
                 setUpdateStatus({ ...updateStatus })
 
-                if (updateStatus.status === "Success") {
+                if (updateStatus.updateStatus?.status === "Success") {
 
                     await updateProfile(auth.currentUser, {
                         displayName: newUserInfo.name,
@@ -149,10 +142,16 @@ function UpdateProfile() {
 
                     setTimeout(() => {
                         navigate("/myprofile");
-                    }, 2000);
+                    }, 1000);
                 }
             }
-        }
+
+        } else {
+            setUpdateStatus({
+                status: "Fail",
+                message: "Faltan completar campos obligatorios"
+            })
+        };
     };
 
     return (
