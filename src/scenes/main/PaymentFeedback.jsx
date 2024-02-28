@@ -2,7 +2,7 @@ import styles from "./PaymentFeedback.module.css";
 
 import { useState,useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import updateUser from "../../redux/actions/users/updateUser"
+import getUserById from "../../redux/actions/users/getUserById"
 
 import IllustrationApproved from "../../assets/payment-approved.png"
 import IllustrationPending from "../../assets/payment-pending.png"
@@ -17,23 +17,23 @@ function PaymentFeedback() {
   const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
   const userId = localStorageUser.id;
 
-  const [newUserInfo, setNewUserInfo] = useState({
-    name: null,
-    email: null,
-    password: null,
-    repeatPassword: null,
-    photo: null,
-});
+//   const [newUserInfo, setNewUserInfo] = useState({
+//     name: localStorageUser.name,
+//     email: localStorageUser.email,
+//     password: null,
+//     repeatPassword: null,
+//     photo: localStorageUser.photo,
+// });
 
   useEffect(() => {
     const updateLocalStorage = async () => {
       if (feedbackType === "success") {
         try {
-          const { updatedUser, updateStatus } = await updateUser(userId,newUserInfo);
-          console.log( updatedUser, updateStatus)
-          if (updateStatus.updateStatus.status=== "Success") {
+          const  data  = await getUserById(userId);
+          console.log( "esta es la data del feedback",data)
+          if (data) {
             localStorage.removeItem('currentUser');
-            localStorage.setItem('currentUser', JSON.stringify(updatedUser.updatedUser));
+            localStorage.setItem('currentUser', JSON.stringify(data));
             console.log("Local storage updated in the feedback component");
             window.dispatchEvent(new Event('storage'));
           }
