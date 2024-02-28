@@ -1,8 +1,12 @@
 .home {
+    width: 100vw;
+    height: 100vh;
     max-width: 100vw;
-    height: auto;
-    padding-right: 45px;
-    padding-left: 45px;
+    min-width: 100vw;
+    min-height: 100vh;
+    max-height: 100vh;
+    padding-right: 0;
+    padding-left: 0;
     padding-top: 70px;
     padding-bottom: 0px;
     display: flex;
