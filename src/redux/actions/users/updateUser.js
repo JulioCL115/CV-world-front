@@ -11,10 +11,9 @@ const updateUser = async (userId, user, subscriptionId) => {
 
     try {
         const response = await axiosInstance.put(endpoint, user, subscriptionId);
-        const updatedUser = response.data;
+        const updatedUser = response.data.userUpdated;
 
         localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-        console.log("UPDATED USER: " + response.data);
 
         window.dispatchEvent(new Event('storage'));
 

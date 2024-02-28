@@ -32,7 +32,7 @@ function AdminUsers() {
         dispatch(getAllUsersUnfiltered());
     }, [dispatch]);
 
-    console.log(users);
+    console.log(localStorageUser);
 
     const onDelete = async (e, params) => {
         await deleteUser(params.id);
