@@ -13,17 +13,16 @@ const updateUser = async (userId, user, subscriptionId) => {
     try {
         const response = await axiosInstance.put(endpoint, user, subscriptionId);
         const updatedUser = response.data.userUpdated;
-        console.log( "este es el local en actions",updatedUser.id)
 
-        if (updatedUser.id) {
+        if (updatedUser.id === localStorageUser.id) {
             localStorage.removeItem('currentUser');
             localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-            console.log("se actualizo el local storage en la actions")
             window.dispatchEvent(new Event('storage'));
         }
 
         updateStatus.status = "Success";
         updateStatus.message = "¡Tu usuario se actualizó con éxito!";
+
         return { updatedUser, updateStatus };
     } catch (error) {
         console.log(error);
