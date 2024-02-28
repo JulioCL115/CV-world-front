@@ -18,12 +18,15 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { current } from "@reduxjs/toolkit";
 
 function AdminUsers() {
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users.allUsersUnfiltered);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
+    const userId = localStorageUser ? localStorageUser.id : null
 
     useEffect(() => {
         dispatch(getAllUsersUnfiltered());
@@ -42,13 +45,25 @@ function AdminUsers() {
         dispatch(getAllUsersUnfiltered());
     };
 
-    const onRoleChange = async(e, params) => {
-        if (window.confirm("¿Estás seguro que querés darle permisos de administrador a este usuario?")) {
-            console.log("SE CAMBIA EL ROL");
-            let role = params.role === "admin" ? "user" : "admin";
-            await updateUser(params.id, { role: role });
-            dispatch(getAllUsersUnfiltered());
-        };
+    const onRoleChange = async (e, params) => {
+        let role = params.role === "admin" ? "user" : "admin";
+
+        let confirmationMessage = params.role === "admin" ?
+            "¿Estás seguro que querés quitarle los permisos de administrador a este usuario?" :
+            "¿Estás seguro que querés darle permisos de administrador a este usuario?";
+
+        if (params.id !== userId && params.role === "admin") {
+            if (window.confirm(confirmationMessage)) {
+                try {
+                    await updateUser(params.id, { role: role });
+                    dispatch(getAllUsersUnfiltered());
+                } catch (error) {
+                    console.log(error);
+                }
+            } 
+        } else {
+            window.alert("No te podés quitar los permisos de administrador a vos mismo");
+        }
     };
 
     const columns = [
