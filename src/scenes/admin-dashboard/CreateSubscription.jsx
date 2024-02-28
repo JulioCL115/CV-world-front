@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Formik } from "formik";
+import React from 'react';
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { tokens } from "./theme";
@@ -86,19 +87,40 @@ const CreateSubscription = () => {
                   helperText={touched.price && errors.price}
                   sx={{ gridColumn: "span 4" }}
                 />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Incluye"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.included[0]}
-                  name="included[0]"
-                  error={!!touched.included && !!errors.included}
-                  helperText={touched.included && errors.included}
-                  sx={{ gridColumn: "span 3" }}
-                />
+                {values.included.map((value, index) => (
+                  <React.Fragment key={index}>
+                    <TextField
+                      fullWidth
+                      variant="filled"
+                      type="text"
+                      label={`Incluye ${index + 1}`}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={value}
+                      name={`included[${index}]`}
+                      error={!!touched.included && !!errors.included}
+                      helperText={touched.included && errors.included}
+                      sx={{ gridColumn: "span 3" }}
+                    />
+                   <Button
+                    type="button"
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                      values.included.splice(index, 1);
+                      handleChange({
+                        target: {
+                          name: "included",
+                          value: [...values.included],
+                        },
+                      });
+                    }}
+                    sx={{ gridColumn: "span 1", minWidth: "20px", minHeight: "20px", fontSize: "10px" }}
+                  >
+                    Eliminar
+                  </Button>
+                  </React.Fragment>
+                ))}
                 <Button
                   type="button"
                   variant="contained"
@@ -112,38 +134,44 @@ const CreateSubscription = () => {
                       },
                     });
                   }}
-                >
+                  sx={{ gridColumn: "span 1", minWidth: "20px", minHeight: "20px", fontSize: "10px" }}
+                  >
                   Agregar
                 </Button>
-                {values.included.slice(1).map((value, index) => (
-                  <TextField
-                    key={index + 1}
-                    fullWidth
-                    variant="filled"
-                    type="text"
-                    label={`Incluye ${index + 1}`}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={value}
-                    name={`included[${index + 1}]`}
-                    error={!!touched.included && !!errors.included}
-                    helperText={touched.included && errors.included}
-                    sx={{ gridColumn: "span 3" }}
-                  />
+                {values.notIncluded.map((value, index) => (
+                  <React.Fragment key={index}>
+                    <TextField
+                      fullWidth
+                      variant="filled"
+                      type="text"
+                      label={`No incluye ${index + 1}`}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={value}
+                      name={`notIncluded[${index}]`}
+                      error={!!touched.notIncluded && !!errors.notIncluded}
+                      helperText={touched.notIncluded && errors.notIncluded}
+                      sx={{ gridColumn: "span 3", marginTop:"30px"}}
+                    />
+                     <Button
+                      type="button"
+                      variant="contained"
+                      color="error"
+                      onClick={() => {
+                        values.notIncluded.splice(index, 1);
+                        handleChange({
+                          target: {
+                            name: "notIncluded",
+                            value: [...values.notIncluded],
+                          },
+                        });
+                      }}
+                      sx={{ gridColumn: "span 1", minWidth: "10px" }}
+                    >
+                      Eliminar
+                    </Button>
+                  </React.Fragment>
                 ))}
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="No incluye"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.notIncluded[0]}
-                  name="notIncluded[0]"
-                  error={!!touched.notIncluded && !!errors.notIncluded}
-                  helperText={touched.notIncluded && errors.notIncluded}
-                  sx={{ gridColumn: "span 3" }}
-                />
                 <Button
                   type="button"
                   variant="contained"
@@ -157,25 +185,10 @@ const CreateSubscription = () => {
                       },
                     });
                   }}
+                  sx={{ gridColumn: "span 1", minWidth: "10px" }}
                 >
                   Agregar
                 </Button>
-                {values.notIncluded.slice(1).map((value, index) => (
-                  <TextField
-                    key={index + 1}
-                    fullWidth
-                    variant="filled"
-                    type="text"
-                    label={`No incluye ${index + 1}`}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={value}
-                    name={`notIncluded[${index + 1}]`}
-                    error={!!touched.notIncluded && !!errors.notIncluded}
-                    helperText={touched.notIncluded && errors.notIncluded}
-                    sx={{ gridColumn: "span 3" }}
-                  />
-                ))}
               </Box>
               <Box display="flex" justifyContent="end" mt="20px">
                 <Button
