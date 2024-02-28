@@ -16,15 +16,17 @@ import { useTheme } from "@mui/material";
 
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { current } from "@reduxjs/toolkit";
 
 function AdminUsers() {
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users.allUsersUnfiltered);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
+    const userId = localStorageUser ? localStorageUser.id : null
 
     useEffect(() => {
         dispatch(getAllUsersUnfiltered());
@@ -43,8 +45,25 @@ function AdminUsers() {
         dispatch(getAllUsersUnfiltered());
     };
 
-    const onEdit = (e, params) => {
-        dispatch(updateUser(params.userID));
+    const onRoleChange = async (e, params) => {
+        let role = params.role === "admin" ? "user" : "admin";
+
+        let confirmationMessage = params.role === "admin" ?
+            "¿Estás seguro que querés quitarle los permisos de administrador a este usuario?" :
+            "¿Estás seguro que querés darle permisos de administrador a este usuario?";
+
+        if (params.id !== userId && params.role === "admin") {
+            if (window.confirm(confirmationMessage)) {
+                try {
+                    await updateUser(params.id, { role: role });
+                    dispatch(getAllUsersUnfiltered());
+                } catch (error) {
+                    console.log(error);
+                }
+            } 
+        } else {
+            window.alert("No te podés quitar los permisos de administrador a vos mismo");
+        }
     };
 
     const columns = [
@@ -76,7 +95,7 @@ function AdminUsers() {
             field: "role",
             headerName: "Rol",
             width: 200,
-            renderCell: ({ row: { role } }) => {
+            renderCell: (params) => {
                 return (
                     <Box
                         width="60%"
@@ -90,11 +109,12 @@ function AdminUsers() {
 
                         }
                         borderRadius="4px"
+                        onClick={(e) => onRoleChange(e, params.row)}
                     >
-                        {role === "admin" && <AdminPanelSettingsOutlinedIcon style={{ color: 'white' }} />}
-                        {role === "user" && <LockOutlinedIcon style={{ color: 'white', width: 20, height: 20 }} />}
+                        {params.row.role === "admin" && <AdminPanelSettingsOutlinedIcon style={{ color: 'white' }} />}
+                        {params.row.role === "user" && <LockOutlinedIcon style={{ color: 'white', width: 20, height: 20 }} />}
                         <Typography color={colors.white[500]} sx={{ ml: "5px" }}>
-                            {role}
+                            {params.row.role}
                         </Typography>
                     </Box>
                 );
@@ -130,22 +150,6 @@ function AdminUsers() {
                 return (
                     <IconButton onClick={(e) => onRestore(e, params.row)}>
                         <RestoreOutlinedIcon />
-                    </IconButton>
-                );
-            },
-        },
-        {
-            field: "edit",
-            headerName: "",
-            width: 50,
-            renderCell: (params) => {
-                return (
-                    <IconButton
-                        onClick={(e) => onEdit(e, params.row)}
-                        component={Link}
-                        to="/users/form/update"
-                    >
-                        <EditOutlinedIcon />
                     </IconButton>
                 );
             },
@@ -217,5 +221,6 @@ function AdminUsers() {
         </Box>
     );
 };
+
 
 export default AdminUsers;
