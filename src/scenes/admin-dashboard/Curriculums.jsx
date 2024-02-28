@@ -44,7 +44,7 @@ function AdminCurriculums() {
     {
       field: "id",
       headerName: "ID",
-      flex: 1
+      width: 400,
     },
     {
       field: "image",
@@ -69,7 +69,7 @@ function AdminCurriculums() {
     {
       field: "contact.email",
       headerName: "Email",
-      width: 400,
+      width: 350,
       valueGetter: (params) => params.row.contact[0]?.email || '',
     },
     {
@@ -122,17 +122,29 @@ function AdminCurriculums() {
     {
       field: "skills",
       headerName: "Competencias",
-      width: 200,
+      width: 300,
+      valueGetter: (params) => {
+      
+        return params.row.skills.join(', ');
+      }
     },
     {
       field: "speakingLanguages",
       headerName: "Idiomas",
-      width: 200,
+      width: 250,
+      valueGetter: (params) => {
+      
+        return params.row.speakingLanguages.join(', ');
+      }
     },
     {
       field: "otherInterests",
       headerName: "Otros intereses",
-      width: 200,
+      width: 300,
+      valueGetter: (params) => {
+      
+        return params.row.otherInterests.join(', ');
+      }
     },
     {
       field: "deleted",
@@ -215,14 +227,23 @@ function AdminCurriculums() {
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.purple[500]} !important`,
           },
+          "& .MuiDataGrid-sortIcon": {
+            color: `${colors.white[500]} !important`,
+          },
+          "& .MuiDataGrid-menuIcon": {
+            color: `${colors.white[500]} !important`,
+          },
         }}
       >
         <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
           <DataGrid
+            display="flex"
             width="auto"
             rows={cvs ? cvs : []}
             columns={columns}
-            slots={{ Toolbar: GridToolbar }}
+            components={{
+              Toolbar: GridToolbar,
+            }}
             checkboxSelection
           />
         </div>

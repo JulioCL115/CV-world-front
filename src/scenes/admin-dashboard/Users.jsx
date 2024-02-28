@@ -52,7 +52,9 @@ function AdminUsers() {
             "¿Estás seguro que querés quitarle los permisos de administrador a este usuario?" :
             "¿Estás seguro que querés darle permisos de administrador a este usuario?";
 
-        if (params.id !== userId && params.role === "admin") {
+        if (params.id === userId && params.role === "admin") {
+            window.alert("No te podés quitar los permisos de administrador a vos mismo");
+        } else {
             if (window.confirm(confirmationMessage)) {
                 try {
                     await updateUser(params.id, { role: role });
@@ -60,9 +62,7 @@ function AdminUsers() {
                 } catch (error) {
                     console.log(error);
                 }
-            } 
-        } else {
-            window.alert("No te podés quitar los permisos de administrador a vos mismo");
+            }
         }
     };
 
@@ -70,7 +70,7 @@ function AdminUsers() {
         {
             field: "id",
             headerName: "ID",
-            width: 100,
+            width: 400,
         },
         {
             field: "photo",
@@ -89,7 +89,7 @@ function AdminUsers() {
         {
             field: "email",
             headerName: "Email",
-            width: 400,
+            width: 350,
         },
         {
             field: "role",
@@ -128,7 +128,7 @@ function AdminUsers() {
         {
             field: "SubscriptionId",
             headerName: "ID Suscripción",
-            width: 100,
+            width: 400,
         },
         {
             field: "delete",
@@ -206,6 +206,12 @@ function AdminUsers() {
                     "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
                         color: `${colors.purple[500]} !important`,
                     },
+                    "& .MuiDataGrid-sortIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
+                      "& .MuiDataGrid-menuIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
                 }}
             >
                 <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
@@ -213,8 +219,11 @@ function AdminUsers() {
                         width="auto"
                         rows={users ? users : []}
                         columns={columns}
-                        slots={{ Toolbar: GridToolbar }}
+                        components={{
+                            Toolbar: GridToolbar,
+                        }}
                         checkboxSelection
+                        showToolbar
                     />
                 </div>
             </Box>
