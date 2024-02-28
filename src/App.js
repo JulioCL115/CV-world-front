@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import getAllCategories from "./redux/actions/categories/getAllCategories";
 import getAllLanguages from "./redux/actions/languages/getAllLanguages";

@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import getAllCvsUnfiltered from "../../redux/actions/cvs/getAllCvsUnfiltered";
 import deleteCv from "../../redux/actions/cvs/deleteCv";
 import restoreCv from "../../redux/actions/cvs/restoreCv";
-import getUserById from "../../redux/actions/users/getUserById";
 
 import ProfilePciture from "./../../assets/blank-profile-picture-973460_960_720.webp"
 
@@ -16,7 +14,6 @@ import { useTheme } from "@mui/material";
 
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminCurriculums() {
   const dispatch = useDispatch();
@@ -51,7 +48,7 @@ function AdminCurriculums() {
       headerName: "Imagen",
       width: 100,
       renderCell: (params) => (
-        <img src={params.row.image ? params.row.image : ProfilePciture} alt="User Photo" style={{ width: '30px', height: '30px', borderRadius: "50%", objectFit: "cover" }} />
+        <img src={params.row.image ? params.row.image : ProfilePciture} alt="Applicant" style={{ width: '30px', height: '30px', borderRadius: "50%", objectFit: "cover" }} />
       ),
     },
     {

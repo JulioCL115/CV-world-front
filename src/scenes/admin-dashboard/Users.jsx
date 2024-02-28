@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import getAllUsersUnfiltered from "../../redux/actions/users/getAllUsersUnfiltered";
 import deleteUser from "../../redux/actions/users/deleteUser";
@@ -76,7 +75,7 @@ function AdminUsers() {
             headerName: "Imagen",
             width: 100,
             renderCell: (params) => (
-                <img src={params.row.photo ? params.row.photo : ProfilePciture} alt="User Photo" style={{ width: '30px', height: '30px', borderRadius: "50%" }} />
+                <img src={params.row.photo ? params.row.photo : ProfilePciture} alt="User" style={{ width: '30px', height: '30px', borderRadius: "50%" }} />
             ),
         },
         {

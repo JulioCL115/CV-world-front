@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import getAllLanguagesUnfiltered from "../../redux/actions/languages/getAllLanguagesUnfiltered";
 import deleteLanguage from "../../redux/actions/languages/deleteLanguage";
@@ -17,7 +17,6 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminLanguages() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const languages = useSelector((state) => state.languages.allLanguagesUnfiltered);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

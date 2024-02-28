@@ -52,11 +52,20 @@ const CreateSubscription = () => {
     };
 
     getSubscriptionData();
-  }, [subscriptionId, dispatch]);
+  }, [subscriptionId, dispatch, initialValues]);
 
   const handleFormSubmit = (values) => {
     console.log(initialValues);
-    updateSubscription(values);
+    try {
+      updateSubscription(values);
+
+      setTimeout(() => {
+        navigate("/admin/subscriptions");
+    }, 2000);
+    } catch (error) {
+      
+    }
+  
   };
 
   return (
