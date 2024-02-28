@@ -122,15 +122,16 @@ function UpdateProfile() {
                 console.log("ADENTRO DEL IF");
 
                 const updateStatus = await updateUser(userId, newUserInfo);
+                console.log("este es el status",updateStatus)
                 setUpdateStatus({ ...updateStatus })
 
-                if (updateStatus.status === "Success") {
+                if (updateStatus.updateStatus.status === "Success") {
 
                     await updateProfile(auth.currentUser, {
                         displayName: newUserInfo.name,
                         email: newUserInfo.email,
                         password: newUserInfo.password,
-                        photoURL: newUserInfo.photo
+                        photoURL: localStorageUser.photo
                     });
 
                     setTimeout(() => {
@@ -298,7 +299,7 @@ function UpdateProfile() {
                 <button className={styles.btnRegister}>Actualizar</button>
             </form>
             {updateStatus ?
-                <p className={updateStatus.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus.message}</p>
+                <p className={updateStatus?.updateStatus?.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus?.updateStatus?.message}</p>
                 : null}
             <Link className={styles.txtRegular16PurpleUnderlined} to="/myprofile">Volver</Link>
         </div>

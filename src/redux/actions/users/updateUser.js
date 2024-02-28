@@ -17,17 +17,19 @@ const updateUser = async (userId, user, subscriptionId) => {
         const updatedUser = response.data.userUpdated;
 
         if (localStorageUser.id === updatedUser.id) {
+            localStorage.removeItem('currentUser');
             localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-
+            console.log("se actualizo el local storage en la actions")
             window.dispatchEvent(new Event('storage'));
         }
 
         updateStatus.status = "Success";
         updateStatus.message = "¡Tu usuario se actualizó con éxito!";
+        return { updatedUser, updateStatus };
     } catch (error) {
         console.log(error);
 
-        const errorStatus = error.response.status;
+        const errorStatus = error.response?.status;
 
         if (errorStatus === 409) {
             updateStatus.status = "Fail";
