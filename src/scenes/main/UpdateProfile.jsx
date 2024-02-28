@@ -137,7 +137,7 @@ function UpdateProfile() {
 
                     setTimeout(() => {
                         navigate("/myprofile");
-                    }, 2000);
+                    }, 1000);
                 }
             }
 
