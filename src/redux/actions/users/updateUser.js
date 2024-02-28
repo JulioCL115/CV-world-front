@@ -13,9 +13,9 @@ const updateUser = async (userId, user, subscriptionId) => {
     try {
         const response = await axiosInstance.put(endpoint, user, subscriptionId);
         const updatedUser = response.data.userUpdated;
-        console.log( "este es el local en actions",updatedUser.id)
+        console.log( "este es el local en actions", updatedUser.id)
 
-        if (updatedUser.id) {
+        if (updatedUser.id === localStorageUser.id) {
             localStorage.removeItem('currentUser');
             localStorage.setItem('currentUser', JSON.stringify(updatedUser));
             console.log("se actualizo el local storage en la actions")
