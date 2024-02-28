@@ -13,8 +13,7 @@ const languagesSlice = createSlice({
     },
     setAllLanguagesUnfiltered(state, action) {
       state.allLanguagesUnfiltered = action.payload
-
-    },
+    }
   }
 });
 

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import getAllSubscriptionsUnfiltered from "../../redux/actions/subscriptions/getAllSubscriptionsUnfiltered";
 import deleteSubscription from "../../redux/actions/subscriptions/deleteSubscription";
-import updateSubscription from "../../redux/actions/subscriptions/updateSubscription";
+import restoreSubscription from "../../redux/actions/subscriptions/restoreSubscription";
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -27,23 +27,21 @@ function AdminSubscriptions() {
 
     console.log(subscriptions);
 
-    const onDelete = (e, params) => {
-        dispatch(deleteSubscription(params.userID));
+    const onDelete = async (e, params) => {
+         await deleteSubscription(params.id);
+         dispatch(getAllSubscriptionsUnfiltered())
     };
 
-    const onRestore = (e, params) => {
-        dispatch(updateSubscription(params.userID));
-    };
-
-    const onEdit = (e, params) => {
-        dispatch(updateSubscription(params.userID));
+    const onRestore = async(e, params) => {
+        await restoreSubscription(params.id);
+        dispatch(getAllSubscriptionsUnfiltered());
     };
 
     const columns = [
         {
             field: "id",
             headerName: "ID",
-            width: 100,
+            width: 400,
         },
         {
             field: "name",
@@ -102,9 +100,8 @@ function AdminSubscriptions() {
             renderCell: (params) => {
                 return (
                     <IconButton
-                        onClick={(e) => onEdit(e, params.row)}
                         component={Link}
-                        to="/users/form/update"
+                        to={`/admin/updatesubscription/${params.row.id}`}
                     >
                         <EditOutlinedIcon />
                     </IconButton>
@@ -124,13 +121,14 @@ function AdminSubscriptions() {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginTop="45px"
             >
                 Suscripciones
             </Typography>
-            <Box display="flex" justifyContent="end">
+            <Box display="flex" justifyContent="start" marginTop="50px">
                 <Button
                     component={Link}
-                    to="/admin/createsubscriptions"
+                    to="/admin/createsubscription"
                     variant="contained"
                     sx={{
                         backgroundColor: "#098D85",
@@ -178,6 +176,12 @@ function AdminSubscriptions() {
                     "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
                         color: `${colors.purple[500]} !important`,
                     },
+                    "& .MuiDataGrid-sortIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
+                      "& .MuiDataGrid-menuIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
                 }}
             >
                 <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
@@ -185,7 +189,9 @@ function AdminSubscriptions() {
                         width="auto"
                         rows={subscriptions ? subscriptions : []}
                         columns={columns}
-                        slots={{ Toolbar: GridToolbar }}
+                        components={{
+                            Toolbar: GridToolbar,
+                        }}
                         checkboxSelection
                     />
                 </div>

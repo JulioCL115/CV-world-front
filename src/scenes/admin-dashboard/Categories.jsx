@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import deleteSubscription from "../../redux/actions/subscriptions/deleteSubscription";
-import updateSubscription from "../../redux/actions/subscriptions/updateSubscription";
+import deleteCategory from "../../redux/actions/categories/deleteCategory";
 import getAllCategoriesUnfiltered from "../../redux/actions/categories/getAllCategoriesUnfiltered";
+import restoreCategory from "../../redux/actions/categories/restoreCategory";
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -27,23 +27,21 @@ function AdminCategories() {
 
     console.log(categories);
 
-    const onDelete = (e, params) => {
-        dispatch(deleteSubscription(params.userID));
+    const onDelete = async (e, params) => {
+        await deleteCategory(params.id);
+        dispatch(getAllCategoriesUnfiltered());
     };
 
-    const onRestore = (e, params) => {
-        dispatch(updateSubscription(params.userID));
-    };
-
-    const onEdit = (e, params) => {
-        dispatch(updateSubscription(params.userID));
+    const onRestore = async (e, params) => {
+        await restoreCategory(params.id);
+        dispatch(getAllCategoriesUnfiltered());
     };
 
     const columns = [
         {
             field: "id",
             headerName: "ID",
-            width: 100,
+            width: 400,
         },
         {
             field: "name",
@@ -87,9 +85,8 @@ function AdminCategories() {
             renderCell: (params) => {
                 return (
                     <IconButton
-                        onClick={(e) => onEdit(e, params.row)}
                         component={Link}
-                        to="/users/form/update"
+                        to={`/admin/updatecategory/${params.row.id}`}
                     >
                         <EditOutlinedIcon />
                     </IconButton>
@@ -109,10 +106,11 @@ function AdminCategories() {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginTop="45px"
             >
                 Categorías
             </Typography>
-            <Box display="flex" justifyContent="end">
+            <Box display="flex" justifyContent="start" marginTop="50px">
                 <Button
                     component={Link}
                     to="/admin/createcategory"
@@ -163,6 +161,12 @@ function AdminCategories() {
                     "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
                         color: `${colors.purple[500]} !important`,
                     },
+                    "& .MuiDataGrid-sortIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
+                      "& .MuiDataGrid-menuIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
                 }}
             >
                 <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
@@ -170,7 +174,9 @@ function AdminCategories() {
                         width="auto"
                         rows={categories ? categories : []}
                         columns={columns}
-                        slots={{ Toolbar: GridToolbar }}
+                        components={{
+                            Toolbar: GridToolbar,
+                        }}
                         checkboxSelection
                     />
                 </div>

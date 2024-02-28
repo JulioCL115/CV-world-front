@@ -1,8 +1,8 @@
 import axiosInstance from "../../../config/axios-config";
 import axios from "axios";
 
-const deleteCategory = async (categoryId) => {
-    const endpoint = axios.defaults.baseURL + "category/delete/" + categoryId
+const restoreCategory = async (categoryId) => {
+    const endpoint = axios.defaults.baseURL + "category/restore/" + categoryId
 
         try {
             await axiosInstance.put(endpoint);
@@ -13,4 +13,4 @@ const deleteCategory = async (categoryId) => {
         }
 };
 
-export default deleteCategory;
+export default restoreCategory;

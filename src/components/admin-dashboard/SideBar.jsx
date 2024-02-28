@@ -15,12 +15,14 @@ import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined';
 import CardMembershipOutlinedIcon from '@mui/icons-material/CardMembershipOutlined';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 // import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../scenes/admin-dashboard/theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    
 
     return (
         <MenuItem
@@ -44,7 +46,7 @@ const SideBar = () => {
     const colors = tokens(theme.palette.mode);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [selected, setSelected] = useState("Dashboard");
-    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     return (
         <Box>
@@ -119,6 +121,14 @@ const SideBar = () => {
                     )}
 
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+                    <Item
+                            title="Home"
+                            to="/home"
+                            icon={<HomeOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+
                         <Item
                             title="Estadísticas"
                             to="/admin/analytics"

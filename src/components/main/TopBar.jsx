@@ -43,7 +43,7 @@ function TopBar() {
         const handleStorageChange = () => {
             setCurrentUser(JSON.parse(localStorage.getItem('currentUser')));
         };
-        console.log(currentUser)
+        console.log("este es el current en la top ",currentUser)
         window.addEventListener('storage', handleStorageChange);
         return () => {
             window.removeEventListener('storage', handleStorageChange);

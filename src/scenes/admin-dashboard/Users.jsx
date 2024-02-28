@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import getAllUsersUnfiltered from "../../redux/actions/users/getAllUsersUnfiltered";
 import deleteUser from "../../redux/actions/users/deleteUser";
 import updateUser from "../../redux/actions/users/updateUser";
+import restoreUser from "../../redux/actions/users/restoreUser";
+
 import ProfilePciture from "./../../assets/blank-profile-picture-973460_960_720.webp"
 
 import { Box, IconButton, Typography } from "@mui/material";
@@ -14,37 +16,60 @@ import { useTheme } from "@mui/material";
 
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 function AdminUsers() {
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users.allUsersUnfiltered);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
+    const userId = localStorageUser ? localStorageUser.id : null
 
     useEffect(() => {
         dispatch(getAllUsersUnfiltered());
     }, [dispatch]);
 
-    console.log(users);
+    console.log(localStorageUser);
 
-    const onDelete = (e, params) => {
-        dispatch(deleteUser(params.userID));
+    const onDelete = async (e, params) => {
+        await deleteUser(params.id);
+        dispatch(getAllUsersUnfiltered());
+
     };
 
-    const onRestore = (e, params) => {
-        dispatch(updateUser(params.userID));
+    const onRestore = async (e, params) => {
+        await restoreUser(params.id);
+        dispatch(getAllUsersUnfiltered());
     };
 
-    const onEdit = (e, params) => {
-        dispatch(updateUser(params.userID));
+    const onRoleChange = async (e, params) => {
+        let role = params.role === "admin" ? "user" : "admin";
+
+        let confirmationMessage = params.role === "admin" ?
+            "¿Estás seguro que querés quitarle los permisos de administrador a este usuario?" :
+            "¿Estás seguro que querés darle permisos de administrador a este usuario?";
+
+        if (params.id === userId && params.role === "admin") {
+            window.alert("No te podés quitar los permisos de administrador a vos mismo");
+        } else {
+            if (window.confirm(confirmationMessage)) {
+                try {
+                    await updateUser(params.id, { role: role });
+                    dispatch(getAllUsersUnfiltered());
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
     };
 
     const columns = [
         {
             field: "id",
             headerName: "ID",
-            width: 100,
+            width: 400,
         },
         {
             field: "photo",
@@ -63,12 +88,36 @@ function AdminUsers() {
         {
             field: "email",
             headerName: "Email",
-            width: 400,
+            width: 350,
         },
         {
             field: "role",
             headerName: "Rol",
             width: 200,
+            renderCell: (params) => {
+                return (
+                    <Box
+                        width="60%"
+                        m="0 auto"
+                        p="5px"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        backgroundColor={
+                            colors.green[500]
+
+                        }
+                        borderRadius="4px"
+                        onClick={(e) => onRoleChange(e, params.row)}
+                    >
+                        {params.row.role === "admin" && <AdminPanelSettingsOutlinedIcon style={{ color: 'white' }} />}
+                        {params.row.role === "user" && <LockOutlinedIcon style={{ color: 'white', width: 20, height: 20 }} />}
+                        <Typography color={colors.white[500]} sx={{ ml: "5px" }}>
+                            {params.row.role}
+                        </Typography>
+                    </Box>
+                );
+            },
         },
         {
             field: "deleted",
@@ -78,7 +127,7 @@ function AdminUsers() {
         {
             field: "SubscriptionId",
             headerName: "ID Suscripción",
-            width: 100,
+            width: 400,
         },
         {
             field: "delete",
@@ -104,22 +153,6 @@ function AdminUsers() {
                 );
             },
         },
-        {
-            field: "edit",
-            headerName: "",
-            width: 50,
-            renderCell: (params) => {
-                return (
-                    <IconButton
-                        onClick={(e) => onEdit(e, params.row)}
-                        component={Link}
-                        to="/users/form/update"
-                    >
-                        <EditOutlinedIcon />
-                    </IconButton>
-                );
-            },
-        },
     ];
 
     return (
@@ -133,6 +166,7 @@ function AdminUsers() {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginTop="45px"
             >
                 Usuarios
             </Typography>
@@ -172,6 +206,12 @@ function AdminUsers() {
                     "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
                         color: `${colors.purple[500]} !important`,
                     },
+                    "& .MuiDataGrid-sortIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
+                      "& .MuiDataGrid-menuIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
                 }}
             >
                 <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
@@ -179,13 +219,17 @@ function AdminUsers() {
                         width="auto"
                         rows={users ? users : []}
                         columns={columns}
-                        slots={{ Toolbar: GridToolbar }}
+                        components={{
+                            Toolbar: GridToolbar,
+                        }}
                         checkboxSelection
+                        showToolbar
                     />
                 </div>
             </Box>
         </Box>
     );
 };
+
 
 export default AdminUsers;

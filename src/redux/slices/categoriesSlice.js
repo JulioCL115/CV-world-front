@@ -17,5 +17,5 @@ const initialState = {
     },
   });
   
-  export const { setAllCategories, setAllCategoriesUnfiltered} = categoriesSlice.actions;
+  export const { setAllCategories, setAllCategoriesUnfiltered } = categoriesSlice.actions;
   export default categoriesSlice.reducer;

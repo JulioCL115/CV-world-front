@@ -22,6 +22,8 @@ function Curriculums() {
     });
     console.log(filters)
 
+    console.log(cvs);
+
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 12;
 

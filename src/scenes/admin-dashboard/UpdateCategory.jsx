@@ -5,12 +5,38 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
 
-import postCategory from "../../redux/actions/categories/postCategory";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-const CreateCategory = () => {
+import updateCategory from "../../redux/actions/categories/updateCategory";
+import getCategoryById from "../../redux/actions/categories/getCategoryById";
+
+const UpdateCategory = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { categoryId } = useParams();
+
+    const [initialValues, setInitialValues] = useState({
+        name: ""
+    })
+
+    useEffect(() => {
+        const getCategoryData = async () => {
+            const categoryData = await getCategoryById(categoryId);
+            if (categoryData) {
+                setInitialValues({ name: categoryData.name });
+            }
+        };
+
+        getCategoryData();
+    }, [categoryId, dispatch]);
+
+    console.log(initialValues.name);
+
 
     const nameRegex = /^[a-zA-Z\s-]+$/;
 
@@ -21,12 +47,13 @@ const CreateCategory = () => {
             .required("required"),
     });
 
-    const initialValues = {
-        name: "",
-    };
 
-    const handleFormSubmit = (values) => {
-        postCategory(values.name);
+    const handleFormSubmit = async (values) => {
+        await updateCategory(categoryId, values.name);
+
+        setTimeout(() => {
+            navigate("/admin/categories");
+        }, 2000);
     };
 
     return (
@@ -36,12 +63,13 @@ const CreateCategory = () => {
                 color={colors.black[500]}
                 fontWeight="600"
             >
-                Crear CategorÃ­a
+                Editar Idioma
             </Typography>
             <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}
                 validationSchema={checkoutSchema}
+                enableReinitialize
             >
                 {({
                     values,
@@ -87,7 +115,7 @@ const CreateCategory = () => {
                                 }}
                                 disabled={isSubmitting}
                             >
-                                Crear
+                                Actualizar
                             </Button>
                         </Box>
                     </Form>
@@ -98,4 +126,4 @@ const CreateCategory = () => {
 };
 
 
-export default CreateCategory;
+export default UpdateCategory;

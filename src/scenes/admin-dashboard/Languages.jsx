@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import getAllLanguagesUnfiltered from "../../redux/actions/languages/getAllLanguagesUnfiltered";
 import deleteLanguage from "../../redux/actions/languages/deleteLanguage";
-import updateLanguage from "../../redux/actions/languages/updateLanguage";
+import restoreLanguage from "../../redux/actions/languages/restoreLanguage";
 
 import { Box, IconButton, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -17,6 +17,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminLanguages() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const languages = useSelector((state) => state.languages.allLanguagesUnfiltered);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -27,23 +28,21 @@ function AdminLanguages() {
 
   console.log(languages);
 
-  const onDelete = (e, params) => {
-    dispatch(deleteLanguage(params.userID));
+  const onDelete = async (e, params) => {
+    await deleteLanguage(params.id);
+    dispatch(getAllLanguagesUnfiltered());
   };
 
-  const onRestore = (e, params) => {
-    dispatch(updateLanguage(params.userID));
-  };
-
-  const onEdit = (e, params) => {
-    dispatch(updateLanguage(params.userID));
+  const onRestore = async (e, params) => {
+    await restoreLanguage(params.id);
+    dispatch(getAllLanguagesUnfiltered());
   };
 
   const columns = [
     {
       field: "id",
       headerName: "ID",
-      width: 100,
+      width: 400,
     },
     {
       field: "name",
@@ -87,9 +86,8 @@ function AdminLanguages() {
       renderCell: (params) => {
         return (
           <IconButton
-            onClick={(e) => onEdit(e, params.row)}
             component={Link}
-            to="/users/form/update"
+            to={`/admin/updatelanguage/${params.row.id}`}
           >
             <EditOutlinedIcon />
           </IconButton>
@@ -109,10 +107,11 @@ function AdminLanguages() {
         variant="h1"
         color={colors.black[500]}
         fontWeight="600"
+        marginTop="45px"
       >
-       Idiomas
+        Idiomas
       </Typography>
-      <Box display="flex" justifyContent="end">
+      <Box display="flex" justifyContent="start" marginTop="50px">
         <Button
           component={Link}
           to="/admin/createlanguage"
@@ -121,8 +120,8 @@ function AdminLanguages() {
             backgroundColor: "#098D85",
             '&:hover': {
               backgroundColor: "#098D85",
-          }
-        }}
+            }
+          }}
         >
           Crear Idioma
         </Button>
@@ -163,6 +162,12 @@ function AdminLanguages() {
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.purple[500]} !important`,
           },
+          "& .MuiDataGrid-sortIcon": {
+            color: `${colors.white[500]} !important`,
+          },
+          "& .MuiDataGrid-menuIcon": {
+            color: `${colors.white[500]} !important`,
+          },
         }}
       >
         <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
@@ -170,7 +175,9 @@ function AdminLanguages() {
             width="auto"
             rows={languages ? languages : []}
             columns={columns}
-            slots={{ Toolbar: GridToolbar }}
+            components={{
+              Toolbar: GridToolbar,
+            }}
             checkboxSelection
           />
         </div>

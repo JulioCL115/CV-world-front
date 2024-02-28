@@ -50,6 +50,10 @@ const getAllCvs = (filters = {}, limit, offset) => {
             return
         } catch (error) {
             console.log(error);
+
+            if (error.response.status === 404) {
+                dispatch(setAllCvs([]));
+            }
         }
     };
 };

@@ -1,11 +1,11 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { tokens } from "./theme";
 import { useTheme } from "@mui/material";
 
-import postLanguage from "../../redux/actions/languages/postLanguage"
+import postLanguage from "../../redux/actions/languages/postLanguage";
 
 const CreateLanguage = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -17,14 +17,14 @@ const CreateLanguage = () => {
     const checkoutSchema = yup.object().shape({
         name: yup
             .string()
-            .matches(nameRegex, "Phone number is not valid")
+            .matches(nameRegex, "Sólo puede contener letras y guiones")
             .required("required"),
     });
 
     const initialValues = {
         name: "",
     };
-    
+
     const handleFormSubmit = (values) => {
         postLanguage(values.name);
     };
@@ -36,7 +36,7 @@ const CreateLanguage = () => {
                 color={colors.black[500]}
                 fontWeight="600"
             >
-                Crear lenguage
+                Crear Idioma
             </Typography>
             <Formik
                 onSubmit={handleFormSubmit}
@@ -52,7 +52,7 @@ const CreateLanguage = () => {
                     handleSubmit,
                     isSubmitting
                 }) => (
-                    <form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit}>
                         <Box
                             display="grid"
                             gap="30px"
@@ -87,16 +87,15 @@ const CreateLanguage = () => {
                                 }}
                                 disabled={isSubmitting}
                             >
-                                Crear lenguage
+                                Crear
                             </Button>
                         </Box>
-                    </form>
+                    </Form>
                 )}
             </Formik>
         </Box>
     );
 };
-
 
 
 export default CreateLanguage;

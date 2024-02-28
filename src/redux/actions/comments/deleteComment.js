@@ -6,11 +6,9 @@ const deleteComment = async (commentId) => {
 
     try {
         await axiosInstance.put(endpoint);
-        // Return true if the deletion is successful
         return true;
     } catch (error) {
         console.log(error);
-        // Return false if there was an error
         return false;
     }
 };
