@@ -15,5 +15,3 @@ const postComment = async(comment, cvId, userId) => {
 };
 
 export default postComment;
-
-

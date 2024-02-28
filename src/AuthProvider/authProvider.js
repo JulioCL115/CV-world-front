@@ -8,17 +8,17 @@ export const AuthProvider = ({ children }) => {
       return token;
    });
 
-useEffect(() => {
-   if (token !== null && token !== undefined) {
-      localStorage.setItem('token', JSON.stringify(token));
-   } else {
-     localStorage.removeItem('token');
-   }
-}, [token]);
- 
-return (
-    <AuthContext.Provider value={{ token, setToken }}>
-      {children}
-    </AuthContext.Provider>
- );
+   useEffect(() => {
+      if (token !== null && token !== undefined) {
+         localStorage.setItem('token', JSON.stringify(token));
+      } else {
+         localStorage.removeItem('token');
+      }
+   }, [token]);
+
+   return (
+      <AuthContext.Provider value={{ token, setToken }}>
+         {children}
+      </AuthContext.Provider>
+   );
 };

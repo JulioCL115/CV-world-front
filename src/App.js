@@ -69,7 +69,6 @@ function App() {
         <div>
           {!isAdminRoute && <TopBar />}
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/curriculums" element={<Curriculums />} />
             <Route path="/subscriptions" element={<Subscriptions />} />

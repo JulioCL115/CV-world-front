@@ -39,7 +39,7 @@ const Checkout = () => {
                 const paymentInfo = {
                     title: subscription.name,
                     description: "Descripción de prueba",
-                    quantity: 1,
+                    quantity:  1,
                     unit_price: subscription.price,
                     subscriptionId: subscriptionId
                 };

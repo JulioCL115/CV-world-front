@@ -5,6 +5,15 @@ const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[A-Z]).{8,}$/;
 function validation(newUser, targetName) {
     const errors = {};
 
+    if (targetName === 'all') {
+        Object.keys(newUser).forEach(key => {
+            if (!newUser[key]) {
+                errors[key] = 'Este campo es obligatorio';
+                return errors;
+            }
+        })
+    }
+
     if (!newUser[targetName]) {
         errors[targetName] = 'Este campo es obligatorio';
         return errors;

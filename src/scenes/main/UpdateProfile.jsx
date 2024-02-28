@@ -57,7 +57,7 @@ function UpdateProfile() {
         };
 
         getUserData();
-    }, [userId, userId]);
+    }, [userId]);
 
 
     const handleImageUpload = (event) => {
@@ -78,6 +78,11 @@ function UpdateProfile() {
     };
 
     const handleChange = (event) => {
+        setUpdateStatus({
+            status: null,
+            message: null
+        });
+
         setNewUserInfo({
             ...newUserInfo,
             [event.target.name]: event.target.value
@@ -109,7 +114,9 @@ function UpdateProfile() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("ADENTRO DEL HADLE SUBMIT", newUserInfo);
+
+        const validationErrors = validation(newUserInfo, 'all');
+        setErrors(validationErrors);
 
         if (newUserInfo.name &&
             newUserInfo.email &&
@@ -307,4 +314,4 @@ function UpdateProfile() {
     )
 };
 
-export default UpdateProfile;
+export default UpdateProfile; 

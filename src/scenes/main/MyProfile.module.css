@@ -44,7 +44,7 @@
 }
 
 .card {
-    max-width: 450px;
+    min-width: 450px;
     min-height: 550px;
     display: flex;
     flex-direction: column;
