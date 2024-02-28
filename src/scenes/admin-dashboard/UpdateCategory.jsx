@@ -62,6 +62,8 @@ const UpdateCategory = () => {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginBottom="50px"
+                marginTop="45px"
             >
                 Editar Idioma
             </Typography>

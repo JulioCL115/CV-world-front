@@ -7,10 +7,13 @@ import { useTheme } from "@mui/material";
 
 import postCategory from "../../redux/actions/categories/postCategory";
 
+import { useNavigate } from "react-router-dom";
+
 const CreateCategory = () => {
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const navigate = useNavigate();
 
     const nameRegex = /^[a-zA-Z\s-]+$/;
 
@@ -25,8 +28,16 @@ const CreateCategory = () => {
         name: "",
     };
 
-    const handleFormSubmit = (values) => {
-        postCategory(values.name);
+    const handleFormSubmit = async (values) => {
+        try {
+            await postCategory(values.name);
+
+            setTimeout(() => {
+                navigate("/admin/languages");
+            }, 2000);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -35,6 +46,8 @@ const CreateCategory = () => {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginBottom="50px"
+                marginTop="45px"
             >
                 Crear Categoría
             </Typography>
