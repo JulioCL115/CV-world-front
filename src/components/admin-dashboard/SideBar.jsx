@@ -15,6 +15,7 @@ import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined';
 import CardMembershipOutlinedIcon from '@mui/icons-material/CardMembershipOutlined';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 // import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../scenes/admin-dashboard/theme";
 
@@ -120,6 +121,14 @@ const SideBar = () => {
                     )}
 
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+                    <Item
+                            title="Home"
+                            to="/home"
+                            icon={<HomeOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+
                         <Item
                             title="Estadísticas"
                             to="/admin/analytics"

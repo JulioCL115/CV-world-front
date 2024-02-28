@@ -188,6 +188,7 @@ function AdminCurriculums() {
         variant="h1"
         color={colors.black[500]}
         fontWeight="600"
+        marginTop="45px"
       >
         Curriculums
       </Typography>
