@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import getAllCategories from "./redux/actions/categories/getAllCategories";
 import getAllLanguages from "./redux/actions/languages/getAllLanguages";
@@ -40,7 +40,6 @@ import UpdateCategory from "./scenes/admin-dashboard/UpdateCategory";
 import UpdateLanguage from "./scenes/admin-dashboard/UpdateLanguage";
 import UpdateSubscription from "./scenes/admin-dashboard/UpdateSubscription";
 import SideBar from "./components/admin-dashboard/SideBar";
-import Topbar from "./components/admin-dashboard/Topbar";
 import PaymentFeedback from "./scenes/main/PaymentFeedback";
 import VerifyEmail from "./scenes/main/VerifyEmail";
 import { AuthProvider } from "./AuthProvider/authProvider";
@@ -56,7 +55,6 @@ function App() {
   const isAdminRoute = location.pathname.startsWith('/admin');
 
   const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
 
   useEffect(() => {
     dispatch(getAllCategories());
@@ -99,8 +97,7 @@ function App() {
               <CssBaseline />
               <div className="containerAdmin">
                 <SideBar />
-                <div className="containerViews">
-                  <Topbar />
+                <div className="conteinerViews">
                   <Routes>
                     <Route path="/admin/analytics" element={<AdminAnalytics />} />
                     <Route path="/admin/users" element={<AdminUsers />} />
@@ -116,7 +113,7 @@ function App() {
                     <Route path="/admin/updatelanguage/:languageId" element={< UpdateLanguage />} />
                     <Route path="/admin/comments" element={<AdminComments />} />
                   </Routes>
-                </div>
+                  </div>
               </div>
             </ThemeProvider>
           </ColorModeContext.Provider>

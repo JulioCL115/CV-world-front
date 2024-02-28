@@ -5,7 +5,7 @@ const restoreCv = async (cvId) => {
     const endpoint = axios.defaults.baseURL + "cv/restore/" + cvId;
 
     try {
-        const response = await axiosInstance.put(endpoint)
+        await axiosInstance.put(endpoint)
 
         return 
     } catch (error) {

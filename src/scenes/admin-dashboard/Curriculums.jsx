@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import getAllCvsUnfiltered from "../../redux/actions/cvs/getAllCvsUnfiltered";
 import deleteCv from "../../redux/actions/cvs/deleteCv";
 import restoreCv from "../../redux/actions/cvs/restoreCv";
-import getUserById from "../../redux/actions/users/getUserById";
 
 import ProfilePciture from "./../../assets/blank-profile-picture-973460_960_720.webp"
 
@@ -16,7 +14,6 @@ import { useTheme } from "@mui/material";
 
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 function AdminCurriculums() {
   const dispatch = useDispatch();
@@ -44,14 +41,14 @@ function AdminCurriculums() {
     {
       field: "id",
       headerName: "ID",
-      flex: 1
+      width: 400,
     },
     {
       field: "image",
       headerName: "Imagen",
       width: 100,
       renderCell: (params) => (
-        <img src={params.row.image ? params.row.image : ProfilePciture} alt="User Photo" style={{ width: '30px', height: '30px', borderRadius: "50%", objectFit: "cover" }} />
+        <img src={params.row.image ? params.row.image : ProfilePciture} alt="Applicant" style={{ width: '30px', height: '30px', borderRadius: "50%", objectFit: "cover" }} />
       ),
     },
     {
@@ -69,7 +66,7 @@ function AdminCurriculums() {
     {
       field: "contact.email",
       headerName: "Email",
-      width: 400,
+      width: 350,
       valueGetter: (params) => params.row.contact[0]?.email || '',
     },
     {
@@ -122,17 +119,29 @@ function AdminCurriculums() {
     {
       field: "skills",
       headerName: "Competencias",
-      width: 200,
+      width: 300,
+      valueGetter: (params) => {
+      
+        return params.row.skills.join(', ');
+      }
     },
     {
       field: "speakingLanguages",
       headerName: "Idiomas",
-      width: 200,
+      width: 250,
+      valueGetter: (params) => {
+      
+        return params.row.speakingLanguages.join(', ');
+      }
     },
     {
       field: "otherInterests",
       headerName: "Otros intereses",
-      width: 200,
+      width: 300,
+      valueGetter: (params) => {
+      
+        return params.row.otherInterests.join(', ');
+      }
     },
     {
       field: "deleted",
@@ -176,6 +185,7 @@ function AdminCurriculums() {
         variant="h1"
         color={colors.black[500]}
         fontWeight="600"
+        marginTop="45px"
       >
         Curriculums
       </Typography>
@@ -215,14 +225,23 @@ function AdminCurriculums() {
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${colors.purple[500]} !important`,
           },
+          "& .MuiDataGrid-sortIcon": {
+            color: `${colors.white[500]} !important`,
+          },
+          "& .MuiDataGrid-menuIcon": {
+            color: `${colors.white[500]} !important`,
+          },
         }}
       >
         <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
           <DataGrid
+            display="flex"
             width="auto"
             rows={cvs ? cvs : []}
             columns={columns}
-            slots={{ Toolbar: GridToolbar }}
+            components={{
+              Toolbar: GridToolbar,
+            }}
             checkboxSelection
           />
         </div>

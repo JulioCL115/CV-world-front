@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import getAllCommentsUnfiltered from "../../redux/actions/comments/getAllCommentsUnfiltered";
 import deleteComment from "../../redux/actions/comments/deleteComment";
-import updateComment from "../../redux/actions/comments/updateComment";
 import restoreComment from "../../redux/actions/comments/restoreComment";
 
 import { Box, IconButton, Typography } from "@mui/material";
@@ -14,7 +13,7 @@ import { useTheme } from "@mui/material";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 
-function AdminComments () {
+function AdminComments() {
     const dispatch = useDispatch();
     const comments = useSelector((state) => state.comments.allCommentsUnfiltered);
     const theme = useTheme();
@@ -41,7 +40,7 @@ function AdminComments () {
         {
             field: "id",
             headerName: "ID",
-            width: 100,
+            width: 400,
         },
         {
             field: "comment",
@@ -62,12 +61,12 @@ function AdminComments () {
         {
             field: "CvId",
             headerName: "ID CV",
-            width: 150,
+            width: 400,
         },
         {
             field: "UserId",
             headerName: "ID Usuario",
-            width: 150,
+            width: 400,
         },
         {
             field: "delete",
@@ -106,6 +105,7 @@ function AdminComments () {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginTop="45px"
             >
                 Comentarios
             </Typography>
@@ -145,6 +145,12 @@ function AdminComments () {
                     "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
                         color: `${colors.purple[500]} !important`,
                     },
+                    "& .MuiDataGrid-sortIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
+                      "& .MuiDataGrid-menuIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
                 }}
             >
                 <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
@@ -152,7 +158,9 @@ function AdminComments () {
                         width="auto"
                         rows={comments ? comments : []}
                         columns={columns}
-                        slots={{ Toolbar: GridToolbar }}
+                        components={{
+                            Toolbar: GridToolbar,
+                        }}
                         checkboxSelection
                     />
                 </div>

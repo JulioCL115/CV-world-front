@@ -56,7 +56,7 @@ function UpdateProfile() {
         };
 
         getUserData();
-    }, [userId, userId]);
+    }, [ userId ]);
 
 
     const handleImageUpload = (event) => {

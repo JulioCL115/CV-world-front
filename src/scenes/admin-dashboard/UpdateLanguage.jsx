@@ -20,8 +20,6 @@ const UpdateLanguage = () => {
     const dispatch = useDispatch();
     const { languageId } = useParams();
 
-    console.log("LANGUAGE ID: " + languageId);
-
     const [initialValues, setInitialValues] = useState({
         name: ""
     })
@@ -30,16 +28,12 @@ const UpdateLanguage = () => {
         const getLanguageData = async () => {
             const languageData = await getLanguageById(languageId);
             if (languageData) {
-                console.log("LANGUAGE DATA: " + languageData.name);
                 setInitialValues({ name: languageData.name });
             }
         };
 
         getLanguageData();
     }, [languageId, dispatch]);
-
-    console.log(initialValues.name);
-
 
     const nameRegex = /^[a-zA-Z\s-]+$/;
 
@@ -52,11 +46,15 @@ const UpdateLanguage = () => {
 
 
     const handleFormSubmit = async (values) => {
-        await updateLanguage(languageId, values.name);
+        try {
+            await updateLanguage(languageId, values.name);
 
-        setTimeout(() => {
-            navigate("/admin/languages");
-        }, 2000);
+            setTimeout(() => {
+                navigate("/admin/languages");
+            }, 2000);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -65,6 +63,8 @@ const UpdateLanguage = () => {
                 variant="h1"
                 color={colors.black[500]}
                 fontWeight="600"
+                marginBottom="50px"
+                marginTop="45px"
             >
                 Editar Idioma
             </Typography>
