@@ -16,7 +16,7 @@ function UpdateProfile() {
     const navigate = useNavigate();
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser.id;
-    console.log("este es el user",userId)
+    console.log("este es el user", userId)
 
     const [newUserInfo, setNewUserInfo] = useState({
         name: null,
@@ -118,22 +118,27 @@ function UpdateProfile() {
         const validationErrors = validation(newUserInfo, 'all');
         setErrors(validationErrors);
 
-        if (newUserInfo.name &&
-            newUserInfo.email &&
-            newUserInfo.password &&
-            newUserInfo.repeatPassword) {
+        if (!newUserInfo.name ||
+            !newUserInfo.email ||
+            !newUserInfo.password ||
+            !newUserInfo.repeatPassword) {
+                
+            setUpdateStatus({
+                status: "Fail",
+                message: "Faltan completar campos obligatorios"
+            })
+
+            console.log(updateStatus);
+        } else {
             if (!errors.name &&
                 !errors.email &&
                 !errors.password &&
                 !errors.repeatPassword) {
 
-                console.log("ADENTRO DEL IF");
-
                 const updateStatus = await updateUser(userId, newUserInfo);
-                console.log("este es el status",updateStatus)
                 setUpdateStatus({ ...updateStatus })
 
-                if (updateStatus.updateStatus?.status === "Success") {
+                if (updateStatus.status === "Success") {
 
                     await updateProfile(auth.currentUser, {
                         displayName: newUserInfo.name,
@@ -147,13 +152,7 @@ function UpdateProfile() {
                     }, 2000);
                 }
             }
-
-        } else {
-            setUpdateStatus({
-                status: "Fail",
-                message: "Faltan completar campos obligatorios"
-            })
-        };
+        }
     };
 
     return (
@@ -307,7 +306,7 @@ function UpdateProfile() {
                 <button className={styles.btnRegister}>Actualizar</button>
             </form>
             {updateStatus ?
-                <p className={updateStatus?.updateStatus?.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus?.updateStatus?.message}</p>
+                <p className={updateStatus?.updateStatus?.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus ? updateStatus.message : null}</p>
                 : null}
             <Link className={styles.txtRegular16PurpleUnderlined} to="/myprofile">Volver</Link>
         </div>

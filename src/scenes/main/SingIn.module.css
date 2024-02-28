@@ -63,6 +63,16 @@
     padding: 0px;
 }
 
+.txtError {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0px;
+    padding-left: 5px;
+}
+
 /*CONTAINERS*/
 
 .containerLeft {
@@ -189,3 +199,4 @@
     border: none;
     cursor: pointer;
   }
+

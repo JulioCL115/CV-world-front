@@ -38,6 +38,8 @@ function SignUp() {
   const [showSecondPassword, setShowSecondPassword] = useState(false);
 
   const handleChange = (event) => {
+    let registerInfoUpdated = { ...registerInfo };
+
     setRegisterInfo({
       ...registerInfo,
       [event.target.name]: event.target.value
@@ -53,10 +55,10 @@ function SignUp() {
       [event.target.name]: event.target.value,
     }, event.target.name);
 
-    setErrors({
+    setErrors((errors) => ({
       ...errors,
-      [event.target.name]: validationErrors[event.target.name]
-    });
+      [event.target.name]: validationErrors[event.target.name],
+    }));
   };
 
   // Para mostrar y ocultar la contraseña
@@ -81,21 +83,24 @@ function SignUp() {
       !registerInfo.email ||
       !registerInfo.password ||
       !registerInfo.repeatPassword) {
+
       setRegistrationStatus({
         status: "Fail",
         message: "Faltan completar campos obligatorios"
       })
+
     } else {
+
       if (!errors.name &&
         !errors.email &&
         !errors.password &&
         !errors.repeatPassword) {
 
-        try {
-          const registrationStatus = await register(registerInfo);
+        const registrationStatus = await register(registerInfo);
 
-          if (registrationStatus.status === "Success") {
+        if (registrationStatus.status === "Success") {
 
+          try {
             const userCredential = await createUserWithEmailAndPassword(auth, registerInfo.email, registerInfo.password)
             const user = userCredential.user;
 
@@ -109,19 +114,16 @@ function SignUp() {
             setTimeout(() => {
               navigate("/verifyemail");
             }, 2000);
-          } else {
-
+          } catch (error) {
             setRegistrationStatus({
               status: "Fail",
-              message: "Ya existe un usuario con ese email"
+              message: "Error de autenticación de terceros"
             })
           }
-        } catch (error) {
-          setRegistrationStatus({
-            status: "Fail",
-            message: "Ya existe un usuario con ese email"
-          })
+        } else {
+          setRegistrationStatus({ ...registrationStatus })
         }
+
       };
     }
   }
