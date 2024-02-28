@@ -21,6 +21,7 @@ import { tokens } from "../../scenes/admin-dashboard/theme";
 const Item = ({ title, to, icon, selected, setSelected }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    
 
     return (
         <MenuItem
@@ -44,7 +45,7 @@ const SideBar = () => {
     const colors = tokens(theme.palette.mode);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [selected, setSelected] = useState("Dashboard");
-    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     return (
         <Box>

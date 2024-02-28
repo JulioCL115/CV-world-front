@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import getAllLanguagesUnfiltered from "../../redux/actions/languages/getAllLanguagesUnfiltered";
 import deleteLanguage from "../../redux/actions/languages/deleteLanguage";
@@ -42,7 +42,7 @@ function AdminLanguages() {
     {
       field: "id",
       headerName: "ID",
-      width: 100,
+      width: 400,
     },
     {
       field: "name",
@@ -108,7 +108,7 @@ function AdminLanguages() {
         color={colors.black[500]}
         fontWeight="600"
       >
-       Idiomas
+        Idiomas
       </Typography>
       <Box display="flex" justifyContent="end">
         <Button
@@ -119,8 +119,8 @@ function AdminLanguages() {
             backgroundColor: "#098D85",
             '&:hover': {
               backgroundColor: "#098D85",
-          }
-        }}
+            }
+          }}
         >
           Crear Idioma
         </Button>
@@ -174,7 +174,9 @@ function AdminLanguages() {
             width="auto"
             rows={languages ? languages : []}
             columns={columns}
-            slots={{ Toolbar: GridToolbar }}
+            components={{
+              Toolbar: GridToolbar,
+            }}
             checkboxSelection
           />
         </div>

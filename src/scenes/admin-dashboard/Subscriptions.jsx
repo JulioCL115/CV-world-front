@@ -41,7 +41,7 @@ function AdminSubscriptions() {
         {
             field: "id",
             headerName: "ID",
-            width: 100,
+            width: 400,
         },
         {
             field: "name",
@@ -175,6 +175,12 @@ function AdminSubscriptions() {
                     "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
                         color: `${colors.purple[500]} !important`,
                     },
+                    "& .MuiDataGrid-sortIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
+                      "& .MuiDataGrid-menuIcon": {
+                        color: `${colors.white[500]} !important`,
+                      },
                 }}
             >
                 <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', width: 'auto' }}>
@@ -182,7 +188,9 @@ function AdminSubscriptions() {
                         width="auto"
                         rows={subscriptions ? subscriptions : []}
                         columns={columns}
-                        slots={{ Toolbar: GridToolbar }}
+                        components={{
+                            Toolbar: GridToolbar,
+                        }}
                         checkboxSelection
                     />
                 </div>
