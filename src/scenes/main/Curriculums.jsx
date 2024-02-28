@@ -21,6 +21,8 @@ function Curriculums() {
         categories: [],
     });
 
+    console.log(cvs);
+
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 12;
 
