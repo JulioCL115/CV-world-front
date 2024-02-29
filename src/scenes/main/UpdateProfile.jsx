@@ -111,40 +111,24 @@ function UpdateProfile() {
         event.preventDefault();
         console.log("ADENTRO DEL HADLE SUBMIT", newUserInfo);
 
-<<<<<<< HEAD
-=======
         const validationErrors = validation(newUserInfo, 'all');
         setErrors(validationErrors);
 
->>>>>>> 6af05825b34897bfeb04cbf4ea6bffed7eb8128e
         if (newUserInfo.name &&
             newUserInfo.email &&
             newUserInfo.password &&
             newUserInfo.repeatPassword) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 6af05825b34897bfeb04cbf4ea6bffed7eb8128e
             if (!errors.name &&
                 !errors.email &&
                 !errors.password &&
                 !errors.repeatPassword) {
 
                 console.log("ADENTRO DEL IF");
-<<<<<<< HEAD
-
-                const updateStatus = await updateUser(userId, newUserInfo);
-                console.log("este es el status",updateStatus)
-                setUpdateStatus({ ...updateStatus })
-
-                if (updateStatus.updateStatus?.status === "Success") {
-=======
 
                 const updateResult = await updateUser(userId, newUserInfo);
                 setUpdateStatus(updateResult.updateStatus);
 
                 if (updateResult.updateStatus?.status === "Success") {
->>>>>>> 6af05825b34897bfeb04cbf4ea6bffed7eb8128e
 
                     await updateProfile(auth.currentUser, {
                         displayName: newUserInfo.name,
@@ -164,11 +148,8 @@ function UpdateProfile() {
                 status: "Fail",
                 message: "Faltan completar campos obligatorios"
             })
-<<<<<<< HEAD
-=======
 
             console.log(updateStatus);
->>>>>>> 6af05825b34897bfeb04cbf4ea6bffed7eb8128e
         };
     };
 

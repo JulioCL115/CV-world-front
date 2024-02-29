@@ -1,32 +1,39 @@
 import styles from "./PaymentFeedback.module.css";
 
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import getUserById from "../../redux/actions/users/getUserById"
 
 import IllustrationApproved from "../../assets/payment-approved.png"
 import IllustrationPending from "../../assets/payment-pending.png"
 import IllustrationFailure from "../../assets/payment-failure.png"
 
-// import updateUserSubscription from "../../redux/actions/users/updateUserSubscription";
-// import { useSelector } from "react-redux";
-
 function PaymentFeedback() {
-    const location = useLocation();
-    const feedbackType = location.pathname.split("/")[1];
-    // const isSuccess = location.pathname.startsWith("/success");
-    // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    // const userId = currentUser ? currentUser.id : null;
-    // const subscriptionId = useSelector(state => state.payments.subscriptionId);
+  const location = useLocation();
+  const feedbackType = location.pathname.split("/")[1];
+  const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
+  const userId = localStorageUser.id;
 
-    // console.log(subscriptionId);
-    // console.log(userId);
-    
-    // useEffect(() => {
-    //     if (isSuccess && subscriptionId && userId) {
-    //         updateUserSubscription(userId, subscriptionId)
-    //     }
-    // }, [isSuccess, userId, subscriptionId]);
+  useEffect(() => {
+    const updateLocalStorage = async () => {
+      if (feedbackType === "success") {
+        try {
+          const  data  = await getUserById(userId);
+          console.log( "esta es la data del feedback",data)
+          if (data) {
+            localStorage.removeItem('currentUser');
+            localStorage.setItem('currentUser', JSON.stringify(data));
+            console.log("Local storage updated in the feedback component");
+            window.dispatchEvent(new Event('storage'));
+          }
+        } catch (error) {
+          console.error('Error updating local storage:', error);
+        }
+      }
+    };
 
+    updateLocalStorage();
+  }, [feedbackType]);
 
     return (
         <div className={styles.container}>
