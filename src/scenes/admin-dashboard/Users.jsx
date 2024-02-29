@@ -119,9 +119,10 @@ function AdminUsers() {
             width: 150,
         },
         {
-            field: "SubscriptionId",
-            headerName: "ID Suscripción",
-            width: 400,
+            field: "Subscription",
+            headerName: "Suscripción",
+            width: 200,
+            valueGetter: (params) => params.row.Subscription?.name || '',
         },
         {
             field: "delete",

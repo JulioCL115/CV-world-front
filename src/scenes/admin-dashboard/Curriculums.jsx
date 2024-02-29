@@ -139,6 +139,19 @@ function AdminCurriculums() {
       }
     },
     {
+      field: "language",
+      headerName: "Idioma",
+      width: 150,
+      valueGetter: (params) => params.row.Language?.name || '',
+      
+    },
+    {
+      field: "category",
+      headerName: "Categoría",
+      width: 300,
+      valueGetter: (params) => params.row.Category?.name || ''
+    },
+    {
       field: "deleted",
       headerName: "Deshabilitado",
       width: 150,

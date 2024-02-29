@@ -13,10 +13,16 @@ import BarChart from "../../components/admin-dashboard/BarChart";
 import StatBox from "../../components/admin-dashboard/StatBox";
 import ProgressCircle from "../../components/admin-dashboard/ProgressCircle";
 
+import { useEffect } from "react";
+
 const Analytics = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const mockTransactions = null;
+
+  useEffect(() => {
+    
+  });
 
   return (
     <Box m="20px">
@@ -48,6 +54,7 @@ const Analytics = () => {
         {/* ROW 1 */}
         <Box
           gridColumn="span 3"
+          borderColor={colors.black[500]}
           backgroundColor={colors.white[500]}
           display="flex"
           alignItems="center"
@@ -55,7 +62,7 @@ const Analytics = () => {
         >
           <StatBox
             title="12,361"
-            subtitle="Emails Sent"
+            subtitle="Emails Enviados"
             progress="0.75"
             increase="+14%"
             icon={
@@ -74,7 +81,7 @@ const Analytics = () => {
         >
           <StatBox
             title="431,225"
-            subtitle="Sales Obtained"
+            subtitle="Cantidad de Ventas"
             progress="0.50"
             increase="+21%"
             icon={
@@ -93,7 +100,7 @@ const Analytics = () => {
         >
           <StatBox
             title="32,441"
-            subtitle="New Clients"
+            subtitle="Nuevos Clientes"
             progress="0.30"
             increase="+5%"
             icon={
@@ -112,7 +119,7 @@ const Analytics = () => {
         >
           <StatBox
             title="1,325,134"
-            subtitle="Traffic Received"
+            subtitle="Tráfico Recibido"
             progress="0.80"
             increase="+43%"
             icon={
