@@ -47,7 +47,7 @@ import { AuthProvider } from "./AuthProvider/authProvider";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./scenes/admin-dashboard/theme";
 
-axios.defaults.baseURL = "https://cv-world-back-production.up.railway.app"
+axios.defaults.baseURL = "https://cv-world-back-production.up.railway.app/"
 
 function App() {
   const dispatch = useDispatch();
