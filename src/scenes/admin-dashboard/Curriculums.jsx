@@ -39,11 +39,6 @@ function AdminCurriculums() {
 
   const columns = [
     {
-      field: "id",
-      headerName: "ID",
-      width: 400,
-    },
-    {
       field: "image",
       headerName: "Imagen",
       width: 100,

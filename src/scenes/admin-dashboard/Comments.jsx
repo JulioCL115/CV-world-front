@@ -38,11 +38,6 @@ function AdminComments() {
 
     const columns = [
         {
-            field: "id",
-            headerName: "ID",
-            width: 400,
-        },
-        {
             field: "comment",
             headerName: "Comentario",
             width: 200,

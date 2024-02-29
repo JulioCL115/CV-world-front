@@ -1,7 +1,6 @@
 import styles from "./Cards.module.css"
 
 import Card from "./Card";
-// import updateCv from "../../redux/actions/cvs/updateCv";
 import deleteCv from "../../../redux/actions/cvs/deleteCv";
 import getUserById from "../../../redux/actions/users/getUserById";
 import updateCvViews from "../../../redux/actions/cvs/updateCvViews";
@@ -15,13 +14,10 @@ function Cards({ cvs, setCurrentUser }) {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
-    // const isMyCvs = location.pathname === "/mycvs";
     const isCurriculums = location.pathname === "/curriculums";
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userId = localStorageUser ? localStorageUser.id : null
     const [isLoading, setIsLoading] = useState(false);
-
-    console.log(userId);
 
     const handleClick = (id, UserId) => {
         if (!localStorageUser || UserId !== localStorageUser.id) {
@@ -29,8 +25,6 @@ function Cards({ cvs, setCurrentUser }) {
         }
         navigate(`/detail/${id}`);
     }
-
-
 
     const handleDelete = async (id) => {
         setIsLoading(true);
@@ -53,8 +47,6 @@ function Cards({ cvs, setCurrentUser }) {
             }, 500)
         }
     };
-
-    console.log(cvs);
 
     return (
         <div className={styles.cards}>

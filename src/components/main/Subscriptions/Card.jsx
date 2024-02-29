@@ -7,7 +7,7 @@ function Card({ id, name, price, included, notIncluded, paymentLink }) {
     const location = useLocation();
     const isCheckout = location.pathname.startsWith('/checkout');
 
-    console.log(currentUser);
+    console.log("CURRENT USER EN CARD SUSCRIPCION" + currentUser);
 
     const renderPrice = () => {
         if (price === 0) {
@@ -17,8 +17,7 @@ function Card({ id, name, price, included, notIncluded, paymentLink }) {
         } else {
             return (
                 <div className={styles.containerPrice}>
-                    <h2 className={styles.txtSemiBold32Green}>${price}/</h2>
-                    <p className={styles.txtSemiBold16Green}>Mes</p>
+                    <h2 className={styles.txtSemiBold32Green}>${price}</h2>
                 </div>
 
             )
@@ -79,7 +78,7 @@ function Card({ id, name, price, included, notIncluded, paymentLink }) {
                 <Link to={paymentLink}>
                     <button className={styles.btn}>Pagar con Mercado Pago</button>
                 </Link> :
-                <Link to={currentUser ? (currentUser.Subscription.name !== name ? `/checkout/${id}` : "/curriculums") : "/signin"}>
+                <Link to={currentUser ? (currentUser.Subscription.name !== name && price !== 0 ? `/checkout/${id}` : "/curriculums") : "/signin"}>
                     <button className={styles.btn}>{currentUser && currentUser.Subscription.name === name ? "Tu plan actual" : "Empezar"}</button>
                 </Link>
             }

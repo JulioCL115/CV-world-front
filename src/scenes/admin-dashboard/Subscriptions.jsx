@@ -39,11 +39,6 @@ function AdminSubscriptions() {
 
     const columns = [
         {
-            field: "id",
-            headerName: "ID",
-            width: 400,
-        },
-        {
             field: "name",
             headerName: "Nombre",
             width: 200,

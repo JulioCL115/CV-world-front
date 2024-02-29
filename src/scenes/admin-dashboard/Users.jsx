@@ -66,11 +66,6 @@ function AdminUsers() {
 
     const columns = [
         {
-            field: "id",
-            headerName: "ID",
-            width: 400,
-        },
-        {
             field: "photo",
             headerName: "Imagen",
             width: 100,
