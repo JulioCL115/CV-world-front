@@ -33,7 +33,7 @@ const CreateCategory = () => {
             await postCategory(values.name);
 
             setTimeout(() => {
-                navigate("/admin/languages");
+                navigate("/admin/categories");
             }, 2000);
         } catch (error) {
             console.log(error);
