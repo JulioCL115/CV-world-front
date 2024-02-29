@@ -70,7 +70,7 @@ function AdminUsers() {
             headerName: "Imagen",
             width: 100,
             renderCell: (params) => (
-                <img src={params.row.photo ? params.row.photo : ProfilePciture} alt="User" style={{ width: '30px', height: '30px', borderRadius: "50%" }} />
+                <img src={params.row.photo ? params.row.photo : ProfilePciture} alt="User" style={{ width: '30px', height: '30px', borderRadius: "50%", objectFit: "cover"  }} />
             ),
         },
         {
