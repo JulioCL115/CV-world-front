@@ -46,8 +46,32 @@ function UpdateCv() {
         dispatch(getAllLanguages());
         const fetchCvDetail = async () => {
             const cvDetail = await getCvDetail(cvId);
+
             console.log(cvDetail);
-            setCv(cvDetail);
+
+            const mappedExp = cvDetail.experience.map((exp) => {
+                return {
+                    ...exp,
+                    toDate: exp.to,
+                    to: exp.to.includes('Presente') ? 'Presente' : 'Seleccionar fecha'
+                }
+            })
+
+            mappedExp.forEach((exp, index) => {
+                if (exp.to === 'Presente') {
+                    setShowExperienceDateField([...showExperienceDateField, false]);
+                } else {
+                    setShowExperienceDateField([...showExperienceDateField, true]);
+                }
+            });
+
+            const mappedEdu = cvDetail.education.map((edu) => {
+                return {
+                    ...edu,
+                    where: edu.institution,
+                    abou: edu.title
+                }
+            });
 
             // Update the cv state with the names instead of the objects
             setCv({
@@ -58,8 +82,8 @@ function UpdateCv() {
                 image: cvDetail.image ? cvDetail.image : "",
                 header: cvDetail.header ? cvDetail.header : "",
                 description: cvDetail.description ? cvDetail.description : "",
-                experience: cvDetail.experience ? cvDetail.experience : [],
-                education: cvDetail.education ? cvDetail.education : [],
+                experience: cvDetail.experience ? mappedExp : [],
+                education: cvDetail.education ? mappedEdu : [],
                 contact: cvDetail.contact ? cvDetail.contact : {
                     location: "",
                     email: "",
@@ -70,12 +94,12 @@ function UpdateCv() {
                 speakingLanguages: cvDetail.speakingLanguages ? cvDetail.speakingLanguages : [],
                 otherInterests: cvDetail.otherInterests ? cvDetail.otherInterests : []
             });
+
             setLoading(false);
         };
 
         fetchCvDetail();
     }, []);
-
 
     const [showEducationDateField, setShowEducationDateField] = useState([]);
     const [showExperienceDateField, setShowExperienceDateField] = useState([]);
@@ -94,17 +118,13 @@ function UpdateCv() {
         language: null,
         name: null,
         description: null,
-        experience: null,
-        education: null,
+        header: null,
         contact: {
             location: null,
             email: null,
             phone: null,
             website: null
         },
-        skills: null,
-        speakingLanguages: null,
-        otherInterests: null
     });
 
     // Manejo de cambios en el formulario
@@ -346,35 +366,30 @@ function UpdateCv() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const validationErrors = validation(cv, 'all', errors);
+        setErrors(validationErrors);
+
         if (cv.category &&
             cv.language &&
             cv.name &&
             cv.header &&
             cv.description &&
-            cv.experience.length &&
-            cv.education.length &&
             cv.contact.location &&
             cv.contact.email &&
             cv.contact.phone &&
-            cv.contact.website &&
-            cv.skills.length &&
-            cv.speakingLanguages.length &&
-            cv.otherInterests.length) {
+            cv.contact.website
+        ) {
             if (
                 !errors.category &&
                 !errors.language &&
                 !errors.name &&
                 !errors.header &&
                 !errors.description &&
-                !errors.experience &&
-                !errors.education &&
                 !errors.contact.location &&
                 !errors.contact.email &&
                 !errors.contact.phone &&
-                !errors.contact.website &&
-                !errors.skills &&
-                !errors.speakingLanguages &&
-                !errors.otherInterests) {
+                !errors.contact.website 
+              ) {
 
                 const creationStatus = await updateCv(cvId, cv);
 
@@ -419,6 +434,7 @@ function UpdateCv() {
 
                         })}
                     </select>
+                    {errors.category ? <p className={styles.txtError}>{errors.category}</p> : null}
                 </div>
 
                 <div className={styles.containerSection}>
@@ -434,8 +450,8 @@ function UpdateCv() {
 
                         })}
                     </select>
+                    {errors.language ? <p className={styles.txtError}>{errors.language}</p> : null}
                 </div>
-
 
                 <div className={styles.containerSection}>
                     <label className={styles.txtSemiBold16Purple}>Nombre y Apellido:</label>
@@ -645,7 +661,7 @@ function UpdateCv() {
                                 <option value="Seleccionar fecha">Seleccionar fecha</option>
                                 <option value="Presente">Presente</option>
                             </select>
-                            <label className={styles.txtRegular16Purple}>Instituto:</label>
+                            <label className={styles.txtRegular16Purple}>Institución:</label>
                             <input
                                 className={styles.input}
                                 type="text"

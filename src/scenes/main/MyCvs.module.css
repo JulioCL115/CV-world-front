@@ -39,6 +39,7 @@
 .containerTop {
     width: 100%;
     text-align: left;
+    margin-bottom: 50px;
 }
 .containerCenter {
     min-height: 70%;
