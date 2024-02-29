@@ -57,7 +57,7 @@ const CreateSubscription = () => {
   const handleFormSubmit = (values) => {
     console.log(initialValues);
     try {
-      updateSubscription(values);
+      updateSubscription(subscriptionId, values);
 
       setTimeout(() => {
         navigate("/admin/subscriptions");
