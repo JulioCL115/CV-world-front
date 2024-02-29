@@ -34,10 +34,10 @@ const CreateSubscription = () => {
 
   const handleFormSubmit = async (values) => {
     try {
-        await postSubscription(values.name);
+        postSubscription(values);
 
         setTimeout(() => {
-            navigate("/admin/languages");
+            navigate("/admin/subscriptions");
         }, 2000);
     } catch (error) {
         console.log(error);

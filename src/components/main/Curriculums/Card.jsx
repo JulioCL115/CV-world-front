@@ -29,7 +29,7 @@ function Card({ image, name, header, contact, description, experience, education
                     <h3 className={styles.txtSemiBold20Black}>/ EXPERIENCIA</h3>
                     {experience.map((experience, index) => {
                         return <div key={index}>
-                            <h4 className={styles.txtSemiBold16Black}>>> {experience.role}</h4>
+                            <h4 className={styles.txtSemiBold16Black}> {experience.role}</h4>
                             <p className={styles.txtRegular16Black}>{experience.company} | {experience.dateRange}</p>
                             <p className={styles.txtRegular16Black}>{experience.responsibilities}</p>
                         </div>
@@ -40,7 +40,7 @@ function Card({ image, name, header, contact, description, experience, education
                     <h3 className={styles.txtSemiBold20Black}>/ EDUCACION</h3>
                     {education.map((education, index) => {
                         return <div key={index}>
-                            <h4 className={styles.txtSemiBold16Black}>>> {education.career}</h4>
+                            <h4 className={styles.txtSemiBold16Black}> {education.career}</h4>
                             <p className={styles.txtRegular16Black}>{education.institution} | {education.dateRange}</p>
                         </div>
                     })
