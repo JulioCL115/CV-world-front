@@ -1,7 +1,7 @@
 import axiosInstance from "../../../config/axios-config";
 
 const createOrder = async (userId, paymentInfo) => {
-    const endpoint = "http://localhost:3001/create-order/" + userId
+    const endpoint = "https://cv-world-back-production.up.railway.app/create-order/" + userId
 
     try {
         console.log("Payment info: ", paymentInfo);
