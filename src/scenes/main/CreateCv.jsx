@@ -62,6 +62,7 @@ function CreateCv() {
         category: null,
         language: null,
         name: null,
+        header: null,
         description: null,
         contact: {
             location: null,
@@ -605,7 +606,7 @@ function CreateCv() {
                                 <option value="Seleccionar fecha">Seleccionar fecha</option>
                                 <option value="Presente">Presente</option>
                             </select>
-                            <label className={styles.txtRegular16Purple}>Instituto:</label>
+                            <label className={styles.txtRegular16Purple}>Institución:</label>
                             <input
                                 className={styles.input}
                                 type="text"
