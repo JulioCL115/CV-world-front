@@ -124,7 +124,12 @@ function SignUp() {
           setRegistrationStatus({ ...registrationStatus })
         }
 
-      };
+      } else {
+        setRegistrationStatus({
+          status: "Fail",
+          message: "Hay campos mal completados"
+        });
+      }
     }
   }
 

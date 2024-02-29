@@ -89,9 +89,8 @@ function SignIn() {
           }
         }
         login(userCredential.user.accessToken);
-        setTimeout(() => {
-          navigate("/curriculums");
-        }, 2000);
+        navigate("/curriculums");
+
       }
     } catch (error) {
       setLoginStatus({

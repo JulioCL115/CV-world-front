@@ -57,7 +57,7 @@ function UpdateProfile() {
         };
 
         getUserData();
-    }, [userId]);
+    }, [userId, userId]);
 
 
     const handleImageUpload = (event) => {
@@ -78,11 +78,6 @@ function UpdateProfile() {
     };
 
     const handleChange = (event) => {
-        setUpdateStatus({
-            status: null,
-            message: null
-        });
-
         setNewUserInfo({
             ...newUserInfo,
             [event.target.name]: event.target.value
@@ -118,27 +113,22 @@ function UpdateProfile() {
         const validationErrors = validation(newUserInfo, 'all');
         setErrors(validationErrors);
 
-        if (!newUserInfo.name ||
-            !newUserInfo.email ||
-            !newUserInfo.password ||
-            !newUserInfo.repeatPassword) {
-                
-            setUpdateStatus({
-                status: "Fail",
-                message: "Faltan completar campos obligatorios"
-            })
+        if (newUserInfo.name &&
+            newUserInfo.email &&
+            newUserInfo.password &&
+            newUserInfo.repeatPassword) {
 
-            console.log(updateStatus);
-        } else {
             if (!errors.name &&
                 !errors.email &&
                 !errors.password &&
                 !errors.repeatPassword) {
 
-                const updateStatus = await updateUser(userId, newUserInfo);
-                setUpdateStatus({ ...updateStatus })
+                console.log("ADENTRO DEL IF");
 
-                if (updateStatus.status === "Success") {
+                const updateResult = await updateUser(userId, newUserInfo);
+                setUpdateStatus(updateResult.updateStatus);
+
+                if (updateResult.updateStatus?.status === "Success") {
 
                     await updateProfile(auth.currentUser, {
                         displayName: newUserInfo.name,
@@ -149,10 +139,18 @@ function UpdateProfile() {
 
                     setTimeout(() => {
                         navigate("/myprofile");
-                    }, 2000);
+                    }, 1000);
                 }
             }
-        }
+
+        } else {
+            setUpdateStatus({
+                status: "Fail",
+                message: "Faltan completar campos obligatorios"
+            })
+
+            console.log(updateStatus);
+        };
     };
 
     return (
@@ -306,7 +304,7 @@ function UpdateProfile() {
                 <button className={styles.btnRegister}>Actualizar</button>
             </form>
             {updateStatus ?
-                <p className={updateStatus?.updateStatus?.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus ? updateStatus.message : null}</p>
+                <p className={updateStatus?.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus?.message}</p>
                 : null}
             <Link className={styles.txtRegular16PurpleUnderlined} to="/myprofile">Volver</Link>
         </div>

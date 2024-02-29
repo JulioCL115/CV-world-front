@@ -8,6 +8,7 @@ import postCv from "../../redux/actions/cvs/postCv";
 import getAllCategories from "../../redux/actions/categories/getAllCategories";
 import getAllLanguages from "../../redux/actions/languages/getAllLanguages";
 import validation from "./createCvValidation";
+import { convertLegacyOperators } from "@mui/x-data-grid/internals";
 
 
 function CreateCv() {
@@ -22,7 +23,7 @@ function CreateCv() {
     useEffect(() => {
         dispatch(getAllCategories());
         dispatch(getAllLanguages());
-    }, []); 
+    }, []);
 
 
     const [cv, setCv] = useState({
@@ -62,17 +63,12 @@ function CreateCv() {
         language: null,
         name: null,
         description: null,
-        experience: null,
-        education: null,
         contact: {
             location: null,
             email: null,
             phone: null,
             website: null
         },
-        skills: null,
-        speakingLanguages: null,
-        otherInterests: null
     });
 
     // Manejo de cambios en el formulario
@@ -188,7 +184,7 @@ function CreateCv() {
 
         const copyShowExperienceDateField = [...showExperienceDateField];
         copyShowExperienceDateField.splice(index, 1);
-        
+
         setShowExperienceDateField([...copyShowExperienceDateField]);
         setCv({
             ...cv,
@@ -314,35 +310,30 @@ function CreateCv() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const validationErrors = validation(cv, 'all', errors);
+        setErrors(validationErrors);
+
+
         if (cv.category &&
             cv.language &&
             cv.name &&
             cv.header &&
             cv.description &&
-            cv.experience.length &&
-            cv.education.length &&
             cv.contact.location &&
             cv.contact.email &&
             cv.contact.phone &&
-            cv.contact.website &&
-            cv.skills.length &&
-            cv.speakingLanguages.length &&
-            cv.otherInterests.length) {
-            if (
-                !errors.category &&
-                !errors.language &&
-                !errors.name &&
-                !errors.header &&
-                !errors.description &&
-                !errors.experience &&
-                !errors.education &&
-                !errors.contact.location &&
-                !errors.contact.email &&
-                !errors.contact.phone &&
-                !errors.contact.website &&
-                !errors.skills &&
-                !errors.speakingLanguages &&
-                !errors.otherInterests) {
+            cv.contact.website
+        ) {
+            if (!errors.category
+                && !errors.language
+                && !errors.name
+                && !errors.header
+                && !errors.description
+                && !errors.contact.location
+                && !errors.contact.email
+                && !errors.contact.phone
+                && !errors.contact.website
+            ) {
 
                 const creationStatus = await postCv(userId, cv);
 
@@ -375,7 +366,7 @@ function CreateCv() {
             <form className={styles.form} onSubmit={handleSubmit}>
 
                 <div className={styles.containerSection}>
-                    <label className={styles.txtSemiBold16Purple}>¿En qué categoría pondrías tu CV?</label>{}
+                    <label className={styles.txtSemiBold16Purple}>¿En qué categoría pondrías tu CV?</label>{ }
                     <select
                         className={styles.input}
                         name='category'
@@ -387,6 +378,7 @@ function CreateCv() {
 
                         })}
                     </select>
+                    {errors.category ? <p className={styles.txtError}>{errors.category}</p> : null}
                 </div>
 
                 <div className={styles.containerSection}>
@@ -402,8 +394,8 @@ function CreateCv() {
 
                         })}
                     </select>
+                    {errors.language ? <p className={styles.txtError}>{errors.language}</p> : null}
                 </div>
-
 
                 <div className={styles.containerSection}>
                     <label className={styles.txtSemiBold16Purple}>Nombre y Apellido:</label>

@@ -6,15 +6,16 @@ const updateStatus = {
     message: null
 };
 
-const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-
 const updateUser = async (userId, user, subscriptionId) => {
+    const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
+    const userLocalId = localStorageUser?.id
+
     const endpoint = "http://localhost:3001/user/" + userId;
     try {
         const response = await axiosInstance.put(endpoint, user, subscriptionId);
         const updatedUser = response.data.userUpdated;
 
-        if (updatedUser.id === localStorageUser.id) {
+        if (userLocalId === updatedUser.id) {
             localStorage.removeItem('currentUser');
             localStorage.setItem('currentUser', JSON.stringify(updatedUser));
             window.dispatchEvent(new Event('storage'));
