@@ -1,6 +1,6 @@
-import { initializeApp } from firebaseapp;
-import { getAnalytics } from firebaseanalytics;
-import { getAuth } from firebaseauth
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth"
 
 const firebaseConfig = {
   apiKey: "AIzaSyDE8WITcG5Vqu_rCNCFB-W6CPjI951LAqs",
@@ -15,6 +15,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth(app);  Obtener el objeto de autenticaci�?³n de Firebase
+const auth = getAuth(app); // Obtener el objeto de autenticaciÃÂÃÂ³n de Firebase
 
 export { auth };
