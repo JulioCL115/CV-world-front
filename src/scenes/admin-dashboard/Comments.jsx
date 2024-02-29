@@ -156,7 +156,6 @@ function AdminComments() {
                         components={{
                             Toolbar: GridToolbar,
                         }}
-                        checkboxSelection
                     />
                 </div>
             </Box>

@@ -19,7 +19,7 @@ const CreateSubscription = () => {
   const nameRegex = /^[a-zA-Z\s-]+$/;
 
   const checkoutSchema = yup.object().shape({
-    name: yup.string().matches(nameRegex, "Phone number is not valid").required("required"),
+    name: yup.string().matches(nameRegex, "No puede contener letras").required("required"),
     price: yup.number().required("required"),
     included: yup.array().of(yup.string()).required("required"),
     notIncluded: yup.array().of(yup.string()).required("required"),
@@ -34,7 +34,7 @@ const CreateSubscription = () => {
 
   const handleFormSubmit = async (values) => {
     try {
-        await postSubscription(values.name);
+        postSubscription(values);
 
         setTimeout(() => {
             navigate("/admin/subscriptions");

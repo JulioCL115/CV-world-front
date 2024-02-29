@@ -172,7 +172,6 @@ function AdminLanguages() {
             components={{
               Toolbar: GridToolbar,
             }}
-            checkboxSelection
           />
         </div>
       </Box>

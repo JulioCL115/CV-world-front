@@ -13,7 +13,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-const CreateSubscription = () => {
+const UpdateSubscription = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -24,7 +24,7 @@ const CreateSubscription = () => {
   const nameRegex = /^[a-zA-Z\s-]+$/;
 
   const checkoutSchema = yup.object().shape({
-    name: yup.string().matches(nameRegex, "Phone number is not valid").required("required"),
+    name: yup.string().matches(nameRegex, "Sólo puede contener letras").required("required"),
     price: yup.number().required("required"),
     included: yup.array().of(yup.string()).required("required"),
     notIncluded: yup.array().of(yup.string()).required("required"),
@@ -39,25 +39,29 @@ const CreateSubscription = () => {
 
   useEffect(() => {
     const getSubscriptionData = async () => {
-      const subscriptionData = await getSubscriptionById(subscriptionId);
-      if (subscriptionData) {
-        setInitialValues({
-          name: subscriptionData.name,
-          price: subscriptionData.price,
-          included: subscriptionData.included,
-          notIncluded: subscriptionData.notIncluded,
-        });
-        console.log("INITIAL VALUES: " + initialValues);
-      }
+        const subscriptionData = await getSubscriptionById(subscriptionId);
+        console.log('subscriptionData', subscriptionData);
+        if (subscriptionData) {
+          setInitialValues({
+            name: subscriptionData.name || "",
+            price: parseInt(subscriptionData.price) || 0,
+            included: subscriptionData.included || [],
+            notIncluded: subscriptionData.notIncluded || [],
+          });
+          console.log("After Set:", initialValues);
+        }
     };
-
+  
     getSubscriptionData();
-  }, [subscriptionId, dispatch, initialValues]);
+  }, [subscriptionId, dispatch]);
+  useEffect(() => {
+    console.log('UPDATED INITIAL VALUES:', initialValues);
+  }, [initialValues]);
 
   const handleFormSubmit = (values) => {
     console.log(initialValues);
     try {
-      updateSubscription(values);
+      updateSubscription(subscriptionId,values);
 
       setTimeout(() => {
         navigate("/admin/subscriptions");
@@ -89,6 +93,7 @@ const CreateSubscription = () => {
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={checkoutSchema}
+        enableReinitialize
         display="flex"
         flexDirection="column"
       >
@@ -299,4 +304,4 @@ const CreateSubscription = () => {
   );
 };
 
-export default CreateSubscription;
+export default UpdateSubscription;

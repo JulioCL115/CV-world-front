@@ -172,7 +172,6 @@ function AdminCategories() {
                         components={{
                             Toolbar: GridToolbar,
                         }}
-                        checkboxSelection
                     />
                 </div>
             </Box>

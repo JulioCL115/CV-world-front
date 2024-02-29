@@ -250,7 +250,6 @@ function AdminCurriculums() {
             components={{
               Toolbar: GridToolbar,
             }}
-            checkboxSelection
           />
         </div>
       </Box>

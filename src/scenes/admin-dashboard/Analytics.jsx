@@ -2,10 +2,10 @@ import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "./theme";
 
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
+import DescriptionIcon from '@mui/icons-material/Description';
+import PaidIcon from '@mui/icons-material/Paid';
 
 import LineChart from "../../components/admin-dashboard/LineChart";
 import GeographyChart from "../../components/admin-dashboard/GeographyChart";
@@ -14,16 +14,42 @@ import StatBox from "../../components/admin-dashboard/StatBox";
 import ProgressCircle from "../../components/admin-dashboard/ProgressCircle";
 
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import getAllUsersUnfiltered from "../../redux/actions/users/getAllUsersUnfiltered";
+import getAllCvsUnfiltered from "../../redux/actions/cvs/getAllCvsUnfiltered";
+
 
 const Analytics = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const mockTransactions = null;
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users.allUsersUnfiltered);
+  const cvs = useSelector((state) => state.cvs.allCvsUnfiltered);
 
   useEffect(() => {
-    
-  });
+    dispatch(getAllUsersUnfiltered());
+    dispatch(getAllCvsUnfiltered());
+}, [dispatch]);
 
+console.log(users);
+
+const usersWithSubscription = users?.filter((user) => user.Subscription && user.Subscription.price !== 0)
+const subscriptionIncome =  usersWithSubscription?.length * 2000
+
+const numberOfUsersWithSubscription = usersWithSubscription?.length;
+
+const percentageOfSubscribedUsers = (numberOfUsersWithSubscription / users?.length) 
+const roundedSubsribersPercentage = parseFloat(percentageOfSubscribedUsers.toFixed(2));
+const subscribersPercentage = parseFloat((roundedSubsribersPercentage * 100).toFixed(2)); 
+
+const usersWithCvs = users?.filter((user) => user.Cvs && user.Cvs.length > 0)
+const numberOfUsersWithCvs = usersWithCvs?.length;
+const percentageOfUsersWithCvs = (numberOfUsersWithCvs / users?.length) 
+const roundedUsersPercentage = parseFloat(percentageOfUsersWithCvs.toFixed(2));
+const usersPercentage = parseFloat((roundedUsersPercentage * 100).toFixed(2));
+    
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -36,6 +62,7 @@ const Analytics = () => {
               fontSize: "14px",
               fontWeight: "bold",
               padding: "10px 20px",
+              marginBottom: "20px",
             }}
           >
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
@@ -59,14 +86,18 @@ const Analytics = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          sx={{
+            border: `1px solid ${colors.black[100]}`, // Add a border here
+            borderRadius: '10px', // Optional: Add a border radius if desired
+        }}
         >
           <StatBox
-            title="12,361"
-            subtitle="Emails Enviados"
+            title={cvs?.length}
+            subtitle="CV Cargados"
             progress="0.75"
             increase="+14%"
             icon={
-              <EmailIcon
+              <DescriptionIcon
                 sx={{ color: colors.green[500], fontSize: "26px" }}
               />
             }
@@ -78,10 +109,14 @@ const Analytics = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          sx={{
+            border: `1px solid ${colors.black[100]}`, // Add a border here
+            borderRadius: '10px', // Optional: Add a border radius if desired
+        }}
         >
           <StatBox
-            title="431,225"
-            subtitle="Cantidad de Ventas"
+            title={usersWithSubscription?.length}
+            subtitle="Suscripciones"
             progress="0.50"
             increase="+21%"
             icon={
@@ -97,10 +132,14 @@ const Analytics = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          sx={{
+            border: `1px solid ${colors.black[100]}`, // Add a border here
+            borderRadius: '10px', // Optional: Add a border radius if desired
+        }}
         >
           <StatBox
-            title="32,441"
-            subtitle="Nuevos Clientes"
+            title={users?.length}
+            subtitle="Nuevos usuarios"
             progress="0.30"
             increase="+5%"
             icon={
@@ -116,14 +155,18 @@ const Analytics = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          sx={{
+            border: `1px solid ${colors.black[100]}`, // Add a border here
+            borderRadius: '10px', // Optional: Add a border radius if desired
+        }}
         >
           <StatBox
-            title="1,325,134"
-            subtitle="Tráfico Recibido"
+            title={`$${subscriptionIncome}`}
+            subtitle="Ingresos totales"
             progress="0.80"
             increase="+43%"
             icon={
-              <TrafficIcon
+              <PaidIcon
                 sx={{ color: colors.green[500], fontSize: "26px" }}
               />
             }
@@ -135,6 +178,10 @@ const Analytics = () => {
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.white[500]}
+          sx={{
+            border: `1px solid ${colors.black[100]}`, // Add a border here
+            borderRadius: '10px', // Optional: Add a border radius if desired
+        }}
         >
           <Box
             mt="25px"
@@ -142,6 +189,7 @@ const Analytics = () => {
             display="flex "
             justifyContent="space-between"
             alignItems="center"
+            
           >
             <Box>
               <Typography
@@ -149,14 +197,14 @@ const Analytics = () => {
                 fontWeight="600"
                 color={colors.black[500]}
               >
-                Revenue Generated
+                Ingresos generados
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.green[500]}
               >
-                $59,342.32
+               {`$${subscriptionIncome}`}
               </Typography>
             </Box>
             <Box>
@@ -176,6 +224,10 @@ const Analytics = () => {
           gridRow="span 2"
           backgroundColor={colors.white[500]}
           overflow="auto"
+          sx={{
+            border: `1px solid ${colors.black[100]}`, // Add a border here
+            borderRadius: '10px', // Optional: Add a border radius if desired
+        }}
         >
           <Box
             display="flex"
@@ -186,7 +238,7 @@ const Analytics = () => {
             p="15px"
           >
             <Typography color={colors.black[500]} variant="h5" fontWeight="600">
-              Recent Transactions
+              Transacciones recientes
             </Typography>
           </Box>
           {mockTransactions?.map((transaction, i) => (
@@ -228,9 +280,13 @@ const Analytics = () => {
           gridRow="span 2"
           backgroundColor={colors.white[500]}
           p="30px"
+          sx={{
+            border: `1px solid ${colors.black[100]}`, // Add a border here
+            borderRadius: '10px', // Optional: Add a border radius if desired
+        }}
         >
           <Typography variant="h5" fontWeight="600">
-            Campaign
+            Usuarios subscriptos
           </Typography>
           <Box
             display="flex"
@@ -238,31 +294,43 @@ const Analytics = () => {
             alignItems="center"
             mt="25px"
           >
-            <ProgressCircle size="125" />
+            <ProgressCircle progress={roundedSubsribersPercentage} size="125" />
             <Typography
               variant="h5"
               color={colors.green[500]}
               sx={{ mt: "15px" }}
             >
-              $48,352 revenue generated
+              {`${subscribersPercentage}% de usuarios subscriptos`}
             </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
           </Box>
         </Box>
         <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.white[500]}
+          p="30px"
+          sx={{
+            border: `1px solid ${colors.black[100]}`, // Add a border here
+            borderRadius: '10px', // Optional: Add a border radius if desired
+        }}
         >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Sales Quantity
+          <Typography variant="h5" fontWeight="600">
+            Usuarios con CV's 
           </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="25px"
+          >
+            <ProgressCircle progress={roundedUsersPercentage} size="125" />
+            <Typography
+              variant="h5"
+              color={colors.green[500]}
+              sx={{ mt: "15px" }}
+            >
+              {`${usersPercentage}% de usuarios cargaron CV's`}
+            </Typography>
           </Box>
         </Box>
         <Box
@@ -270,13 +338,17 @@ const Analytics = () => {
           gridRow="span 2"
           backgroundColor={colors.white[500]}
           padding="30px"
+          sx={{
+            border: `1px solid ${colors.black[100]}`, // Add a border here
+            borderRadius: '10px', // Optional: Add a border radius if desired
+        }}
         >
           <Typography
             variant="h5"
             fontWeight="600"
             sx={{ marginBottom: "15px" }}
           >
-            Geography Based Traffic
+            Residencia de los usuarios
           </Typography>
           <Box height="200px">
             <GeographyChart isDashboard={true} />

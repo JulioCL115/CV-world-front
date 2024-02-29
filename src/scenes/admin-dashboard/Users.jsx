@@ -24,7 +24,7 @@ function AdminUsers() {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
-    const userId = localStorageUser ? localStorageUser.id : null
+    const userId = localStorageUser ? localStorageUser.id : null;
 
     useEffect(() => {
         dispatch(getAllUsersUnfiltered());
@@ -217,7 +217,6 @@ function AdminUsers() {
                         components={{
                             Toolbar: GridToolbar,
                         }}
-                        checkboxSelection
                         showToolbar
                     />
                 </div>
