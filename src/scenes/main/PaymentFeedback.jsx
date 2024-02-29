@@ -8,6 +8,7 @@ import IllustrationApproved from "../../assets/payment-approved.png"
 import IllustrationPending from "../../assets/payment-pending.png"
 import IllustrationFailure from "../../assets/payment-failure.png"
 
+
 function PaymentFeedback() {
   const location = useLocation();
   const feedbackType = location.pathname.split("/")[1];
