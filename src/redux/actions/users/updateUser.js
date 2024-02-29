@@ -9,7 +9,7 @@ const updateUser = async (userId, user) => {
     const localStorageUser = JSON.parse(localStorage.getItem('currentUser'));
     const userLocalId = localStorageUser?.id
 
-    const endpoint = "http://localhost:3001/user/" + userId;
+    const endpoint = "https://cv-world-back-production.up.railway.app/user/" + userId;
     try {
         const response = await axiosInstance.put(endpoint, user);
         const updatedUser = response.data.userUpdated;
