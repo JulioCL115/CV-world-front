@@ -39,25 +39,29 @@ const CreateSubscription = () => {
 
   useEffect(() => {
     const getSubscriptionData = async () => {
-      const subscriptionData = await getSubscriptionById(subscriptionId);
-      if (subscriptionData) {
-        setInitialValues({
-          name: subscriptionData.name,
-          price: subscriptionData.price,
-          included: subscriptionData.included,
-          notIncluded: subscriptionData.notIncluded,
-        });
-        console.log("INITIAL VALUES: " + initialValues);
-      }
+        const subscriptionData = await getSubscriptionById(subscriptionId);
+        console.log('subscriptionData', subscriptionData);
+        if (subscriptionData) {
+          setInitialValues({
+            name: subscriptionData.name || "",
+            price: parseInt(subscriptionData.price) || 0,
+            included: subscriptionData.included || [],
+            notIncluded: subscriptionData.notIncluded || [],
+          });
+          console.log("After Set:", initialValues);
+        }
     };
-
+  
     getSubscriptionData();
-  }, [subscriptionId, dispatch, initialValues]);
+  }, [subscriptionId, dispatch]);
+  useEffect(() => {
+    console.log('UPDATED INITIAL VALUES:', initialValues);
+  }, [initialValues]);
 
   const handleFormSubmit = (values) => {
     console.log(initialValues);
     try {
-      updateSubscription(subscriptionId, values);
+      updateSubscription(subscriptionId,values);
 
       setTimeout(() => {
         navigate("/admin/subscriptions");
@@ -83,12 +87,13 @@ const CreateSubscription = () => {
         display="flex"
         alignSelf="center"
       >
-        Editar suscripción
+        Editar suscripciÃ³n
       </Typography>
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
         validationSchema={checkoutSchema}
+        enableReinitialize
         display="flex"
         flexDirection="column"
       >
