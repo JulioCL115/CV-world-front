@@ -7,7 +7,7 @@ function Card({ id, name, price, included, notIncluded, paymentLink }) {
     const location = useLocation();
     const isCheckout = location.pathname.startsWith('/checkout');
 
-    console.log(currentUser);
+    console.log("CURRENT USER EN CARD SUSCRIPCION" + currentUser);
 
     const renderPrice = () => {
         if (price === 0) {
