@@ -17,9 +17,16 @@ const postCv = async (userId, cv) => {
             creationStatus.message = "¡Tu CV se creó con éxito!";
         } catch (error) {
             console.log(error);
+            
+            const errorStatus = error.response?.status;
 
-            creationStatus.status = "Fail";
-            creationStatus.message = "Faltan datos obligatorios";
+            if (errorStatus === 409) {
+                creationStatus.status = "Fail";
+                creationStatus.message = "Ya existe un cv con características similares"
+            } else {
+                creationStatus.status = "Fail";
+                creationStatus.message = "Error del servidor"
+            };
         };
 
     return creationStatus;

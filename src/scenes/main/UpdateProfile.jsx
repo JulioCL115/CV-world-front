@@ -57,7 +57,7 @@ function UpdateProfile() {
         };
 
         getUserData();
-    }, [userId]);
+    }, [userId, userId]);
 
 
     const handleImageUpload = (event) => {
@@ -78,11 +78,6 @@ function UpdateProfile() {
     };
 
     const handleChange = (event) => {
-        setUpdateStatus({
-            status: null,
-            message: null
-        });
-
         setNewUserInfo({
             ...newUserInfo,
             [event.target.name]: event.target.value
@@ -116,22 +111,40 @@ function UpdateProfile() {
         event.preventDefault();
         console.log("ADENTRO DEL HADLE SUBMIT", newUserInfo);
 
+<<<<<<< HEAD
+=======
+        const validationErrors = validation(newUserInfo, 'all');
+        setErrors(validationErrors);
+
+>>>>>>> 6af05825b34897bfeb04cbf4ea6bffed7eb8128e
         if (newUserInfo.name &&
             newUserInfo.email &&
             newUserInfo.password &&
             newUserInfo.repeatPassword) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6af05825b34897bfeb04cbf4ea6bffed7eb8128e
             if (!errors.name &&
                 !errors.email &&
                 !errors.password &&
                 !errors.repeatPassword) {
 
                 console.log("ADENTRO DEL IF");
+<<<<<<< HEAD
 
                 const updateStatus = await updateUser(userId, newUserInfo);
                 console.log("este es el status",updateStatus)
                 setUpdateStatus({ ...updateStatus })
 
                 if (updateStatus.updateStatus?.status === "Success") {
+=======
+
+                const updateResult = await updateUser(userId, newUserInfo);
+                setUpdateStatus(updateResult.updateStatus);
+
+                if (updateResult.updateStatus?.status === "Success") {
+>>>>>>> 6af05825b34897bfeb04cbf4ea6bffed7eb8128e
 
                     await updateProfile(auth.currentUser, {
                         displayName: newUserInfo.name,
@@ -151,6 +164,11 @@ function UpdateProfile() {
                 status: "Fail",
                 message: "Faltan completar campos obligatorios"
             })
+<<<<<<< HEAD
+=======
+
+            console.log(updateStatus);
+>>>>>>> 6af05825b34897bfeb04cbf4ea6bffed7eb8128e
         };
     };
 
@@ -305,7 +323,7 @@ function UpdateProfile() {
                 <button className={styles.btnRegister}>Actualizar</button>
             </form>
             {updateStatus ?
-                <p className={updateStatus?.updateStatus?.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus ? updateStatus.message : null}</p>
+                <p className={updateStatus?.status === "Success" ? styles.txtSemiBold16Green : styles.txtError16}>{updateStatus?.message}</p>
                 : null}
             <Link className={styles.txtRegular16PurpleUnderlined} to="/myprofile">Volver</Link>
         </div>
